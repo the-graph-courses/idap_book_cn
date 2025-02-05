@@ -21,37 +21,37 @@ book:
     ## Use the below for HTML render. (Parts don't seem to work in HTML render)
     - part: "Foundations"
       chapters:
-        - p_foundations_google_colab.qmd
-        - p_foundations_coding_basics.qmd
-        - p_foundations_functions_methods.qmd
-        - p_foundations_data_structures.qmd
-        - p_foundations_for_loops.qmd
-        - p_foundations_writing_functions.qmd
+        - p_foundations_google_colab_cn.qmd
+        - p_foundations_coding_basics_cn.qmd
+        - p_foundations_functions_methods_cn.qmd
+        - p_foundations_data_structures_cn.qmd
+        - p_foundations_for_loops_cn.qmd
+        - p_foundations_writing_functions_cn.qmd
     - part: "Data Visualization"
       chapters:
-        - p_data_on_display_data_viz_types.qmd
-        - p_data_on_display_univariate.qmd
-        - p_data_on_display_multivariate.qmd
+        - p_data_on_display_data_viz_types_cn.qmd
+        - p_data_on_display_univariate_cn.qmd
+        - p_data_on_display_multivariate_cn.qmd
     - part: "Tools for Local Python"
       chapters:
-        - p_tools_installing_python.qmd
-        - p_tools_using_vscode.qmd
-        - p_tools_venv.qmd
-        - p_tools_quarto.qmd
+        - p_tools_installing_python_cn.qmd
+        - p_tools_using_vscode_cn.qmd
+        - p_tools_venv_cn.qmd
+        - p_tools_quarto_cn.qmd
     - part: "Data Manipulation"
       chapters:
-        - p_untangled_subset_columns.qmd
-        - p_untangled_query_rows.qmd
-        - p_untangled_transform_variables.qmd
-        - p_untangled_conditional_transforms.qmd
-        - p_untangled_groupby_agg.qmd
-        - p_untangled_other_grouped_operations.qmd
-        - p_untangled_joining_1.qmd
-        - p_untangled_joining_2.qmd
-        - p_untangled_pivoting.qmd
+        - p_untangled_subset_columns_cn.qmd
+        - p_untangled_query_rows_cn.qmd
+        - p_untangled_transform_variables_cn.qmd
+        - p_untangled_conditional_transforms_cn.qmd
+        - p_untangled_groupby_agg_cn.qmd
+        - p_untangled_other_grouped_operations_cn.qmd
+        - p_untangled_joining_1_cn.qmd
+        - p_untangled_joining_2_cn.qmd
+        - p_untangled_pivoting_cn.qmd
     - part: "Using LLMs in Python"
       chapters:
-        - p_ai_LLM_functions.qmd
+        - p_ai_LLM_functions_cn.qmd
 
 resources:
   - CNAME
