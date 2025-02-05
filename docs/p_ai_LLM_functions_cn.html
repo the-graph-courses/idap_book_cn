@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/the-graph-courses/idap_book_cn" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#自动摘要电影数据集" id="toc-自动摘要电影数据集" class="nav-link" data-scroll-target="#自动摘要电影数据集"><span class="header-section-number">24.10</span> 自动摘要:电影数据集</a></li>
   <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">24.12</span> 总结</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -405,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="设置-openai-客户端" class="level2" data-number="24.3">
 <h2 data-number="24.3" class="anchored" data-anchor-id="设置-openai-客户端"><span class="header-section-number">24.3</span> 设置 OpenAI 客户端</h2>
 <p>首先,我们需要使用您的 API 密钥设置 OpenAI 客户端。在这里,我们将密钥存储在名为 <code>local_settings.py</code> 的文件中,然后将其导入到我们的脚本中。</p>
-<div id="0d81741d" class="cell" data-execution_count="1">
+<div id="48ca3f65" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -420,15 +420,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="进行-api-调用" class="level2" data-number="24.4">
 <h2 data-number="24.4" class="anchored" data-anchor-id="进行-api-调用"><span class="header-section-number">24.4</span> 进行 API 调用</h2>
 <p>让我们进行一次 API 调用,使用 <code>gpt-4o-mini</code> 模型生成对提示的响应。</p>
-<div id="ffd3e168" class="cell" data-execution_count="2">
+<div id="31a357dd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.chat.completions.create(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-4o-mini"</span>, messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is the most tourist-friendly city in France?"</span>}]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>While opinions may vary, Paris is often considered the most tourist-friendly city in France. As the capital, it offers a wealth of attractions, including world-famous landmarks like the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral. The city's extensive public transportation system, including buses and the Metro, makes it easy for visitors to explore. Additionally, Paris is known for its hospitality, with many accommodations, restaurants, and services catering specifically to tourists. 
-
-Other cities, such as Nice, Lyon, and Marseille, also offer great experiences for travelers, but Paris remains the most iconic and popular destination in the country.</code></pre>
+<pre><code>Paris is often considered the most tourist-friendly city in France. Renowned for its iconic landmarks such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral, Paris offers a wealth of activities, cultural experiences, and culinary delights. The city is well-equipped for tourists, with extensive public transportation, abundant information centers, and a wide variety of accommodations and dining options. Additionally, Paris hosts numerous events and festivals that cater to visitors, making it a top destination for travelers from around the world.</code></pre>
 </div>
 </div>
 </section>
@@ -437,7 +435,7 @@ Other cities, such as Nice, Lyon, and Marseille, also offer great experiences fo
 <p>为了简化我们的代码并避免重复,我们将定义一个用于进行 API 调用的辅助函数。API 调用包含大量样板代码,因此将此逻辑封装在函数中可以使我们的代码更简洁、更易维护。</p>
 <p>如果您忘记如何构建 API 调用,请参考 <a href="https://platform.openai.com/docs/api-reference/introduction">OpenAI API 文档</a> 或在线搜索“OpenAI Python API example”。</p>
 <p>以下是我们如何定义 <code>llm_chat</code> 函数:</p>
-<div id="cc6d1903" class="cell" data-execution_count="3">
+<div id="e1661be1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> llm_chat(message):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> client.chat.completions.create(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gpt-4o-mini"</span>, messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: message}]</span>
@@ -449,12 +447,16 @@ Other cities, such as Nice, Lyon, and Marseille, also offer great experiences fo
 <section id="固定问题" class="level2" data-number="24.6">
 <h2 data-number="24.6" class="anchored" data-anchor-id="固定问题"><span class="header-section-number">24.6</span> 固定问题</h2>
 <p>让我们首先向 <code>gpt-4o-mini</code> 模型发送一个固定问题并获取响应。</p>
-<div id="a9305fd5" class="cell" data-execution_count="4">
+<div id="6e7ebdfc" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 示例用法</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> llm_chat(<span class="st">"What is the most tourist-friendly city in France?"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>While France has many cities that are popular with tourists, Paris is often considered the most tourist-friendly city in the country. It offers a wealth of attractions, including iconic landmarks like the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral. Additionally, Paris has a well-developed public transportation system, including buses and the metro, making it easy for visitors to navigate the city. The availability of English-speaking services, diverse accommodations, and a vibrant atmosphere with numerous dining and shopping options further enhance its appeal to tourists. Other cities like Nice, Lyon, and Marseille also offer unique experiences and can be quite tourist-friendly, but Paris remains the top destination for most travelers.</code></pre>
+<pre><code>The most tourist-friendly city in France is often considered to be Paris. Known as the "City of Light," Paris offers a wealth of attractions, including iconic landmarks like the Eiffel Tower, the Louvre Museum, Notre-Dame Cathedral, and Montmartre. The city's extensive public transportation system makes it easy for visitors to navigate, and it is known for its vibrant culture, dining options, and shopping experiences.
+
+Moreover, Paris is well-equipped for tourists, with a wide range of accommodations, guided tours, and information centers. The city's rich history, beautiful architecture, and numerous parks and gardens also enhance its appeal to visitors from around the world.
+
+However, other cities in France, such as Nice, Lyon, and Marseille, also offer unique experiences and are considered friendly to tourists, each with their own charm and attractions.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="练习">
@@ -469,7 +471,7 @@ Other cities, such as Nice, Lyon, and Marseille, also offer great experiences fo
 <section id="练习题获取巴西最适合旅游的城市" class="level2 callout-body-container callout-body" data-number="24.7">
 <h2 data-number="24.7" class="anchored" data-anchor-id="练习题获取巴西最适合旅游的城市"><span class="header-section-number">24.7</span> 练习题:获取巴西最适合旅游的城市</h2>
 <p>使用 <code>llm_chat</code> 函数询问模型巴西最适合旅游的城市。将响应存储在名为 <code>rec_brazil</code> 的变量中。打印响应。</p>
-<div id="511b9651" class="cell" data-execution_count="5">
+<div id="ece28a18" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -478,20 +480,20 @@ Other cities, such as Nice, Lyon, and Marseille, also offer great experiences fo
 <section id="可变作为提示输入" class="level2" data-number="24.8">
 <h2 data-number="24.8" class="anchored" data-anchor-id="可变作为提示输入"><span class="header-section-number">24.8</span> 可变作为提示输入</h2>
 <p>通常,您会希望基于不同的输入生成响应。让我们创建一个函数,该函数接受一个国家作为输入,并询问模型该国最适合旅游的城市。</p>
-<div id="f9ff05b2" class="cell" data-execution_count="7">
+<div id="d5cd454a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> city_rec(country):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"What is the most tourist-friendly city in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">?"</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> llm_chat(prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>现在,您可以通过调用 <code>city_rec("Country Name")</code> 来获取不同国家的推荐:</p>
-<div id="9945bfb8" class="cell" data-execution_count="8">
+<div id="107375dc" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>city_rec(<span class="st">"Nigeria"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>"Lagos is often considered the most tourist-friendly city in Nigeria. It's the largest city in the country and serves as a major cultural and economic hub. Lagos offers a variety of attractions, including beautiful beaches, vibrant nightlife, cultural festivals, art galleries, and museums. The city's diverse culinary scene and bustling markets, such as Lekki Market and Balogun Market, also draw visitors. Additionally, there are numerous hotels and accommodations catering to tourists, as well as a range of transportation options to facilitate getting around the city. Other cities, like Abuja (the capital), Calabar, and Port Harcourt, also have tourist-friendly elements, but Lagos stands out for its vibrancy and variety."</code></pre>
+<pre><code>'One of the most tourist-friendly cities in Nigeria is Lagos. As the largest city in the country, Lagos offers a vibrant mix of culture, history, and modern attractions. Key points that make Lagos appealing to tourists include:\n\n1. **Cultural Diversity**: Lagos is a melting pot of cultures, showcasing a rich array of traditions, festivals, and cuisines.\n\n2. **Beaches**: The city boasts several beautiful beaches, such as Lekki and Tarkwa Bay, where visitors can relax and enjoy water activities.\n\n3. **Entertainment and Nightlife**: Lagos is known for its lively nightlife, with numerous clubs, restaurants, and entertainment options.\n\n4. **Museums and Art Galleries**: Visitors can explore places like the Nike Art Gallery and the National Museum, which provide insights into Nigerian art and history.\n\n5. **Local Markets**: Markets like Balogun and Lekki Market offer a unique shopping experience with local crafts, fabrics, and souvenirs.\n\n6. **Accessibility**: Lagos has an international airport (Murtala Muhammed International Airport) that connects it to major cities around the world, making it relatively easy for tourists to visit.\n\nWhile Lagos is a primary destination, other cities like Abuja (the capital), Calabar, and Port Harcourt also offer unique attractions and experiences for tourists.'</code></pre>
 </div>
 </div>
 <p>然而,如果我们尝试将此函数直接用于国家列表或 DataFrame 列,它不会逐个处理每个国家。而是会尝试将列表连接成一个字符串,这不是我们想要的行为。</p>
-<div id="46b31870" class="cell" data-execution_count="9">
+<div id="4a588e45" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 错误用法</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>country_df <span class="op">=</span> pd.DataFrame({<span class="st">"country"</span>: [<span class="st">"Nigeria"</span>, <span class="st">"Chile"</span>, <span class="st">"France"</span>, <span class="st">"Canada"</span>]})</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -499,25 +501,21 @@ Other cities, such as Nice, Lyon, and Marseille, also offer great experiences fo
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Determining the "most tourist-friendly" city in each country can be subjective and depends on various factors like accessibility, language, attractions, safety, and public services. However, based on general knowledge and popular opinion, here are some cities in the listed countries that are often considered tourist-friendly:
+<pre><code>Determining the "most tourist-friendly" city can vary based on personal experiences, business metrics, and travel reviews. However, generally speaking:
 
-1. **Nigeria**: Lagos is often cited as a major city with tourist attractions, but it's important to note that cities like Abuja (the capital) can also be considered due to their modern infrastructure and safety.
+1. **Nigeria**: Lagos is a major city that attracts tourists but may not be seen as the most tourist-friendly due to safety concerns and infrastructure challenges.
+   
+2. **Chile**: Santiago is the capital and offers a mix of cultural and modern attractions, making it relatively tourist-friendly, with good public transportation and hospitality.
 
-2. **Chile**: Santiago, the capital city, is frequently regarded as tourist-friendly due to its transportation options, attractions, and hospitality.
+3. **France**: Paris is one of the most visited cities in the world, known for its iconic landmarks, rich history, and diverse gastronomy, making it highly tourist-friendly.
 
-3. **France**: Paris is undoubtedly the most tourist-friendly city, famous for its cultural landmarks, cuisine, and extensive services for tourists.
+4. **Canada**: Cities like Toronto and Vancouver are often considered very tourist-friendly, with a welcoming atmosphere, a range of attractions, and good public services.
 
-4. **Canada**: Toronto is often viewed as very tourist-friendly, offering diverse attractions, cultural experiences, and a welcoming atmosphere for visitors.
-
-In summary, considering general tourist-friendliness:
-- **Nigeria**: Abuja
-- **Chile**: Santiago
-- **France**: Paris
-- **Canada**: Toronto</code></pre>
+Based on global perception and tourist feedback, **Paris, France**, is often regarded as the most tourist-friendly city among the options provided.</code></pre>
 </div>
 </div>
 <p>要逐个处理每个国家,我们可以使用 NumPy 的 <code>vectorize</code> 函数。此函数将 <code>city_rec</code> 转换为可以接受数组(如列表或 NumPy 数组)并按元素应用函数的形式。</p>
-<div id="46f13a74" class="cell" data-execution_count="10">
+<div id="948a569f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 向量化函数</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>city_rec_vec <span class="op">=</span> np.vectorize(city_rec)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -545,17 +543,17 @@ In summary, considering general tourist-friendliness:
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>Chile</td>
-<td>The most tourist-friendly city in Chile is oft...</td>
+<td>Santiago is often considered the most tourist-...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>France</td>
-<td>While France has many tourist-friendly cities,...</td>
+<td>Paris is often regarded as the most tourist-fr...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>Canada</td>
-<td>While opinions may vary, Vancouver is often re...</td>
+<td>Determining the "most tourist-friendly" city i...</td>
 </tr>
 </tbody>
 </table>
@@ -576,7 +574,7 @@ In summary, considering general tourist-friendliness:
 <section id="练习题获取当地菜肴" class="level2 callout-body-container callout-body" data-number="24.9">
 <h2 data-number="24.9" class="anchored" data-anchor-id="练习题获取当地菜肴"><span class="header-section-number">24.9</span> 练习题:获取当地菜肴</h2>
 <p>创建一个名为 <code>get_local_dishes</code> 的函数,该函数接受一个国家名称作为输入,并返回该国一些最著名的当地菜肴。然后,将此函数向量化并应用于 <code>country_df</code> DataFrame,为每个国家添加一个包含当地菜肴推荐的列。</p>
-<div id="9c0f9cd2" class="cell" data-execution_count="11">
+<div id="9cad8115" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -586,7 +584,7 @@ In summary, considering general tourist-friendliness:
 <h2 data-number="24.10" class="anchored" data-anchor-id="自动摘要电影数据集"><span class="header-section-number">24.10</span> 自动摘要:电影数据集</h2>
 <p>在此示例中,我们将使用来自 <code>vega_datasets</code> 的电影数据集为每部电影生成自动摘要。我们将每部电影的数据转换为字典,并将其作为输入提供给 LLM 生成一段关于其表现的摘要。</p>
 <p>首先,让我们加载电影数据集并预览前几行:</p>
-<div id="8a474bab" class="cell" data-execution_count="13">
+<div id="38d13a4e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vega_datasets <span class="im">as</span> vd</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -722,7 +720,7 @@ In summary, considering general tourist-friendliness:
 </div>
 </div>
 <p>接下来,我们将 DataFrame 的每一行转换为字典。这将有助于将数据传递给 LLM。</p>
-<div id="aeb941d0" class="cell" data-execution_count="14">
+<div id="35b67236" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将每部电影的数据转换为字典</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>movies.to_dict(orient<span class="op">=</span><span class="st">"records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -809,7 +807,7 @@ In summary, considering general tourist-friendliness:
 </div>
 </div>
 <p>让我们将此新列存储在 DataFrame 中:</p>
-<div id="f46298e7" class="cell" data-execution_count="15">
+<div id="48a76428" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>movies[<span class="st">"full_dict"</span>] <span class="op">=</span> movies.to_dict(orient<span class="op">=</span><span class="st">"records"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>movies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -947,33 +945,33 @@ In summary, considering general tourist-friendliness:
 </div>
 </div>
 <p>现在,让我们定义一个 <code>movie_performance</code> 函数,该函数接受电影的数据字典,构建提示,并调用 <code>llm_chat</code> 函数以获取摘要:</p>
-<div id="2227baee" class="cell" data-execution_count="16">
+<div id="0eac8585" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> movie_performance(movie_data):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"Considering the following data on this movie </span><span class="sc">{</span>movie_data<span class="sc">}</span><span class="ss">, provide a one-paragraph summary of its performance for my report."</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> llm_chat(prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>我们将向量化此函数,以便可以将其应用于整个 <code>full_dict</code> 列:</p>
-<div id="3e71b35a" class="cell" data-execution_count="17">
+<div id="e17ec865" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 向量化函数以应用于 DataFrame</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>movie_performance_vec <span class="op">=</span> np.vectorize(movie_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>让我们使用一个示例测试我们的函数:</p>
-<div id="70c88733" class="cell" data-execution_count="18">
+<div id="90b31849" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 示例用法</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>movie_performance(<span class="st">"Name: Kene's Movie, Sales: 100,000 USD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>"Kene's Movie has demonstrated a strong financial performance, achieving total sales of $100,000 USD. This impressive figure suggests that the film has successfully resonated with its target audience, leading to significant viewer engagement and revenue generation. The sales performance can be indicative of effective marketing strategies and audience appeal, positioning Kene's Movie as a noteworthy entry in its genre. Overall, the sales achievement is a positive reflection of the movie's traction in the market and its potential for continued success."</code></pre>
+<pre><code>"Kene's Movie has demonstrated a commendable performance in the market, generating sales of 100,000 USD. This figure not only reflects the film's popularity but also indicates a strong reception from audiences. Such sales figures suggest successful marketing strategies and a solid viewer interest, positioning Kene's Movie as a significant contender within its genre. Overall, the movie's financial success highlights its appeal and potential for continued engagement in both current and future viewing platforms."</code></pre>
 </div>
 </div>
 <p>最后,我们将应用向量化函数为每部电影生成摘要:</p>
-<div id="c899452f" class="cell" data-execution_count="19">
+<div id="d45deabf" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为每部电影生成摘要</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>movies[<span class="st">"llm_summary"</span>] <span class="op">=</span> movie_performance_vec(movies[<span class="st">"full_dict"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>您现在可以将生成的摘要与 DataFrame 一起保存到 CSV 文件:</p>
-<div id="25053b31" class="cell" data-execution_count="20">
+<div id="46cdd01c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将结果保存到 CSV 文件</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>movies.to_csv(<span class="st">"movies_output.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -990,7 +988,7 @@ In summary, considering general tourist-friendliness:
 <section id="练习题天气摘要" class="level2 callout-body-container callout-body" data-number="24.11">
 <h2 data-number="24.11" class="anchored" data-anchor-id="练习题天气摘要"><span class="header-section-number">24.11</span> 练习题:天气摘要</h2>
 <p>使用来自 <code>vega_datasets</code> 的 <code>seattle_weather</code> 数据集的前 5 行,创建一个函数,该函数接受某一天的所有天气列,并生成该天天气状况的摘要。该函数应使用 LLM 根据提供的数据生成一段用于报告的一段摘要。将摘要存储在名为 <code>weather_summary</code> 的列中。</p>
-<div id="221ee1b6" class="cell" data-execution_count="21">
+<div id="fd7a4efe" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> vd.data.seattle_weather().head()</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -1061,7 +1059,7 @@ In summary, considering general tourist-friendliness:
 </div>
 </div>
 </div>
-<div id="5c938b62" class="cell" data-execution_count="22">
+<div id="8ec26e40" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1513,7 +1511,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

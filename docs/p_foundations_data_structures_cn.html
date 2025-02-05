@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/the-graph-courses/idap_book_cn" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pandas-dataframe" id="toc-pandas-dataframe" class="nav-link" data-scroll-target="#pandas-dataframe"><span class="header-section-number">5.7</span> Pandas DataFrame</a></li>
   <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">5.8</span> 总结</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_data_structures_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_data_structures_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="导入" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="导入"><span class="header-section-number">5.3</span> 导入</h2>
 <p>我们需要在本课程中使用pandas。你可以这样导入它:</p>
-<div id="1f0c4262" class="cell" data-execution_count="1">
+<div id="7908e32e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>如果你收到错误,可能需要安装它。你可以在单元格中运行 <code>!pip install pandas</code> 来安装。</p>
@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-列表" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="python-列表"><span class="header-section-number">5.4</span> Python 列表</h2>
 <p>列表就像有序的容器,可以存放不同类型的信息。例如,你可能有一个购物清单:</p>
-<div id="5e6baa9f" class="cell" data-execution_count="2">
+<div id="f52d68af" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>shopping <span class="op">=</span> [<span class="st">"apples"</span>, <span class="st">"bananas"</span>, <span class="st">"milk"</span>, <span class="st">"bread"</span>] </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>shopping</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -427,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>在Python中,我们使用所谓的“零基索引”来访问列表中的项。这意味着我们从0而不是1开始计数位置。</p>
 <p>让我们看一些例子:</p>
-<div id="8dd654be" class="cell" data-execution_count="3">
+<div id="9c28a3fd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shopping[<span class="dv">0</span>])  <span class="co"># 第一个项目(记住,我们从0开始!)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shopping[<span class="dv">1</span>])  <span class="co"># 第二个项目</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shopping[<span class="dv">2</span>])  <span class="co"># 第三个项目</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -439,7 +439,7 @@ milk</code></pre>
 </div>
 <p>乍一看可能觉得奇怪,但这是许多编程语言中的常见做法。这与计算机如何存储信息以及编写算法的便利性有关。</p>
 <p>我们可以在创建列表后更改其内容,使用相同的索引系统。</p>
-<div id="e5e9ccd5" class="cell" data-execution_count="4">
+<div id="adf83f9a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>shopping[<span class="dv">1</span>] <span class="op">=</span> <span class="st">"oranges"</span>  <span class="co"># 替换第二个项目(索引为1)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>shopping</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -447,7 +447,7 @@ milk</code></pre>
 </div>
 </div>
 <p>列表有许多可用的方法。例如,我们可以使用 <code>append()</code> 方法向列表添加元素。</p>
-<div id="fb6fe566" class="cell" data-execution_count="5">
+<div id="afc8cec4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>shopping.append(<span class="st">"eggs"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>shopping</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -471,7 +471,7 @@ milk</code></pre>
 <li>打印列表的第一个元素</li>
 <li>将最后一个元素改为6</li>
 </ol>
-<div id="732455b6" class="cell" data-execution_count="6">
+<div id="834d498c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在此编写你的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -480,7 +480,7 @@ milk</code></pre>
 <section id="python-字典" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="python-字典"><span class="header-section-number">5.5</span> Python 字典</h2>
 <p>字典就像带标签的存储箱,用于存放你的数据。每个数据(值)都有一个唯一的标签(键)。下面,我们有一个一些学生的成绩字典。</p>
-<div id="886ff887" class="cell" data-execution_count="7">
+<div id="7c885d28" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> {<span class="st">"Alice"</span>: <span class="dv">90</span>, <span class="st">"Bob"</span>: <span class="dv">85</span>, <span class="st">"Charlie"</span>: <span class="dv">92</span>}</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>grades</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -489,7 +489,7 @@ milk</code></pre>
 </div>
 <p>如你所见,字典使用大括号 <code>{}</code> 定义,键和值之间用冒号 <code>:</code> 分隔,键值对之间用逗号分隔。</p>
 <p>我们使用键来获取关联的值。</p>
-<div id="b70a1c08" class="cell" data-execution_count="8">
+<div id="ecf6c42f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>grades[<span class="st">"Bob"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>85</code></pre>
@@ -498,14 +498,14 @@ milk</code></pre>
 <section id="添加修改条目" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="添加修改条目"><span class="header-section-number">5.5.1</span> 添加/修改条目</h3>
 <p>我们可以轻松地在字典中添加新信息或更改现有数据。</p>
-<div id="4cb1d492" class="cell" data-execution_count="9">
+<div id="9b5ac333" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>grades[<span class="st">"David"</span>] <span class="op">=</span> <span class="dv">88</span>  <span class="co"># 添加一个新学生</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>grades</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>{'Alice': 90, 'Bob': 85, 'Charlie': 92, 'David': 88}</code></pre>
 </div>
 </div>
-<div id="e0687f6d" class="cell" data-execution_count="10">
+<div id="d5c2ae5d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>grades[<span class="st">"Alice"</span>] <span class="op">=</span> <span class="dv">95</span>  <span class="co"># 更新Alice的成绩</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>grades</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -529,7 +529,7 @@ milk</code></pre>
 <li>添加一个新水果 “grape”,价格为1.5</li>
 <li>将 “banana” 的价格改为0.30</li>
 </ol>
-<div id="6e774772" class="cell" data-execution_count="11">
+<div id="27614ff4" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在此编写你的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -540,7 +540,7 @@ milk</code></pre>
 <h2 data-number="5.6" class="anchored" data-anchor-id="pandas-series"><span class="header-section-number">5.6</span> Pandas Series</h2>
 <p>Pandas 提供了一种名为 Series 的数据结构,类似于列表,但具有一些特别适用于数据分析的附加功能。</p>
 <p>让我们创建一个简单的Series:</p>
-<div id="bf8b7cbe" class="cell" data-execution_count="12">
+<div id="d4b290ad" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>temps <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>temps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -553,7 +553,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>我们可以使用内置的Series方法来计算摘要统计。</p>
-<div id="dcf38d2f" class="cell" data-execution_count="13">
+<div id="908ff770" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>temps.mean()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>temps.median()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>temps.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -562,7 +562,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Series 的一个重要特性是它们可以有自定义索引,以便直观访问。</p>
-<div id="833099af" class="cell" data-execution_count="14">
+<div id="bf576f28" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>temps_labeled <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'Mon'</span>, <span class="st">'Tue'</span>, <span class="st">'Wed'</span>, <span class="st">'Thu'</span>])</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>temps_labeled</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>temps_labeled[<span class="st">'Wed'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +586,7 @@ dtype: int64</code></pre>
 <li>创建一个名为 <code>rain</code> 的Series,包含这些值:5, 4, 3, 2</li>
 <li>获取平均降雨量和中位数降雨量</li>
 </ol>
-<div id="de7ef1a8" class="cell" data-execution_count="15">
+<div id="9d3bb144" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在此编写你的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -599,14 +599,14 @@ dtype: int64</code></pre>
 <p>DataFrame像是Python中的电子表格。它有行和列,非常适合组织结构化数据。</p>
 <p>大多数时候,你将导入外部数据框,但你也应该知道如何在Python中从头创建数据框。</p>
 <p>首先让我们创建三个列表:</p>
-<div id="85b004e3" class="cell" data-execution_count="16">
+<div id="a5639411" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建三个列表</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>]</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">28</span>]</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Lagos"</span>, <span class="st">"London"</span>, <span class="st">"Lima"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>然后我们将它们组合成一个字典,最后转换为一个数据框。</p>
-<div id="c4b40842" class="cell" data-execution_count="17">
+<div id="25118c13" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'name'</span>: names,</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'age'</span>: ages,</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'city'</span>: cities}</span>
@@ -652,7 +652,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>注意,我们本可以在没有中间Series的情况下创建数据框:</p>
-<div id="06264652" class="cell" data-execution_count="18">
+<div id="4f1b92b7" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>people_df <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>: [<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>],</span>
@@ -700,7 +700,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>我们可以从DataFrame中选择特定的列或行。</p>
-<div id="ec6d4daf" class="cell" data-execution_count="19">
+<div id="82be5af8" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>people_df[<span class="st">"city"</span>]  <span class="co"># 选择一列。注意这会返回一个Series。</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>people_df.loc[<span class="dv">0</span>]  <span class="co"># 按标签选择一行。这也会返回一个Series。</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
@@ -711,7 +711,7 @@ Name: 0, dtype: object</code></pre>
 </div>
 </div>
 <p>我们可以对数据框调用方法。</p>
-<div id="644ca674" class="cell" data-execution_count="20">
+<div id="2acc2821" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>people_df.describe() <span class="co"># 这是数值列的摘要</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>people_df.info() <span class="co"># 这是数据类型的摘要</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -729,7 +729,7 @@ memory usage: 204.0+ bytes</code></pre>
 </div>
 <p>我们还可以对从选择列结果的Series对象调用方法。</p>
 <p>例如,我们可以获取“city”列的摘要统计。</p>
-<div id="5aaffa1e" class="cell" data-execution_count="21">
+<div id="6c18021e" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>people_df[<span class="st">"city"</span>].describe()  <span class="co"># 这是“city”列的摘要</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>people_df[<span class="st">"age"</span>].mean()  <span class="co"># 这是“age”列的平均值</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -758,7 +758,7 @@ memory usage: 204.0+ bytes</code></pre>
 <li>计算并显示学生的平均年龄</li>
 <li>显示Bob的那一行。</li>
 </ol>
-<div id="3e3c08bd" class="cell" data-execution_count="22">
+<div id="3515617b" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 在此编写你的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1212,7 +1212,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_data_structures_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_data_structures_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

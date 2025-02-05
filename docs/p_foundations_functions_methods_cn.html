@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/the-graph-courses/idap_book_cn" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -363,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#安装库" id="toc-安装库" class="nav-link" data-scroll-target="#安装库"><span class="header-section-number">4.7</span> 安装库</a></li>
   <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">4.8</span> 总结</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_functions_methods_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_functions_methods_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -408,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="函数" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="函数"><span class="header-section-number">4.3</span> 函数</h2>
 <p>函数是执行特定任务的一段代码。它可以接收输入(参数)并返回输出。以下是一个只使用一个参数的内置函数的例子:</p>
-<div id="3421cd16" class="cell" data-execution_count="1">
+<div id="c058b631" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the len() function to get the length of a string</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(<span class="st">"Python"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>round()</code>函数接受两个参数:要四舍五入的数字和要四舍五入的小数位数。</p>
-<div id="280efa5a" class="cell" data-execution_count="2">
+<div id="cc373aa9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the round() function to round a number</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(<span class="fl">3.1415</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -436,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="问题使用内置函数"><span class="header-section-number">4.3.1</span> 问题:使用内置函数</h3>
 <p>使用<code>abs()</code>函数获取-5的绝对值。</p>
 <p>在下方编写你的代码并运行以检查答案:</p>
-<div id="7671e104" class="cell" data-execution_count="3">
+<div id="495000fb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>传递参数给函数有不同的方法。</p>
 <p>再次考虑<code>round()</code>函数。</p>
 <p>如果我们查看<code>round()</code>函数的文档,使用:</p>
-<div id="3ff3b485" class="cell" data-execution_count="4">
+<div id="c26adbf3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>我们看到它接受两个参数:</p>
@@ -460,27 +460,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>位置参数:按照定义的顺序传递。由于参数的默认顺序是<code>number</code>然后<code>ndigits</code>,我们可以按照这个顺序传递参数,而无需指定参数名,就像上面所做的那样。</li>
 </ol>
-<div id="79797662" class="cell" data-execution_count="5">
+<div id="f22f0c04" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(<span class="fl">3.1415</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>3.14</code></pre>
 </div>
 </div>
 <p>如果我们交换参数的顺序,就会出现错误:</p>
-<div id="f2a1fdbe" class="cell" data-execution_count="6">
+<div id="1b43f4b3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(<span class="dv">2</span>, <span class="fl">3.1415</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>关键字参数:通过指定参数名后跟<code>=</code>和参数值来传递。</li>
 </ol>
-<div id="aeff0457" class="cell" data-execution_count="7">
+<div id="a2584ac8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(number<span class="op">=</span><span class="fl">3.1415</span>, ndigits<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>3.14</code></pre>
 </div>
 </div>
 <p>使用这种方法,我们可以按任何顺序传递参数,只要使用参数名。</p>
-<div id="2b0cdc99" class="cell" data-execution_count="8">
+<div id="2f1a2bd1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(ndigits<span class="op">=</span><span class="dv">2</span>, number<span class="op">=</span><span class="fl">3.1415</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>3.14</code></pre>
@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="问题使用位置参数与pow"><span class="header-section-number">4.4.1</span> 问题:使用位置参数与<code>pow()</code></h3>
 <p>使用<code>pow()</code>函数通过传递位置参数来计算2的7次方。你可能需要查阅<code>pow()</code>函数的文档来了解它的工作方式。</p>
 <p>在下方编写你的代码并运行以检查答案:</p>
-<div id="c65ba111" class="cell" data-execution_count="9">
+<div id="dd2d37b0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -509,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="问题使用关键字参数与round"><span class="header-section-number">4.4.2</span> 问题:使用关键字参数与<code>round()</code></h3>
 <p>使用<code>round()</code>函数通过指定关键字参数将数字<code>9.87652</code>四舍五入到<code>3</code>位小数。</p>
 <p>在下方编写你的代码并运行以检查答案:</p>
-<div id="897e0bf2" class="cell" data-execution_count="10">
+<div id="908f3c07" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -521,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>方法类似于函数,但它们与特定的对象或数据类型相关联。它们通过点符号调用。</p>
 <p>例如,每个字符串对象都有一系列内置方法,如<code>upper()</code>用于转换为大写,<code>lower()</code>用于转换为小写,<code>replace()</code>用于替换子字符串等等。</p>
 <p>让我们看看如何使用这些方法:</p>
-<div id="561400f5" class="cell" data-execution_count="11">
+<div id="3133a733" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"python"</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name.upper())</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(name.lower())</span>
@@ -533,7 +533,7 @@ python
 </div>
 </div>
 <p>我们还可以直接在字符串对象上调用这些方法,而不将其赋值给变量:</p>
-<div id="79e70d2e" class="cell" data-execution_count="12">
+<div id="4b6f7843" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the upper() method on a string</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"python"</span>.upper())</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"PYTHON"</span>.lower())</span>
@@ -545,7 +545,7 @@ python
 </div>
 </div>
 <p>同样,Python中的数字也有一些内置方法。例如,<code>as_integer_ratio()</code>(在Python 3.8中添加)方法将一个小数转换为两个整数的比率。</p>
-<div id="fdc75ce1" class="cell" data-execution_count="13">
+<div id="d522a838" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the as_integer_ratio() method on a float</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>example_decimal <span class="op">=</span> <span class="fl">1.5</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>example_decimal.as_integer_ratio()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ python
 <li>在字符串 “Helo” 上调用 <code>replace()</code> 方法,将单个 l 替换为双 l。</li>
 <li>在字符串 “Hello World” 上调用 <code>split()</code> 方法,将字符串拆分为单词列表。</li>
 </ol>
-<div id="5d6cacb8" class="cell" data-execution_count="14">
+<div id="d34e726e" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -599,17 +599,17 @@ python
 <p>库是你可以在程序中使用的预编写代码的集合。它们通过提供额外的函数和工具扩展了Python的功能。</p>
 <p>例如,<code>math</code>库提供数学函数,如用于平方根的<code>sqrt()</code>和用于正弦的<code>sin()</code>。</p>
 <p>如果我们在未导入<code>math</code>库的情况下尝试使用<code>sqrt()</code>函数,就会出现错误:</p>
-<div id="d7343921" class="cell" data-execution_count="15">
+<div id="9fca7045" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will cause a NameError</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sqrt(<span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>我们可以导入<code>math</code>库并像这样使用<code>sqrt()</code>函数:</p>
-<div id="6f565f76" class="cell" data-execution_count="16">
+<div id="aeabf578" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the library</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>然后我们可以像这样使用<code>sqrt()</code>函数:</p>
-<div id="41b016ab" class="cell" data-execution_count="17">
+<div id="1da3002c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the sqrt() function</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>math.sqrt(<span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -617,12 +617,12 @@ python
 </div>
 </div>
 <p>我们可以以类似的方式获取函数的帮助,调用函数和它所在的库:</p>
-<div id="49129137" class="cell" data-execution_count="18">
+<div id="efa53f65" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get help on the sqrt() function</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>math.sqrt?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>我们还可以为库取别名进行导入。例如,我们可以将<code>math</code>库导入并取别名为<code>m</code>:</p>
-<div id="9cca3cf5" class="cell" data-execution_count="19">
+<div id="94b55098" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the entire library with an alias</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we can use the alias to call the function</span></span>
@@ -632,7 +632,7 @@ python
 </div>
 </div>
 <p>最后,如果你想省略别名/库名,你可以单独导入函数:</p>
-<div id="2b46a378" class="cell" data-execution_count="20">
+<div id="152ee77c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import specific functions from a library</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt, sin</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we can use the function directly</span></span>
@@ -643,7 +643,7 @@ python
 </div>
 </div>
 <p>或者导入库中的所有内容:</p>
-<div id="f0201b51" class="cell" data-execution_count="21">
+<div id="b2643d84" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import everything from the library</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we can all functions directly, such as sqrt() and sin()</span></span>
@@ -690,7 +690,7 @@ python
 <ul>
 <li>导入<code>random</code>库并使用<code>randint()</code>函数生成1到10之间的随机整数。导入后,你可以使用<code>?</code>运算符获取关于该函数的帮助。</li>
 </ul>
-<div id="1d074aea" class="cell" data-execution_count="22">
+<div id="e6d5f4d6" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -700,11 +700,11 @@ python
 <h2 data-number="4.7" class="anchored" data-anchor-id="安装库"><span class="header-section-number">4.7</span> 安装库</h2>
 <p>虽然Python自带了许多内置库,但还有成千上万的额外库可用,你可以安装它们以进一步扩展Python的功能。让我们以<code>cowsay</code>库为例,看看如何安装和使用一个简单的外部库。</p>
 <p>如果我们在未先安装此库的情况下尝试导入它,就会出现错误:</p>
-<div id="62c77ab0" class="cell" data-execution_count="23">
+<div id="dd692f28" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cowsay</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>要安装该库,你可以在Google Colab的代码单元中使用<code>!pip install</code>命令。对于<code>cowsay</code>,你需要运行:</p>
-<div id="3c4027c3" class="cell" data-execution_count="24">
+<div id="d87b2481" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install cowsay</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pip从称为<a href="https://pypi.org/">PyPI</a>的远程仓库安装软件包。任何人都可以创建并上传软件包到PyPI。经过一些检查后,它就可供任何人安装了。</p>
@@ -723,7 +723,7 @@ python
 </div>
 </div>
 <p>安装后,我们现在可以导入并使用<code>cowsay</code>库:</p>
-<div id="5bfa28d2" class="cell" data-execution_count="25">
+<div id="5de67967" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cowsay</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the cow say something</span></span>
@@ -759,7 +759,7 @@ python
 <li>查阅<code>emoji</code>库中<code>emojize()</code>函数的帮助。</li>
 <li>使用<code>emojize()</code>函数显示“点赞”表情。</li>
 </ol>
-<div id="7ddb625f" class="cell" data-execution_count="26">
+<div id="7ed4d802" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1220,7 +1220,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_functions_methods_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_functions_methods_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

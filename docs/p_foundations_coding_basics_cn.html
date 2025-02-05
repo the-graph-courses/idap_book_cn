@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/the-graph-courses/idap_book_cn" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#命名变量" id="toc-命名变量" class="nav-link" data-scroll-target="#命名变量"><span class="header-section-number">3.24</span> 命名变量</a></li>
   <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">3.26</span> 总结</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_coding_basics_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_coding_basics_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -421,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.3" class="anchored" data-anchor-id="注释"><span class="header-section-number">3.3</span> 注释</h2>
 <p>注释是 Python 忽略的文本。它们用于解释代码在做什么。</p>
 <p>你使用符号 <code>#</code>,读作“井号”或“pound”,来开始注释。同一行中 <code>#</code> 之后的任何内容都会被忽略。例如:</p>
-<div id="b99a1925" class="cell" data-execution_count="1">
+<div id="c67b4401" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加法</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -429,20 +429,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>如果我们只是尝试在代码上方写 <code>Addition</code>,会导致错误:</p>
-<div id="8a49ae9e" class="cell" data-execution_count="2">
+<div id="10ad1dcc" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Addition</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code>NameError: name 'Addition' is not defined</code></pre>
 <p>我们可以将注释放在代码的同一行,但它需要放在代码之后。</p>
-<div id="31babcc0" class="cell" data-execution_count="3">
+<div id="b1cd70c2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>  <span class="co"># 加法</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>4</code></pre>
 </div>
 </div>
 <p>要编写多行注释,你可以添加更多的 <code>#</code> 符号:</p>
-<div id="2ce5c93a" class="cell" data-execution_count="4">
+<div id="9b608c08" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加法</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 添加两个数字</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>或者你可以使用三引号 <code>'''</code> 或 <code>"""</code>:</p>
-<div id="426f8125" class="cell" data-execution_count="5">
+<div id="44945a60" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">加法:</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">下面我们添加两个数字</span></span>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>或者:</p>
-<div id="62597f0c" class="cell" data-execution_count="6">
+<div id="a038b6c7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">加法:</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">下面我们添加两个数字</span></span>
@@ -511,39 +511,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.5" class="anchored" data-anchor-id="python-作为计算器"><span class="header-section-number">3.5</span> Python 作为计算器</h2>
 <p>如你所见,Python 可以按照标准方式作为计算器使用。</p>
 <p>以下是一些其他基本算术运算的例子:</p>
-<div id="95df4e4f" class="cell" data-execution_count="7">
+<div id="e67a3d42" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span> <span class="co"># 二减二</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>0</code></pre>
 </div>
 </div>
-<div id="4b474006" class="cell" data-execution_count="8">
+<div id="4c76bdaf" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span>  <span class="co"># 二乘二 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>4</code></pre>
 </div>
 </div>
-<div id="92193139" class="cell" data-execution_count="9">
+<div id="85cf4c5f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>  <span class="co"># 二除以二</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>1.0</code></pre>
 </div>
 </div>
-<div id="9f7f25a9" class="cell" data-execution_count="10">
+<div id="cabee4b0" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> <span class="dv">2</span>  <span class="co"># 二的二次方</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>4</code></pre>
 </div>
 </div>
 <p>还有一些你可能会遇到的其他运算符。例如,<code>%</code> 是取模运算符,它返回除法的余数。</p>
-<div id="0185905a" class="cell" data-execution_count="11">
+<div id="8bc3a62e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span>  <span class="co"># 十模三</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>1</code></pre>
 </div>
 </div>
 <p><code>//</code> 是地板除运算符,它先除法然后向下取整到最接近的整数。</p>
-<div id="edda527b" class="cell" data-execution_count="12">
+<div id="8c8c2abf" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">//</span> <span class="dv">3</span>  <span class="co"># 十地板除三</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>3</code></pre>
@@ -561,10 +561,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题取模与地板除" class="level2 callout-body-container callout-body" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="练习题取模与地板除"><span class="header-section-number">3.6</span> 练习题:取模与地板除</h2>
 <p>猜测以下代码块的结果,然后运行它们以检查你的答案:</p>
-<div id="fcb6c8a9" class="cell" data-execution_count="13">
+<div id="ed860fb1" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">%</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ad8e42af" class="cell" data-execution_count="14">
+<div id="ed774820" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">//</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -574,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.7" class="anchored" data-anchor-id="运算顺序"><span class="header-section-number">3.7</span> 运算顺序</h2>
 <p>Python 遵循标准的 PEMDAS 运算顺序(括号、指数、乘法、除法、加法、减法)。</p>
 <p>例如,乘法在加法之前计算,所以下面的结果是 <code>6</code>。</p>
-<div id="237d8ecc" class="cell" data-execution_count="15">
+<div id="f258a9c1" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">2</span>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>6</code></pre>
@@ -592,10 +592,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题评估算术表达式" class="level2 callout-body-container callout-body" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="练习题评估算术表达式"><span class="header-section-number">3.8</span> 练习题:评估算术表达式</h2>
 <p>以下哪些代码块将计算为 <code>10</code>?</p>
-<div id="2961c7e0" class="cell" data-execution_count="16">
+<div id="8fb9ea2d" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="95755436" class="cell" data-execution_count="17">
+<div id="1166e259" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -604,7 +604,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="使用数学库" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="使用数学库"><span class="header-section-number">3.9</span> 使用数学库</h2>
 <p>我们还可以使用 <code>math</code> 库来进行更复杂的数学运算。例如,我们可以使用 <code>math.sqrt</code> 函数计算一个数的平方根。</p>
-<div id="010b3136" class="cell" data-execution_count="18">
+<div id="f44cbc66" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>math.sqrt(<span class="dv">100</span>)  <span class="co"># 平方根</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -612,7 +612,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>或者我们可以使用 <code>math.log</code> 函数计算一个数的自然对数。</p>
-<div id="299a73fa" class="cell" data-execution_count="19">
+<div id="142630b2" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>math.log(<span class="dv">100</span>)  <span class="co"># 对数</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -648,18 +648,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.10" class="anchored" data-anchor-id="练习题使用数学库"><span class="header-section-number">3.10</span> 练习题:使用数学库</h2>
 <p>使用 <code>math</code> 库,计算 81 的平方根。</p>
 <p>在下方编写你的代码并运行以检查你的答案:</p>
-<div id="7a1ea262" class="cell" data-execution_count="20">
+<div id="28a67c94" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 你的代码在这里</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="练习题描述-random-库的使用" class="level2" data-number="3.11">
 <h2 data-number="3.11" class="anchored" data-anchor-id="练习题描述-random-库的使用"><span class="header-section-number">3.11</span> 练习题:描述 Random 库的使用</h2>
 <p>考虑以下代码,它生成一个 1 到 10 之间的随机数:</p>
-<div id="d8eab2d7" class="cell" data-execution_count="21">
+<div id="71003750" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>random.randint(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>7</code></pre>
+<pre><code>1</code></pre>
 </div>
 </div>
 <p>在这段代码中,确定库、函数和函数的参数。</p>
@@ -676,7 +676,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Python 使用缩进来表示循环、函数和其他代码块的开始和结束。我们将在后面的课程中详细介绍这一点。</p>
 <p>目前,需要注意的一件事是避免在代码前意外加入空格。</p>
 <p>例如,考虑以下代码块:</p>
-<div id="76d6ca90" class="cell" data-execution_count="22">
+<div id="8bfdc70a" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 获取 100 的平方根</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a> math.sqrt(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -684,7 +684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>尝试运行这段代码会导致错误:</p>
 <pre><code>IndentationError: unexpected indent</code></pre>
 <p>这是由于 <code>math.sqrt</code> 函数前的空格。我们可以通过删除空格来修复它。</p>
-<div id="865eb382" class="cell" data-execution_count="23">
+<div id="20ef99d6" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 获取 100 的平方根</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>math.sqrt(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -694,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.14" class="anchored" data-anchor-id="空行"><span class="header-section-number">3.14</span> 空行</h2>
 <p>使用空行来分隔代码的不同部分。</p>
 <p>例如,考虑以下代码块:</p>
-<div id="a26ecb79" class="cell" data-execution_count="24">
+<div id="77618da4" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置数字</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
@@ -707,7 +707,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>我们可以添加空行来分隔代码的不同部分:</p>
-<div id="448b0f77" class="cell" data-execution_count="25">
+<div id="e4d678d5" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置数字</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
@@ -726,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="运算符周围的空格" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="运算符周围的空格"><span class="header-section-number">3.15</span> 运算符周围的空格</h2>
 <p>在数学运算符周围添加空格可以提高可读性:</p>
-<div id="044276c5" class="cell" data-execution_count="26">
+<div id="4c9f03f0" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 难以阅读</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span><span class="dv">5</span><span class="op">+</span><span class="dv">3</span><span class="op">*</span><span class="dv">2</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -734,7 +734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>在列举项目时,在每个逗号后添加一个空格:</p>
-<div id="ba28056b" class="cell" data-execution_count="27">
+<div id="2fd7934c" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 难以阅读</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,7 +746,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-中的变量" class="level2" data-number="3.16">
 <h2 data-number="3.16" class="anchored" data-anchor-id="python-中的变量"><span class="header-section-number">3.16</span> Python 中的变量</h2>
 <p>如你所见,为了在 Python 中存储一个值以供将来使用,我们使用 <em>赋值运算符</em> <code>=</code> 将其赋值给一个 <em>变量</em>。</p>
-<div id="571322c7" class="cell" data-execution_count="28">
+<div id="c7b5a453" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>my_var <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>  <span class="co"># 将 `2 + 2` 的结果赋值给名为 `my_var` 的变量</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_var)  <span class="co"># 打印 my_var</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -756,13 +756,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>现在你已经创建了变量 <code>my_var</code>,Python 知道它并将在这个 Python 会话中跟踪它。</p>
 <p>你可以打开你的环境查看你创建了哪些变量。这取决于你的 IDE 而有所不同。</p>
 <p>那么,变量到底是什么?可以将其视为一个命名的容器,可以保存一个值。当你运行以下代码:</p>
-<div id="938d3231" class="cell" data-execution_count="29">
+<div id="d937f623" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>my_var <span class="op">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>你是在告诉 Python,“将数字 20 存储在名为 ‘my_var’ 的变量中”。</p>
 <p>一旦代码运行,我们可以用 Python 术语说,“变量 <code>my_var</code> 的值是 20”。</p>
 <p>尝试为以下代码块编写类似的句子:</p>
-<div id="f1875259" class="cell" data-execution_count="30">
+<div id="28ec0401" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Joanna"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>运行这段代码后,我们可以用 Python 术语说,“变量 <code>first_name</code> 的值是 Joanna”。</p>
@@ -778,7 +778,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>像 “Joanna” 这样的文本值称为 <strong>字符串</strong>,而像 20 这样的数字称为 <strong>整数</strong>。如果数字有小数点,则称为 <strong>浮点数</strong>,是“浮点数”(floating-point number)的简称。</p>
 <p>以下是这三种变量类型的示例:</p>
-<div id="a708e12b" class="cell" data-execution_count="31">
+<div id="f3d236b5" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 字符串变量</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Joanna"</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -789,7 +789,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="fl">1.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>你可以使用 <code>type()</code> 函数检查变量的类型。</p>
-<div id="3d6f9dfe" class="cell" data-execution_count="32">
+<div id="5b66c1df" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(first_name))</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(age))</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -819,15 +819,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.17" class="anchored" data-anchor-id="重新赋值变量"><span class="header-section-number">3.17</span> 重新赋值变量</h2>
 <p>重新赋值变量就像是更改容器的内容。</p>
 <p>例如,之前我们运行了这段代码,将值 “Joanna” 存储在 <code>first_name</code> 变量中:</p>
-<div id="eec34069" class="cell" data-execution_count="33">
+<div id="6a5f43af" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Joanna"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>要将其更改为不同的值,只需运行一个新的赋值语句并使用新值:</p>
-<div id="250029b1" class="cell" data-execution_count="34">
+<div id="0b11bb21" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Luigi"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>你可以打印变量以观察变化:</p>
-<div id="6f512154" class="cell" data-execution_count="35">
+<div id="1a03a8c9" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>first_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>'Luigi'</code></pre>
@@ -838,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.18" class="anchored" data-anchor-id="操作变量"><span class="header-section-number">3.18</span> 操作变量</h2>
 <p>大部分时间你将在 Python 中操作变量。让我们看一些快速的例子。</p>
 <p>你可以对变量运行简单的命令。例如,下面我们将值 <code>100</code> 存储在变量中,然后对变量取平方根:</p>
-<div id="5355a76b" class="cell" data-execution_count="36">
+<div id="6532a376" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>my_number <span class="op">=</span> <span class="dv">100</span></span>
@@ -850,7 +850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Python 将 <code>my_number</code> 视为数字 100,因此能够计算其平方根。</p>
 <hr>
 <p>你还可以将现有变量组合起来创建新变量。例如,输入以下代码,将 <code>my_number</code> 加到自身,并将结果存储在名为 <code>my_sum</code> 的新变量中:</p>
-<div id="dc68716c" class="cell" data-execution_count="37">
+<div id="f5957fcd" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="op">=</span> my_number <span class="op">+</span> my_number</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>my_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
@@ -860,7 +860,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>my_sum</code> 的值应该是多少?先猜测,然后通过打印来检查。</p>
 <hr>
 <p>Python 还允许我们使用 <code>+</code> 运算符连接字符串。例如,我们可以连接 <code>first_name</code> 和 <code>last_name</code> 变量来创建一个名为 <code>full_name</code> 的新变量:</p>
-<div id="61c905b0" class="cell" data-execution_count="38">
+<div id="10b96e79" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Joanna"</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>last_name <span class="op">=</span> <span class="st">"Luigi"</span></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>full_name <span class="op">=</span> first_name <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> last_name</span>
@@ -881,7 +881,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题变量赋值与操作" class="level2 callout-body-container callout-body" data-number="3.19">
 <h2 data-number="3.19" class="anchored" data-anchor-id="练习题变量赋值与操作"><span class="header-section-number">3.19</span> 练习题:变量赋值与操作</h2>
 <p>考虑以下代码。变量 <code>answer</code> 的值是多少?想一想,然后运行代码检查你的答案。</p>
-<div id="48931492" class="cell" data-execution_count="39">
+<div id="f6dffdd2" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>eight <span class="op">=</span> <span class="dv">9</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> eight <span class="op">-</span> <span class="dv">8</span></span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -893,20 +893,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.20" class="anchored" data-anchor-id="获取用户输入"><span class="header-section-number">3.20</span> 获取用户输入</h2>
 <p>尽管在数据分析中不常用,但 Python 的 <code>input()</code> 函数是一个很酷的 Python 功能,你应该了解。它允许你获取用户输入。</p>
 <p>这是一个简单的例子。我们可以请求用户输入并将其存储在名为 <code>name</code> 的变量中。</p>
-<div id="31881cda" class="cell" data-execution_count="40">
+<div id="9220345d" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="bu">input</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>然后我们可以向用户打印一个问候语。</p>
-<div id="65f0f329" class="cell" data-execution_count="41">
+<div id="35e4cbf8" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello,"</span>, name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>我们还可以在输入提示中包含一个问题:</p>
-<div id="4d490935" class="cell" data-execution_count="42">
+<div id="f8475d76" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">'What is your name? '</span>)</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello,"</span>, name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>让我们看另一个例子。我们将告诉用户他们名字中有多少个字母。</p>
-<div id="5ed87672" class="cell" data-execution_count="43">
+<div id="4562bfbf" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="bu">input</span>(<span class="st">'What is your name? '</span>)</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"There are"</span>, <span class="bu">len</span>(name), <span class="st">"letters in your name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -931,7 +931,7 @@ There are 4 letters in your name</code></pre>
 <section id="与变量相关的常见错误" class="level2" data-number="3.22">
 <h2 data-number="3.22" class="anchored" data-anchor-id="与变量相关的常见错误"><span class="header-section-number">3.22</span> 与变量相关的常见错误</h2>
 <p>在 Python 中使用变量时,你会遇到的最常见错误之一是 <code>NameError</code>。当你尝试使用一个尚未定义的变量时,就会发生这种错误。例如:</p>
-<div id="c3f7a827" class="cell" data-execution_count="44">
+<div id="7f04bf45" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="op">=</span> <span class="dv">48</span>  <span class="co"># 定义 `my_number`</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>My_number <span class="op">+</span> <span class="dv">2</span>  <span class="co"># 尝试将 2 加到 `my_number`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -939,7 +939,7 @@ There are 4 letters in your name</code></pre>
 <pre><code>NameError: name 'My_number' is not defined</code></pre>
 <p>在这里,Python 返回错误信息,因为我们尚未创建(或 <em>定义</em>)变量 <code>My_number</code>。记住,Python 是区分大小写的;我们定义了 <code>my_number</code>,但尝试使用 <code>My_number</code>。</p>
 <p>要修复此问题,确保你使用的是正确的变量名:</p>
-<div id="792eb2a4" class="cell" data-execution_count="45">
+<div id="edd58085" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="op">=</span> <span class="dv">48</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>my_number <span class="op">+</span> <span class="dv">2</span>  <span class="co"># 这将工作并返回 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
@@ -964,7 +964,7 @@ There are 4 letters in your name</code></pre>
 <section id="练习题调试变量错误" class="level2 callout-body-container callout-body" data-number="3.23">
 <h2 data-number="3.23" class="anchored" data-anchor-id="练习题调试变量错误"><span class="header-section-number">3.23</span> 练习题:调试变量错误</h2>
 <p>下面的代码返回一个错误。为什么?(仔细看看)</p>
-<div id="68a276b1" class="cell" data-execution_count="46">
+<div id="f549a4f8" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>my_1st_name <span class="op">=</span> <span class="st">"Kene"</span></span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>my_last_name <span class="op">=</span> <span class="st">"Nwosu"</span></span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -983,14 +983,14 @@ There are 4 letters in your name</code></pre>
 <p>因为你在 Python 中的很多工作涉及与你创建的变量互动,给这些变量选择智能的名字很重要。</p>
 <p>命名变量很难,因为名字应该既 <strong>简短</strong>(这样你可以快速键入它们)又 <strong>信息丰富</strong>(这样你可以轻松记住变量包含的内容),而这两个目标往往相冲突。</p>
 <p>因此,像下面这样太长的名字是不好的,因为它们需要很长时间来输入。</p>
-<div id="1ee340c1" class="cell" data-execution_count="47">
+<div id="da0b697c" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>sample_of_the_ebola_outbreak_dataset_from_sierra_leone_in_2014</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>而像 <code>data</code> 这样的名字也是不好的,因为它不具有信息性;名字没有很好地说明变量包含什么。</p>
 <p>随着你编写更多的 Python 代码,你将学会如何编写简短且信息丰富的名字。</p>
 <hr>
 <p>对于由多个单词组成的名字,有几种约定用于分隔单词:</p>
-<div id="45fc4b05" class="cell" data-execution_count="48">
+<div id="57e747e3" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>snake_case <span class="op">=</span> <span class="st">"蛇形命名使用下划线"</span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>camelCase <span class="op">=</span> <span class="st">"骆驼命名法将新单词首字母大写(但不包括第一个单词)"</span></span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>PascalCase <span class="op">=</span> <span class="st">"帕斯卡命名法将所有单词包括第一个单词都首字母大写"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1001,16 +1001,16 @@ There are 4 letters in your name</code></pre>
 <ul>
 <li>名称必须以字母或下划线开头。因此 <code>2014_data</code> 不是一个有效的名字(因为它以数字开头)。尝试运行下面的代码块看看会得到什么错误。</li>
 </ul>
-<div id="624511be" class="cell" data-execution_count="49">
+<div id="d5f725dd" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2014</span><span class="er">_data</span> <span class="op">=</span> <span class="st">"This is not a valid name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>名称只能包含字母、数字和下划线 (<code>_</code>)。因此 <code>ebola-data</code> 或 <code>ebola~data</code> 或带空格的 <code>ebola data</code> 都不是有效的名字。</li>
 </ul>
-<div id="2b3371ac" class="cell" data-execution_count="50">
+<div id="7d04cea9" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>ebola<span class="op">-</span>data <span class="op">=</span> <span class="st">"This is not a valid name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="57f62d77" class="cell" data-execution_count="51">
+<div id="421acd0c" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>ebola<span class="op">~</span>data <span class="op">=</span> <span class="st">"This is not a valid name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="附注">
@@ -1039,7 +1039,7 @@ There are 4 letters in your name</code></pre>
 <h2 data-number="3.25" class="anchored" data-anchor-id="练习题有效的变量命名约定"><span class="header-section-number">3.25</span> 练习题:有效的变量命名约定</h2>
 <p>以下哪些变量名在 Python 中是有效的?尝试在不运行代码的情况下确定,然后通过尝试运行每行代码来检查你的答案。</p>
 <p>然后修复无效的变量名。</p>
-<div id="ab9ff1fb" class="cell" data-execution_count="52">
+<div id="dba4bc3f" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="er">st_name</span> <span class="op">=</span> <span class="st">"John"</span></span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>last_name <span class="op">=</span> <span class="st">"Doe"</span></span>
 <span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>full<span class="op">-</span>name <span class="op">=</span> <span class="st">"John Doe"</span></span>
@@ -1510,7 +1510,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_coding_basics_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_foundations_coding_basics_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

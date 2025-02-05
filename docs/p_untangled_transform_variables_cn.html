@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/the-graph-courses/idap_book_cn" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#写时复制警告" id="toc-写时复制警告" class="nav-link" data-scroll-target="#写时复制警告"><span class="header-section-number">17.9</span> 写时复制警告</a></li>
   <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">17.10</span> 总结</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_untangled_transform_variables_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_untangled_transform_variables_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -407,11 +407,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="导入" class="level2" data-number="17.3">
 <h2 data-number="17.3" class="anchored" data-anchor-id="导入"><span class="header-section-number">17.3</span> 导入</h2>
 <p>首先,让我们导入 pandas 包:</p>
-<div id="c237ea19" class="cell" data-execution_count="2">
+<div id="33d2cb8f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>现在我们将设置一个重要选项,这将帮助我们避免后续的一些警告。在课程的后面部分,我们会更详细地讨论这个选项。</p>
-<div id="983d207a" class="cell" data-execution_count="3">
+<div id="cae7ccca" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.options.mode.copy_on_write <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="17.4" class="anchored" data-anchor-id="数据集"><span class="header-section-number">17.4</span> 数据集</h2>
 <p>在本课中,我们将使用包含人口和经济数据的美国县的数据集。您可以通过以下链接下载该数据集:<a href="https://github.com/the-graph-courses/idap_book/raw/refs/heads/main/data/us_counties_data.zip">https://github.com/the-graph-courses/idap_book/raw/refs/heads/main/data/us_counties_data.zip</a>。</p>
 <p>下载文件后,解压缩并将 <code>us_counties_data.csv</code> 文件放在项目的 <code>data</code> 文件夹中。</p>
-<div id="3658b8a4" class="cell" data-execution_count="4">
+<div id="c2cf2fe5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>counties <span class="op">=</span> pd.read_csv(<span class="st">"data/us_counties_data.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>counties</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>foreign_born_num</code>: 外国出生居民数量</li>
 </ul>
 <p>让我们创建一个仅包含面积和人口列的数据集子集作为示例。</p>
-<div id="45ee079f" class="cell" data-execution_count="5">
+<div id="ab00bf89" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Small subset for illustration</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>area_df <span class="op">=</span> counties[[<span class="st">"county"</span>, <span class="st">"area_sq_miles"</span>, <span class="st">"pop_20"</span>]]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="创建新变量" class="level2" data-number="17.5">
 <h2 data-number="17.5" class="anchored" data-anchor-id="创建新变量"><span class="header-section-number">17.5</span> 创建新变量</h2>
 <p>假设我们想将面积从平方英里转换为平方公里。由于 1 平方英里约等于 2.59 平方公里,我们可以通过将 <code>area_sq_miles</code> 列乘以 2.59 来创建一个新变量 <code>area_sq_km</code>。</p>
-<div id="830d7bed" class="cell" data-execution_count="6">
+<div id="1d9ae704" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"area_sq_km"</span>] <span class="op">=</span> area_df[<span class="st">"area_sq_miles"</span>] <span class="op">*</span> <span class="fl">2.59</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -651,7 +651,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>语法非常易于理解,虽然有点难以输入。</p>
 <p>使用 <code>area_df["area_sq_km"]</code>,我们表示要创建一个名为 <code>area_sq_km</code> 的新列,然后 <code>area_df["area_sq_miles"] * 2.59</code> 是计算该新列值的表达式。</p>
 <p>让我们再添加一个变量,这次以公顷为单位。转换因子是 1 平方英里 = 259 公顷。</p>
-<div id="7238e90b" class="cell" data-execution_count="7">
+<div id="71c4de1a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert area to hectares as well</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"area_hectares"</span>] <span class="op">=</span> area_df[<span class="st">"area_sq_miles"</span>] <span class="op">*</span> <span class="dv">259</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -730,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题以英亩为单位的面积" class="level3 callout-body-container callout-body" data-number="17.5.1">
 <h3 data-number="17.5.1" class="anchored" data-anchor-id="练习题以英亩为单位的面积"><span class="header-section-number">17.5.1</span> 练习题:以英亩为单位的面积</h3>
 <p>使用 <code>area_df</code> 数据集,通过将 <code>area_sq_miles</code> 变量乘以 640,创建一个名为 <code>area_acres</code> 的新列。将结果存回 <code>area_df</code> 并显示 DataFrame。</p>
-<div id="28e1c1b5" class="cell" data-execution_count="8">
+<div id="57fb38b1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -739,7 +739,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="修改现有变量" class="level2" data-number="17.6">
 <h2 data-number="17.6" class="anchored" data-anchor-id="修改现有变量"><span class="header-section-number">17.6</span> 修改现有变量</h2>
 <p>假设我们想将 <code>area_sq_km</code> 变量四舍五入到小数点后一位。我们可以在 <code>area_sq_km</code> 列上调用 <code>round</code> 方法。</p>
-<div id="bde3beab" class="cell" data-execution_count="9">
+<div id="3201df5b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"area_sq_km"</span>] <span class="op">=</span> area_df[<span class="st">"area_sq_km"</span>].<span class="bu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -817,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题对-area_acres-进行四舍五入" class="level3 callout-body-container callout-body" data-number="17.6.1">
 <h3 data-number="17.6.1" class="anchored" data-anchor-id="练习题对-area_acres-进行四舍五入"><span class="header-section-number">17.6.1</span> 练习题:对 <code>area_acres</code> 进行四舍五入</h3>
 <p>使用 <code>area_df</code> 数据集,将 <code>area_acres</code> 变量四舍五入到小数点后一位。更新 DataFrame <code>area_df</code> 并显示它。</p>
-<div id="48d0b5e4" class="cell" data-execution_count="10">
+<div id="b7542f2f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -827,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="17.7" class="anchored" data-anchor-id="多变量计算"><span class="header-section-number">17.7</span> 多变量计算</h2>
 <p>我们可以基于多个现有变量创建新变量。</p>
 <p>例如,让我们计算每平方公里的人口密度。</p>
-<div id="b7cd87d8" class="cell" data-execution_count="11">
+<div id="0c0ef6c7" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"pop_per_sq_km"</span>] <span class="op">=</span> area_df[<span class="st">"pop_20"</span>] <span class="op">/</span> area_df[<span class="st">"area_sq_km"</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -900,7 +900,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>我们可以将在此输出后添加 <code>round</code> 方法,将结果四舍五入到小数点后一位。</p>
-<div id="ac1dc53b" class="cell" data-execution_count="12">
+<div id="4c22e896" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"pop_per_sq_km"</span>] <span class="op">=</span> (area_df[<span class="st">"pop_20"</span>] <span class="op">/</span> area_df[<span class="st">"area_sq_km"</span>]).<span class="bu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -973,7 +973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>或者,如果您愿意,您可以将其分两步完成:</p>
-<div id="83a20f13" class="cell" data-execution_count="13">
+<div id="b1acfe06" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"pop_per_sq_km"</span>] <span class="op">=</span> area_df[<span class="st">"pop_20"</span>] <span class="op">/</span> area_df[<span class="st">"area_sq_km"</span>]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>area_df[<span class="st">"pop_per_sq_km"</span>] <span class="op">=</span> area_df[<span class="st">"pop_per_sq_km"</span>].<span class="bu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1047,7 +1047,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>在计算人口密度之后,我们可能希望根据这个新变量对 DataFrame 进行排序。让我们按降序排序。</p>
-<div id="40ce8524" class="cell" data-execution_count="14">
+<div id="b0f295db" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by population density in descending order</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>area_df <span class="op">=</span> area_df.sort_values(<span class="st">"pop_per_sq_km"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>area_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1133,7 +1133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="练习题计算外籍出生人口百分比" class="level3 callout-body-container callout-body" data-number="17.7.1">
 <h3 data-number="17.7.1" class="anchored" data-anchor-id="练习题计算外籍出生人口百分比"><span class="header-section-number">17.7.1</span> 练习题:计算外籍出生人口百分比</h3>
 <p>使用 <code>counties</code> 数据集计算每个县的外籍出生居民百分比。变量 <code>foreign_born_num</code> 显示外籍出生居民的数量,<code>pop_20</code> 显示总人口。按外籍出生居民百分比的降序对 DataFrame 进行排序。哪两个县的外籍出生居民比例最高?</p>
-<div id="8455082d" class="cell" data-execution_count="15">
+<div id="6a9b71a4" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1143,7 +1143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="17.8" class="anchored" data-anchor-id="创建布尔变量"><span class="header-section-number">17.8</span> 创建布尔变量</h2>
 <p>有时创建布尔变量以根据条件对数据进行分类或标记是很有用的。布尔变量是仅取两个值的变量:<code>True</code> 或 <code>False</code>。</p>
 <p>考虑 <code>counties</code> 数据集中的 <code>pop_change_2010_2020</code> 变量,它显示了 2010 年至 2020 年之间的人口百分比变化。</p>
-<div id="f7111c37" class="cell" data-execution_count="16">
+<div id="df6a802e" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>changes_df <span class="op">=</span> counties[[<span class="st">"county"</span>, <span class="st">"pop_change_2010_2020"</span>, <span class="st">"pct_emp_change_2010_2021"</span>]]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>changes_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -1199,7 +1199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>我们可能想创建一个布尔变量来标记人口是否增加。为此,如果人口增加,我们将 <code>pop_increase</code> 变量设为 <code>True</code>,否则设为 <code>False</code>。</p>
 <p>运行表达式 <code>changes_df["pop_change_2010_2020"] &gt; 0</code> 会返回一系列布尔值:</p>
-<div id="2d2dbd5d" class="cell" data-execution_count="17">
+<div id="0e85f1ca" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>changes_df[<span class="st">"pop_change_2010_2020"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>0        True
@@ -1211,7 +1211,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 </div>
 </div>
 <p>我们可以将这一系列布尔值赋给 <code>pop_increase</code> 变量。</p>
-<div id="b326354c" class="cell" data-execution_count="18">
+<div id="7a929cea" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>changes_df[<span class="st">"pop_increase"</span>] <span class="op">=</span> changes_df[<span class="st">"pop_change_2010_2020"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>changes_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
@@ -1272,7 +1272,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 </div>
 </div>
 <p>同样,我们可以为就业变化创建布尔变量 <code>emp_increase</code>。</p>
-<div id="739adde4" class="cell" data-execution_count="19">
+<div id="a0041221" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>changes_df[<span class="st">"emp_increase"</span>] <span class="op">=</span> changes_df[<span class="st">"pct_emp_change_2010_2021"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>changes_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
@@ -1339,7 +1339,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 </div>
 </div>
 <p>现在,我们可以筛选出人口增加但就业减少的县。</p>
-<div id="77aed014" class="cell" data-execution_count="20">
+<div id="5a249708" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counties where population increased but employment decreased</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pop_up_emp_down <span class="op">=</span> changes_df.query(<span class="st">"pop_increase == True &amp; emp_increase == False"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>pop_up_emp_down</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1407,7 +1407,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 </div>
 </div>
 <p>您也可以简写如下:</p>
-<div id="df269e59" class="cell" data-execution_count="21">
+<div id="59545f0a" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counties where population increased but employment decreased</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pop_up_emp_down <span class="op">=</span> changes_df.query(<span class="st">"pop_increase &amp; ~(emp_increase)"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pop_up_emp_down</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1488,7 +1488,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 <h3 data-number="17.8.1" class="anchored" data-anchor-id="练习题按外籍出生人口分类县"><span class="header-section-number">17.8.1</span> 练习题:按外籍出生人口分类县</h3>
 <p>在之前的练习题中,我们计算了每个县的外籍出生居民百分比。现在,创建一个布尔变量 <code>foreign_born_pct_gt_30</code>,如果百分比大于 30%,则为 <code>True</code>。</p>
 <p>完成后,查询 DataFrame 以仅显示 <code>foreign_born_pct_gt_30</code> 为 <code>True</code> 的县。您应该得到 24 行。</p>
-<div id="f7e01030" class="cell" data-execution_count="22">
+<div id="116d049d" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1497,7 +1497,7 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 <section id="写时复制警告" class="level2" data-number="17.9">
 <h2 data-number="17.9" class="anchored" data-anchor-id="写时复制警告"><span class="header-section-number">17.9</span> 写时复制警告</h2>
 <p>在本课的前面部分,我们启用了“写时复制”模式。让我们看看当此功能被禁用时会发生什么。</p>
-<div id="3c134cfa" class="cell" data-execution_count="23">
+<div id="b325ac52" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"mode.copy_on_write"</span>, <span class="va">False</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a small subset of our data</span></span>
@@ -1598,11 +1598,11 @@ Name: pop_change_2010_2020, Length: 3226, dtype: bool</code></pre>
 </div>
 </div>
 <p>当我们尝试修改子集时,会收到一个警告:</p>
-<div id="9b666f04" class="cell" data-execution_count="24">
+<div id="861da085" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the subset</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>subset[<span class="st">'unemp_20'</span>] <span class="op">=</span> subset[<span class="st">'unemp_20'</span>].<span class="bu">round</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_55609/317403666.py:2: SettingWithCopyWarning:
+<pre><code>/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_61682/317403666.py:2: SettingWithCopyWarning:
 
 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -2072,7 +2072,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_untangled_transform_variables_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book_cn/edit/main/p_untangled_transform_variables_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book_cn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
