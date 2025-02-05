@@ -1,0 +1,275 @@
+```markdown
+---
+title: 'pandas 中的变量转换'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+pd.options.display.max_rows = 5
+```
+
+## 介绍
+
+在数据分析中,最常见的任务之一是转换数据集中的变量。pandas 库提供了简洁高效的方法来完成这项任务。
+
+## 学习目标
+
+- 理解如何在 DataFrame 中创建新变量。
+- 学习如何修改现有变量。
+- 处理修改视图上变量的潜在问题。
+
+## 导入
+
+首先,让我们导入 pandas 包:
+
+```{python}
+import pandas as pd
+```
+
+现在我们将设置一个重要选项,这将帮助我们避免后续的一些警告。在课程的后面部分,我们会更详细地讨论这个选项。
+
+```{python}
+pd.options.mode.copy_on_write = True
+```
+
+## 数据集
+
+在本课中,我们将使用包含人口和经济数据的美国县的数据集。您可以通过以下链接下载该数据集:[https://github.com/the-graph-courses/idap_book/raw/refs/heads/main/data/us_counties_data.zip](https://github.com/the-graph-courses/idap_book/raw/refs/heads/main/data/us_counties_data.zip)。
+
+下载文件后,解压缩并将 `us_counties_data.csv` 文件放在项目的 `data` 文件夹中。
+
+```{python}
+counties = pd.read_csv("data/us_counties_data.csv")
+counties
+```
+
+数据集中的变量包括:
+
+- `state`: 美国州
+- `county`: 美国县
+- `pop_20`: 2020 年人口估计
+- `area_sq_miles`: 平方英里面积
+- `hh_inc_21`: 2021 年家庭收入中位数
+- `econ_type`: 县的经济类型
+- `pop_change_2010_2020`: 2010 年至 2020 年人口变化(%)
+- `unemp_20`: 2020 年失业率(%)
+- `pct_emp_change_2010_2021`: 2010 年至 2021 年就业变化百分比(%)
+- `foreign_born_num`: 外国出生居民数量
+
+让我们创建一个仅包含面积和人口列的数据集子集作为示例。
+
+```{python}
+# Small subset for illustration
+area_df = counties[["county", "area_sq_miles", "pop_20"]]
+area_df
+```
+
+## 创建新变量
+
+假设我们想将面积从平方英里转换为平方公里。由于 1 平方英里约等于 2.59 平方公里,我们可以通过将 `area_sq_miles` 列乘以 2.59 来创建一个新变量 `area_sq_km`。
+
+```{python}
+area_df["area_sq_km"] = area_df["area_sq_miles"] * 2.59
+area_df
+```
+
+语法非常易于理解,虽然有点难以输入。
+
+使用 `area_df["area_sq_km"]`,我们表示要创建一个名为 `area_sq_km` 的新列,然后 `area_df["area_sq_miles"] * 2.59` 是计算该新列值的表达式。
+
+让我们再添加一个变量,这次以公顷为单位。转换因子是 1 平方英里 = 259 公顷。
+
+```{python}
+# Convert area to hectares as well
+area_df["area_hectares"] = area_df["area_sq_miles"] * 259
+area_df
+```
+
+::: {.callout-tip title="练习"}
+
+### 练习题:以英亩为单位的面积
+
+使用 `area_df` 数据集,通过将 `area_sq_miles` 变量乘以 640,创建一个名为 `area_acres` 的新列。将结果存回 `area_df` 并显示 DataFrame。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 修改现有变量
+
+假设我们想将 `area_sq_km` 变量四舍五入到小数点后一位。我们可以在 `area_sq_km` 列上调用 `round` 方法。
+
+```{python}
+area_df["area_sq_km"] = area_df["area_sq_km"].round(1)
+area_df
+```
+
+::: {.callout-tip title="练习"}
+
+### 练习题:对 `area_acres` 进行四舍五入
+
+使用 `area_df` 数据集,将 `area_acres` 变量四舍五入到小数点后一位。更新 DataFrame `area_df` 并显示它。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 多变量计算
+
+我们可以基于多个现有变量创建新变量。
+
+例如,让我们计算每平方公里的人口密度。
+
+```{python}
+area_df["pop_per_sq_km"] = area_df["pop_20"] / area_df["area_sq_km"]
+area_df
+```
+
+我们可以将在此输出后添加 `round` 方法,将结果四舍五入到小数点后一位。
+
+```{python}
+area_df["pop_per_sq_km"] = (area_df["pop_20"] / area_df["area_sq_km"]).round(1)
+area_df
+```
+
+或者,如果您愿意,您可以将其分两步完成:
+
+```{python}
+area_df["pop_per_sq_km"] = area_df["pop_20"] / area_df["area_sq_km"]
+area_df["pop_per_sq_km"] = area_df["pop_per_sq_km"].round(1)
+area_df
+```
+
+在计算人口密度之后,我们可能希望根据这个新变量对 DataFrame 进行排序。让我们按降序排序。
+
+```{python}
+# Sort by population density in descending order
+area_df = area_df.sort_values("pop_per_sq_km", ascending=False)
+area_df
+```
+
+我们看到纽约县在数据集中拥有最高的人口密度。
+
+::: {.callout-tip title="练习"}
+
+### 练习题:计算外籍出生人口百分比
+    
+使用 `counties` 数据集计算每个县的外籍出生居民百分比。变量 `foreign_born_num` 显示外籍出生居民的数量,`pop_20` 显示总人口。按外籍出生居民百分比的降序对 DataFrame 进行排序。哪两个县的外籍出生居民比例最高?
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 创建布尔变量
+
+有时创建布尔变量以根据条件对数据进行分类或标记是很有用的。布尔变量是仅取两个值的变量:`True` 或 `False`。
+
+考虑 `counties` 数据集中的 `pop_change_2010_2020` 变量,它显示了 2010 年至 2020 年之间的人口百分比变化。
+
+```{python}
+changes_df = counties[["county", "pop_change_2010_2020", "pct_emp_change_2010_2021"]]
+changes_df
+```
+
+我们可能想创建一个布尔变量来标记人口是否增加。为此,如果人口增加,我们将 `pop_increase` 变量设为 `True`,否则设为 `False`。
+
+运行表达式 `changes_df["pop_change_2010_2020"] > 0` 会返回一系列布尔值:
+
+```{python}
+changes_df["pop_change_2010_2020"] > 0
+```
+
+我们可以将这一系列布尔值赋给 `pop_increase` 变量。
+
+```{python}
+changes_df["pop_increase"] = changes_df["pop_change_2010_2020"] > 0
+changes_df
+```
+
+同样,我们可以为就业变化创建布尔变量 `emp_increase`。
+
+```{python}
+changes_df["emp_increase"] = changes_df["pct_emp_change_2010_2021"] > 0
+changes_df
+```
+
+现在,我们可以筛选出人口增加但就业减少的县。
+
+```{python}
+# Counties where population increased but employment decreased
+pop_up_emp_down = changes_df.query("pop_increase == True & emp_increase == False")
+pop_up_emp_down
+```
+
+您也可以简写如下:
+
+```{python}
+# Counties where population increased but employment decreased
+pop_up_emp_down = changes_df.query("pop_increase & ~(emp_increase)")
+pop_up_emp_down
+```
+
+有几个这样的县,这些县可能值得进一步分析。
+
+::: {.callout-tip title="练习"}
+
+### 练习题:按外籍出生人口分类县
+
+在之前的练习题中,我们计算了每个县的外籍出生居民百分比。现在,创建一个布尔变量 `foreign_born_pct_gt_30`,如果百分比大于 30%,则为 `True`。
+
+完成后,查询 DataFrame 以仅显示 `foreign_born_pct_gt_30` 为 `True` 的县。您应该得到 24 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 写时复制警告
+
+在本课的前面部分,我们启用了“写时复制”模式。让我们看看当此功能被禁用时会发生什么。
+
+```{python}
+pd.set_option("mode.copy_on_write", False)
+
+# Create a small subset of our data
+subset = counties.query("state == 'AL'")
+
+subset
+```
+
+当我们尝试修改子集时,会收到一个警告:
+
+```{python}
+# Modify the subset
+subset['unemp_20'] = subset['unemp_20'].round(0)
+```
+
+虽然我们不会深入探讨此警告的技术细节(因为它涉及复杂的 pandas 内部机制),但值得注意的是,该警告包含一个指向 pandas 文档的链接。该文档包含了我们在课程开始时使用的设置。
+
+如果您需要再次参考此设置,您只需点击警告消息中的链接即可访问文档。文档页面还提供了有关此特定问题的更详细信息。
+
+另请注意,从 Pandas 3.0(可能在 2025 年发布)开始,将移除此警告,因为默认行为将改为写时复制。
+
+## 总结
+
+转换数据是任何数据分析工作流程中的基本步骤。pandas 使得使用简单直观的语法在您的 DataFrame 中创建和修改变量变得直接。
+
+在本课中,您学习了如何:
+
+- 通过分配给新列创建新变量。
+- 修改现有变量。
+- 执行涉及多个变量的计算。
+- 基于条件创建布尔变量。
+
+祝贺您完成本课!
+```

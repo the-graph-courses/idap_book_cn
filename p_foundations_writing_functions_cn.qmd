@@ -1,0 +1,318 @@
+---
+title: '函数与条件语句入门'
+---
+
+```{python}
+import pandas as pd
+pd.options.display.max_rows = 7
+```
+
+## 简介
+
+到目前为止,在本课程中你主要使用了别人编写的函数。在本课中,你将学习如何在 Python 中编写自己的函数。
+
+## 学习目标
+
+在本课结束时,你将能够:
+
+1. 在 Python 中创建和使用自己的函数。
+2. 设计函数参数并设置默认值。
+3. 在函数中使用条件逻辑,如 `if`、`elif` 和 `else`。
+
+## 包
+
+运行以下代码以安装并加载本课所需的包:
+
+```{python}
+# Import packages
+import pandas as pd
+import numpy as np
+import vega_datasets as vd
+```
+
+## 函数基础
+
+让我们从创建一个非常简单的函数开始。考虑以下将磅(重量单位)转换为公斤(另一个重量单位)的函数:
+
+```{python}
+def pounds_to_kg(pounds):
+    return pounds * 0.4536
+```
+
+如果你执行这段代码,你将创建一个名为 `pounds_to_kg` 的函数,可以在脚本或控制台中直接使用:
+
+```{python}
+print(pounds_to_kg(150))
+```
+
+让我们一步步解析这个简单函数的结构。
+
+首先,使用 `def` 关键字创建一个函数,后跟一对括号和一个冒号。
+
+```{python}
+# | eval: false
+def function_name():
+    # Function body
+```
+
+在括号内,我们指明函数的**参数**。我们的函数只接受一个参数,我们将其命名为 `pounds`。这是我们想要从磅转换为公斤的值。
+
+```{python}
+# | eval: false
+def pounds_to_kg(pounds):
+    # Function body
+```
+
+当然,我们可以将这个参数命名为任意名称,例如 `p` 或 `weight`。
+
+冒号之后的下一个元素是函数的**主体**。这是我们编写希望在调用函数时执行的代码的地方。
+
+```{python}
+def pounds_to_kg(pounds):
+    return pounds * 0.4536
+```
+
+我们使用 `return` 语句指定函数应输出的值。
+
+你也可以将结果赋给一个变量,然后返回该变量:
+
+```{python}
+def pounds_to_kg(pounds):
+    kg = pounds * 0.4536
+    return kg
+```
+
+这虽然有点冗长,但使函数更清晰。
+
+现在我们可以使用命名参数这样调用我们的函数:
+
+```{python}
+pounds_to_kg(pounds=150)
+```
+
+或者不使用命名参数:
+
+```{python}
+pounds_to_kg(150)
+```
+
+要在 DataFrame 中使用它,可以创建一个新列:
+
+```{python}
+pounds_df = pd.DataFrame({'pounds': [150, 200, 250]})
+pounds_df['kg'] = pounds_to_kg(pounds_df['pounds'])
+pounds_df
+```
+
+就是这样!你刚刚在 Python 中创建并使用了第一个函数。
+
+::: {.callout-tip title="练习"}
+### 月龄转换函数
+
+创建一个名为 `years_to_months` 的简单函数,将年龄从年转换为月。
+
+在下面导入的 `riots_df` DataFrame 上使用它,创建一个名为 `age_months` 的新列:
+
+```{python}
+riots_df = vd.data.la_riots()
+riots_df 
+```
+:::
+
+## 多参数函数
+
+大多数函数接受多个参数而不仅仅是一个。让我们看一个接受三个参数的函数示例:
+
+```{python}
+def calc_calories(carb_grams, protein_grams, fat_grams):
+    result = (carb_grams * 4) + (protein_grams * 4) + (fat_grams * 9)
+    return result
+
+calc_calories(carb_grams=50, protein_grams=25, fat_grams=10)
+```
+
+`calc_calories` 函数根据碳水化合物、蛋白质和脂肪的克数计算总卡路里。碳水化合物和蛋白质估计为每克 4 卡路里,而脂肪估计为每克 9 卡路里。
+
+如果试图在不提供所有参数的情况下使用该函数,将会产生错误。
+
+```{python}
+# | eval: false
+calc_calories(carb_grams=50, protein_grams=25)
+```
+
+```
+TypeError: calc_calories() missing 1 required positional argument: 'fat_grams'
+```
+
+你可以为函数的参数定义**默认值**。如果调用时**未赋值**,则该参数将采用默认值。让我们通过为所有参数赋予默认值,使所有参数都变为可选:
+
+```{python}
+def calc_calories(carb_grams=0, protein_grams=0, fat_grams=0):
+    result = (carb_grams * 4) + (protein_grams * 4) + (fat_grams * 9)
+    return result
+```
+
+现在,我们可以只用部分参数调用函数而不会出错:
+
+```{python}
+calc_calories(carb_grams=50, protein_grams=25)
+```
+
+让我们在一个示例数据集上使用它:
+
+```{python}
+food_df = pd.DataFrame({
+    'food': ['Apple', 'Avocado'],
+    'carb_grams': [25, 10],
+    'protein_grams': [0, 1],
+    'fat_grams': [0, 14]
+})
+food_df['calories'] = calc_calories(food_df['carb_grams'], food_df['protein_grams'], food_df['fat_grams'])
+food_df
+```
+
+::: {.callout-tip title="练习"}
+### BMI 计算函数
+
+创建一个名为 `calc_bmi` 的函数,计算一个或多个人的身体质量指数(BMI),然后通过运行下面的代码块应用该函数。BMI 公式为体重(kg)除以身高(m)的平方。
+
+```{python}
+# Your code here
+
+```
+
+```{python}
+# | eval: false
+bmi_df = pd.DataFrame({
+    'Weight': [70, 80, 100],  # in kg
+    'Height': [1.7, 1.8, 1.2]  # in meters
+})
+bmi_df['BMI'] = calc_bmi(bmi_df['Weight'], bmi_df['Height'])
+bmi_df
+```
+:::
+
+## 条件语句简介:`if`、`elif` 和 `else`
+
+条件语句允许你仅在满足某些条件时执行代码。Python 中的基本语法是:
+
+```{python}
+# | eval: false
+if condition:
+    # Code to execute if condition is True
+elif another_condition:
+    # Code to execute if the previous condition was False and this condition is True
+else:
+    # Code to execute if all previous conditions were False
+```
+
+让我们看一个在函数中使用条件语句的示例。假设我们想编写一个函数,将数字分类为正数、负数或零。
+
+```{python}
+def class_num(num):
+    if num > 0:
+        return "Positive"
+    elif num < 0:
+        return "Negative"
+    else:
+        return "Zero"
+
+print(class_num(10))    # Output: Positive
+print(class_num(-5))    # Output: Negative
+print(class_num(0))     # Output: Zero
+```
+
+如果你像上面对 BMI 函数那样使用这个函数,将会得到一个错误:
+
+```{python}
+num_df = pd.DataFrame({'num': [10, -5, 0]})
+num_df
+```
+
+```{python}
+# | eval: false
+num_df['category'] = class_num(num_df['num'])
+```
+
+```
+ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+```
+
+原因是 if 语句并不是为处理系列(它们不是固有的向量化)的,而是处理单个值。为了解决这个问题,我们可以使用 `np.vectorize` 函数创建函数的向量化版本:
+
+```{python}
+class_num_vec = np.vectorize(class_num)
+num_df['category'] = class_num_vec(num_df['num'])
+num_df
+```
+
+为了更多地练习条件语句,让我们编写一个将成绩分类为简单类别的函数:
+
+- 如果成绩为 85 或以上,类别为 '优秀'。
+- 如果成绩在 60 到 84 之间,类别为 '及格'。
+- 如果成绩低于 60,类别为 '不及格'。
+- 如果成绩为负或无效,返回 '无效成绩'。
+
+```{python}
+def categorize_grade(grade):
+    if grade >= 85 and grade <= 100:
+        return 'Excellent'
+    elif grade >= 60 and grade < 85:
+        return 'Pass'
+    elif grade >= 0 and grade < 60:
+        return 'Fail'
+    else:
+        return 'Invalid grade'
+
+categorize_grade(95)  # Output: Excellent
+```
+
+我们可以将此函数应用于 DataFrame 中的一列,但首先需要将其向量化:
+
+```{python}
+categorize_grade = np.vectorize(categorize_grade)
+```
+
+```{python}
+grades_df = pd.DataFrame({'grade': [95, 82, 76, 65, 58, -5]})
+grades_df['grade_cat'] = categorize_grade(grades_df['grade'])
+grades_df
+```
+
+::: {.callout-tip title="练习"}
+### 年龄分类函数
+
+现在,尝试编写一个将年龄分类为不同生命阶段的函数,使用以下标准:
+
+- 如果年龄小于 18 岁,类别为 '未成年人'。
+- 如果年龄大于或等于 18 岁且小于 65 岁,类别为 '成年人'。
+- 如果年龄大于或等于 65 岁,类别为 '老年人'。
+- 如果年龄为负或无效,返回 '无效年龄'。
+
+在下面打印的 `riots_df` DataFrame 上使用它,创建一个名为 `Age_Category` 的新列。
+
+```{python}
+# Your code here
+
+riots_df = vd.data.la_riots()
+riots_df
+```
+:::
+
+::: {.callout-note title="附注"}
+
+### Apply 与 Vectorize
+
+在 DataFrame 上使用带有 if 语句的函数的另一种方法是使用 `apply` 方法。以下是如何使用 `apply` 实现成绩分类函数:
+
+```{python}
+grades_df['grade_cat'] = grades_df['grade'].apply(categorize_grade)
+grades_df
+```
+
+`vectorize` 方法在处理多个参数时更容易使用,但你将在后续学习中接触到 `apply` 方法。
+:::
+
+## 结论
+
+在本课中,我们介绍了在 Python 中编写函数的基础知识以及如何在这些函数中使用条件语句。函数是编程中必不可少的构建模块,允许你封装代码以便重用和更好的组织。条件语句使你的函数能够根据输入值或其他条件做出决策。

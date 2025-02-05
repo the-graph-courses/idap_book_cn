@@ -1,0 +1,270 @@
+---
+title: "在 Python 中使用 LLM 进行文本生成"
+---
+
+## 简介
+
+在本教程中,我们将探讨如何利用大型语言模型(LLMs)使用 OpenAI 的 API 生成文本。我们将使用 `gpt-4o-mini` 模型来生成对固定和可变提示的响应,使用辅助函数和向量化优化我们的代码,并使用 pandas DataFrame 处理数据。
+
+## 学习目标
+
+- 设置 OpenAI 客户端
+- 定义和使用简单函数生成文本
+- 使用向量化将函数应用于 DataFrame
+
+## 设置 OpenAI 客户端
+
+首先,我们需要使用您的 API 密钥设置 OpenAI 客户端。在这里,我们将密钥存储在名为 `local_settings.py` 的文件中,然后将其导入到我们的脚本中。
+
+```{python}
+from openai import OpenAI
+import pandas as pd
+import numpy as np
+from local_settings import OPENAI_KEY
+
+# 设置 OpenAI API 密钥
+# 使用您的 API 密钥初始化 OpenAI 客户端
+client = OpenAI(api_key=OPENAI_KEY)
+```
+
+或者,您可以在设置 `api_key` 时直接传递您的 API 密钥,但请注意不要在代码中泄露,尤其是如果您计划共享或发布代码时。
+
+## 进行 API 调用
+
+让我们进行一次 API 调用,使用 `gpt-4o-mini` 模型生成对提示的响应。
+
+```{python}
+response = client.chat.completions.create(
+    model="gpt-4o-mini", messages=[{"role": "user", "content": "What is the most tourist-friendly city in France?"}]
+)
+print(response.choices[0].message.content)
+```
+
+## 定义辅助函数
+
+为了简化我们的代码并避免重复,我们将定义一个用于进行 API 调用的辅助函数。API 调用包含大量样板代码,因此将此逻辑封装在函数中可以使我们的代码更简洁、更易维护。
+
+如果您忘记如何构建 API 调用,请参考 [OpenAI API 文档](https://platform.openai.com/docs/api-reference/introduction) 或在线搜索“OpenAI Python API example”。
+
+以下是我们如何定义 `llm_chat` 函数:
+
+```{python}
+def llm_chat(message):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini", messages=[{"role": "user", "content": message}]
+    )
+    return response.choices[0].message.content
+```
+
+此函数接受一个 `message` 作为输入,发送给 LLM,并返回生成的响应。 `model` 参数指定要使用的模型 —— 在此情况下为 `gpt-4o-mini`。我们使用此模型是因为它在质量、速度和成本之间具有良好的平衡。如果您需要更高性能的模型,可以使用 `gpt-4o`,但请注意不要超过您的 API 配额。
+
+## 固定问题
+
+让我们首先向 `gpt-4o-mini` 模型发送一个固定问题并获取响应。
+
+```{python}
+# 示例用法
+response = llm_chat("What is the most tourist-friendly city in France?")
+print(response)
+```
+
+::: {.callout-tip title="练习"}
+
+## 练习题:获取巴西最适合旅游的城市
+
+使用 `llm_chat` 函数询问模型巴西最适合旅游的城市。将响应存储在名为 `rec_brazil` 的变量中。打印响应。
+
+```{python}
+# 您的代码
+```
+
+```{python}
+#| include: false
+response = llm_chat("What is the most tourist-friendly city in Brazil?")
+print(response)
+```
+
+:::
+
+## 可变作为提示输入
+
+通常,您会希望基于不同的输入生成响应。让我们创建一个函数,该函数接受一个国家作为输入,并询问模型该国最适合旅游的城市。
+
+```{python}
+def city_rec(country):
+    prompt = f"What is the most tourist-friendly city in {country}?"
+    return llm_chat(prompt)
+```
+
+现在,您可以通过调用 `city_rec("Country Name")` 来获取不同国家的推荐:
+
+```{python}
+city_rec("Nigeria")
+```
+
+然而,如果我们尝试将此函数直接用于国家列表或 DataFrame 列,它不会逐个处理每个国家。而是会尝试将列表连接成一个字符串,这不是我们想要的行为。
+
+```{python}
+
+# 错误用法
+country_df = pd.DataFrame({"country": ["Nigeria", "Chile", "France", "Canada"]})
+
+response = city_rec(country_df["country"])
+
+print(response)
+```
+
+要逐个处理每个国家,我们可以使用 NumPy 的 `vectorize` 函数。此函数将 `city_rec` 转换为可以接受数组(如列表或 NumPy 数组)并按元素应用函数的形式。
+
+```{python}
+# 向量化函数
+city_rec_vec = np.vectorize(city_rec)
+
+# 将函数应用于每个国家
+country_df["city_rec"] = city_rec_vec(country_df["country"])
+country_df
+```
+
+此代码将输出一个包含新列 `city_rec` 的 DataFrame,其中包含每个国家对应的城市推荐。
+
+::: {.callout-tip title="练习"}
+
+## 练习题:获取当地菜肴
+
+创建一个名为 `get_local_dishes` 的函数,该函数接受一个国家名称作为输入,并返回该国一些最著名的当地菜肴。然后,将此函数向量化并应用于 `country_df` DataFrame,为每个国家添加一个包含当地菜肴推荐的列。
+
+```{python}
+# 您的代码
+```
+
+```{python}
+#| include: false
+def get_local_dishes(country):
+    prompt = f"What are some of the most famous local dishes from {country}?"
+    return llm_chat(prompt)
+
+# 向量化函数
+get_local_dishes_vec = np.vectorize(get_local_dishes)
+
+# 应用于 DataFrame
+country_df['local_dishes'] = get_local_dishes_vec(country_df['country'])
+country_df
+```
+
+:::
+
+## 自动摘要:电影数据集
+
+在此示例中,我们将使用来自 `vega_datasets` 的电影数据集为每部电影生成自动摘要。我们将每部电影的数据转换为字典,并将其作为输入提供给 LLM 生成一段关于其表现的摘要。
+
+首先,让我们加载电影数据集并预览前几行:
+
+```{python}
+import pandas as pd
+import vega_datasets as vd
+
+# 加载电影数据集
+movies = vd.data.movies().head()  # 仅使用前 5 行以节省 API 积分
+movies
+```
+
+接下来,我们将 DataFrame 的每一行转换为字典。这将有助于将数据传递给 LLM。
+
+```{python}
+# 将每部电影的数据转换为字典
+movies.to_dict(orient="records")
+```
+
+让我们将此新列存储在 DataFrame 中:
+
+```{python}
+movies["full_dict"] = movies.to_dict(orient="records")
+movies
+```
+
+现在,让我们定义一个 `movie_performance` 函数,该函数接受电影的数据字典,构建提示,并调用 `llm_chat` 函数以获取摘要:
+
+```{python}
+def movie_performance(movie_data):
+    prompt = f"Considering the following data on this movie {movie_data}, provide a one-paragraph summary of its performance for my report."
+    return llm_chat(prompt)
+```
+
+我们将向量化此函数,以便可以将其应用于整个 `full_dict` 列:
+
+```{python}
+import numpy as np
+
+# 向量化函数以应用于 DataFrame
+movie_performance_vec = np.vectorize(movie_performance)
+```
+
+让我们使用一个示例测试我们的函数:
+
+```{python}
+# 示例用法
+movie_performance("Name: Kene's Movie, Sales: 100,000 USD")
+```
+
+最后,我们将应用向量化函数为每部电影生成摘要:
+
+```{python}
+# 为每部电影生成摘要
+movies["llm_summary"] = movie_performance_vec(movies["full_dict"])
+```
+
+您现在可以将生成的摘要与 DataFrame 一起保存到 CSV 文件:
+
+```{python}
+# 将结果保存到 CSV 文件
+movies.to_csv("movies_output.csv", index=False)
+```
+
+这种方法允许您基于每部电影的完整数据生成详细摘要,这对于自动报告和数据分析非常有用。
+
+::: {.callout-tip title="练习"}
+
+## 练习题:天气摘要
+
+使用来自 `vega_datasets` 的 `seattle_weather` 数据集的前 5 行,创建一个函数,该函数接受某一天的所有天气列,并生成该天天气状况的摘要。该函数应使用 LLM 根据提供的数据生成一段用于报告的一段摘要。将摘要存储在名为 `weather_summary` 的列中。
+
+```{python}
+weather = vd.data.seattle_weather().head()
+weather
+```
+
+```{python}
+# 您的代码
+```
+
+```{python}
+#| include: false
+# 步骤 1:加载数据集
+weather = vd.data.seattle_weather().head()
+
+# 步骤 2:将每一行转换为字典并添加到 DataFrame
+weather_dicts = weather.to_dict(orient="records")
+weather["full_dict"] = weather_dicts
+
+# 步骤 3:定义生成摘要的函数
+def weather_summary(weather_data):
+    prompt = (
+        f"Considering the following weather data: {weather_data}, "
+        "provide a one-paragraph summary of the weather conditions for my report."
+    )
+    return llm_chat(prompt)
+
+# 步骤 4:向量化函数
+weather_summary_vec = np.vectorize(weather_summary)
+
+# 步骤 5:应用函数生成摘要
+weather["summary"] = weather_summary_vec(weather["full_dict"])
+```
+
+:::
+
+## 总结
+
+在本教程中,我们学习了在 Python 中使用 OpenAI 的 LLM 进行文本生成的基础知识,创建了辅助函数,并通过向量化将这些函数应用于数据集。
+
+在下一课中,我们将探讨结构化输出,允许我们指定从 LLM 获得响应的格式。我们将使用这一点从非结构化文本中提取结构化数据,这在数据分析中是常见任务。

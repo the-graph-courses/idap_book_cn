@@ -1,0 +1,650 @@
+---
+title: '使用 Plotly Express 的双变量和多变量图'
+---
+
+## 介绍
+
+在本课程中,您将学习如何使用 Plotly Express 创建双变量和多变量图。这类图表对于探索两个或多个变量之间的关系至关重要,无论这些变量是定量的还是分类的。理解这些关系可以为您的数据提供更深入的见解。
+
+让我们开始吧!
+
+## 学习目标
+
+在本课程结束时,您将能够:
+
+- 为定量对定量数据创建散点图
+- 为定量对分类数据生成分组直方图和小提琴图
+- 为分类对分类数据创建分组、堆叠和百分比堆叠条形图
+- 使用条形图和折线图可视化时间序列数据
+- 创建气泡图以显示三个或更多变量之间的关系
+- 使用分面图比较不同数据子集的分布
+
+## 导入
+
+本课程需要 `plotly.express`、`pandas`、`numpy` 和 `vega_datasets`。如果尚未安装,请先安装它们。
+
+```{python}
+import plotly.express as px
+import pandas as pd
+import numpy as np
+from vega_datasets import data
+```
+
+## 数值与数值数据
+
+当两个变量都是定量的时,散点图是可视化它们关系的绝佳方式。
+
+### 散点图
+
+让我们创建一个散点图来检查 `total_bill` 和 `tip` 在 tips 数据集中的关系。tips 数据集包含在 Plotly Express 中,其中包含美国餐厅服务员收集的餐账和小费信息。
+
+首先,我们将加载数据集并查看前五行:
+
+```{python}
+tips = px.data.tips()
+tips
+```
+
+接下来,我们将创建一个基本的散点图。我们将使用 `px.scatter` 函数来完成。
+
+```{python}
+px.scatter(tips, x='total_bill', y='tip')
+```
+
+从散点图中,我们可以观察到,随着总账单的增加,小费金额也趋于增加。
+
+让我们通过添加标签和标题来增强散点图。
+
+```{python}
+px.scatter(
+    tips,
+    x="total_bill",
+    y="tip",
+    labels={"total_bill": "总账单($)", "tip": "小费($)"},
+    title="总账单与小费金额之间的关系",
+)
+```
+
+请记得,您可以在单元格中输入 `px.scatter?` 并执行单元格,以查看有关该函数的更多信息。
+
+```{python}
+# | eval: False
+px.scatter?
+```
+
+### 练习题:预期寿命与人均 GDP
+
+::: {.callout-tip title='练习'}
+
+使用 Gapminder 数据集(以下定义的2007年子集 `g_2007`),创建一个散点图,显示 `gdpPercap`(人均 GDP)和 `lifeExp`(预期寿命)之间的关系。
+
+根据图表,人均 GDP 和预期寿命之间是什么关系?
+
+```{python}
+gapminder = px.data.gapminder()
+g_2007 = gapminder.query('year == 2007')
+g_2007.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+px.scatter(
+    g_2007,
+    x="gdpPercap",
+    y="lifeExp",
+    labels={"gdpPercap": "人均 GDP", "lifeExp": "预期寿命"},
+    title="预期寿命与人均 GDP 之间的关系(2007)",
+)
+```
+
+根据图表,人均 GDP 和预期寿命之间存在正相关关系,尽管在较高的 GDP 值时似乎趋于平稳。
+:::
+
+## 数值与分类数据
+
+当一个变量是定量的,另一个是分类的时,我们可以使用分组直方图、小提琴图或箱线图来可视化定量变量在不同类别中的分布。
+
+### 分组直方图
+
+首先,以下是如何创建所有小费的常规直方图:
+
+```{python}
+px.histogram(tips, x='tip')
+```
+
+要创建分组直方图,请使用 `color` 参数指定分类变量。在这里,我们将按 `sex` 为直方图着色:
+
+```{python}
+px.histogram(tips, x='tip', color='sex')
+```
+
+默认情况下,每个类别的直方图是堆叠的。要更改此行为,您可以使用 `barmode` 参数。例如,`barmode='overlay'` 将创建一个重叠的直方图:
+
+```{python}
+px.histogram(tips, x="tip", color="sex", barmode="overlay")
+```
+
+这将在彼此之上创建两个半透明的直方图,从而允许直接比较分布。
+
+### 练习题:按性别的年龄分布
+
+::: {.callout-tip title='练习'}
+
+使用 `vega_datasets` 中的 `la_riots` 数据集,创建按 `gender` 分组的 `age` 直方图。比较不同性别之间的年龄分布。
+
+根据图表,年龄最大的受害者是男性还是女性?
+
+```{python}
+la_riots = data.la_riots()
+la_riots.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+px.histogram(la_riots, x="age", color="gender")
+```
+
+根据图表,年龄最大的受害者是女性。
+:::
+
+### 小提琴图和箱线图
+
+小提琴图对于比较定量变量在不同类别中的分布非常有用。它们显示了数据在不同值处的概率密度,并可以包括一个箱线图以总结关键统计量。
+
+首先,让我们创建一个所有小费的小提琴图:
+
+```{python}
+px.violin(tips, y="tip")
+```
+
+我们可以通过将 `box` 参数设置为 `True` 来在小提琴图中添加箱线图:
+
+```{python}
+px.violin(tips, y="tip", box=True)
+```
+
+仅使用箱线图,我们可以使用 `px.box`:
+
+```{python}
+px.box(tips, y="tip")
+```
+
+要在小提琴图或箱线图中添加抖动点,我们可以使用 `points='all'` 参数。
+
+```{python}
+px.violin(tips, y="tip", points="all")
+```
+
+现在,创建按性别分组的小提琴图,使用 `x` 参数指定分类变量:
+
+```{python}
+px.violin(tips, y="tip", x="sex", box=True)
+```
+
+我们还可以添加颜色轴以区分小提琴图:
+
+```{python}
+px.violin(tips, y="tip", x="sex", color="sex", box=True)
+```
+
+::: {.callout-tip title='练习'}
+
+### 练习题:按洲分的预期寿命
+
+使用 `g_2007` 数据集,创建一个显示 `lifeExp` 按 `continent` 分布的小提琴图。
+
+根据图表,哪个洲的国家预期寿命中位数最高?
+
+```{python}
+g_2007 = gapminder.query("year == 2007")
+g_2007.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+# 解决方案
+px.violin(
+    g_2007,
+    y="lifeExp",
+    x="continent",
+    box=True,
+    title="不同洲的预期寿命分布(2007)",
+)
+```
+
+根据图表,澳大利亚大洋洲的国家预期寿命中位数最高。
+:::
+
+### 摘要条形图(平均值和标准差)
+
+有时,显示定量变量在不同类别中的平均值和标准差非常有用。这可以使用带有误差条的条形图来可视化。
+
+首先,让我们计算每个性别的小费平均值和标准差。您尚未学习如何执行此操作,但在后续课程中会涉及。
+
+```{python}
+# 计算平均值和标准差
+summary_df = (
+    tips.groupby("sex")
+    .agg(mean_tip=("tip", "mean"), std_tip=("tip", "std"))
+    .reset_index()
+)
+summary_df
+```
+
+接下来,我们将使用 `px.bar` 创建条形图,并使用 `error_y` 参数添加误差条:
+
+```{python}
+# 创建条形图
+px.bar(summary_df, x="sex", y="mean_tip", error_y="std_tip")
+```
+
+此条形图显示了每个性别的平均小费金额,误差条表示标准差。
+
+::: {.callout-tip title='练习'}
+
+### 练习题:按天的平均总账单
+
+使用 `tips` 数据集,创建一个带有标准差误差条的按 `day` 分组的平均 `total_bill` 条形图。您可以复制并粘贴上面的示例代码,并修改以创建此图。
+
+根据图表,哪个星期天的平均总账单最高?
+
+```{python}
+tips.head()  # 查看 tips 数据集
+# 您的代码在此处
+```
+
+```{python}
+# | include: false
+# 解决方案
+# 计算平均值和标准差
+summary_df = (
+    tips.groupby("day")
+    .agg(mean_bill=("total_bill", "mean"), std_bill=("total_bill", "std"))
+    .reset_index()
+)
+
+# 创建条形图
+px.bar(
+    summary_df,
+    x="day",
+    y="mean_bill",
+    error_y="std_bill",
+    title="按天的平均总账单",
+)
+```
+
+根据图表,星期天的平均账单最高。
+:::
+
+::: {.callout-note title='附注:`px.bar` 和 `px.histogram` 之间的区别'}
+
+请注意,这是我们第一次使用 `px.bar` 函数。在过去的图表中,我们使用 `px.histogram` 来制作条形图。
+
+条形图函数通常期望被绘制的数值变量已经在自己的列中,而直方图函数会为您进行分组。
+
+例如,在下面的单元格中,我们使用 `px.histogram` 制作 `sex` 列的条形图。生成的图表比较了数据集中男性和女性客户的数量。
+
+```{python}
+px.histogram(tips, x='sex')
+```
+
+要使用 `px.bar` 制作相同的图表,我们首先需要按 `sex` 列分组并计算每个性别的行数。
+
+```{python}
+sex_counts = tips['sex'].value_counts().reset_index()
+sex_counts
+```
+
+然后,我们可以使用 `px.bar` 绘制 `sex` 列:
+
+```{python}
+px.bar(sex_counts, x="sex", y="count")
+```
+
+这将生成一个每个性别一个条形的条形图。
+
+:::
+
+## 分类与分类数据
+
+当两个变量都是分类时,带有颜色轴的条形图对于可视化类别之间的频率分布非常有效。我们将重点介绍三种类型的条形图:堆叠条形图、百分比堆叠条形图和分组/集群条形图。
+
+### 堆叠条形图
+
+堆叠条形图显示总计和每个类别中的分解。要制作堆叠条形图,请使用 `color` 参数指定分类变量:
+
+```{python}
+px.histogram(
+    tips,
+    x='day',
+    color='sex'
+)
+```
+
+让我们在条形上添加数字以显示确切的计数,并使用自定义颜色改善色彩调色板。
+
+```{python}
+px.histogram(
+    tips,
+    x="day",
+    color="sex",
+    text_auto=True,
+    color_discrete_sequence=["#deb221", "#2f828a"],
+)
+```
+
+此堆叠条形图显示了每一天的总客户数量,按性别细分。
+
+::: {.callout-tip title='练习'}
+
+### 练习题:按洲的高收入和低收入国家
+
+使用 `g_2007_income` 数据集,创建一个堆叠条形图,显示每个洲的高收入和低收入国家的数量。
+
+```{python}
+gap_dat = px.data.gapminder()
+
+g_2007_income = (
+    gap_dat.query("year == 2007")
+    .drop(columns=["year", "iso_alpha", "iso_num"])
+    .assign(
+        income_group=lambda df: np.where(
+            df.gdpPercap > 15000, "高收入", "低收入和中等收入"
+        )
+    )
+)
+
+g_2007_income.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+# 解决方案
+px.histogram(
+    g_2007_income,
+    x="continent",
+    color="income_group",
+    title="按洲的高收入和低收入国家数量",
+)
+```
+:::
+
+### 百分比堆叠条形图
+
+要显示比例而不是计数,我们可以通过将 `barnorm` 参数设置为 `'percent'` 来创建百分比堆叠条形图:
+
+```{python}
+# 创建百分比堆叠条形图
+px.histogram(tips, x="day", color="sex", barnorm="percent")
+```
+
+此图表将条形高度规范化为表示百分比,显示每一天每个性别的比例。
+
+我们还可以在条形上添加文本标签以显示确切的百分比:
+
+```{python}
+px.histogram(tips, x="day", color="sex", barnorm="percent", text_auto=".1f")
+```
+
+`text_auto` 参数中的符号 `.1f` 将文本标签格式化为一位小数。
+
+::: {.callout-tip title='练习'}
+
+### 练习题:按洲的高收入和低收入国家比例
+
+再次使用 `g_2007_income` 数据集,创建一个百分比堆叠条形图,显示每个洲高收入和低收入国家的比例。添加文本标签以显示确切的百分比。
+
+根据图表,哪个洲的高收入国家比例最高?此图表有哪些限制?
+
+```{python}
+# 您的代码在此处
+```
+
+```{python}
+# | include: false
+# 解决方案
+px.histogram(
+    g_2007_income,
+    x="continent",
+    color="income_group",
+    barnorm="percent",
+    title="按洲的高收入和低收入国家比例",
+)
+
+# 根据图表,北美洲的高收入国家比例最高。
+# 一个限制是它隐藏了每个洲国家的实际数量。因此,澳大利亚大洋洲看起来像是一个高收入洲,但在数据中仅包含两个大洋洲国家,这对于得出这样的结论来说数量太少了。
+```
+
+:::
+
+### 集群条形图
+
+对于集群条形图,将 `barmode` 参数设置为 `'group'` 以将每个类别的条形并排放置:
+
+```{python}
+px.histogram(tips, x="day", color="sex", barmode="group")
+```
+
+这种布局使得跨类别的值比较更加容易。
+
+## 时间序列数据
+
+时间序列数据表示在不同时间点收集的观察值。它对于分析趋势、模式和随时间的变化至关重要。让我们使用 Gapminder 数据集中尼日利亚的人口数据探索一些基本的时间序列可视化。
+
+首先,让我们准备数据:
+
+```{python}
+# 加载 Gapminder 数据集
+gapminder = px.data.gapminder()
+
+# 子集数据为尼日利亚
+nigeria_pop = gapminder.query('country == "Nigeria"')[['year', 'pop']]
+nigeria_pop
+```
+
+### 条形图
+
+条形图可以用于绘制时间序列数据。
+
+```{python}
+# 条形图
+px.bar(nigeria_pop, x="year", y="pop")
+```
+
+此条形图清晰地展示了尼日利亚人口随年份的变化,每个条形代表特定年份的人口。
+
+### 折线图
+
+折线图非常适合显示随时间的连续变化:
+
+```{python}
+# 折线图
+px.line(nigeria_pop, x="year", y="pop")
+```
+
+折线图连接了人口值,使得整体人口增长趋势更易于观察。
+
+在折线图中添加标记点可以突出显示特定的数据点:
+
+```{python}
+# 带点的折线图
+px.line(nigeria_pop, x='year', y='pop', markers=True)
+```
+
+我们还可以通过添加 `color` 参数来比较多个国家的人口增长:
+
+```{python}
+nigeria_ghana = gapminder.query('country in ["Nigeria", "Ghana"]')
+px.line(nigeria_ghana, x="year", y="pop", color="country", markers=True)
+```
+
+此图表允许我们比较尼日利亚和加纳的人口增长趋势。
+
+::: {.callout-tip title='练习'}
+
+### 练习题:人均 GDP 时间序列
+
+使用 Gapminder 数据集,创建伊拉克人均 GDP 的时间序列可视化。
+
+```{python}
+# 您的代码在此处
+```
+
+1980 年代伊拉克发生了什么事件,可能解释了图表中的现象?
+
+```{python}
+#| include: false
+# 解决方案
+iraq_gdp = gapminder.query('country == "Iraq"')
+px.line(
+    iraq_gdp,
+    x="year",
+    y="gdpPercap",
+    markers=True,
+    title="伊拉克人均 GDP 随时间变化"
+)
+
+# 伊朗-伊拉克战争(1980-1988)可能解释了1980年代人均 GDP 的显著下降。
+```
+
+:::
+
+## 三个或更多变量的图表
+
+虽然双变量可视化是最常见的可视化类型,但有时三个或更多变量的图表也是有用的。让我们探索一些示例。
+
+### 气泡图
+
+气泡图通过将点的大小映射到第三个变量来显示三个变量之间的关系。下面,我们绘制了 `gdpPercap` 和 `lifeExp` 之间的关系,点的大小表示国家的人口。
+
+```{python}
+px.scatter(g_2007, x="gdpPercap", y="lifeExp", size="pop")
+```
+
+我们可以轻松地识别出人口最多的国家,如中国、印度和美国。我们还可以添加颜色轴以区分不同洲:
+
+```{python}
+px.scatter(g_2007, x="gdpPercap", y="lifeExp", size="pop", color="continent")
+```
+
+现在我们绘制了四个不同的变量:
+
+- `gdpPercap` 在 x 轴
+- `lifeExp` 在 y 轴
+- `pop` 作为点的大小
+- `continent` 作为点的颜色
+
+::: {.callout-tip title='练习'}
+
+### 练习题:小费气泡图
+
+使用 `tips` 数据集,创建一个气泡图,显示 `total_bill` 和 `tip` 之间的关系,点的大小表示聚会的 `size`,颜色表示星期几的 `day`。
+
+使用此图回答以下问题:
+
+- 最高的两个小费金额是哪几天的,且桌子的人数是多少?
+
+```{python}
+tips.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+# 解决方案
+px.scatter(
+    tips,
+    x="total_bill",
+    y="tip",
+    size="size",
+    color="day",
+    title="按聚会大小和星期几的小费与总账单关系"
+)
+```
+
+:::
+
+### 分面图
+
+分面图将单个图表拆分为多个图表,每个图表显示数据的不同子集。这对于比较不同子集之间的分布非常有用。
+
+例如,我们可以按洲对气泡图进行分面:
+
+```{python}
+px.scatter(
+    g_2007,
+    x="gdpPercap",
+    y="lifeExp",
+    size="pop",
+    color="continent",
+    facet_col="continent",
+)
+```
+
+我们可以通过更改 `facet_col_wrap` 参数来更改分面排列。例如,`facet_col_wrap=2` 将分面排列为两列:
+
+```{python}
+px.scatter(
+    g_2007,
+    x="gdpPercap",
+    y="lifeExp",
+    size="pop",
+    color="continent",
+    facet_col="continent",
+    facet_col_wrap=2,
+)
+```
+
+类似地,我们可以按星期几对小费的小提琴图进行分面:
+
+```{python}
+px.violin(
+    tips,
+    x="sex",
+    y="tip",
+    color="sex",
+    facet_col="day",
+    facet_col_wrap=2,
+)
+```
+
+分面图使我们能够比较不同日子的分布,提供更细致的见解。
+
+::: {.callout-tip title='练习'}
+
+### 练习题:小费分面图
+
+使用 `tips` 数据集,创建一个按 `day` 分面、按 `time` 列百分比堆叠、颜色按 `sex` 列的条形图。
+
+哪个日子的哪个时间段拥有最高比例的男性客户(例如,星期五午餐、星期六晚餐等)?
+
+```{python}
+tips.head()
+# 您的代码在此处
+```
+
+```{python}
+#| include: false
+# 解决方案
+px.histogram(
+    tips,
+    x="time",
+    color="sex",
+    facet_col="day",
+    barnorm="percent",
+    text_auto=".1f",
+    title="按日和时间的男女客户比例",
+)
+```
+
+:::
+
+## 总结
+
+在本课程中,您学习了如何使用 Plotly Express 创建双变量和多变量图。理解这些可视化技术将帮助您更有效地探索和传达数据中的关系。
+
+下节课见!

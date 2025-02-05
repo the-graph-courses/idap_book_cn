@@ -1,0 +1,359 @@
+---
+title: '使用 `assign()` 创建和修改变量'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+pd.options.display.max_rows = 5
+```
+
+
+## 介绍
+
+今天你将学习如何使用 pandas 的 `assign()` 方法修改现有变量或创建新变量。这是大多数数据分析项目中的关键步骤。
+
+让我们开始吧!
+
+## 学习目标
+
+- 你可以使用 pandas 的 `assign()` 方法创建新变量或修改现有变量。
+
+## 导入
+
+本课程将需要 pandas 包。你可以使用以下代码导入它:
+
+```{python}
+import pandas as pd
+```
+
+## 数据集
+
+在本课程中,我们将使用包含美国各县的人口统计和经济数据的数据集。
+
+```{python}
+counties = pd.read_csv("data/us_counties_data.csv")
+counties
+```
+
+数据集中的变量有:
+
+- `state`,美国州
+- `county`,美国县
+- `pop_20`,2020 年的人口估计
+- `area_sq_miles`,面积(平方英里)
+- `hh_inc_21`,2021 年的家庭中位收入
+- `econ_type`,县的经济类型
+- `pop_change_2010_2020`,2010 年至 2020 年的人口变化
+- `unemp_20`,2020 年的失业率
+- `pct_emp_change_2010_2021`,2010 年至 2021 年的就业百分比变化
+
+这些变量来自多个来源,包括美国人口普查局、劳工统计局和美国社区调查。
+
+让我们创建一个包含面积和人口的小子集以作说明。
+
+```{python}
+## small subset for illustration
+area_pop = counties[["county", "area_sq_miles", "pop_20"]]
+area_pop
+```
+
+## 介绍 `assign()` 和 lambda 函数
+
+我们使用 pandas 的 `assign()` 方法来创建新变量或修改现有变量。
+
+让我们看一个快速的例子。
+
+`area_pop` 数据集显示了每个县的面积(平方英里)。我们想要**创建一个新变量**,将其转换为平方公里,因此必须将 `area_sq_miles` 变量乘以 2.59。使用 `assign()`,我们可以这样写:
+
+```{python}
+area_pop.assign(area_sq_km=lambda x: x.area_sq_miles * 2.59)
+```
+
+很好!语法可能看起来有些混乱,让我们分解一下。
+
+我们可以将 `lambda x: x.area_sq_miles * 2.59` 理解为,“定义一个函数,该函数接受一个数据框 `x`,然后将该数据框中的 `area_sq_miles` 变量乘以 2.59。”
+
+`lambda` 是一个术语,用于指代无需名称的小函数。这部分代码是必不可少的。
+
+但上面称为 `x` 的符号可以是你想要的任何名称;它只是数据框的占位符。例如,我们可以称它为 `dat`:
+
+```{python}
+area_pop.assign(area_sq_km=lambda dat: dat.area_sq_miles * 2.59)
+```
+
+让我们看另一个例子。我们将通过将 `area_sq_miles` 乘以 259 来添加一个显示面积(公顷)的变量。我们还将把新的数据框存储在一个名为 `area_pop_converted` 的变量中。(请记住,如果我们不将新的数据框存储在变量中,如上面的例子,它将不会被保存。)
+
+```{python}
+area_pop_converted = area_pop.assign(
+    area_sq_km=lambda x: x.area_sq_miles * 2.59,
+    area_hectares=lambda x: x.area_sq_miles * 259,
+)
+area_pop_converted  # view the new DataFrame
+```
+
+::: {.callout-tip title='练习'}
+### 练习题 Q:英亩面积
+
+- 使用 `area_pop` 数据集,通过将 `area_sq_miles` 变量乘以 640 创建一个名为 `area_acres` 的新列。将新的数据框存储在一个名为 `conversion_question` 的对象中并打印出来。
+
+```{python}
+# your code here
+```
+:::
+
+## 覆盖变量
+
+我们也可以使用 `assign()` 来覆盖现有变量。例如,要将 `area_sq_km` 变量四舍五入到一位小数,我们可以这样写:
+
+```{python}
+area_pop_converted.assign(area_sq_km=lambda x: round(x.area_sq_miles * 2.59, 1))
+```
+
+::: {.callout-tip title='练习'}
+### 练习题 Q:英亩面积四舍五入
+
+- 使用你上面创建的 `conversion_question` 数据集,将 `area_acres` 变量四舍五入到一位小数。将新的数据框存储在一个名为 `conversion_question_rounded` 的对象中并打印出来。
+
+```{python}
+# your code here
+```
+:::
+
+## 更复杂的赋值
+
+为了进一步练习 `assign()` 方法,让我们看看如何创建结合多个现有变量的新列。
+
+例如,要计算每平方公里的人口密度,我们可以这样写:
+
+```{python}
+area_pop_converted.assign(pop_per_sq_km=lambda x: x.pop_20 / x.area_sq_km)
+```
+
+我们也可以在 `assign()` 方法中将 `pop_per_sq_km` 变量四舍五入到一位小数,可以在同一行:
+
+```{python}
+area_pop_converted.assign(
+    pop_per_sq_km=lambda x: round(x.pop_20 / x.area_sq_km, 1)
+)
+```
+
+或者像这样在新的一行:
+
+```{python}
+area_pop_converted.assign(
+    pop_per_sq_km=lambda x: x.pop_20 / x.area_sq_km,
+    pop_per_sq_km_rounded=lambda x: round(x.pop_per_sq_km, 1),
+)
+```
+
+最后一步,让我们通过按 `pop_per_sq_km` 变量降序排列数据集来练习方法链,并将其存储在一个名为 `area_pop_converted_sorted` 的新变量中。
+
+```{python}
+area_pop_converted_sorted = area_pop_converted.assign(
+    pop_per_sq_km=lambda x: x.pop_20 / x.area_sq_km,
+    pop_per_sq_km_rounded=lambda x: round(x.pop_per_sq_km, 1),
+).sort_values("pop_per_sq_km", ascending=False)
+
+area_pop_converted_sorted
+```
+
+我们看到纽约县拥有全国最高的人口密度。
+
+::: {.callout-tip title='练习'}
+### 练习题 Q:所有变量四舍五入
+
+- 考虑下面创建的示例数据集。使用 `assign()` 将所有变量四舍五入到 1 位小数。你的最终数据框应该叫做 `sample_df_rounded`,并且仍然有三列,`a`、`b` 和 `c`。
+
+```{python}
+sample_df = pd.DataFrame(
+    {
+        "a": [1.111, 2.222, 3.333],
+        "b": [4.444, 5.555, 6.666],
+        "c": [7.777, 8.888, 9.999],
+    }
+)
+sample_df
+```
+
+```{python}
+# your code here
+```
+
+:::
+
+::: {.callout-note title='专业提示'}
+### 为什么在 `assign()` 中使用 lambda 函数?
+
+你可能会想,lambda 函数在 `assign` 中真的有必要吗。毕竟,我们可以运行如下代码:
+
+```{python}
+area_pop.assign(
+    area_sq_km=area_pop.area_sq_miles * 2.59,
+    area_hectares=area_pop.area_sq_miles * 259,
+)
+```
+
+在这里,我们在 `assign()` 方法中回到 `area_pop` 数据框。
+
+问题在于,我们无法访问在同一个 `assign()` 调用中创建的变量或在同一个方法链中创建的变量。
+
+例如,在下面的代码中,如果你试图使用 `area_sq_km` 变量来计算人口密度,你会得到一个错误:
+
+```{python}
+# | eval: false
+area_pop.assign(
+    area_sq_km=area_pop.area_sq_miles * 2.59,
+    area_hectares=area_pop.area_sq_miles * 259,
+    pop_per_sq_km=area_pop.pop_20 / area_pop.area_sq_km,
+)
+```
+
+```
+AttributeError: 'DataFrame' object has no attribute 'area_sq_km'
+```
+
+Python 无法找到 `area_sq_km` 变量,因为它是在同一个 `assign()` 调用中创建的。因此,`area_pop` 数据框还没有该变量!
+
+`assign()` 中的 lambda 函数允许你基于同一次调用中的中间结果创建新列。因此,下面的代码是可行的:
+
+```{python}
+area_pop.assign(
+    area_sq_km=lambda x: x.area_sq_miles * 2.59,
+    area_hectares=lambda x: x.area_sq_miles * 259,
+    # area_sq_km is created in the previous line, but is already available here
+    pop_per_sq_km=lambda x: x.pop_20 / x.area_sq_km,
+)
+```
+
+:::
+
+## 创建布尔变量
+
+你可以使用 `assign()` 创建布尔变量来对数据集的部分内容进行分类。
+
+考虑 `counties` 数据集中的 `pop_change_2010_2020` 变量,它显示了 2010 年至 2020 年的人口百分比变化。如下所示,我们在 `changes_df` 子集中展示。
+
+```{python}
+changes_df = counties[
+    ["county", "pop_change_2010_2020", "pct_emp_change_2010_2021"]
+]  # Make dataset subset
+changes_df
+```
+
+下面我们创建一个布尔变量 `pop_increased`,如果增长率大于 0 则为 `True`,否则为 `False`。
+
+```{python}
+changes_df.assign(pop_increased=lambda x: x.pop_change_2010_2020 > 0)
+```
+
+代码 `x['pop_change_2010_2020'] > 0` 评估每个增长率是否大于 0。符合该条件的增长率(大于 0 的增长率)为 `True`,不符合条件的为 `False`。
+
+让我们对就业变化变量做同样的操作,并将结果存储在我们的数据集中。
+
+```{python}
+changes_df = changes_df.assign(
+    pop_increased=lambda x: x.pop_change_2010_2020 > 0,
+    emp_increased=lambda x: x.pct_emp_change_2010_2021 > 0,
+)
+changes_df
+```
+
+我们现在可以查询数据集,例如,查看哪些县有人口增加但就业减少。从政策角度来看,这是一个关注点,因为就业无法跟上人口增长。
+
+```{python}
+changes_df.query("pop_increased == True & emp_increased == False")
+# Or more succinctly:
+changes_df.query("pop_increased & not emp_increased")
+```
+
+有 242 个这样的令人担忧的县。
+
+::: {.callout-tip title='练习'}
+### 练习题 Q:外国出生居民
+
+- 使用 `foreign_born_num` 变量和人口估计来计算每个县外国出生居民的百分比。然后创建一个名为 `foreign_born_pct_gt_30` 的布尔变量,如果外国出生居民的百分比大于 30% 则为 `True`,否则为 `False`。将新的数据框存储在一个名为 `foreign_born_df_question` 的变量中。
+
+```{python}
+# your code here
+```
+
+- 在 `foreign_born_df_question` 数据框上使用 `.query()` 仅返回 `foreign_born_pct_gt_30` 变量为 `True` 的县。你应该得到 24 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+::: {.callout-tip title='专业提示'}
+### 在 lambda 函数中使用 `[]` 访问变量
+
+我们也可以使用方括号 `[]` 访问变量。这在两种情况下很有用:
+
+1. 当变量名有特殊字符时。
+2. 当变量名是 Python 中的保留字或方法名时。
+
+如果人口变量名为 `pop 20`,带有空格,我们将无法使用点表示法访问它。
+
+```{python}
+demo_df = area_pop.rename(columns={"pop_20": "pop 20"})
+demo_df
+```
+
+```{python}
+# | eval: false
+demo_df.assign(pop_per_sq_km=lambda x: x.pop 20 / x.area_sq_miles) # gives error
+```
+
+```
+area_pop.assign(pop_per_sq_km=lambda x: x.pop 20 / x.area_sq_miles)
+                                            ^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+```
+
+因此,我们需要使用方括号来访问变量。
+
+```{python}
+demo_df.assign(pop_per_sq_km=lambda x: x["pop 20"] / x.area_sq_miles)
+```
+
+实际上,我们可能应该重命名这样的变量!
+
+----
+
+如果我们的变量名是 Python 中的保留字或方法名,也需要使用方括号。
+
+例如,如果我们的 `pop` 变量名为 `pop`,在 `assign()` 方法中使用点表示法访问它时,会出现错误,因为 `pop` 是一个方法名。
+
+```{python}
+demo_df = area_pop.rename(columns={"pop_20": "pop"})
+demo_df
+```
+
+```{python}
+# | eval: false
+demo_df.assign(pop_per_sq_mile=lambda x: x.pop / x.area_sq_miles)
+```
+
+```
+TypeError: unsupported operand type(s) for /: 'method' and 'float'
+```
+
+在这种情况下,我们可以使用方括号 `[]` 访问 `pop` 变量。
+
+```{python}
+demo_df.assign(pop_per_sq_mile=lambda x: x["pop"] / x.area_sq_miles)
+```
+
+:::
+
+## 总结
+
+如你所料,数据转换是任何数据分析工作流中的关键步骤。它通常需要清理数据并为进一步的统计分析或绘图做准备。正如你所见,使用 pandas 的 `assign()` 方法转换数据非常简单。
+
+恭喜你完成了这一部分。
+
+但你的数据处理之旅尚未结束!在接下来的课程中,我们将学习如何创建复杂的数据摘要以及如何创建和处理数据框分组。感兴趣吗?下节课见。

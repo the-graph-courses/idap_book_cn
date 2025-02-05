@@ -1,0 +1,29 @@
+---
+title: "介绍"
+---
+
+## 介绍
+
+《用 Python 介绍数据科学》课程草稿书
+
+这本书是由 The GRAPH Courses 提供的一门为期 3 个月的在线课程的课程笔记汇编。要访问课程视频、练习文件和在线测验，请访问我们的网站 [thegraphcourses.org](https://thegraphcourses.org)。
+
+The GRAPH Courses 是 Global Research and Analyses for Public Health (GRAPH) Network 的一个项目，该网络是一个非营利组织，致力于通过经济实惠的现场训练营和免费的自学课程让编程和数据技能变得触手可及。
+
+## 贡献者
+
+我们非常感谢以下多年来为这些资料开发做出贡献的各位：
+
+Amanda McKinley, Andree Valle Campos, Aziza Merzouki, Benedict Nguimbis, Bennour Hsin, Camille Beatrice Valera, Daniel Camara, Eduardo Araujo, Elton Mukonda, Guy Wafeu, Imad El Badisy, Imane Bensouda Korachi, Joy Vaz, Kene David Nwosu, Lameck Agasa, Laure Nguemo, Laure Vancauwenberghe, Matteo Franza, Michal Shrestha, Olivia Keiser, Sabina Rodriguez Velasquez, Sara Botero Mesa.
+
+## 合作伙伴与资助方
+
+- 日内瓦大学
+- 牛津大学
+- 世界卫生组织
+- 全球基金
+- Ernst Goehner 基金会
+
+## 欢迎视频
+
+{{< video https://youtu.be/5gDtfh3PHP4?si=NeIaijjVvOiFlQQs >}}

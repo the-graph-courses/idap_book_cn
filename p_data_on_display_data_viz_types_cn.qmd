@@ -1,0 +1,349 @@
+---
+title: "数据可视化类型"
+---
+
+## 幻灯片
+
+您可以查看下面的幻灯片,这些幻灯片用于录制视频。或者,您可以直接跳到以下部分,这些部分详细介绍了每种可视化类型。
+
+![Slide 1](slides/data_viz_types/Slide1.jpeg)
+![Slide 2](slides/data_viz_types/Slide2.jpeg)
+![Slide 3](slides/data_viz_types/Slide3.jpeg)
+![Slide 4](slides/data_viz_types/Slide4.jpeg)
+![Slide 5](slides/data_viz_types/Slide5.jpeg)
+![Slide 6](slides/data_viz_types/Slide6.jpeg)
+![Slide 7](slides/data_viz_types/Slide7.jpeg)
+![Slide 8](slides/data_viz_types/Slide8.jpeg)
+![Slide 9](slides/data_viz_types/Slide9.jpeg)
+![Slide 10](slides/data_viz_types/Slide10.jpeg)
+![Slide 11](slides/data_viz_types/Slide11.jpeg)
+![Slide 12](slides/data_viz_types/Slide12.jpeg)
+![Slide 13](slides/data_viz_types/Slide13.jpeg)
+![Slide 14](slides/data_viz_types/Slide14.jpeg)
+
+## 引言
+
+在数据可视化中,通常有三个主要步骤:
+
+1. **整理和清理**您的数据。  
+2. **选择**适合您的问题的可视化类型。  
+3. **编写代码**来实现该可视化。
+
+在本课程中,我们重点关注第2步:了解哪种类型的图表最适合特定类型的问题。我们将查看Plotly内置的`tips`数据集中的示例,探索:
+
+- **单变量(单一变量)数值**数据  
+- **单变量(单一变量)分类**数据  
+- **双变量数值 vs 数值**  
+- **双变量数值 vs 分类**  
+- **双变量分类 vs 分类**  
+- **时间序列**
+
+然后,我们将使用另一个数据集(`gapminder`)进行练习,以强化如何为您的数据和问题选择有效的图表。
+
+## 设置
+
+运行以下代码以设置绘图环境并加载Plotly Express中的`tips`数据集。
+
+```{python}
+import plotly.express as px
+import pandas as pd
+import numpy as np
+import plotly.io as pio
+
+tips = px.data.tips()
+```
+
+---
+
+# 1. 单变量图表
+
+在探索数据中的**一列**(变量)时,您的可视化选择取决于该列是**数值型**(例如`tip`,`total_bill`)还是**分类型**(例如`sex`,`day`)。
+
+## 1.1 单变量数值
+
+问题形式:
+> *一个数值变量的分布是什么?*  
+> *它的范围是多少?中位数是多少?大多数值位于哪里?*
+
+可能的可视化包括:
+
+- **直方图** – 有助于查看值的整体分布。  
+- **箱线图** – 突出显示中位数、四分位数和异常值。  
+- **小提琴图** – 结合了箱线图和“平滑”直方图(密度)形状。  
+- **条带/抖动图** – 显示每个单独的点,略微“抖动”以避免重叠。
+
+### 直方图
+
+```{python}
+fig_hist = px.histogram(tips, x='tip')
+fig_hist.show()
+```
+
+### 箱线图
+
+```{python}
+fig_box = px.box(tips, x='tip')
+fig_box.show()
+```
+
+### 小提琴图(带箱线图和点)
+
+```{python}
+fig_violin = px.violin(tips, x='tip', box=True, points='all')
+fig_violin.show()
+```
+
+---
+
+## 1.2 单变量分类
+
+问题形式:
+> *每个类别有多少观测值?*  
+> 以tips数据集为例,*每个性别有多少观测值?*
+
+可能的可视化包括:
+
+- **条形图** – 通常统计每个类别中的行数。  
+- **饼图** – 如果类别较少并且想要突出比例,可以使用。
+
+### 条形图
+
+```{python}
+fig_bar_cat = px.histogram(tips, x='sex', color='sex', color_discrete_sequence=['#deb221', '#2f828a'])
+fig_bar_cat.update_layout(showlegend=False)
+fig_bar_cat.show()
+```
+
+### 饼图
+
+```{python}
+fig_pie_cat = px.pie(tips, names='sex', color='sex', values='tip',
+                     color_discrete_sequence=['#deb221', '#2f828a'])
+fig_pie_cat.update_layout(showlegend=False)
+fig_pie_cat.update_traces(textposition='none')
+fig_pie_cat.show()
+```
+
+---
+
+# 2. 双变量图表
+
+在比较**两个变量**时,考虑它们是数值型还是分类型。我们将看:
+
+1. 数值 vs 数值  
+2. 数值 vs 分类  
+3. 分类 vs 分类  
+
+## 2.1 数值 vs 数值
+
+典型问题:
+> *两个数值变量是否相关?*  
+> 以tips数据集为例,*总账单与小费是否相关?*
+
+**散点图**通常是首选。
+
+```{python}
+fig_scatter = px.scatter(tips, x='total_bill', y='tip')
+fig_scatter.show()
+```
+
+---
+
+## 2.2 数值 vs 分类
+
+典型问题:
+> *哪个组的平均值更高?*  
+> 以tips数据集为例,*男性还是女性的小费更多?*
+
+可视化选项:
+
+- **分组直方图** – 每个类别的单独直方图(通常叠加)。  
+- **分组箱线图/小提琴图/条带图** – 每个类别一个分布图。  
+- **摘要条形图** – 显示每个类别的平均值(或中位数),可选带误差条。
+
+### 分组直方图
+
+```{python}
+fig_grouped_hist = px.histogram(tips, x='tip', color='sex', barmode='overlay',
+                                color_discrete_sequence=['#deb221', '#2f828a'])
+fig_grouped_hist.show()
+```
+
+### 分组小提琴图/箱线图/条带图
+
+```{python}
+fig_grouped_violin = px.violin(tips, y='sex', x='tip', color='sex',
+                               box=True, points='all',
+                               color_discrete_sequence=['#deb221', '#2f828a'])
+fig_grouped_violin.update_layout(showlegend=False)
+fig_grouped_violin.show()
+```
+
+### 摘要条形图(均值 + 标准差)
+
+```{python}
+summary_df = tips.groupby('sex').agg({'tip': ['mean', 'std']}).reset_index()
+summary_df.columns = ['sex', 'mean_tip', 'std_tip']
+
+fig_mean_bar = px.bar(
+    summary_df,
+    y='sex',
+    x='mean_tip',
+    error_x='std_tip',
+    color='sex',
+    color_discrete_sequence=['#deb221', '#2f828a'],
+)
+fig_mean_bar.update_layout(showlegend=False)
+fig_mean_bar.show()
+```
+
+---
+
+## 2.3 分类 vs 分类
+
+典型问题:
+> *两个分类变量如何重叠?*  
+> 以tips数据集为例,*按星期几性别比例有何不同?*
+
+可视化选项:
+
+- **堆积条形图** – 总计数,按类别堆叠。  
+- **分组条形图** – 每个类别的条形并排显示。  
+- **百分比堆积条形图** – 每个条形缩放到100%,以显示比例。
+
+### 分组条形图
+
+```{python}
+fig_grouped_bar = px.histogram(tips, x='day', color='sex', barmode='group',
+                               color_discrete_sequence=['#deb221', '#2f828a'])
+fig_grouped_bar.show()
+```
+
+### 堆积条形图
+
+```{python}
+fig_stacked_bar = px.histogram(tips, x='day', color='sex',
+                               color_discrete_sequence=['#deb221', '#2f828a'])
+fig_stacked_bar.show()
+```
+
+### 百分比堆积
+
+```{python}
+fig_percent_stacked = px.histogram(tips, x='day', color='sex',
+                                   barmode='stack', barnorm='percent',
+                                   color_discrete_sequence=['#deb221', '#2f828a'])
+fig_percent_stacked.show()
+```
+
+# 3. 时间序列
+
+虽然您可以将时间视为数值变量,但时间序列具有独特性,因为它们显示值如何随连续时间变化。常见图表:
+
+- **折线图** – 适合显示连续趋势。  
+- **条形图** – 也可以使用,但通常表示离散步骤而非平滑进展。
+
+以Plotly的`gapminder`数据集中的尼日利亚人口为例:
+
+```{python}
+gap_dat = px.data.gapminder()
+nigeria_pop = gap_dat.query('country == "Nigeria"')
+
+# 条形图
+fig_nigeria_bar = px.bar(nigeria_pop, x='year', y='pop')
+fig_nigeria_bar.show()
+
+# 带点的折线图
+fig_nigeria_line = px.line(nigeria_pop, x='year', y='pop', markers=True)
+fig_nigeria_line.show()
+```
+
+# 4. 使用Gapminder数据集进行练习
+
+下面,我们将`gapminder`筛选到2007年并添加一个简单的收入组分类。然后我们将回答一些常见问题。尝试思考:“这是数值 vs 数值,数值 vs 分类,还是分类 vs 分类?”然后相应地选择您的图表。
+
+```{python}
+gap_2007 = (
+    gap_dat
+    .query("year == 2007")
+    .drop(columns=["iso_alpha", "iso_num", "year"])
+    .assign(income_group=lambda df: np.where(df.gdpPercap > 15000, "高收入", "中低收入"))
+)
+gap_2007.head()
+```
+
+对于下面的每个部分,在查看解决方案之前,尝试自行回答问题。
+
+## 4.1 人均GDP在各大洲如何变化?
+
+- 人均GDP = 数值  
+- 洲 = 分类  
+
+按洲分组的小提琴图或箱线图效果良好。
+
+```{python}
+fig_gdp_violin = px.violin(
+    gap_2007, 
+    x="gdpPercap", 
+    y="continent", 
+    color="continent", 
+    box=True, 
+    points="all",
+    color_discrete_sequence=px.colors.qualitative.G10
+)
+fig_gdp_violin.update_layout(showlegend=False)
+fig_gdp_violin.show()
+```
+
+## 4.2 一个国家的人均GDP与预期寿命之间有关系吗?
+
+- 人均GDP = 数值  
+- 预期寿命 = 数值  
+
+通常选择散点图。
+
+```{python}
+fig_scatter_gdp_life = px.scatter(gap_2007, x='gdpPercap', y='lifeExp')
+fig_scatter_gdp_life.show()
+```
+
+## 4.3 预期寿命在收入组之间如何变化?
+
+- 预期寿命 = 数值  
+- 收入组 = 分类  
+
+使用分组的箱线图、小提琴图或条带图。
+
+```{python}
+fig_life_violin = px.violin(gap_2007, x="income_group", y="lifeExp", box=True, points="all")
+fig_life_violin.show()
+```
+
+## 4.4 洲与收入组之间的关系是什么?
+
+- 洲 = 分类  
+- 收入组 = 分类  
+
+堆积条形图或百分比堆积条形图是不错的选择。
+
+```{python}
+fig_continent_income = px.histogram(
+    gap_2007,
+    x='continent',
+    color='income_group',
+    barmode='stack',
+    color_discrete_sequence=['#deb221', '#2f828a']
+)
+fig_continent_income.show()
+```
+
+# 结论
+
+选择合适的可视化类型始于提出以下问题:  
+1. *我在看多少变量?*  
+2. *它们是数值型还是分类型?*  
+3. *我具体想回答什么问题?*  
+
+大多数时候,上述展示的图表(直方图、箱线图/小提琴图、散点图、条形图等)足以有效传达您的见解。对于时间序列或更专业的问题,您可能会选择折线图或其他高级可视化。  
+
+不断使用不同的数据集进行练习,并始终问自己:**“哪个图表最能回答当前的问题?”**

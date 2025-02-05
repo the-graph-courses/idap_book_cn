@@ -1,0 +1,248 @@
+---
+title: 'Python中的数据结构'
+---
+
+## 介绍
+
+到目前为止,在我们的Python探索中,我们一直在处理简单的、单一的值,如数字和字符串。但是,正如你所知,数据通常以更大的结构形式出现。你最熟悉的结构是带有行和列的表格。
+
+在本课程中,我们将探索在Python中组织数据的构建块,从列表、字典、Series,最后到表格,或者更正式地说,是数据框(DataFrames)。
+
+让我们开始吧!
+
+## 学习目标
+
+- 创建和使用Python列表和字典
+- 理解和使用Pandas Series
+- 探索Pandas DataFrame用于组织结构化数据
+
+## 导入
+
+我们需要在本课程中使用pandas。你可以这样导入它:
+
+```{python}
+import pandas as pd
+```
+
+如果你收到错误,可能需要安装它。你可以在单元格中运行 `!pip install pandas` 来安装。
+
+## Python 列表
+
+列表就像有序的容器,可以存放不同类型的信息。例如,你可能有一个购物清单:
+
+```{python}
+shopping = ["apples", "bananas", "milk", "bread"] 
+shopping
+```
+
+在Python中,我们使用所谓的“零基索引”来访问列表中的项。这意味着我们从0而不是1开始计数位置。
+
+让我们看一些例子:
+
+```{python}
+print(shopping[0])  # 第一个项目(记住,我们从0开始!)
+print(shopping[1])  # 第二个项目
+print(shopping[2])  # 第三个项目
+```
+
+乍一看可能觉得奇怪,但这是许多编程语言中的常见做法。这与计算机如何存储信息以及编写算法的便利性有关。
+
+我们可以在创建列表后更改其内容,使用相同的索引系统。
+
+```{python}
+shopping[1] = "oranges"  # 替换第二个项目(索引为1)
+shopping
+```
+
+列表有许多可用的方法。例如,我们可以使用 `append()` 方法向列表添加元素。
+
+```{python}
+shopping.append("eggs")
+shopping
+```
+
+在你Python数据之旅的初期阶段,你可能不会经常使用列表,所以我们将简要介绍。
+
+::: {.callout-tip title='练习'}
+### 练习:使用列表
+
+1. 创建一个名为 `temps` 的列表,包含这些值:1,2,3,4
+2. 打印列表的第一个元素
+3. 将最后一个元素改为6
+
+```{python}
+# 在此编写你的代码
+```
+:::
+
+## Python 字典
+
+字典就像带标签的存储箱,用于存放你的数据。每个数据(值)都有一个唯一的标签(键)。下面,我们有一个一些学生的成绩字典。
+
+```{python}
+grades = {"Alice": 90, "Bob": 85, "Charlie": 92}
+grades
+```
+
+如你所见,字典使用大括号 `{}` 定义,键和值之间用冒号 `:` 分隔,键值对之间用逗号分隔。
+
+我们使用键来获取关联的值。
+
+```{python}
+grades["Bob"]
+```
+
+### 添加/修改条目
+
+我们可以轻松地在字典中添加新信息或更改现有数据。
+
+```{python}
+grades["David"] = 88  # 添加一个新学生
+grades
+```
+
+```{python}
+grades["Alice"] = 95  # 更新Alice的成绩
+grades
+```
+
+::: {.callout-tip title='练习'}
+### 练习:使用字典
+
+1. 创建一个名为 `prices` 的字典,包含以下键值对:"apple": 0.50, "banana": 0.25, "orange": 0.75
+2. 使用键打印橙子的价格
+3. 添加一个新水果 "grape",价格为1.5
+4. 将 "banana" 的价格改为0.30
+
+```{python}
+# 在此编写你的代码
+```
+:::
+
+## Pandas Series
+
+Pandas 提供了一种名为 Series 的数据结构,类似于列表,但具有一些特别适用于数据分析的附加功能。
+
+让我们创建一个简单的Series:
+
+```{python}
+temps = pd.Series([1, 2, 3, 4, 5])
+temps
+```
+
+我们可以使用内置的Series方法来计算摘要统计。
+
+```{python}
+temps.mean()
+temps.median()
+temps.std()
+```
+
+Series 的一个重要特性是它们可以有自定义索引,以便直观访问。
+
+```{python}
+temps_labeled = pd.Series([1, 2, 3, 4], index=['Mon', 'Tue', 'Wed', 'Thu'])
+temps_labeled
+temps_labeled['Wed']
+```
+
+这使它们类似于字典。
+
+::: {.callout-tip title='练习'}
+### 练习:使用 Series
+
+1. 创建一个名为 `rain` 的Series,包含这些值:5, 4, 3, 2
+2. 获取平均降雨量和中位数降雨量
+
+```{python}
+# 在此编写你的代码
+```
+:::
+
+## Pandas DataFrame
+
+接下来,让我们考虑Pandas DataFrame,它们类似于Series,但有两维——想象一下电子表格或数据库表。
+
+这是数据分析中最重要的数据结构。
+
+DataFrame像是Python中的电子表格。它有行和列,非常适合组织结构化数据。
+
+大多数时候,你将导入外部数据框,但你也应该知道如何在Python中从头创建数据框。
+
+首先让我们创建三个列表:
+
+```{python}
+# 创建三个列表
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 28]
+cities = ["Lagos", "London", "Lima"]
+```
+
+然后我们将它们组合成一个字典,最后转换为一个数据框。
+
+```{python}
+data = {'name': names,
+        'age': ages,
+        'city': cities}
+
+people_df = pd.DataFrame(data)
+people_df
+```
+
+注意,我们本可以在没有中间Series的情况下创建数据框:
+
+```{python}
+people_df = pd.DataFrame(
+    {
+        "name": ["Alice", "Bob", "Charlie"],
+        "age": [25, 30, 28],
+        "city": ["Lagos", "London", "Lima"],
+    }
+)
+people_df
+```
+
+我们可以从DataFrame中选择特定的列或行。
+
+```{python}
+people_df["city"]  # 选择一列。注意这会返回一个Series。
+people_df.loc[0]  # 按标签选择一行。这也会返回一个Series。
+```
+
+我们可以对数据框调用方法。
+
+```{python}
+people_df.describe() # 这是数值列的摘要
+people_df.info() # 这是数据类型的摘要
+```
+
+我们还可以对从选择列结果的Series对象调用方法。
+
+例如,我们可以获取“city”列的摘要统计。
+
+```{python}
+people_df["city"].describe()  # 这是“city”列的摘要
+people_df["age"].mean()  # 这是“age”列的平均值
+```
+
+在未来的一系列课程中,我们将深入探讨切片和操作DataFrame。本课程的目标只是让你熟悉基本语法和概念。
+
+::: {.callout-tip title='练习'}
+### 练习:使用 DataFrame
+
+1. 创建一个名为 `students` 的DataFrame,包含以下信息:
+   - 列:"Name", "Age", "Grade"
+   - Alice的成绩是90,Bob的成绩是85,Charlie的成绩是70。你自行选择年龄。
+2. 仅显示“Grade”列
+3. 计算并显示学生的平均年龄
+4. 显示Bob的那一行。
+
+```{python}
+# 在此编写你的代码
+```
+
+:::
+
+## 总结
+
+我们已经探索了Python数据分析的主要数据结构。从基本的列表和字典到Pandas Series和DataFrame,这些工具对于组织和分析数据至关重要。它们将是未来课程中更高级数据工作的基础。

@@ -1,0 +1,343 @@
+```markdown
+---
+title: 'Univariate Graphs with Plotly Express'
+---
+
+## 简介
+
+在本课中,您将学习如何使用 Plotly Express 创建单变量图表。单变量图表对于理解单一变量的分布至关重要,无论该变量是分类的还是定量的。
+
+让我们开始吧!
+
+## 学习目标
+
+- 使用 Plotly Express 为分类数据创建条形图、饼图和树状图
+- 使用 Plotly Express 为定量数据生成直方图
+- 自定义图表的外观和标签
+
+## 导入
+
+本课需要 plotly.express,pandas 和 vega_datasets。如果您尚未安装,请先安装。
+
+```{python}
+import plotly.express as px
+import pandas as pd
+from vega_datasets import data
+```
+
+## 定量数据
+
+### 直方图
+
+直方图用于可视化连续变量的分布。
+
+让我们创建一个“tips”数据集中小费金额的直方图。
+
+```{python}
+tips = px.data.tips()
+tips.head() # view the first 5 rows
+```
+
+```{python}
+px.histogram(tips, x='tip')
+```
+
+我们可以看到,最高的条形对应于小费在 1.75 到 2.24 之间,频数为 55。这意味着有 55 个小费处于 1.75 到 2.24 之间。
+
+::: {.callout-note title='旁注'}
+
+请注意,Plotly 图表是交互式的。您可以将鼠标悬停在条形上,以查看每个区间中小费的确切数量。
+
+尝试使用右上角的按钮。将图表下载为 png 的按钮特别有用。
+
+:::
+
+::: {.callout-tip title='练习'}
+
+### 练习题:速度分布直方图
+
+按照小费直方图的示例,使用 birdstrikes 数据集创建速度分布 (Speed_IAS_in_knots) 的直方图。
+
+```{python}
+birdstrikes = data.birdstrikes()
+birdstrikes.head()
+# Your code here
+```
+
+```{python}
+#| include: false
+# Solution
+px.histogram(birdstrikes, x='Speed_IAS_in_knots')
+```
+:::
+
+我们可以通过在单元格中键入 `px.histogram?` 并运行它来查看该函数的帮助文档。  
+
+```{python}
+px.histogram?
+```
+
+从帮助文档中,我们可以看到 `px.histogram` 函数具有许多可用于自定义图表的参数。
+
+让我们通过添加标题、自定义 x 轴标签和更改颜色使直方图更美观一些。
+
+```{python}
+px.histogram(
+    tips,
+    x="tip",
+    labels={"tip": "Tip Amount ($)"},
+    title="Distribution of Tips", 
+    color_discrete_sequence=["lightseagreen"]
+)
+```
+
+颜色名称基于 Mozilla 的标准 CSS 颜色命名。您可以在 [这里](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color) 查看完整列表。
+
+或者,您可以使用十六进制颜色代码,例如 `#1f77b4`。您可以通过使用取色器轻松获取这些颜色。请在 Google 上搜索“color picker”。 
+
+```{python}
+px.histogram(
+    tips,
+    x="tip",
+    labels={"tip": "Tip Amount ($)"},
+    title="Distribution of Tips", 
+    color_discrete_sequence=["#6a5acd"]
+)
+```
+
+::: {.callout-tip title='练习'}
+
+### 练习题:鸟类撞击事件直方图自定义
+
+更新您的 birdstrikes 直方图,使用十六进制代码颜色,添加标题,并将 x 轴标签更改为“速度(海里每小时)”。
+
+```{python}
+# Your code here
+```
+
+```{python}
+#| include: false
+# Solution
+px.histogram(
+    birdstrikes,
+    x="Speed_IAS_in_knots",
+    labels={"Speed_IAS_in_knots": "Speed (Nautical Miles Per Hour)"},
+    title="Distribution of Bird Strike Speeds",
+    color_discrete_sequence=["#4B0082"]  # Indigo color
+)
+```
+:::
+
+## 分类数据
+
+### 条形图
+
+条形图可用于显示单个分类变量的频数。 
+
+Plotly 有一个 `px.bar` 函数,我们稍后会看到。但对于**单一分类变量**,Plotly 要求您使用的函数实际上是 `px.histogram`。(世界各地的统计学家都在抱怨;直方图本应仅用于定量数据!)
+
+让我们创建一个基本的条形图,显示 tips 数据集中性别的分布:
+
+```{python}
+px.histogram(tips, x='sex')   
+```
+
+让我们在条形上添加计数。
+
+```{python}
+px.histogram(tips, x='sex', text_auto= True)
+```
+
+我们可以通过添加颜色轴、自定义标签和标题来增强图表。
+
+```{python}
+px.histogram(tips, x='sex', text_auto=True, color='sex', 
+             labels={'sex': 'Gender'},
+             title='Distribution of Customers by Gender')
+```
+
+可以说,在这个图中,我们不需要 `color` 轴,因为 `sex` 变量已经由 x 轴表示。但公众喜欢颜色,所以仍然值得包括。 
+
+然而,我们应该移除图例。让我们还使用自定义颜色。
+
+为此,我们可以首先创建一个图形对象,然后使用该对象的 `.layout.update` 方法来更新图例。
+
+```{python}
+tips_by_sex = px.histogram(
+    tips,
+    x="sex",
+    text_auto=True,
+    color="sex",
+    labels={"sex": "Gender"},
+    title="Distribution of Customers by Gender",
+    color_discrete_sequence=["#1f77b4", "#ff7f0e"],
+)
+
+tips_by_sex.update_layout(showlegend=False)
+```
+
+::: {.callout-tip title='练习'}
+
+### 练习题:鸟类撞击事件按飞行阶段统计
+
+创建一个条形图,显示按飞行阶段 `When__Phase_of_flight` 的鸟类撞击事件频率。添加适当的标签和标题。使用您选择的颜色,并移除图例。
+
+```{python}
+# Your code here
+```
+:::
+
+```{python}
+# | include: false
+# Solution
+fig = px.histogram(
+    birdstrikes,
+    x="When__Phase_of_flight",
+    text_auto=True,
+    color="When__Phase_of_flight",
+    labels={"When__Phase_of_flight": "Phase of Flight"},
+    title="Bird Strikes by Phase of Flight",
+    color_discrete_sequence=px.colors.qualitative.Set3,
+)
+fig.update_layout(showlegend=False)
+```
+:::
+
+#### 排序类别
+
+有时在条形图中为类别指定特定顺序是很有用的。 
+
+考虑一下这张 2013 年蒙特利尔市长选举中按区划分的当选者条形图。
+
+```{python}
+election = px.data.election()
+election.head()
+```
+
+```{python}
+px.histogram(election, x='winner')
+```
+
+让我们为类别定义一个自定义顺序。“Bergeron” 将排在第一位,然后是 “Joly”,然后是 “Coderre”。
+    
+```{python}
+custom_order = ["Bergeron", "Joly", "Coderre"]
+election_chart = px.histogram(election, x='winner', category_orders={'winner': custom_order})
+election_chart
+```
+
+我们也可以按频率对类别进行排序。
+
+我们可以使用 x 轴的 `categoryorder` 属性按频率对类别进行排序。
+
+```{python}
+election_chart = px.histogram(election, x="winner")
+election_chart.update_xaxes(categoryorder="total descending")
+```
+
+或者按升序:
+
+```{python}
+election_chart = px.histogram(election, x="winner")
+election_chart.update_xaxes(categoryorder="total ascending")
+``` 
+
+::: {.callout-tip title='练习'}
+
+### 练习题:已排序的原产州条形图
+
+创建一个已排序的条形图,显示按原产州划分的鸟类撞击事件分布。按频率的降序排序条形。
+
+```{python}
+# Your code here
+```
+
+```{python}
+#| include: false
+# Solution
+fig = px.histogram(birdstrikes, x="Origin_State")
+fig.update_xaxes(categoryorder="total descending")
+```
+:::
+
+### 水平条形图
+
+当您有许多类别时,水平条形图通常比垂直条形图更容易阅读。要创建水平条形图,只需使用 `y` 轴而不是 `x` 轴。
+
+```{python}
+px.histogram(tips, y='day')
+```
+
+::: {.callout-tip title='练习'}
+
+### 练习题:原产州的水平条形图
+    
+创建一个水平条形图,显示按原产州划分的鸟类撞击事件分布。
+
+```{python}
+# Your code here
+```
+
+```{python}
+#| include: false
+# Solution
+px.histogram(birdstrikes, y="Origin_State")
+```
+:::
+
+### 饼图
+
+饼图也有助于显示分类变量的比例。它们最好在类别数量*较少*时使用。类别数量较多时,饼图难以阅读。
+
+让我们创建一个按星期几分布的小费饼图。
+
+```{python}
+px.pie(tips, names="day")
+```
+
+我们可以向饼图添加标签,使其更易于阅读。
+
+```{python}
+tips_by_day = px.pie(tips, names="day")
+tips_by_day_with_labels = tips_by_day.update_traces(textposition="inside", textinfo="percent+label")
+tips_by_day_with_labels
+```
+
+不再需要图例,因此我们可以将其移除。
+
+```{python}
+tips_by_day_with_labels.update_layout(showlegend=False)
+```
+
+::: {.callout-note title='专业提示'}
+
+如果您忘记了如何进行此类简单更改,请随时查阅 Plotly 文档、Google 或 ChatGPT。
+
+:::
+
+::: {.callout-tip title='练习'}
+
+### 练习题:野生动物大小饼图
+
+创建一个饼图,显示按野生动物大小划分的鸟类撞击事件分布。将百分比和标签包含在饼片内。
+
+```{python}
+# Your code here
+```
+:::
+
+```{python}
+# | include: false
+# Solution
+fig = px.pie(birdstrikes, names="Wildlife__Size")
+fig.update_traces(textposition="inside", textinfo="percent+label")
+fig.update_layout(showlegend=False)
+```
+:::
+
+## 总结
+
+在本课中,您学习了如何使用 Plotly Express 创建单变量图表。您现在应该对创建条形图、饼图和直方图有信心。您还应该对自定义图表的外观感到舒适。
+
+下节课见。
+```

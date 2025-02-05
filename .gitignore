@@ -1,0 +1,11 @@
+.env
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+__pycache__
+local_settings.py
+

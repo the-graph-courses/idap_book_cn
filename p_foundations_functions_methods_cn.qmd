@@ -1,0 +1,344 @@
+---
+title: 'Python中的函数、方法和库'
+---
+
+{{< video https://youtu.be/bGmceVFYI-g?si=qPmObA5dzdDzCh1E >}}  
+
+## 学习目标
+
+1. 你理解Python中的函数和方法是什么。
+2. 你能识别和使用函数和方法中的参数。
+3. 你知道如何在对象上调用内置函数和方法。
+4. 你理解Python中的库及其导入方式。
+5. 你知道如何安装一个简单的外部库并在代码中使用它。
+
+## 介绍
+
+在本课中,你将学习Python中的函数、方法和库,基于我们在前一课中涵盖的基础知识。
+
+首先,打开你喜欢的Python环境(例如,Jupyter Notebook、VS Code或PyCharm),并创建一个新的Python文件或笔记本。
+
+接下来,根据你的环境,将文件**保存**为类似 "functions_and_libraries.py" 或 "functions_and_libraries.ipynb" 的名称。
+
+现在,你应该将本课的所有代码输入到该文件中。
+
+## 函数
+
+函数是执行特定任务的一段代码。它可以接收输入(参数)并返回输出。以下是一个只使用一个参数的内置函数的例子:
+
+```{python}
+# Using the len() function to get the length of a string
+len("Python")
+```
+
+`round()`函数接受两个参数:要四舍五入的数字和要四舍五入的小数位数。   
+
+```{python}
+# Using the round() function to round a number
+round(3.1415, 2)
+```
+
+::: {.callout-tip title='练习'}
+
+### 问题:使用内置函数
+
+使用`abs()`函数获取-5的绝对值。
+
+在下方编写你的代码并运行以检查答案:
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 参数(形参)
+
+参数(也称为形参)是在调用函数(或方法)时传递给它的值。 
+
+传递参数给函数有不同的方法。
+
+再次考虑`round()`函数。
+
+如果我们查看`round()`函数的文档,使用: 
+
+```{python}
+round?
+```
+
+我们看到它接受两个参数:
+
+- `number`:要四舍五入的数字。
+- `ndigits`:要四舍五入的小数位数。
+
+传递参数给这个函数有两种主要的方法。 
+
+1. 位置参数:按照定义的顺序传递。由于参数的默认顺序是`number`然后`ndigits`,我们可以按照这个顺序传递参数,而无需指定参数名,就像上面所做的那样。
+
+```{python}
+round(3.1415, 2)
+```
+
+如果我们交换参数的顺序,就会出现错误:
+
+```{python}
+# | eval: False
+round(2, 3.1415)
+```
+
+2. 关键字参数:通过指定参数名后跟`=`和参数值来传递。 
+
+```{python}
+round(number=3.1415, ndigits=2)
+```
+
+使用这种方法,我们可以按任何顺序传递参数,只要使用参数名。
+
+```{python}
+round(ndigits=2, number=3.1415)
+```
+
+通常建议指定关键字,除非函数简单且参数很少,或者从上下文中参数的顺序很明显。
+
+::: {.callout-tip title='练习'}
+
+### 问题:使用位置参数与`pow()`
+
+使用`pow()`函数通过传递位置参数来计算2的7次方。你可能需要查阅`pow()`函数的文档来了解它的工作方式。
+
+在下方编写你的代码并运行以检查答案:
+
+```{python}
+# Your code here
+```
+
+### 问题:使用关键字参数与`round()`
+
+使用`round()`函数通过指定关键字参数将数字`9.87652`四舍五入到`3`位小数。
+
+在下方编写你的代码并运行以检查答案:
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 方法
+
+方法类似于函数,但它们与特定的对象或数据类型相关联。它们通过点符号调用。 
+
+例如,每个字符串对象都有一系列内置方法,如`upper()`用于转换为大写,`lower()`用于转换为小写,`replace()`用于替换子字符串等等。 
+
+让我们看看如何使用这些方法:
+
+```{python}
+name = "python"
+print(name.upper())
+print(name.lower())
+print(name.replace("p", "🐍"))
+```
+
+我们还可以直接在字符串对象上调用这些方法,而不将其赋值给变量:
+
+```{python}
+# Using the upper() method on a string
+print("python".upper())
+print("PYTHON".lower())
+print("python".replace("p", "🐍"))
+```
+
+同样,Python中的数字也有一些内置方法。例如,`as_integer_ratio()`(在Python 3.8中添加)方法将一个小数转换为两个整数的比率。
+
+```{python}
+# Using the as_integer_ratio() method on a float
+example_decimal = 1.5
+example_decimal.as_integer_ratio()
+```
+
+::: {.callout-note title='练习'}
+
+### 问题:术语定义
+
+想出以下术语的简明定义,使对你而言清晰(即使在技术上不是完全准确的):
+
+- Function
+- Method
+- Argument (Parameter)
+- Dot Notation
+
+:::
+
+::: {.callout-tip title='练习'}
+
+### 问题:使用方法
+
+1. 在字符串 "Helo" 上调用 `replace()` 方法,将单个 l 替换为双 l。
+2. 在字符串 "Hello World" 上调用 `split()` 方法,将字符串拆分为单词列表。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## Python中的库
+
+库是你可以在程序中使用的预编写代码的集合。它们通过提供额外的函数和工具扩展了Python的功能。
+
+例如,`math`库提供数学函数,如用于平方根的`sqrt()`和用于正弦的`sin()`。
+
+如果我们在未导入`math`库的情况下尝试使用`sqrt()`函数,就会出现错误:
+
+```{python}
+# | eval: False
+# This will cause a NameError
+sqrt(16)
+```
+
+我们可以导入`math`库并像这样使用`sqrt()`函数:
+
+```{python}
+# Import the library
+import math
+```
+
+然后我们可以像这样使用`sqrt()`函数:
+
+```{python}
+# Use the sqrt() function
+math.sqrt(16)
+```
+
+我们可以以类似的方式获取函数的帮助,调用函数和它所在的库:
+
+```{python}
+# Get help on the sqrt() function
+math.sqrt?
+```
+
+我们还可以为库取别名进行导入。例如,我们可以将`math`库导入并取别名为`m`:
+
+```{python}
+# Import the entire library with an alias
+import math as m
+# Then we can use the alias to call the function
+m.sqrt(16)
+```
+
+最后,如果你想省略别名/库名,你可以单独导入函数: 
+
+```{python}
+# Import specific functions from a library
+from math import sqrt, sin
+# Then we can use the function directly
+sqrt(16)
+sin(0)
+```
+
+或者导入库中的所有内容:
+
+```{python}
+# Import everything from the library
+from math import *
+# Then we can all functions directly, such as sqrt() and sin()
+sqrt(16)
+cos(0)
+tan(0)
+sin(0)
+```
+
+真是有很多导入库的方法!你大部分时间会看到`import ... as ...`语法,有时也会看到`from ... import ...`语法。
+
+注意,通常我们会在文件的顶部,在一个代码块中导入所有需要的库。这是一种良好的实践。
+
+::: {.callout-tip title='练习'}
+
+### 问题:术语定义
+
+想出以下术语的简明定义,使对你来说清晰(即使在技术上并不完全准确的):
+
+- Library (Module)
+- Import
+- Alias
+
+:::
+
+::: {.callout-tip title='练习'}
+
+### 问题:使用已导入库的函数
+
+- 导入`random`库并使用`randint()`函数生成1到10之间的随机整数。导入后,你可以使用`?`运算符获取关于该函数的帮助。 
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 安装库
+
+虽然Python自带了许多内置库,但还有成千上万的额外库可用,你可以安装它们以进一步扩展Python的功能。让我们以`cowsay`库为例,看看如何安装和使用一个简单的外部库。
+
+如果我们在未先安装此库的情况下尝试导入它,就会出现错误:
+
+```{python}
+# | eval: False
+import cowsay
+```
+
+要安装该库,你可以在Google Colab的代码单元中使用`!pip install`命令。对于`cowsay`,你需要运行:
+
+```{python}
+# | eval: False
+!pip install cowsay
+```
+
+Pip从称为[PyPI](https://pypi.org/)的远程仓库安装软件包。任何人都可以创建并上传软件包到PyPI。经过一些检查后,它就可供任何人安装了。
+
+::: {.callout-note title='附注'}
+
+对于在本地Python环境中工作的用户,你可以在终端中使用pip安装`cowsay`:
+
+```
+pip install cowsay
+```
+
+:::
+
+安装后,我们现在可以导入并使用`cowsay`库:
+
+```{python}
+import cowsay
+
+# Make the cow say something
+cowsay.cow('Moo!')
+```
+
+这将显示一只说"Moo!"的ASCII艺术牛。
+
+::: {.callout-tip title='练习'}
+
+### 问题:使用emoji库
+
+1. 安装`emoji`库。
+2. 导入`emoji`库。
+3. 查阅`emoji`库中`emojize()`函数的帮助。
+4. 使用`emojize()`函数显示“点赞”表情。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 总结
+
+在本课中,我们涵盖了:
+
+1. Python中的函数和方法
+2. 参数及其使用方法
+3. 导入和使用库
+4. 安装和使用外部库
+
+这些概念是Python编程的基础,并将在你继续提升技能的过程中广泛使用。练习使用不同的函数、方法和库,以更熟练掌握这些概念。

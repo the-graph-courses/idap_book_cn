@@ -1,0 +1,272 @@
+---
+title: 'Pandas中其他分组操作'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+pd.options.display.max_rows = 10
+```
+
+## 介绍
+
+在我们之前的课程中,您已经学习了如何使用 `groupby()` 和 `agg()` 从分组中提取汇总统计。现在,我们将更进一步,探索一些额外有用的分组数据转换。让我们开始吧。
+
+## 学习目标
+
+在本课程结束时,您将能够:
+
+- 使用 `transform()` 将分组级别的汇总统计添加为新列。
+- 使用 `value_counts()` 统计组内的值。
+- 计算组内的累积和。
+
+## 导入
+
+运行以下单元以导入必要的库:
+
+```{python}
+import pandas as pd
+import vega_datasets as vd
+import plotly.express as px
+import warnings
+import calendar
+```
+
+## 数据
+
+我们将使用 `weather` 数据集作为例子。
+
+```{python}
+weather_raw = vd.data.seattle_weather()
+
+# 使用 query 选择2012年的数据,并添加一个月份列
+weather = weather_raw.query("date.dt.year == 2012")
+weather["month"] = pd.Categorical(
+    weather["date"].dt.strftime("%B"),
+    categories=list(calendar.month_name[1:]),
+    ordered=True,
+)
+weather
+```
+
+现在让我们设置本课程其余部分的显示选项:
+
+```{python}
+# | eval: false
+pd.options.display.max_rows = 20
+```
+
+并且让我们忽略在使用当前版本的 pandas 处理分类数据时出现的警告:
+
+```{python}
+warnings.filterwarnings(
+    "ignore"
+)  ## 有一类关于使用当前版本 pandas 处理分类数据时出现的警告,我们可以忽略
+```
+
+## 使用 `transform()` 添加汇总统计
+
+在上一课中,您学习了如何使用 `agg()` 计算平均值、中位数或标准差等汇总统计。
+
+例如,要计算每个月的平均降水量(雨+雪),您可以使用:
+
+```{python}
+weather.groupby('month').agg(mean_precip = ('precipitation', 'mean'))
+```
+
+有时,我们希望将这些组级别的统计添加为原始 DataFrame 的新列。我们无法直接使用 `agg()` 的输出来实现:
+
+```{python}
+# 无法工作
+weather['mean_precip'] = weather.groupby('month').agg(mean_precip = ('precipitation', 'mean'))
+weather
+```
+
+但我们可以使用 `transform()` 来实现。`transform()` 将输出重新整形以匹配原始 DataFrame 的形状,允许我们将组级别的统计添加为新列。
+
+```{python}
+weather['mean_precip_month'] = weather.groupby('month')['precipitation'].transform('mean')
+weather
+```
+
+您可以以类似方式计算其他统计。例如,要计算每个月的降水中位数,您可以使用:
+
+```{python}
+weather['prep_median_month'] = weather.groupby('month')['precipitation'].transform('median')    
+weather
+```
+
+或者计算每个月的降水总和:
+
+```{python}
+weather['precip_sum_month'] = weather.groupby('month')['precipitation'].transform('sum')
+weather
+```
+
+有了总和,我们可以轻松计算该月降水量在每天中所占的比例:
+
+```{python}
+weather["precip_month_prop"] = weather["precipitation"] / weather["precip_sum_month"]
+weather
+```
+
+::: {.callout-tip title="练习"}
+
+## 练习题:每日小费比例
+
+使用 `tips` 数据集,计算:
+1. 一个包含每天总小费的新列 `daily_total_tips`
+2. 一个显示每位顾客该日总小费的比例的新列 `tip_proportion`
+
+```{python}
+# Your code here:
+tips = px.data.tips()
+tips
+```
+
+您的输出数据的前几行应类似于:
+
+```
+total_bill    tip     sex      smoker    day    time      size    daily_total_tips    tip_proportion
+16.99         1.01    Female   No        Sun    Dinner    2       247.39              0.004083
+10.34         1.66    Male     No        Sun    Dinner    3       247.39              0.006710
+21.01         3.50    Male     No        Sun    Dinner    3       247.39              0.014148
+23.68         3.31    Male     No        Sun    Dinner    2       247.39              0.013380
+```
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+tips["daily_total_tips"] = tips.groupby("day")["tip"].transform("sum")
+tips["tip_proportion"] = tips["tip"] / tips["daily_total_tips"]
+tips
+```
+
+:::
+
+让我们重新初始化 `weather` DataFrame 为一个较小的列集合,用于本课程的其余部分:
+
+```{python}
+weather = weather[['date', 'month', 'precipitation', 'wind', 'weather']]
+weather
+```
+
+## 使用 `value_counts()` 统计组内的值
+
+统计分类变量在组内的出现次数可以揭示有趣的模式,通常需要在使用 `groupby()` 后进行。
+
+首先,让我们回顾一下 `value_counts()` 在整个 DataFrame 上的工作方式。
+
+```{python}
+# 天气类型的计数
+weather["weather"].value_counts()
+```
+
+我们可以添加 `normalize=True` 来获得比例:
+
+```{python}
+weather['weather'].value_counts(normalize=True)
+```
+
+现在,要统计每个月的天气类型,我们首先按 `month` 分组,然后选择 `weather` 列并应用 `value_counts()`。
+
+```{python}
+# 每个月天气类型的计数
+weather.groupby('month')['weather'].value_counts()
+```
+
+这将返回一个具有多重索引的 Series,可以使用 `reset_index()` 转换为常规的 DataFrame:
+
+```{python}
+weather.groupby('month')['weather'].value_counts().reset_index()
+```
+
+::: {.callout-tip title="练习"}
+
+## 练习题:按日统计吸烟者和非吸烟者人数
+
+使用 `tips` 数据集,统计每一天吸烟者和非吸烟者的数量。
+
+```{python}
+tips = px.data.tips()
+tips
+
+# Your code here:
+```
+
+您的结果的前几行应类似于:
+
+```
+day	smoker	count
+Fri	Yes	15
+Fri	No	4
+Sat	No	45
+```
+
+```{python}
+# | echo: false
+# | eval: false
+## Solution
+smoker_counts = tips.groupby("day")["smoker"].value_counts().reset_index(name="count")
+smoker_counts
+```
+
+:::
+
+## 在组内计算累积和
+
+累积和有助于跟踪组内的运行总计。这是一种常用的操作。让我们看看如何对分组数据执行此操作。
+
+回顾一下,以下是如何计算整个 DataFrame 的降水累积和:
+
+```{python}
+# 降水的累积和
+weather["precip_cumul"] = weather["precipitation"].cumsum()
+weather
+```
+
+要计算每个月的降水累积和,我们可以使用 `groupby()` 和 `cumsum()`:
+
+```{python}
+# 每个月的降水累积和
+weather["precip_cumul"] = weather.groupby("month")["precipitation"].cumsum()
+weather
+```
+
+::: {.callout-practice title="练习题1:按日累积小费金额"}
+
+## 练习题:按日累积小费金额
+
+使用 `tips` 数据集,计算每个 `day` 的 `total_bill` 累积和,添加一个新列 `cumul_total_bill_day`。然后添加另一列 `cumul_tip_day`,包含每个 `day` 的 `tip` 累积和。
+
+```{python}
+tips = px.data.tips()
+tips = tips.sort_values('day')
+tips
+# Your code here:
+```
+
+```{python}
+# | echo: false
+# | eval: false
+tips["cumul_tip_day"] = tips.groupby("day")["tip"].cumsum()
+tips["cumul_total_bill_day"] = tips.groupby("day")["total_bill"].cumsum()
+tips[["day", "cumul_tip_day", "cumul_total_bill_day"]]
+```
+
+:::
+
+## 总结
+
+在本课程中,您学习了 pandas 中几个强大的 **分组级数据转换**:
+
+- **添加汇总统计**:使用 `transform()` 将分组级别的计算添加为新列
+- **组内计数**:使用 `value_counts()` 统计组内的出现次数
+- **计算累积和**:跟踪组内的运行总计
+
+这些技术使您能够分析数据中特定子集中的模式和统计信息。继续练习不同的数据集,以提升您的数据操作技能!
+
+下次见!

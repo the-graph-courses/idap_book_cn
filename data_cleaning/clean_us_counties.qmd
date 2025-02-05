@@ -1,0 +1,82 @@
+---
+title: 'Subsetting rows'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+classifications = pd.read_excel('../data/RuralAtlasData24.xlsx', sheet_name="County Classifications") 
+people = pd.read_excel('../data/RuralAtlasData24.xlsx', sheet_name="People")
+jobs = pd.read_excel('../data/RuralAtlasData24.xlsx', sheet_name="Jobs")
+income = pd.read_excel('../data/RuralAtlasData24.xlsx', sheet_name="Income")
+veterans = pd.read_excel('../data/RuralAtlasData24.xlsx', sheet_name="Veterans")
+```
+
+```{python}
+import janitor
+
+full_counties = (
+    classifications.merge(people, on=["FIPS", "State", "County"])
+    .merge(jobs, on=["FIPS", "State", "County"])
+    .merge(income, on=["FIPS", "State", "County"])
+    .merge(veterans, on=["FIPS", "State", "County"])
+)
+
+
+full_counties = full_counties.clean_names(case_type="snake")
+
+full_counties = full_counties.rename(
+    columns={
+        "land_area_sq_miles2020": "area_sq_miles",
+        "pop_change_rate1020": "pop_change_2010_2020",
+        "unemp_rate2020": "unemp_20",
+        "popestimate2020": "pop_20",
+        "pct_emp_change1021": "pct_emp_change_2010_2021",
+        "med_hh_inc": "hh_inc_21",  ## temporary to keep track of the variable
+    }
+)
+
+full_counties = (
+    full_counties.assign(county=lambda x: x["county"] + ", " + x["state"])
+    .assign(
+        econ_type=lambda x: x.type_2015_update.case_when(
+            [
+                (x.type_2015_update == 0, "Nonspecialized"),
+                (x.type_2015_update == 1, "Farming"),
+                (x.type_2015_update == 2, "Mining"),
+                (x.type_2015_update == 3, "Manufacturing"),
+                (x.type_2015_update == 4, "Federal/State Government"),
+                (x.type_2015_update == 5, "Recreation"),
+            ]
+        )
+    )
+    .filter(
+        items=[
+            "state",
+            "county",
+            "pop_20",  # 2020
+            "area_sq_miles",
+            "hh_inc_21",  # 2021
+            "econ_type",
+            "unemp_20",  # 2020
+            "foreign_born_num",
+            "pop_change_2010_2020",
+            "pct_emp_change_2010_2021",
+        ]
+    )
+)
+
+```
+
+```{python}
+full_counties.to_csv("../data/us_counties_data.csv", index=False)
+
+## get the names of all vars. Print all of them 
+print([col for col in full_counties.columns])
+```
+
+```{python}
+
+```

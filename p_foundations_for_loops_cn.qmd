@@ -1,0 +1,271 @@
+---
+title: 'Intro to Loops in Python'
+---
+
+```{python}
+# | echo: false
+# temporary solution to avoid SSL certificate verification error
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+```
+
+## 简介
+
+编程的核心概念是重复执行任务多次。`for` 循环是实现这一目标的基本方法之一。循环能够高效地重复操作,节省时间和精力。
+
+掌握这一概念对于编写智能的 Python 代码至关重要。
+
+让我们深入学习,提升您的编码技能!
+
+## 学习目标
+
+在本课程结束时,您将能够:
+
+- 使用 Python 中的基本 `for` 循环
+- 使用索引变量在循环中遍历列表
+- 在循环中使用 f-字符串格式化输出
+- 应用循环生成多个数据可视化图表
+
+## 包
+
+在本课程中,我们将使用以下 Python 库:
+
+```{python}
+import pandas as pd
+import plotly.express as px
+from vega_datasets import data
+```
+
+## `for` 循环简介
+
+让我们从一个简单的例子开始。假设我们有一个儿童年龄(以年为单位)的列表,我们想要将其转换为月份:
+
+```{python}
+ages = [7, 8, 9]  # List of ages in years
+```
+
+我们可以尝试直接将列表乘以 12:
+
+```{python}
+ages * 12
+```
+
+但这并不能达到我们的目的。它只是将列表重复了 12 次。
+
+相反,我们需要遍历列表中的每个元素,并将其乘以 12:
+
+```{python}
+for age in ages:
+    print(age * 12)
+```
+
+`for` 和 `in` 是循环中必需的关键字。冒号以及第二行的缩进也是必需的。
+
+在这个循环中,`age` 是一个临时变量,在每次迭代时取 `ages` 列表中每个元素的值。首先,`age` 是 7,然后是 8,接着是 9。
+
+您可以为这个变量选择任何名称:
+
+```{python}
+for random_name in ages:
+    print(random_name * 12)
+```
+
+请注意,我们需要使用 print 语句,因为循环不会自动打印结果: 
+
+```{python}
+for age in ages:
+    age * 12
+```
+
+::: {.callout-tip title='练习'}
+
+### 小时转分钟基础循环
+
+尝试使用 `for` 循环将小时转换为分钟。首先,从以下小时列表开始:
+
+```{python}
+hours = [3, 4, 5]  # List of hours
+# Your code here
+```
+
+:::
+
+## 使用 f-字符串进行打印
+
+我们可能想要同时打印结果和原始年龄。我们可以通过使用 `+` 运算符连接字符串来实现。但我们需要使用 `str()` 将年龄转换为字符串。
+
+```{python}
+for age in ages:
+    print(str(age) + " years is " + str(age * 12) + " months" )
+```
+
+或者,我们可以使用一种称为 f-字符串的字符串。这种字符串允许我们直接嵌入变量。
+
+```{python}
+for age in ages:
+    print(f"{age} years is {age * 12} months")
+```
+
+在 f-字符串中,我们使用大括号 `{}` 来嵌入变量。
+
+::: {.callout-tip title='练习'}
+
+### 练习:F-字符串
+
+再次将下面的小时列表转换为分钟。使用 f-字符串同时打印原始小时数和转换后的分钟数。
+
+```{python}
+hours = [3, 4, 5]  # List of hours
+# Your code here
+# Example output "3 hours is 180 minutes"
+```
+
+:::
+
+## `for` 循环在 Python 中有用吗?
+
+虽然 `for` 循环很有用,但在许多情况下,有更高效的方法对数据集合执行操作。
+
+例如,我们最初的年龄转换可以使用 pandas Series 实现:
+
+```{python}
+import pandas as pd
+
+ages = pd.Series([7, 8, 9])
+months = ages * 12
+print(months)
+```
+
+但尽管像 pandas 这样的库提供了强大的数据处理方式,`for` 循环对于那些无法轻易向量化的任务或当您需要对迭代过程进行精细控制时仍然是必不可少的。
+
+## 使用索引和值进行循环
+
+有时,我们希望同时访问列表中项的位置(索引)和值。`enumerate()` 函数可以帮助我们轻松实现这一点。
+
+让我们再次看一下 `ages` 列表:
+
+```{python}
+ages = [7, 8, 9]  # List of ages in years
+```
+
+首先,让我们看看 `enumerate()` 实际上做了什么:
+
+```{python}
+for item in enumerate(ages):
+    print(item)
+```
+
+如您所见,`enumerate()` 会给我们 (索引, 值) 的对。
+
+我们可以在 `for` 循环中直接展开这些对:
+
+```{python}
+for i, age in enumerate(ages):
+    print(f"The person at index {i} is aged {age}")
+```
+
+这里,`i` 是索引,而 `age` 是该索引处的值。
+
+现在,让我们使用索引和值创建更详细的输出:
+
+```{python}
+for i, age in enumerate(ages):
+    print(f"The person at index {i} is aged {age} years which is {age * 12} months")
+```
+
+当您在循环中需要同时获取位置和对应值时,这尤其有用。
+
+::: {.callout-tip title='练习'}
+
+### 练习:使用 `enumerate()` 和 F-字符串
+
+使用 `enumerate()` 和 f-字符串为列表中的每个小时打印一句话:
+
+```{python}
+hours = [3, 4, 5]  # List of hours
+
+# Your code here
+# Example output: "Hour 3 at index 0 is equal to 180 minutes"
+```
+
+:::
+
+# 真实的循环应用:生成多个图表
+
+既然您已经对 `for` 循环有了扎实的理解,让我们将知识应用于一个更实际的循环任务:生成多个图表。
+
+我们将使用 Vega 数据集中的 `gapminder` 数据集来演示这一点。我们的目标是为 gapminder 数据集中选定的几个国家创建折线图。
+
+首先,让我们加载数据:
+
+```{python}
+# Load gapminder dataset
+gapminder = data.gapminder()
+gapminder.head()
+```
+
+现在让我们为一个国家创建折线图。我们将使用 `query` 方法来筛选国家为 "China" 的数据。我们尚未学习此方法;它是 pandas 的一个函数,允许我们基于条件筛选数据。我们将在课程后面学习更多相关内容。
+
+```{python}
+# Filter data for China
+china_data = gapminder.query("country == 'China'")
+
+# Create line chart
+fig = px.line(china_data, x="year", y="life_expect", title="Life Expectancy in China")
+fig.show()
+```
+
+现在,让我们创建一个循环,为几个选定的国家创建折线图。
+
+```{python}
+countries = ["India", "China", "United States", "Indonesia", "Pakistan"]
+
+for country_name in countries:
+    country_data = gapminder.query("country == @country_name")
+    fig = px.line(
+        country_data,
+        x="year",
+        y="life_expect",
+        title=f"Life Expectancy in {country_name}",
+    )
+    fig.show()
+```
+
+这个循环为我们列表中的每个国家创建一个独立的折线图,展示预期寿命如何随时间变化。
+
+::: {.callout-tip title='练习'}
+
+### 练习:随时间变化的人口
+
+使用 `gapminder` 数据集,为 `United States`、`Canada`、`Mexico` 和 `Jamaica` 这几个国家随时间变化的人口创建条形图(使用 `px.bar`)。
+
+```{python}
+# Your code here
+```
+
+:::
+
+::: {.callout-tip title='练习'}
+
+### 练习:按天划分的小费直方图
+
+使用 `tips` 数据集,创建每周每天的总账单直方图。
+
+```{python}
+# Load tips dataset
+tips = px.data.tips()
+tips.head()
+```
+
+```{python}
+# List of days
+days = ["Thur", "Fri", "Sat", "Sun"]
+
+# Your loop here
+```
+
+:::
+
+# 总结!
+
+我们已经涵盖了 Python 中 `for` 循环的基本知识,从简单的语法到实用的数据分析应用。循环对于高效编程至关重要,允许您自动化重复性任务。随着课程的进展,我们将遇到这一关键编程结构的许多其他应用。

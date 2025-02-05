@@ -1,0 +1,402 @@
+---
+title: '数据分组和汇总'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+pd.options.display.max_rows = 7
+```
+
+## 介绍
+
+在本课程中,我们将探讨两个强大的 pandas 方法:`agg()` 和 `groupby()`。这些工具将使您能够轻松提取汇总统计信息并对分组数据执行操作。
+
+汇总统计量是描述一系列值(通常是数据集中的一列)的单个值(如平均值或中位数)。
+
+让我们看看如何使用它们!
+
+## 学习目标
+
+1.  您可以使用 `pandas.DataFrame.agg()` 从数据集中提取汇总统计信息。
+
+2.  您可以使用 `pandas.DataFrame.groupby()` 按一个或多个变量对数据进行分组,然后对其执行操作。
+
+3.  您可以将自定义函数传递给 `agg()` 以计算汇总统计信息。
+
+------------------------------------------------------------------------
+
+## 库
+
+运行以下代码导入必要的库:
+
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+## 雅温得 COVID-19 数据集
+
+在本课程中,我们将再次使用喀麦隆雅温得进行的 COVID-19 血清调查数据的一个子集。
+
+您可以从此链接下载数据集:[yaounde_mini.csv](https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/yaounde_mini.zip)
+
+```{python}
+# | message: false
+
+yao = pd.read_csv("data/yaounde_mini.csv")
+yao
+```
+
+您可以在这里了解更多关于该数据集的信息:https://www.nature.com/articles/s41467-021-25946-0
+
+## 介绍 `pandas.DataFrame.agg()`
+
+首先,让我们考虑如何在不使用 `agg()` 的情况下获取简单的汇总统计信息,然后我们将考虑为什么您*应该*实际使用 `agg()`。
+
+假设有人要求您找出 `yao` 数据框中受访者的平均年龄。您可以通过调用 `yao` 数据框的 `age` 列上的 `mean()` 方法来实现:
+
+```{python}
+yao[["age"]].mean()
+```
+
+现在,让我们看看如何使用 `agg()` 来做到这一点。
+
+```{python}
+yao.agg(mean_age=('age', 'mean'))
+```
+
+这种语法的结构是:
+
+```{python}
+# | eval: false
+dataframe.agg(summary_name=("COLUMN_TO_SUMMARIZE", "SUMMARY_FUNCTION"))
+```
+
+这一部分 `("COLUMN_TO_SUMMARIZE", "SUMMARY_FUNCTION")` 被称为*元组*。元组的第一个元素是要汇总的列的名称,第二个元素是要应用于该列的汇总函数。
+
+语法更为复杂,但正如您稍后将看到的,它更加强大,因为它允许您计算多个汇总统计信息,并按组计算统计数据。
+
+------------------------------------------------------------------------
+
+让我们看看如何在单个 `agg()` 语句中计算多个汇总统计信息。如果您想要年龄的平均值和中位数,您可以运行:
+
+```{python}
+yao.agg(mean_age=("age", "mean"), median_age=("age", "median"))
+```
+
+很好,现在试试下面的练习题。
+
+::: {.callout-tip title='练习'}
+
+## 练习题:平均值和中位数体重
+
+使用 `agg()` 和相关的汇总函数,从 `yao` 数据框的 `weight_kg` 变量中获取受访者体重的平均值和中位数。
+
+```{python}
+# Your code here
+```
+
+```{python}
+# | eval: false
+# | echo: false
+
+yao.agg(mean_weight=("weight_kg", "mean"), median_weight=("weight_kg", "median"))
+```
+
+:::
+
+## 使用 `pandas.DataFrame.groupby()` 进行分组汇总
+
+现在让我们看看如何使用 `groupby()` 来获得分组汇总,这是使用 `agg()` 的主要原因。
+
+顾名思义,`pandas.DataFrame.groupby()` 让您可以按变量中的值对数据框进行分组(例如,按性别分组为男性和女性)。然后,您可以执行按这些组拆分的操作。
+
+让我们尝试按性别对 `yao` 数据框进行分组,并观察效果:
+
+```{python}
+yao.groupby("sex")
+```
+
+嗯。显然没有发生任何事情。我们只是得到了一个 `GroupBy` 对象。
+
+但是,当我们将 `groupby()` 与前一节中使用的 `agg()` 调用链式连接时,看看会发生什么:
+
+```{python}
+yao.groupby("sex").agg(mean_age=("age", "mean"), median_age=("age", "median"))
+```
+
+现在我们为每个组获得了不同的统计数据!女性受访者的平均年龄约为 29.5 岁,而男性受访者的平均年龄约为 28.4 岁。
+
+如前所述,这种分组汇总是 `agg()` 函数如此有用的主要原因。
+
+您可能注意到有两行标题。这是因为输出具有层次索引(在 pandas 中称为 MultiIndex)。虽然在某些情况下这可能有用,但它通常会使进一步的数据操作更加困难。我们可以使用 `reset_index()` 方法重置索引,将组标签转换回常规列。
+
+```{python}
+yao.groupby("sex").agg(mean_age=("age", "mean"), median_age=("age", "median")).reset_index()
+```
+
+您可能会注意到代码行变得相当长。我们可以将每个新的方法调用移到新的一行以提高代码的可读性,但需要将整个链包裹在括号中。
+
+```{python}
+(
+    yao.groupby("sex")
+    .agg(mean_age=("age", "mean"), median_age=("age", "median"))
+    .reset_index()
+)
+```
+
+------------------------------------------------------------------------
+
+让我们看一个例子。
+
+假设您被要求获取不同社区中个体的最大和最小体重,并呈现每个社区中的个体数量。我们可以编写:
+
+```{python}
+(
+    yao.groupby("neighborhood")
+    .agg(
+        max_weight=("weight_kg", "max"),
+        min_weight=("weight_kg", "min"),
+        count=("weight_kg", "size"),  # the size function counts rows per group
+    )
+    .reset_index()
+) 
+```
+
+::: {.callout-tip title='练习'}
+
+## 练习题:按性别分组的最小和最大身高
+
+使用 `groupby()`、`agg()` 和相关的汇总函数,从 `yao` 数据框中获取每个性别的最小和最大身高,以及每个性别组中的个体数量。
+
+您的输出应为如下所示的 DataFrame:
+
+| sex    | min_height_cm | max_height_cm | count |
+|--------|---------------|---------------|-------|
+| Female |               |               |       |
+| Male   |               |               |       |
+
+```{python}
+# Your code here
+```
+
+```{python}
+# | eval: false
+# | echo: false
+
+(
+    yao.groupby("sex")
+    .agg(
+        min_height=("height_cm", "min"),
+        max_height=("height_cm", "max"),
+        count=("height_cm", "size"),
+    )
+    .reset_index()
+)
+```
+
+:::
+
+## 按多个变量分组(嵌套分组)
+
+可以按多个变量对数据框进行分组。这有时称为“嵌套”分组。
+
+假设您想知道每个社区中男性和女性的平均年龄,您可以在 `groupby()` 语句中同时放入 `sex` 和 `neighborhood`:
+
+```{python}
+(
+    yao
+    .groupby(['sex', 'neighborhood'])
+    .agg(mean_age=('age', 'mean'))
+    .reset_index()
+)
+```
+
+从这个输出数据框您可以看出,例如,来自 Briqueterie 的女性的平均年龄为 31.6 岁。
+
+::: {.callout-tip title='练习'}
+
+## 练习题:按年龄和性别组的最小和最大身高
+
+使用 `groupby()`、`agg()` 以及 `min()` 和 `max()`,获取 `yao` 数据框中每个年龄-性别组的最小和最大身高。需要的变量是 `age_category_3` 和 `sex`。
+
+您的输出应为如下所示的 DataFrame:
+
+| age_category_3 | sex    | min_height | max_height |
+|----------------|--------|------------|------------|
+| Adult          | Female | 78         | 185        |
+| Adult          | Male   | 147        | 196        |
+| Child          | Female | 54         | 183        |
+| Child          | Male   | 96         | 190        |
+| Senior         | Female | 143        | 174        |
+| Senior         | Male   | 160        | 195        |
+
+```{python}
+# Your code here
+```
+
+```{python}
+# | eval: false
+# | echo: false
+
+# Solution
+(
+    yao.groupby(["age_category_3", "sex"])
+    .agg(min_height=("height_cm", "min"), max_height=("height_cm", "max"))
+    .reset_index()
+)
+```
+
+:::
+
+## `agg()` 中的 NaN 值
+
+在使用 `agg()` 计算分组汇总统计信息时,请注意您关注的组是否包含 NaN 值。
+
+例如,要按吸烟状态获取平均体重,我们可以编写:
+
+```{python}
+(
+    yao.groupby("is_smoker")
+    .agg(weight_mean=("weight_kg", "mean"))
+    .reset_index()
+)
+```
+
+但这实际上会将一些具有 NaN 吸烟状态的行从汇总表中排除。
+
+我们可以通过在 `groupby()` 函数中设置 `dropna=False` 来将这些个体包含在汇总表中。
+
+```{python}
+(
+    yao.groupby("is_smoker", dropna=False)
+    .agg(weight_mean=("weight_kg", "mean"))
+    .reset_index()
+)
+```
+
+此外,记住您可以使用 `size()` 函数查看每个吸烟状态组中有多少个体。这通常在您的汇总表中包含此信息很有用,这样您就知道每个汇总统计背后有多少个体。
+
+```{python}
+(
+    yao.groupby("is_smoker", dropna=False)
+    .agg(weight_mean=("weight_kg", "mean"), 
+         count=("weight_kg", "size"))
+    .reset_index()
+)
+```
+
+::: {.callout-tip title='练习'}
+
+## 练习题:按怀孕状态的平均体重
+
+使用 `groupby()`、`agg()` 和 `mean()` 函数,从 `yao` 数据框中按怀孕状态获取平均体重(公斤)。在汇总表中包含怀孕状态为 NaN 的个体。
+
+输出的数据框应类似于:
+
+| is_pregnant | weight_mean |
+|-------------|-------------|
+| No          |             |
+| No response |             |
+| Yes         |             |
+| NaN         |             |
+
+```{python}
+# your code here
+```
+
+```{python}
+# | eval: false
+# | echo: false
+
+(
+    yao.groupby("is_pregnant", dropna=False)
+    .agg(weight_mean=("weight_kg", "mean"))
+    .reset_index()
+)
+```
+
+:::
+
+## 使用 lambda 函数进行自定义汇总统计
+
+在深入研究自定义汇总统计之前,让我们简要介绍一下 lambda 函数。Python 中的 lambda 函数是使用 `lambda` 关键字定义的小型匿名函数。
+
+例如,考虑一个计算列表的范围(最大值与最小值之差)的函数。您可以使用常规函数如下定义:
+
+```{python}
+def range_func(x):
+    return max(x) - min(x)
+
+print(range_func([1, 2, 3, 4]))  # Output: 3
+```
+
+或者,您可以使用 lambda 函数实现相同的结果:
+
+```{python}
+range_func = lambda x: max(x) - min(x)
+print(range_func([1, 2, 3, 4]))  # Output: 3
+```
+
+现在,让我们看看如何使用 lambda 函数在数据分析中应用自定义汇总统计。
+
+例如,假设我们想计算每个社区中体重的范围。我们可以使用 `range_func` 函数来实现:
+
+```{python}
+(
+    yao.groupby("neighborhood")
+    .agg(weight_range=("weight_kg", range_func))
+    .reset_index()
+)
+```
+
+注意我们没有将 `range_func` 放在引号中。只有内置函数才会被放在引号中。
+
+现在,我们可以在 `agg()` 调用中直接使用 lambda 函数,而不调用 `range_func`:
+
+```{python}
+(
+    yao.groupby("neighborhood")
+    .agg(weight_range=("weight_kg", lambda x: max(x) - min(x)))
+    .reset_index()
+)
+```
+
+请注意,我们仍然向 `agg()` 函数提供了一个元组,`('weight_kg', lambda x: max(x) - min(x))`,但元组的第二个元素是一个 lambda 函数。
+
+这个 lambda 函数作用于元组中提供的列 `weight_kg`。
+
+再看一个例子:计算每个社区内体重的变异系数(CV)。CV 是标准差除以均值,是分布相对可变性的无单位度量。
+
+```{python}
+(
+    yao.groupby("neighborhood")
+    .agg(weight_cv=("weight_kg", lambda x: (np.std(x) / np.mean(x)) * 100))
+    .reset_index()
+)
+```
+
+::: {.callout-tip title='练习'}
+
+## 练习题:按社区年龄的四分位距
+
+找出每个社区的年龄变量的四分位距(IQR)。IQR 是第 75 和第 25 百分位数之间的差。您的 lambda 如下所示:`lambda x: x.quantile(0.75) - x.quantile(0.25)`
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 总结
+
+在本课程中,您学会了如何使用 `agg()` 快速获取数据的汇总统计信息,使用 `groupby()` 对数据进行分组,并将 `groupby()` 与 `agg()` 结合使用以实现强大的数据汇总。
+
+这些技能对于探索性数据分析和为展示或绘图准备数据至关重要。`groupby()` 和 `agg()` 结合使用是 pandas 中最常见和最有用的数据操作技术之一。
+
+在接下来的课程中,我们将探讨将 `groupby()` 与其他 pandas 方法结合使用的方法。
+
+下次见!

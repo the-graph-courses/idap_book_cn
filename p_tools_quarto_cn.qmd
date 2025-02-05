@@ -1,0 +1,312 @@
+```qmd
+---
+title: "使用 Quarto"
+format: html
+---
+
+## 介绍
+
+作为数据分析师,你角色的重要部分是通过报告将结果传达给他人。**Quarto** 是生成此类报告最强大、最灵活的工具之一。它使你能够通过结合格式化文本和代码生成的结果来生成动态文档。使用 Quarto,你可以创建各种格式的文档,如 HTML、PDF、Word、PowerPoint 幻灯片、网页仪表板等。
+
+我们在 GRAPH 课程中的大部分文档实际上都是用 Quarto 编写的!
+
+在本课中,我们将介绍这个强大工具的基础知识。
+
+## 学习目标
+
+完成本课后,你应该能:
+
+- 创建并渲染包含 Python 代码和叙述文本的 Quarto 文档。
+- 以多种格式输出文档,包括 HTML、PDF、Word 等。
+- 理解基本的 Markdown 语法。
+- 使用代码块选项来控制代码执行和输出显示。
+- 使用 Python 包在 Quarto 文档中显示表格和图形。
+
+## 安装 Quarto
+
+要开始使用,首先需要安装 Quarto。
+
+在你喜欢的搜索引擎中搜索“quarto download”。按照结果进入“Quarto.org”网站,然后按照你的操作系统的说明进行操作。(我们不在这里提供直接链接,因为确切链接可能会随着时间变化。)
+
+安装后,可以通过在命令行或终端中运行以下命令来检查是否已安装:
+
+```bash
+quarto --version
+```
+
+现在 Quarto 已安装,使用它来安装 `tinytex` 包,我们需要该包来编译我们的 PDF:
+
+```bash
+quarto install tinytex
+```
+
+要在 VSCode 中使用 Quarto 的所有功能,我们需要安装 **Quarto** 扩展和 **Jupyter** 扩展。你可以在 VSCode 的扩展标签中安装这些扩展。确保安装这些扩展的官方版本。Quarto 由 Quarto 发布,Jupyter 由微软发布。
+
+这需要安装很多扩展,但不要担心——你只需在电脑上完成这些步骤一次。
+
+## 项目设置
+
+首先,在 VSCode 中打开你的 `graph_courses_python` 项目。
+
+如果你没有观看前一个解释项目设置的视频,请现在观看。在那个视频中,我们解释了如何创建项目文件夹、创建虚拟环境、选择解释器,并安装 `jupyter`、`ipykernel`、`kaleido`、`itables`、`plotly` 和 `pandas` 包。
+
+## 创建新文档
+
+Quarto 文档是一个简单的文本文件,扩展名为 `.qmd`。
+
+要创建一个新的 Quarto 文档,创建一个新文件并将其保存为 `.qmd` 扩展名,例如 `first_quarto_doc.qmd`。
+
+在你的文档中添加以下文本的两个部分:
+
+```markdown
+# 第一节
+
+你好
+
+
+# 第二节
+
+世界
+```
+
+## 添加代码块
+
+你可以使用以下语法及快捷键 `Cmd + Shift + I`(Mac 上)或 `Ctrl + Shift + I`(Windows 上)向文档中添加代码块。或者,可以点击屏幕右上方的“...”按钮。
+
+让我们创建一个将两个数字相加并显示结果的代码块:
+
+```{python}
+2 + 2
+```
+
+你应该在工具栏中看到一个“运行单元格”按钮。点击它来运行代码块。
+
+如果你尚未在当前环境中安装 `ipykernel` 包,VSCode 可能会提示你安装。去安装它。
+
+现在练习在文档末尾添加另一个将 3 乘以 3 的代码块。
+
+添加这些后,你应该也会看到“运行下一个单元”和“运行上方”按钮出现。
+
+还有两个你应该熟悉的快捷键:
+
+- `Cmd + Enter`(Mac)或 `Ctrl + Enter`(Windows/Linux)运行代码块。
+- `Option + Enter`(Mac)或 `Alt + Enter`(Windows/Linux)运行当前行或选中的代码部分。
+
+要测试这些快捷键,在一个代码块中添加多行代码,然后练习使用第一个快捷键运行整个块,用第二个快捷键逐行运行。
+
+如你所见,我们可以将 Quarto 用作类似于 Jupyter notebook 或 Google Colab 的交互式文档。但真正使它出色的是其输出多种格式的能力。
+
+课程后面,我们将看到如何使用此功能。
+
+## Quarto 文档头部 (YAML)
+
+在文档顶部,我们添加一个 YAML 部分。这是我们可以指定文档详情的地方,例如标题、作者和格式。
+
+```yaml
+---
+title: "我的第一个 Quarto 文档"
+author: "你的名字"
+format: html
+---
+```
+
+现在,我们将只使用 `html` 格式。
+
+要渲染文档,点击屏幕右上方的“Render”按钮。
+
+(要正确渲染,你需要安装 `jupyter` 包。如果你尚未设置虚拟环境,请观看我们关于设置虚拟环境的视频,并了解如何安装包。)
+
+你应该会在 VSCode 中看到一个新标签页,显示已经渲染的文档。
+
+如果你转到资源管理器,你应该会看到一个名为 `first_quarto_doc.html` 的新文件。
+
+所以现在我们拥有了 Quarto 文档的主要元素:
+
+- YAML 头部
+- 部分标题
+- 文本
+- 代码块
+- 这些代码块的输出
+
+这些元素共同使 Quarto 成为报告的一个非常强大的工具。
+
+你还可以使用额外的选项来自定义输出格式。例如,要将资源直接嵌入到 HTML 文件中,可以修改 YAML 头部中的 `format` 部分:
+
+```yaml
+format:
+  html:
+    embed-resources: true
+```
+## 输出格式
+
+如我们之前讨论的,Quarto 的一个强大功能是它能够输出多种格式。
+
+你可以在 YAML 头部中更改 `format` 值来尝试其他格式。
+
+尝试以下格式:
+
+- `html`:将文档渲染为 HTML 网页。
+- `pdf`:将文档渲染为 PDF。你需要在电脑上安装 LaTeX(或 tinytex)才能使用此格式。
+- `docx`:将文档渲染为 Microsoft Word 文档。
+- `pptx`:将文档渲染为 PowerPoint 演示文稿。
+- `revealjs`:将文档渲染为 HTML 幻灯片。
+- `dashboard`:将文档渲染为交互式仪表板。
+
+请注意,由于不同的操作系统或软件版本,这些格式中的一些可能无法在你的电脑上正常工作。
+
+## Markdown
+
+Quarto 文档中的文本使用 Markdown 编写。
+
+**Markdown** 是一组用于为纯文本添加格式的简单约定。例如,要将文本设置为斜体,可以将其用星号包裹 `*text here*`,要开始一个新标题,可以使用井号 `#`。我们将在下面详细学习这些内容。
+
+你可以通过在一行开始添加一个或多个 `#` 来定义不同级别的标题:
+
+```markdown
+# 一级标题
+
+## 二级标题
+
+### 三级标题
+```
+
+文档主体由遵循 Markdown 语法的文本组成。Markdown 文件是包含轻量级标记的文本文件,帮助设置标题级别或格式化文本。例如,以下文本:
+
+```markdown
+This is text with *italics* and **bold**.
+
+You can define bulleted lists:
+
+- First element
+- Second element
+```
+
+将生成以下格式化的文本:
+
+> 这是带有*斜体*和**粗体**的文本。
+>
+> 你可以定义无序列表:
+>
+> - 第一项
+> - 第二项
+
+注意,你需要在列表前后留空行,并将列表项保持在单独的行上。否则,它们会挤在一起,而不是形成列表。
+
+我们看到,放在星号之间的词语会变为斜体,而以破折号开头的行会转换为项目符号列表。
+
+Markdown 语法还允许其他格式化,例如插入链接或图片。例如,以下代码:
+
+```markdown
+[示例链接](https://example.com)
+```
+
+... 将生成以下链接:
+
+> [示例链接](https://example.com)
+
+我们还可以嵌入图片。在你的文档中,你可以输入:
+
+```markdown
+![替代文本](images/picture_name.jpg)
+```
+
+将“替代文本”替换为图片的描述(也可以为空),将“images”替换为项目中的图片文件夹名称,将“picture_name.jpg”替换为你想要使用的图片名称。或者,在某些编辑器中,你可以将图片拖放到文档中。
+
+## 代码块选项
+
+可以为每个代码块传递选项以修改其行为。
+
+例如,一个代码块如下所示:
+
+```{python}
+# Your code here
+x = 2 + 2
+print(x)
+```
+
+但你可以添加选项来控制代码块的执行和显示:
+
+```{python}
+#| echo: false
+x = 2 + 2
+print(x)
+```
+
+在此示例中,`echo: false` 选项告诉 Quarto 不在渲染的文档中显示代码,仅显示输出。
+
+### 全局选项
+
+你可能希望全局应用选项到文档中的所有代码块。你可以在 YAML 头部的 `execute` 键下设置默认的代码执行选项。
+
+例如:
+
+```yaml
+---
+title: "Quarto 文档"
+format: html
+execute:
+  echo: false
+---
+```
+
+这将为所有代码块设置 `echo: false`。
+
+## 显示表格
+
+默认情况下,pandas DataFrame 在 Quarto 中显示整洁。然而,对于交互式表格,我们可以使用 `itables` 包。
+
+确保你已安装 `itables` 包。如果没有,可以使用以下命令安装:
+
+```{python}
+#| eval: false
+!pip install itables
+```
+
+然后,你可以运行类似以下的代码:
+
+```{python}
+import plotly.express as px
+from itables import show
+
+tips = px.data.tips()
+show(tips)
+```
+
+请注意,交互式表格仅在 HTML 格式中有效。我们将在后面查看其他格式的表格。
+
+## 显示图表
+
+对于交互式图表,`plotly` 包非常有用。
+
+```{python}
+tips = px.data.tips()
+tips_sex = px.violin(tips, x="day", y="total_bill", color="sex")
+tips_sex.show()
+```
+
+这将在 HTML 输出中显示一个交互式的 Plotly 图表。
+
+对于静态输出,如 PDF 和 Word 文档,我们需要将图表保存为图像文件,然后将其包含在文档中。
+
+首先,将图表保存为图像:
+
+```{python}
+tips_sex.write_image("tips_sex_plot.png")
+```
+
+此命令将在与你的文档相同的文件夹中创建一个静态图像文件。然后,我们可以将其包含在文档中,如下所示:
+
+```markdown
+![按日和性别划分的总账单小提琴图](tips_sex_plot.png)
+```
+
+这将在输出中显示图片。
+
+---
+
+## 结束语
+
+在本课中,我们学习了如何创建和渲染 Quarto 文档,添加格式,以及包含代码块。我们还学习了如何使用代码块选项来控制文档的行为。我们尝试了不同的输出格式以及如何自定义文档的显示。
+
+通过这些工具,你可以创建动态和交互式的报告,能够以各种格式轻松分享。Quarto 的灵活性和与 Python 的集成使其成为数据分析师和研究人员的优秀选择。
+```

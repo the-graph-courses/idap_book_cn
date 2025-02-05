@@ -1,0 +1,357 @@
+---
+title: "Using LLMs in Python – Working with Structured Outputs"
+---
+
+在本教程中,我们将深入探讨如何使用 Pydantic 模型处理 OpenAI 的大语言模型(LLMs)的结构化输出。我们将学习如何定义预期的响应格式,将 LLM 的输出解析为结构化数据,并将其整合到我们的数据处理工作流程中。
+
+## 前提条件
+
+在开始本教程之前,请确保您已完成之前关于在 Python 中使用 LLMs 进行基本文本生成的教程。您应该熟悉设置 OpenAI 客户端、定义辅助函数以及使用可变输入和数据框(DataFrames)。
+
+运行以下代码以设置 OpenAI 客户端并导入必要的库:
+
+```{python}
+import urllib.request
+import json
+
+url = "https://simple.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Italy&explaintext=1"
+response = urllib.request.urlopen(url)
+content = json.loads(response.read())
+text = content['query']['pages'].popitem()[1]['extract']
+print(text)
+```
+
+```{python}
+import os
+from openai import OpenAI
+import numpy as np
+import pandas as pd
+
+# Initialize the OpenAI client with your API key
+client = OpenAI(
+    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+)
+```
+
+接下来,我们定义一个包含一些国家的数据框:
+
+```{python}
+countries = ["Nigeria", "Chile", "France", "Canada"]
+country_df = pd.DataFrame({"country": countries})
+country_df
+```
+
+接下来,我们定义上一课中的聊天辅助函数:
+
+```{python}
+def llm_chat(message):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": message}]
+    )
+    return response.choices[0].message.content
+```
+
+## 结构化输出
+
+在上一课中,我们编写了一个函数,该函数以国家名称作为输入,并返回该国家最适合旅游的城市。
+
+```{python}
+def city_rec(country):
+    prompt = f"What is the most tourist-friendly city in {country}?"
+    response = llm_chat(message=prompt)
+    return response
+
+city_rec_vec = np.vectorize(city_rec)
+```
+
+让我们测试这个函数:
+
+```{python}
+city_rec_vec(country_df['country'])
+```
+
+然而,如果我们只想提取城市名称而不包含其他文本,该怎么办?一种方法是(或者说请求!)让 LLM 以全大写字母返回城市名称。但这并不总是有效。
+
+为了确保可靠的数据提取,我们可以使用 Pydantic 模型定义结构化输出。
+
+首先,让我们定义一个辅助函数,该函数接受提示(prompt)和 Pydantic 模型,并返回解析后的响应。该函数封装了使用结构化输出进行 API 调用所需的样板代码。
+
+```{python}
+from pydantic import BaseModel
+
+def llm_structured(message, response_format: BaseModel):
+    completion = client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": message}],
+        response_format=response_format,
+    )
+    parsed_response = completion.choices[0].message
+    if getattr(parsed_response, 'refusal', None):
+        print(f"Model refused to provide an answer: {parsed_response.refusal}")
+        return None
+    else:
+        return parsed_response.parsed
+```
+
+**注意**:函数 `llm_structured` 使用 `client.beta.chat.completions.parse`,这是 OpenAI API 的一个新功能。当此功能退出测试阶段时,可能需要更新此代码(很可能只需移除 `beta` 前缀)。
+
+现在,我们将为预期的输出定义一个 Pydantic 模型。Pydantic 允许我们使用类型注解定义数据模型,这些模型可用于数据验证和解析。
+
+```{python}
+from pydantic import BaseModel
+
+class Recommendation(BaseModel):
+    city: str
+```
+
+该模型指定,我们期望响应包含一个名为 `city` 的字段,其类型为字符串。
+
+现在,我们可以更新 `city_rec` 函数,以相应地解析响应。
+
+```{python}
+def city_rec_structured(country):
+    prompt = f"What is the most tourist-friendly city in {country}?"
+    response = llm_structured(message=prompt, response_format=Recommendation)
+    return response.city
+```
+
+让我们测试这个函数:
+
+```{python}
+city_rec_structured("Brazil")
+```
+
+我们还可以创建一个向量化的版本,将其应用于国家列表或数据框(DataFrame)中的某一列:
+
+```{python}
+# Vectorize the function
+city_rec_structured_vec = np.vectorize(city_rec_structured)
+
+# Apply to the DataFrame
+country_df['city'] = city_rec_structured_vec(country_df['country'])
+print(country_df)
+```
+
+现在,`city` 列包含来自 LLM 的结构化输出。
+
+**练习问题**
+
+*问题*:创建一个新的函数 `get_local_dish_structured`,该函数以国家名称作为输入,并返回该国家最著名的当地菜肴。然后创建一个向量化版本并将其应用于 `country_df` 数据框,以添加一个新的 'local_dish' 列。
+
+*解决方案*:
+
+首先,为预期的输出定义一个 Pydantic 模型:
+
+```{python}
+class DishRecommendation(BaseModel):
+    dish: str
+```
+
+然后,定义函数:
+
+```{python}
+def get_local_dish_structured(country):
+    prompt = f"What is the most famous local dish from {country}?"
+    response = llm_structured(message=prompt, response_format=DishRecommendation)
+    return response.dish
+```
+
+向量化函数:
+
+```{python}
+get_local_dish_structured_vec = np.vectorize(get_local_dish_structured)
+```
+
+将其应用于数据框:
+
+```{python}
+country_df['local_dish'] = get_local_dish_structured_vec(country_df['country'])
+print(country_df)
+```
+
+## 为模型添加详细描述
+
+您还可以为 Pydantic 模型添加详细描述,以指导 LLM 格式化响应。例如,让我们指定我们希望城市名称以全大写字母提供。
+
+```{python}
+from pydantic import Field
+
+class Recommendation(BaseModel):
+    city: str = Field(description="The name of the city in all capital letters")
+```
+
+重新定义我们的函数:
+
+```{python}
+def city_rec_structured_caps(country):
+    prompt = f"What is the most tourist-friendly city in {country}?"
+    response = llm_structured(message=prompt, response_format=Recommendation)
+    return response.city
+```
+
+测试函数:
+
+```{python}
+city_rec_structured_caps("Brazil")
+```
+
+## 定义扩展的结构化输出模型
+
+让我们扩展我们的建议,包含更多信息,例如安全评级和游客的典型成本水平。我们将为结构化输出定义一个更全面的 Pydantic 模型。
+
+首先,导入必要的类:
+
+```{python}
+from pydantic import BaseModel, Field
+from enum import Enum
+```
+
+定义一个用于成本水平的 `Enum` 类:
+
+```{python}
+class CostLevel(str, Enum):
+    budget = "Budget-friendly"
+    moderate = "Moderate cost"
+    expensive = "Expensive"
+```
+
+定义扩展的模型:
+
+```{python}
+class RecommendationDetail(BaseModel):
+    city: str
+    safety: int = Field(description="Safety rating out of 10")
+    cost: CostLevel = Field(description="The typical cost level for tourists")
+```
+
+现在,我们可以定义一个返回结构化响应的函数:
+
+```{python}
+def city_rec_detail(country):
+    prompt = (f"What is the most tourist-friendly city in {country}? "
+              "Provide the city name, a safety rating out of 10, and the typical cost level for tourists.")
+    parsed = llm_structured(prompt, RecommendationDetail)
+    return {
+        'city': parsed.city,
+        'safety': parsed.safety,
+        'cost': parsed.cost.value
+    }
+```
+
+向量化函数:
+
+```{python}
+city_rec_detail_vec = np.vectorize(city_rec_detail)
+```
+
+示例用法:
+
+```{python}
+# Example usage
+recommendation = city_rec_detail_vec("United Kingdom")
+print(recommendation)
+```
+
+应用于数据框:
+
+```{python}
+# Apply to the DataFrame
+results = city_rec_detail_vec(country_df['country'])
+print(results)
+
+# Convert to DataFrame
+results_df = pd.DataFrame(results.tolist())
+print(results_df)
+
+# Join back to original DataFrame
+country_df_joined = pd.concat([country_df, results_df], axis=1)
+print(country_df_joined)
+```
+
+现在,我们可以将该输出转换为数据框:
+
+```{python}
+results_df = pd.DataFrame(results.tolist())
+print(results_df)
+```
+
+将其重新与原始数据框连接:
+
+```{python}
+country_df_joined = pd.concat([country_df, results_df], axis=1)
+print(country_df_joined)
+```
+
+**练习问题**
+
+*问题*:创建一个名为 `local_dish_detail` 的新函数,该函数以国家名称作为输入,返回 LLM 猜测的该国最著名的当地菜肴,是否辣("Spicy" 或 "Not spicy")、烹饪难易度评分(满分 10 分)以及成本水平(Budget、Moderate 或 Expensive)。然后创建一个向量化版本,并将其应用于 `country_df` 数据框,以添加一个新的 'local_dish_detail' 列。
+
+*解决方案*:
+
+首先,定义必要的类:
+
+```{python}
+class Spiciness(str, Enum):
+    spicy = "Spicy"
+    not_spicy = "Not spicy"
+
+class DishCostLevel(str, Enum):
+    budget = "Budget"
+    moderate = "Moderate"
+    expensive = "Expensive"
+
+class LocalDishDetail(BaseModel):
+    dish: str
+    spiciness: Spiciness = Field(description="Is the dish spicy or not spicy?")
+    ease_of_cooking: int = Field(description="Ease of cooking rating out of 10")
+    cost: DishCostLevel = Field(description="Cost level: Budget, Moderate, or Expensive")
+```
+
+定义函数:
+
+```{python}
+def local_dish_detail(country):
+    prompt = (f"What is the most famous local dish from {country}? "
+              "Provide the dish name, whether it's spicy or not spicy, an ease of cooking rating out of 10, "
+              "and a cost level (Budget, Moderate, or Expensive).")
+    parsed = llm_structured(prompt, LocalDishDetail)
+    return {
+        'dish': parsed.dish,
+        'spiciness': parsed.spiciness.value,
+        'ease_of_cooking': parsed.ease_of_cooking,
+        'cost': parsed.cost.value
+    }
+```
+
+向量化函数:
+
+```{python}
+local_dish_detail_vec = np.vectorize(local_dish_detail)
+```
+
+将其应用于数据框:
+
+```{python}
+# Apply to the DataFrame
+dish_details = local_dish_detail_vec(country_df['country'])
+dish_details_df = pd.DataFrame(dish_details.tolist())
+country_df = pd.concat([country_df, dish_details_df], axis=1)
+print(country_df)
+```
+
+这样,详细的当地菜肴信息将被添加到您的数据框中。
+
+---
+
+通过学习本教程,您已了解如何:
+
+- 定义 Pydantic 模型以指定预期的响应格式。
+- 使用这些模型解析来自 LLM 的结构化输出。
+- 将结构化数据整合到 pandas 数据框的工作流程中。
+
+# 后续尝试事项
+
+- 尝试使用并行处理来加快 LLM 调用速度。
+- 尝试解析 PDF 文档并从中提取结构化数据。
+- 尝试使用 LLM 自动化一些电子邮件。您可以返回主题、收件人和正文。

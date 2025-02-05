@@ -1,0 +1,443 @@
+---
+title: '使用 melt() 和 pivot() 重新塑造数据'
+---
+
+## 软件包
+
+```{python}
+import pandas as pd
+import plotly.express as px
+```
+
+## 数据
+
+运行下面的代码以加载和定义将在本课中使用的数据集。
+
+```{python}
+# Temperatures dataset
+temperatures = pd.DataFrame(
+    {
+        "country": ["Sweden", "Denmark", "Norway"],
+        "1994": [1, 2, 3],
+        "1995": [3, 4, 5],
+        "1996": [5, 6, 7],
+    }
+)
+
+# Fuels Wide dataset
+fuels_wide = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/oil_per_capita_wide.csv"
+)
+
+# Eurostat Births Wide dataset
+euro_births_wide = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/euro_births_wide.csv"
+)
+
+# Contracts dataset
+contracts = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/chicago_contracts_20_23.csv"
+)
+
+# Population dataset
+population = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/tidyr_population.csv"
+)
+```
+
+## 介绍
+
+重塑是一种数据操作技术,涉及重新定位数据集的行和列。这通常是为了使数据更易于分析或理解所需。
+
+在本课中,我们将介绍如何使用 `pandas` 函数有效地重塑数据。
+
+## 学习目标
+
+- 理解宽数据格式和长数据格式的区别。
+- 学习如何使用 `melt()` 将宽数据重塑为长数据。
+- 学习如何使用 `pivot()` 将长数据重塑为宽数据。
+
+## “宽”和“长”意味着什么?
+
+“宽”和“长”这两个术语最好在示例数据集的上下文中理解。现在让我们看看一些示例。
+
+想象一下,你有三种产品,收集了这三个月的销售数据。
+
+**宽格式:**
+
+| 产品 | 一月 | 二月 | 三月 |
+|-----|-----|-----|-----|
+| A   | 100 | 120 | 110 |
+| B   | 90  | 95  | 100 |
+| C   | 80  | 85  | 90  |
+
+---
+
+**长格式:**
+
+| 产品 | 月份 | 销售 |
+|-----|-----|-----|
+| A   | 一月 | 100 |
+| A   | 二月 | 120 |
+| A   | 三月 | 110 |
+| B   | 一月 | 90  |
+| B   | 二月 | 95  |
+| B   | 三月 | 100 |
+| C   | 一月 | 80  |
+| C   | 二月 | 85  |
+| C   | 三月 | 90  |
+
+花一分钟时间研究这两个数据集,以确保你理解它们之间的关系。
+
+在**宽数据集中**,每个观测单位(每个产品)只占一行,每个测量(1月、2月、3月的销售)在单独的列中。
+
+而在**长数据集中**,每个观测单位(每个产品)占多行,每个测量有一行。
+
+---
+
+这是另一个使用模拟数据的示例,其中观测单位是国家:
+
+**长格式:**
+
+| 国家 | 年份 | GDP   |
+|-----|-----|-------|
+| USA | 2020 | 21433 |
+| USA | 2021 | 22940 |
+| China | 2020 | 14723 |
+| China | 2021 | 17734 |
+
+**宽格式:**
+
+| 国家 | GDP_2020 | GDP_2021 |
+|-----|----------|----------|
+| USA | 21433    | 22940    |
+| China | 14723  | 17734    |
+
+---
+
+上述示例都是时间序列数据集,因为测量值在时间上重复。但宽和长的概念也与其他类型的数据相关。
+
+考虑下面的例子,显示三个公司的不同部门的员工数量:
+
+**宽格式:**
+
+| 公司 | 人力资源 | 销售 | IT  |
+|-----|----------|-----|-----|
+| A   | 10       | 20  | 15  |
+| B   | 8        | 25  | 20  |
+| C   | 12       | 18  | 22  |
+
+**长格式:**
+
+| 公司 | 部门 | 员工数量 |
+|-----|-----|-----|
+| A   | 人力资源 | 10  |
+| A   | 销售 | 20  |
+| A   | IT  | 15  |
+| B   | 人力资源 | 8  |
+| B   | 销售 | 25  |
+| B   | IT  | 20  |
+| C   | 人力资源 | 12  |
+| C   | 销售 | 18  |
+| C   | IT  | 22  |
+
+在宽数据集中,每个观测单位(每个公司)只占一行,重复的测量值(不同部门的员工数量)分布在多列中。
+
+在长数据集中,每个观测单位分布在多行中。
+
+::: {.callout-note title="词汇"}
+**观测单位**,有时称为**统计单位**,是数据集描述的主要实体或项目。
+
+在第一个示例中,观测单位是产品;在第二个示例中是国家;在第三个示例中是公司。
+:::
+
+::: {.callout-tip title="练习"}
+
+## 练习题:宽还是长?
+
+考虑前面创建的 `temperatures` 数据集:
+
+```{python}
+temperatures
+```
+
+这些数据是宽格式还是长格式?
+
+:::
+
+## 何时应该使用宽数据和长数据?
+
+事实上,这取决于你想做什么!宽格式非常适合 *展示数据*,因为这样便于视觉比较数值。长数据最适合一些数据分析任务,如分组和制图。
+
+了解如何轻松地在这两种格式之间切换是至关重要的。从宽格式切换到长格式,或反之,则称为**重塑**。
+
+## 使用 `melt()` 从宽到长
+
+为了练习从宽到长的重塑,我们将考虑《世界数据》中关于人均化石燃料消费的数据。你可以在[这里](https://ourworldindata.org/grapher/fossil-fuels-per-capita)找到这些数据。
+
+下面,我们查看人均化石燃料消费的数据:
+
+```{python}
+fuels_wide
+```
+
+我们观察到,每个观测单位(每个国家)只占一行,重复的测量值(以千瓦时当量计的化石燃料消费)分布在多列中。因此,该数据集为宽格式。
+
+为了将其转换为长格式,我们可以使用方便的 `melt` 函数。在 `melt` 中,可以定义不想重塑的 id 变量,如下所示:
+
+```{python}
+fuels_long = fuels_wide.melt(id_vars=["Entity", "Code"])
+fuels_long
+```
+
+非常简单!
+
+让我们排序一下,使其更易读:
+
+```{python}
+fuels_long = fuels_long.sort_values(by=['Entity', 'variable'])
+fuels_long
+```
+
+年份现在在 `variable` 变量中表示,所有的消费值占据单一变量 `value`。我们可能希望将 `variable` 列重命名为 `year`,将 `value` 列重命名为 `oil_consumption`。这可以直接在 `melt` 函数中完成:
+
+```{python}
+fuels_long = fuels_wide.melt(
+    id_vars=['Entity', 'Code'],
+    var_name='year',
+    value_name='oil_consumption'
+).sort_values(by=['Entity', 'year'])
+fuels_long
+```
+
+你还可能希望去掉每个年份前的 `y_`。这可以通过字符串操作实现。
+
+```{python}
+fuels_long['year'] = fuels_long['year'].str.replace('y_', '').astype(int)
+fuels_long
+```
+
+以下是我们上面所做的事情:
+
+- 使用 `str.replace()` 去除每个年份前的 `y_` 前缀。
+- 使用 `astype(int)` 将 `year` 列转换为整数。
+- 使用 `sort_values()` 按 "Entity" 和 "year" 对数据进行排序。
+
+::: {.callout-tip title="练习"}
+
+## 练习题:将 Temperatures 数据集转换为长格式
+
+将下面显示的 `temperatures` 数据集转换为长格式。你的答案应包含以下列名:**"country"**, **"year"**, 和 **"avg_temp"**。
+
+```{python}
+# Your code here
+temperatures
+```
+
+:::
+
+::: {.callout-tip title="练习"}
+
+## 练习题:将 Eurostat 的出生数据转换为长格式
+
+在本练习题中,你将使用来自 [Eurostat](https://ec.europa.eu/eurostat/databrowser/view/tps00204/default/table) 的 `euro_births_wide` 数据集。它显示了 50 个欧洲国家的年度出生人数:
+
+```{python}
+euro_births_wide.head()
+```
+
+数据是宽格式。将其转换为长格式的 DataFrame,包含以下列名:**"country"**, **"year"**, 和 **"births_count"**。
+
+去掉年份列名的 `x` 前缀,并将它们转换为整数。
+
+:::
+
+## 使用长数据进行分析
+
+让我们看看为什么长数据通常更适合分析。
+
+再次考虑 `fuels_wide` 数据集:
+
+```{python}
+fuels_wide.head()
+```
+
+```{python}
+fuels_long.head()
+```
+
+如果我们想要找到每个国家的平均化石燃料消费,使用长格式非常容易:
+
+```{python}
+fuels_long.groupby('Entity')['oil_consumption'].mean()
+```
+
+但使用宽格式,这就不那么容易了:
+
+```{python}
+fuels_wide[['y_1970', 'y_1980', 'y_1990', 'y_2000', 'y_2010', 'y_2020']].mean(axis=1)
+```
+
+想象一下如果你有 100 年的数据!
+
+而均值是一个相当简单的操作。你如何计算每个国家的化石燃料消费标准差?
+
+---
+
+长数据对于制图也非常有用。
+
+例如,要绘制每个国家随时间变化的平均化石燃料消费,我们可以使用以下代码:
+
+```{python}
+subset = fuels_long.query('Entity in ["Peru", "Iran", "China"]')
+px.line(subset, x='year', y='oil_consumption', color='Entity', title='Average Fossil Fuel Consumption per Country')
+```
+
+使用宽格式无法直接创建类似的图,因为你要绘制的数据散布在多个列中。
+
+因此,如你所见,虽然宽数据适合展示,但长数据对于分析和制图非常有用。
+
+## 从长到宽
+
+现在你已经知道如何使用 `melt()` 将宽格式重塑为长格式。那么如何从长格式转换为宽格式呢?为此,你可以使用 `pivot()` 函数。
+
+但在我们看到如何使用这个函数来操作长数据之前,先考虑你可能在哪里会遇到长数据。
+
+虽然宽数据往往来自外部来源(如上所示),但长数据则可能是在数据处理过程中由**你**创建的,特别是在分组聚合的过程中。
+
+现在让我们看一个例子。
+
+我们将使用芝加哥市从 2020 年到 2023 年授予的合同数据集。你可以[在这里](https://data.cityofchicago.org/Administration-Finance/Contracts/rsxa-ify5/)找到更多关于数据的信息。
+
+```{python}
+contracts
+```
+
+每一行对应一个合同,我们有每个合同的编号、授予年份、合同金额、供应商的名称和地址等变量。
+
+现在,考虑以下对 `contracts` 数据集的分组摘要,显示每年按供应商所在州的合同数量:
+
+```{python}
+contracts_summary = contracts.groupby("state")["year"].value_counts().reset_index()
+contracts_summary
+```
+
+这个分组操作的输出是一个典型的“长”数据集。每个观测单位(每个州)占多行,每个测量(每年)有一行。
+
+现在,让我们看看如何使用 `pivot()` 将长数据转换为宽格式。
+
+代码相当简单:
+
+```{python}
+contracts_wide = contracts_summary.pivot(
+    index="state", columns="year", values="count"
+).reset_index()
+contracts_wide.head()
+```
+
+如你所见,`pivot()` 有三个重要的参数:
+
+- **`index`** 定义了哪些列将用作新的索引。在我们的例子中,是 "state",因为我们希望每一行表示一个州。
+- **`columns`** 确定了哪个变量用于定义宽格式中的列名。在我们的例子中,是 "year"。你可以看到年份现在是列名。
+- **`values`** 指定了哪些值将成为宽数据格式的核心。在我们的例子中,是合同数量 "count"。
+
+你也可能希望将*年份*作为主要的观测单位,每一年占一行。这可以类似于上述示例进行,但将 `year` 作为索引,`state` 作为列:
+
+```{python}
+contracts_wide_year = contracts_summary.pivot(
+    index="year", columns="state", values="count"
+).reset_index()
+contracts_wide_year
+```
+
+在这里,唯一的观测单位(我们的行)现在是年份(2020, 2021, 2022, 2023)。
+
+::: {.callout-tip title="练习"}
+
+## 练习题:将 Temperatures 长格式转换回宽格式
+
+将你上面创建的长格式 `temperatures_long` 数据集转换回宽格式。你的答案应包含以下列名:**"country"**, **"1994"**, **"1995"**, 和 **"1996"**。
+
+```{python}
+# Your code here
+```
+
+:::
+
+::: {.callout-tip title="练习"}
+
+## 练习题:将 Population 数据转换为宽格式
+
+`population` 数据集显示了 219 个国家随时间变化的人口。
+
+将这些数据重塑为宽格式。
+
+```{python}
+population
+```
+
+:::
+
+## 重塑可能很难
+
+我们这里主要看了一些非常简单的重塑示例,但在实际中,重塑可能很难准确地完成。
+
+当遇到这种情况时,我们建议查看 pandas 团队的[官方文档](https://pandas.pydata.org/docs/user_guide/reshaping.html),因为它包含丰富的示例。
+
+## 总结
+
+恭喜!你已经掌握了使用 pandas 重塑数据的技巧。
+
+你现在理解了宽格式和长格式之间的区别,并且能够熟练地使用 `melt()` 和 `pivot()` 根据需要转换你的数据。
+
+## 练习题答案:宽还是长?
+
+数据是宽格式。
+
+## 练习题答案:将 Temperatures 转换为长格式
+
+```{python}
+# Melt the wide data into long format
+temperatures_long = temperatures.melt(
+    id_vars=["country"], var_name="year", value_name="avgtemp"
+)
+
+# Display the long format data
+temperatures_long
+```
+
+## 练习题答案:将 Eurostat 的出生数据转换为长格式
+
+```{python}
+# Melt the wide data into long format
+births_long = euro_births_wide.melt(
+    id_vars=["country"], var_name="year", value_name="births_count"
+)
+
+# Display the long format data
+births_long
+```
+
+## 练习题答案:将 Temperatures 转换回宽格式
+
+```{python}
+# Pivot the long data into wide format
+temperatures_wide = temperatures_long.pivot(
+    index="country", columns="year", values="avgtemp"
+).reset_index()
+
+# Display the wide format data
+temperatures_wide
+```
+
+## 练习题答案:将 Population 数据转换为宽格式
+
+```{python}
+# Pivot the long data into wide format
+population_wide = population.pivot(
+    index="country", columns="year", values="population"
+).reset_index()
+
+# Display the wide format data
+population_wide
+```

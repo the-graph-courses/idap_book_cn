@@ -1,0 +1,389 @@
+---
+title: '查询行'
+---
+
+```{python}
+# | echo: false
+# Setup
+import pandas as pd
+
+pd.options.display.max_rows = 5
+```
+
+## 介绍
+
+查询行是数据分析中最常用的操作之一。它允许您过滤数据集,关注特定的子集,从而实现更有针对性和高效的分析。
+
+在本课程中,我们将探索使用 pandas 对行进行子集操作的各种技术。
+
+让我们开始吧!
+
+## 学习目标
+
+1.  您可以使用 `query()` 方法从 DataFrame 中保留或删除行。
+2.  您可以使用大于 (`>`)、小于 (`<`)、等于 (`==`)、不等于 (`!=`)、以及属于 (`isin()`) 等关系运算符来指定条件。
+3.  您可以使用 `&` 和 `|` 组合条件。
+4.  您可以使用 `~` 取反条件。
+5.  您可以使用 `isna()` 和 `notna()` 方法。
+6.  您可以使用 `str.contains()` 根据字符串模式进行查询。
+
+## 雅温得 COVID-19 数据集
+
+在本课程中,我们将再次使用喀麦隆雅温得进行的 COVID-19 血清学调查的数据。
+
+您可以从此链接下载数据集:[yaounde_data.csv](https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/yaounde_data.csv)
+
+您可以在这里了解有关此数据集的更多信息:https://www.nature.com/articles/s41467-021-25946-0
+
+让我们将数据加载到 pandas DataFrame 中。
+
+```{python}
+import pandas as pd
+
+yaounde = pd.read_csv("data/yaounde_data.csv")
+# a smaller subset of variables
+yao = yaounde[
+    [
+        "age",
+        "sex",
+        "weight_kg",
+        "neighborhood",
+        "occupation",
+        "symptoms",
+        "is_smoker",
+        "is_pregnant",
+        "igg_result",
+        "igm_result",
+    ]
+]
+yao.head()
+```
+
+## 介绍 `query()`
+
+我们可以使用 `query()` 方法保留满足一系列条件的行。让我们看一个简单的例子。如果我们只想保留男性记录,我们可以运行:
+
+```{python}
+yao.query('sex == "Male"')
+```
+
+如您所见,`query()` 的语法非常简单。(将代码放在引号中可能有点令人惊讶,但它非常易读。)
+
+注意这里使用的是双等号 (`==`) 而不是单等号 (`=`)。`==` 用于测试相等性,而单等号用于赋值。这是初学者常犯的错误来源,因此要注意。
+
+我们可以将 `query()` 与 `shape[0]` 链接起来,以计算男性受访者的数量。
+
+```{python}
+yao.query('sex == "Male"').shape[0]
+```
+
+::: {.callout-note title="提示"}
+
+`shape` 属性返回 DataFrame 中的行数和列数。第一个元素,`shape[0]`,是行数,第二个元素,`shape[1]`,是列数。
+
+例如:
+
+```{python}
+yao.shape
+```
+
+```{python}
+yao.shape[0] # 行数
+```
+
+```{python}
+yao.shape[1]  # 列数
+```
+
+:::
+
+::: {.callout-note title="关键点"}
+
+请注意,这些子集不会修改 DataFrame 本身。如果我们想要一个修改后的版本,我们需要创建一个新的 DataFrame 来存储子集。例如,下面我们创建了一个男性受访者的子集:
+
+```{python}
+yao_male = yao.query('sex == "Male"')
+yao_male
+```
+
+但为了便于说明,下面的例子中我们只是打印结果,而不存储到变量中。
+
+:::
+
+::: {.callout-tip title="练习"}
+
+### 练习题:筛选怀孕的受访者
+
+筛选 `yao` 数据框,保留在调查期间怀孕的受访者(`is_pregnant` 列包含 "Yes"、"No" 或 NaN)。将结果赋值给一个新的 DataFrame,名为 `yao_pregnant`。然后打印这个新的 DataFrame。应该有 24 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 关系运算符
+
+上面介绍的 `==` 运算符是一个“关系”运算符的例子,因为它测试两个值之间的关系。以下是一些更多这些运算符的列表。在查询数据中的行时,您将经常使用它们。
+
+|              |                                     |
+|:-------------|:------------------------------------|
+| **运算符** | **当满足以下条件时为真**                     |
+| A == B       | A **等于** B                         |
+| A != B       | A **不等于** B                       |
+| A < B        | A **小于** B                          |
+| A <= B       | A **小于或等于** B                    |
+| A > B        | A **大于** B                          |
+| A >= B       | A **大于或等于** B                    |
+| A.isin([B])  | A **是** B 的一个元素                  |
+
+让我们看看如何在 `query()` 中使用这些运算符:
+
+```{python}
+yao.query('sex == "Female"')  # 保留 `sex` 为 female 的行
+yao.query('sex != "Male"')  # 保留 `sex` 不为 "Male" 的行
+yao.query("age < 6")  # 保留年龄小于 6 岁的受访者
+yao.query("age >= 70")  # 保留年龄至少为 70 岁的受访者
+
+# 保留所在社区为 "Tsinga" 或 "Messa" 的受访者
+yao.query('neighborhood.isin(["Tsinga", "Messa"])')
+```
+
+::: {.callout-tip title="练习"}
+
+### 练习题:筛选儿童
+
+- 从 `yao` 中,仅保留儿童(18 岁以下)的受访者。将结果赋值给一个新的 DataFrame,名为 `yao_children`。应该有 291 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+::: {.callout-tip title="练习"}
+
+### 练习题:筛选 Tsinga 和 Messa
+
+- 使用 `isin()`,仅保留居住在 "Carriere" 或 "Ekoudou" 社区的受访者。将结果赋值给一个新的 DataFrame,名为 `yao_carriere_ekoudou`。应该有 426 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 在 `query()` 中访问外部变量
+
+`query()` 方法允许您使用 `@` 符号访问 DataFrame 外部的变量。当您想在查询条件中使用动态值时,这很有用。
+
+例如,假设您有变量 `min_age` 想要在查询中使用。可以这样做:
+
+```{python}
+min_age = 25
+
+# 使用外部变量进行查询
+yao.query('age >= @min_age')
+```
+
+此功能在您需要基于可能变化或在运行时确定的值过滤数据时非常有用。
+
+::: {.callout-tip title="练习"}
+
+### 练习题:筛选年轻的受访者
+
+- 从 `yao` 中,保留年龄小于或等于下面定义的变量 `max_age` 的受访者。将结果赋值给一个新的 DataFrame,名为 `yao_young`。应该有 590 行。
+
+```{python}
+max_age = 30
+# Your code here
+```
+
+:::
+
+## 使用 `&` 和 `|` 组合条件
+
+我们可以使用 `&`(“与”符号)和 `|`(“或”符号)向 `query()` 传递多个条件。
+
+例如,要保留年龄小于 18 岁或大于 65 岁的受访者,可以写:
+
+```{python}
+yao.query("age < 18 | age > 65")
+```
+
+要保留怀孕且曾吸烟的受访者,我们写:
+
+```{python}
+yao.query('is_pregnant == "Yes" & is_smoker == "Ex-smoker"')
+```
+
+要保留所有怀孕或曾吸烟的受访者,我们写:
+
+```{python}
+yao.query('is_pregnant == "Yes" | is_smoker == "Ex-smoker"')
+```
+
+::: {.callout-note title="旁注"}
+
+要获取列中的唯一值,您可以使用 `value_counts()` 方法。
+
+```{python}
+yao.is_smoker.value_counts()
+```
+
+:::
+
+::: {.callout-tip title="练习"}
+
+### 练习题:筛选 IgG 阳性男性
+
+筛选 `yao`,仅保留 IgG 阳性的男性。将结果赋值给一个新的 DataFrame,名为 `yao_igg_positive_men`。查询后应该有 148 行。仔细考虑是使用 `&` 还是 `|`。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 使用 `~` 运算符取反条件
+
+在 `query()` 中取反条件,我们使用 `~` 运算符(读作“波浪号”)。
+
+让我们用这个来删除学生受访者:
+
+```{python}
+yao.query('~ (occupation == "Student")')
+```
+
+注意,我们必须将条件括在括号中。
+
+我们也可以将多个条件括在括号中。
+
+假设我们要发放一种药物,但由于它是强效药物,我们不希望儿童或体重轻(低于 30kg)的受访者服用。首先,我们可以编写查询来选择儿童和这些体重轻的受访者:
+
+```{python}
+yao.query("age < 18 | weight_kg < 30")
+```
+
+现在,要删除这些个体,我们可以用 `~` 取反条件:
+
+```{python}
+yao.query("~ (age < 18 | weight_kg < 30)")
+```
+
+这也可以写成:
+
+```{python}
+yao.query("age >= 18 & weight_kg >= 30")
+```
+
+但有时取反条件更易读。
+
+::: {.callout-tip title="练习"}
+
+### 练习题:删除吸烟者和50岁以上者
+
+我们希望避免给年长个体和吸烟者发药。 从 `yao` 中删除那些年龄超过 50 或是吸烟者的受访者。使用 `~` 来取反条件。将结果赋值给一个新的 DataFrame,名为 `yao_dropped`。您的输出应该有 810 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## `NaN` 值
+
+目前介绍的关系运算符不适用于像 `NaN` 这样的空值。
+
+例如,`is_pregnant` 列对于男性包含 (NA) 值。要保留 `is_pregnant` 值缺失的行,我们可以尝试编写:
+
+```{python}
+# |eval: false
+yao.query("is_pregnant == NaN")  # does not work
+```
+
+但这不会工作。这是因为 `NaN` 是一个不存在的值。因此系统无法评估它是否“等于”或“不等于”任何东西。
+
+相反,我们可以使用 `isna()` 方法选择缺失值的行:
+
+```{python}
+yao.query("is_pregnant.isna()")
+```
+
+或者使用 `notna()` 选择非缺失的行:
+
+```{python}
+yao.query("is_pregnant.notna()")
+```
+
+::: {.callout-tip title="练习"}
+
+### 练习题:保留吸烟状态缺失的记录
+
+从 `yao` 数据集中,保留所有吸烟状态记录为 NA 的受访者。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 基于字符串模式的查询
+
+有时,我们需要基于字符串列是否包含某个子字符串来过滤数据。这在处理多选类型变量时特别有用,因为回应可能包含由分隔符分隔的多个值。让我们通过数据集中 `occupation` 列来探索这一点。
+
+首先,让我们看一下 `occupation` 列中的唯一值:
+
+```{python}
+yao.occupation.value_counts().to_dict()
+```
+
+如我们所见,一些受访者有多个职业,用 "--" 分隔。要基于字符串包含进行查询,我们可以在 `query()` 中使用 `str.contains()` 方法。
+
+### 基本的字符串包含
+
+要找到所有是学生(无论是单独还是与其他职业结合)的受访者,我们可以使用:
+
+```{python}
+yao.query("occupation.str.contains('Student')")
+```
+
+此查询将返回 `occupation` 列中包含 "Student" 字样的所有行,无论它是唯一的职业还是多职业条目的一部分。
+
+### 取反字符串包含
+
+要找到不是学生的受访者(即职业不包含 "Student"),您可以使用 `~` 运算符:
+
+```{python}
+yao.query("~occupation.str.contains('Student')")
+```
+
+### 将 `|` 与字符串包含一起使用
+
+要找到是学生或农民的受访者,我们可以使用:
+
+```{python}
+yao.query("occupation.str.contains('Student|Farmer')")
+```
+
+::: {.callout-tip title="练习"}
+
+### 练习题:症状
+
+`symptoms` 列包含受访者报告的一系列症状。
+
+查询 `yao` 以找到报告 "Cough" 或 "Fever" 作为症状的受访者。您的答案应该有 219 行。
+
+```{python}
+# Your code here
+```
+
+:::
+
+## 总结
+
+干得好!您已经学会了如何选择特定的列并基于各种条件过滤行。
+
+这些技能使您能够专注于相关数据,并创建针对性的子集进行分析。
+
+接下来,我们将探索如何修改和转换数据,进一步扩展您的数据整理工具包。在下一个课程中再见!

@@ -1,0 +1,737 @@
+---
+title: '数据集连接介绍'
+---
+
+```{python}
+# | echo: false
+# | message: false
+# | warning: false
+
+# Load packages
+import pandas as pd
+```
+
+## 数据与包
+
+请运行下面的代码以加载我们将在本课程中使用的包和数据集。
+
+```{python}
+
+import pandas as pd
+
+
+# TB incidence in Africa
+tb_2019_africa = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/tb_incidence_2019.csv"
+) 
+
+# Health expenditure data
+health_exp_2019 = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/health_expend_per_cap_2019.csv"
+)
+
+# Highest expenditure countries
+highest_exp = health_exp_2019.sort_values("expend_usd", ascending=False).head(70)
+
+# TB cases in children
+tb_cases_children = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/tb_cases_children_2012.csv"
+).dropna()
+
+# Country continents data
+country_continents = pd.read_csv(
+    "https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/country_continents.csv"
+)
+
+# people data
+people = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "age": [25, 32, 45]})
+
+# Test information
+test_info = pd.DataFrame(
+    {
+        "name": ["Alice", "Bob", "Charlie"],
+        "test_date": ["2023-06-05", "2023-08-10", "2023-07-15"],
+        "result": ["Negative", "Positive", "Negative"],
+    }
+)
+
+# Disordered test information
+test_info_disordered = pd.DataFrame(
+    {
+        "name": ["Bob", "Alice", "Charlie"],  # Bob in first row
+        "test_date": ["2023-08-10", "2023-06-05", "2023-07-15"],
+        "result": ["Positive", "Negative", "Negative"],
+    }
+)
+
+# Multiple test information
+test_info_multiple = pd.DataFrame(
+    {
+        "name": ["Alice", "Alice", "Bob", "Charlie"],
+        "test_date": ["2023-06-05", "2023-06-06", "2023-08-10", "2023-07-15"],
+        "result": ["Negative", "Negative", "Positive", "Negative"],
+    }
+)
+
+# Test information with different name
+test_info_different_name = pd.DataFrame(
+    {
+        "first_name": ["Alice", "Bob", "Charlie"],
+        "test_date": ["2023-06-05", "2023-08-10", "2023-07-15"],
+        "result": ["Negative", "Positive", "Negative"],
+    }
+)
+
+# Test information including Xavier
+test_info_xavier = pd.DataFrame(
+    {
+        "name": ["Alice", "Bob", "Xavier"],
+        "test_date": ["2023-06-05", "2023-08-10", "2023-05-02"],
+        "result": ["Negative", "Positive", "Negative"],
+    }
+)
+
+# Students data
+students = pd.DataFrame(
+    {"student_id": [1, 2, 3], "name": ["Alice", "Bob", "Charlie"], "age": [20, 22, 21]}
+)
+
+# Exam dates data
+exam_dates = pd.DataFrame(
+    {"student_id": [1, 3], "exam_date": ["2023-05-20", "2023-05-22"]}
+)
+
+# Employee details
+employee_details = pd.DataFrame(
+    {
+        "id_number": ["E001", "E002", "E003"],
+        "full_name": ["Emily", "Frank", "Grace"],
+        "department": ["HR", "IT", "Marketing"],
+    }
+)
+
+# Performance reviews
+performance_reviews = pd.DataFrame(
+    {
+        "employee_code": ["E001", "E002", "E003"],
+        "review_type": ["Annual", "Mid-year", "Annual"],
+        "review_date": ["2022-05-10", "2023-09-01", "2021-12-15"],
+    }
+)
+
+# Sales data
+sales_data = pd.DataFrame(
+    {
+        "salesperson_id": [1, 4, 8],
+        "product": ["Laptop", "Smartphone", "Tablet"],
+        "date_of_sale": ["2023-01-15", "2023-03-05", "2023-02-20"],
+    }
+)
+
+# Salesperson peoples
+salesperson_peoples = pd.DataFrame(
+    {
+        "salesperson_id": [1, 2, 3, 5, 8],
+        "name": ["Alice", "Bob", "Charlie", "Diana", "Eve"],
+        "age": [28, 45, 32, 55, 40],
+        "gender": ["Female", "Male", "Male", "Female", "Female"],
+    }
+)
+
+# Total sales data
+total_sales = pd.DataFrame(
+    {
+        "product": [
+            "Laptop",
+            "Desktop",
+            "Tablet",
+            "Smartphone",
+            "Smartwatch",
+            "Headphones",
+            "Monitor",
+            "Keyboard",
+            "Mouse",
+            "Printer",
+        ],
+        "total_units_sold": [9751, 136, 8285, 2478, 3642, 5231, 1892, 4267, 3891, 982],
+    }
+)
+
+# Product feedback data
+product_feedback = pd.DataFrame(
+    {
+        "product": [
+            "Laptop",
+            "Desktop",
+            "Tablet",
+            "Smartphone",
+            "Smartwatch",
+            "Headphones",
+            "Monitor",
+            "Gaming Console",
+            "Camera",
+            "Speaker",
+        ],
+        "n_positive_reviews": [1938, 128, 842, 1567, 723, 956, 445, 582, 234, 678],
+        "n_negative_reviews": [42, 30, 56, 89, 34, 28, 15, 11, 8, 25],
+    }
+)
+
+# Sales incidence data
+sales = pd.DataFrame(
+    {
+        "year": [2010, 2011, 2014, 2016, 2017],
+        "sales_count": [69890, 66507, 59831, 58704, 59151],
+    }
+)
+
+# Customer complaints data
+customer_complaints = pd.DataFrame(
+    {
+        "year": [2011, 2013, 2015, 2016, 2019],
+        "complaints_count": [1292, 1100, 1011, 940, 895],
+    }
+)
+
+
+employees = pd.DataFrame(
+    {"employee_id": [1, 2, 3], "name": ["John", "Joy", "Khan"], "age": [32, 28, 40]}
+)
+
+training_sessions = pd.DataFrame(
+    {
+        "employee_id": [1, 2, 3],
+        "training_date": ["2023-01-20", "2023-02-20", "2023-05-15"],
+    }
+)
+
+customer_details = pd.DataFrame(
+    {
+        "id_number": ["A001", "B002", "C003"],
+        "full_name": ["Alice", "Bob", "Charlie"],
+        "address": ["123 Elm St", "456 Maple Dr", "789 Oak Blvd"],
+    }
+)
+
+# Order Records
+order_records = pd.DataFrame(
+    {
+        "customer_code": ["A001", "B002", "C003"],
+        "product_type": ["Electronics", "Books", "Clothing"],
+        "order_date": ["2022-05-10", "2023-09-01", "2021-12-15"],
+    }
+)
+```
+
+
+## 简介
+
+连接是处理数据时的关键技能,因为它允许您从多个来源组合关于相同实体的信息,从而进行更全面和有洞察力的分析。在本课程中,您将学习如何使用 Python 的 `pandas` 库使用不同的连接技术。让我们开始吧!
+
+## 学习目标
+
+-   理解不同连接的工作原理:左连接、右连接、内连接和外连接。
+-   能够使用 `pd.merge()` 函数将简单的数据集连接在一起。
+
+## 我们为什么需要连接?
+
+为了说明连接的实用性,让我们从一个简单的例子开始。考虑以下两个数据集。第一个 `people` 包含三个人的姓名和年龄:
+
+```{python}
+people
+```
+
+第二个 `test_info` 包含这些人的测试日期和结果:
+
+```{python}
+test_info
+```
+
+我们希望将这些数据一起分析,因此我们需要一种将它们组合起来的方法。
+
+我们可以考虑的一个选项是使用 `pd.concat()` 将数据框水平拼接:
+
+```{python}
+pd.concat([people, test_info], axis=1)
+```
+
+这成功地合并了数据集,但并不非常智能。该函数基本上是“粘贴”或“订书”这两个表。因此,您会注意到“name”列出现了两次。这并不理想,并且会对分析造成问题。
+
+另一个问题是,如果两个数据集中的行未对齐。此时,使用 `pd.concat()` 将数据不正确地组合在一起。考虑 `test_info_disordered` 数据集,现在第一行是 Bob:
+
+```{python}
+test_info_disordered
+```
+
+如果我们将其与原始 `people` 数据集拼接,其中 Bob 在第二行,会发生什么?
+
+```{python}
+pd.concat([people, test_info_disordered], axis=1)
+```
+
+Alice 的个人详情现在错误地与 Bob 的测试信息对齐了!
+
+第三个问题是当一个实体在一个数据集中出现多次时。也许 Alice 进行了多次测试:
+
+```{python}
+test_info_multiple
+```
+
+如果我们尝试将其与 `people` 数据集拼接,由于行数不同,我们会得到不匹配的数据:
+
+```{python}
+pd.concat([people, test_info_multiple], axis=1)
+```
+
+这会导致 NaN 值和数据对不齐。
+
+::: {.callout-note title="附注"}
+我们这里所拥有的是一种 **一对多** 关系——在人员数据中有一个 Alice,但在测试数据中有多行 Alice,因为她进行了多次测试。在这种情况下的连接将在第二个连接课程中详细介绍。
+:::
+
+---
+
+显然,我们需要比拼接更智能的方式来组合数据集;我们需要进入连接的世界。在 pandas 中,执行连接的函数是 `pd.merge()`。
+
+它适用于简单的情况,并且不会重复名称列:
+
+```{python}
+pd.merge(people, test_info)
+```
+
+它适用于数据集未按相同顺序排列的情况:
+
+```{python}
+pd.merge(people, test_info_disordered)
+```
+
+如您所见,Alice 的详情现在正确地与她的测试结果对齐。
+
+并且当每个个体有多个测试记录时,它也能正常工作:
+
+```{python}
+pd.merge(people, test_info_multiple)
+```
+
+在这种情况下,`pd.merge()` 函数正确地为 Alice 的每次测试重复了她的详情。
+
+简单而优雅!
+
+## pd.merge() 语法
+
+现在我们了解了 *为什么* 需要连接,让我们来看一下它们的基本语法。
+
+连接将两个数据框作为前两个参数:`left`(*左*数据框)和 `right`(*右*数据框)。在 pandas 中,您可以将它们作为位置参数或关键字参数提供:
+
+```{python}
+# left and right
+pd.merge(left=people, right=test_info)  # keyword arguments
+pd.merge(people, test_info)  # positional arguments
+```
+
+另一个关键参数是 `on`,它指示用于连接表的列或 **键**。我们并不总是需要提供这个参数;它可以从数据集中 *推断* 出来。例如,在我们最初的例子中,`people` 和 `test_info` 中唯一共同的列是 “name”。因此,合并函数假定 `on='name'`:
+
+```{python}
+# on argument is optional if the column key is the same in both dataframes
+pd.merge(people, test_info)
+pd.merge(people, test_info, on="name")
+```
+
+::: {.callout-note title="词汇"}
+用于在连接操作中匹配两个数据框行的列被称为 **键**。在 pandas 的 `merge()` 函数中,键在 `on` 参数中指定,如 `pd.merge(people, test_info, on='name')` 中所示。
+:::
+
+如果两个数据集中的键名称不同,会发生什么呢?考虑 `test_info_different_name` 数据集,其中 “name” 列更改为 “first_name”:
+
+```{python}
+test_info_different_name
+```
+
+如果我们尝试将 `test_info_different_name` 与原始 `people` 数据集连接,我们将遇到错误:
+
+```{python}
+# | eval: false
+pd.merge(people, test_info_different_name)
+```
+
+```
+MergeError: No common columns to perform merge on. Merge options: left_on=None, right_on=None, left_index=False, right_index=False
+```
+
+错误表明没有共同的变量,因此无法进行连接。
+
+在这种情况下,您有两个选择:您可以将第二个数据框中的列重命名以匹配第一个数据框,或者更简单地,使用 `left_on` 和 `right_on` 指定要连接的列。
+
+以下是如何操作:
+
+```{python}
+pd.merge(people, test_info_different_name, left_on='name', right_on='first_name')
+```
+
+这种语法基本上表示,“因为它们代表相同的数据,所以将左数据框中的 `name` 连接到右数据框中的 `first_name`”。
+
+---
+
+::: {.callout-note title="词汇"}
+**键**:在连接操作中用于匹配两个数据框行的列或列的集合。
+
+**左连接**:一种连接类型,保留左数据框中的所有行,并添加右数据框中匹配的行。如果没有匹配,右侧的结果为 `NaN`。
+:::
+
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:连接员工和培训课程
+
+考虑以下两个数据集,一个包含员工详情,另一个包含这些员工的培训课程日期。
+
+```{python}
+employees
+```
+
+```{python}
+training_sessions
+```
+
+在连接这两个数据集后,您预计会有多少行和多少列?
+
+现在连接这两个数据集并检查您的答案。
+
+```{python}
+# Your code here
+```
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(employees, training_sessions)
+```
+
+:::
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:使用 `on` 参数进行连接
+
+以下是两个数据集,一个包含客户详情,另一个包含这些客户的订单记录。
+
+```{python}
+customer_details
+```
+
+```{python}
+order_records
+```
+
+将 `customer_details` 和 `order_records` 数据集连接起来。由于客户标识列名称不同,您需要使用 `left_on` 和 `right_on` 参数。
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(customer_details, order_records, left_on="id_number", right_on="customer_code")
+```
+
+:::
+
+## 连接类型
+
+到目前为止的简单示例涉及可以完美匹配的数据集——一个数据集中的每一行在另一个数据集中都有对应的行。
+
+现实世界中的数据通常更为复杂。通常,第一个表中会有一些条目在第二个表中没有对应的条目,反之亦然。
+
+为了处理这些不完美匹配的情况,不同的连接类型具有特定的行为:`left`、`right`、`inner` 和 `outer`。在接下来的章节中,我们将通过示例了解每种连接类型如何处理不完美匹配的数据集。
+
+## `left` 连接
+
+让我们从 `left` 连接开始。为了看看它如何处理不匹配的行,我们将尝试将原始 `people` 数据集与修改后的 `test_info` 数据集连接起来。
+
+作为提醒,这里是包含 Alice、Bob 和 Charlie 的 `people` 数据集:
+
+```{python}
+people
+```
+
+对于测试信息,我们将删除 `Charlie`,并添加一个新个体 `Xavier` 及其测试数据:
+
+```{python}
+test_info_xavier
+```
+
+我们可以使用 `how` 参数指定连接类型:
+
+```{python}
+pd.merge(people, test_info_xavier, how='left')
+```
+
+正如您所见,使用 *左* 连接时,*左* 数据框(`people`)的所有记录都会被保留。因此,即使 `Charlie` 在 `test_info_xavier` 数据集中没有匹配,他仍包含在输出中。(但由于他的测试信息在 `test_info_xavier` 中不可用,这些值被设置为 `NaN`。)
+
+另一方面,仅存在于右数据框中的 Xavier 会被删除。
+
+下图展示了此连接的工作方式:
+
+![Left Join](images/left_join1.gif)
+
+如果我们颠倒数据框的顺序会怎样?让我们看看当 `test_info_xavier` 是左数据框,`people` 是右数据框时的结果:
+
+```{python}
+pd.merge(test_info_xavier, people, on='name', how='left')
+```
+
+同样,`left` 连接保留了 *左* 数据框(现在是 `test_info_xavier`)的所有行。这意味着这次 Xavier 的数据被包含在内。另一方面,Charlie 被排除在外。
+
+::: {.callout-note title="关键点"}
+**主数据集**:在连接的上下文中,主数据集指的是操作中的主要或优先数据集。在左连接中,左数据框被视为主数据集,因为其所有行都会保留在输出中,无论它们是否在另一个数据框中有匹配的行。
+:::
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:左连接学生和考试日期
+
+考虑以下两个数据集,一个包含学生详情,另一个包含部分学生的考试日期。
+
+```{python}
+students
+```
+
+```{python}
+exam_dates
+```
+
+使用左连接将 `students` 数据集与 `exam_dates` 数据集连接起来。
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(students, exam_dates, on='student_id', how='left')
+```
+
+:::
+
+---
+
+## 分析非洲结核病发病率与健康支出
+
+让我们尝试另一个示例,这次使用更实际的一组数据。
+
+首先,我们有一些非洲国家每 10 万人中的结核病发病率数据,来自[世卫组织](https://www.who.int/data/gho/data/indicators/indicator-details/GHO/incidence-of-tuberculosis-(per-100-000-population-per-year)):
+
+```{python}
+tb_2019_africa
+```
+
+我们希望分析非洲国家的结核病发病率如何随着人均政府卫生支出的变化而变化。为此,我们有来自世卫组织的按人均美元计的健康支出数据,涵盖所有大洲的国家:
+
+```{python}
+health_exp_2019
+```
+
+我们应该使用哪个数据集作为连接的左数据框?
+
+由于我们的目标是分析非洲国家,我们应该使用 `tb_2019_africa` 作为左数据框。这将确保在最终的连接数据集中保留所有非洲国家。
+
+让我们连接它们:
+
+```{python}
+tb_health_exp_joined = pd.merge(tb_2019_africa, health_exp_2019, on='country', how='left')
+tb_health_exp_joined
+```
+
+现在在连接的数据集中,我们只有非洲国家,这正是我们想要的。
+
+左数据框 `tb_2019_africa` 的所有行都被保留,而 `health_exp_2019` 中的非洲国家被丢弃。
+
+我们可以通过过滤 `NaN` 值来检查 `tb_2019_africa` 中是否有任何行在 `health_exp_2019` 中没有匹配:
+
+```{python}
+tb_health_exp_joined.query("expend_usd.isna()")
+```
+
+这显示有 3 个国家——毛里求斯、南苏丹和科摩罗——在 `health_exp_2019` 中没有支出数据。但由于它们存在于 `tb_2019_africa` 中,而 `tb_2019_africa` 是左数据框,它们仍被包含在连接数据中。
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:左连接结核病例和大洲
+
+第一个数据集 `tb_cases_children` 包含 2012 年各国 15 岁以下的结核病例数:
+
+```{python}
+tb_cases_children
+```
+
+`country_continents` 列出了所有国家及其对应的区域和大洲:
+
+```{python}
+country_continents
+```
+
+您的目标是将大洲和区域数据添加到结核病例数据集中。
+
+哪个数据框应该放在左侧?哪个应该放在右侧?一旦决定,使用左连接适当地连接数据集。
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(tb_cases_children, country_continents, left_on='country', right_on='country.name.en', how='left')
+```
+
+:::
+
+## `right` 连接
+
+`right` 连接可以被视为 `left` 连接的镜像。其机制相同,但现在保留 *右* 数据框的所有行,同时仅保留在右数据框中找到匹配的左数据框行。
+
+让我们通过一个例子来理解这一点。我们将使用原始的 `people` 和修改后的 `test_info_xavier` 数据集:
+
+```{python}
+people
+test_info_xavier
+```
+
+现在让我们尝试进行右连接,将 `people` 作为右数据框:
+
+```{python}
+pd.merge(test_info_xavier, people, on='name', how='right')
+```
+
+希望您已经掌握了这一点,并能预测输出!由于 `people` 是 *右* 数据框,并且我们使用的是 *右* 连接,`people` 中的所有行都会被保留——Alice、Bob 和 Charlie——但仅保留与 `test_info_xavier` 中匹配的记录。
+
+下图说明了这一过程:
+
+![Right Join](images/right_join.gif)
+
+一个重要的点——相同的最终数据框可以通过 `left` 连接或 `right` 连接创建;这仅取决于您将数据框提供给这些函数的顺序:
+
+```{python}
+# Here, right join prioritizes the right dataframe, people
+pd.merge(test_info_xavier, people, on='name', how='right')
+```
+
+```{python}
+# Here, left join prioritizes the left dataframe, again people
+pd.merge(people, test_info_xavier, on='name', how='left')
+```
+
+如前所述,数据科学家通常倾向于使用 `left` 连接而不是 `right` 连接。这使得首先指定主要数据集在左侧更加合理。选择使用 `left` 连接是一种常见的最佳实践,因为其逻辑更清晰,出错的可能性更低。
+
+## `inner` 连接
+
+`inner` 连接的独特之处在于,只有在 *两个* 数据框中都存在连接值的行才会被保留。让我们回到个体及其测试结果的示例。作为提醒,这里是我们的数据集:
+
+```{python}
+people
+```
+
+```{python}
+test_info_xavier
+```
+
+现在我们对连接的工作原理有了更好的理解,如果我们对上述两个数据框使用 `inner` 连接,可以预见最终的数据框会是什么样子。如果仅保留两个数据框中 *都存在* 的连接值的行,并且 `people` 和 `test_info_xavier` 中唯一都存在的个体是 `Alice` 和 `Bob`,那么他们应该是我们最终数据集中唯一的个体!让我们试试。
+
+```{python}
+pd.merge(people, test_info_xavier, on='name', how='inner')
+```
+
+完美,这正是我们预期的!这里,`Charlie` 仅存在于 `people` 数据集中,`Xavier` 仅存在于 `test_info_xavier` 数据集中,因此他们都被移除了。下图显示了这种连接的工作方式:
+
+![Inner Join](images/inner_join.gif)
+
+请注意,默认的连接类型是 `inner`。因此,如果您不指定 `how='inner'`,实际上您正在执行内连接!试试看:
+
+```{python}
+pd.merge(people, test_info_xavier)
+```
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:内连接产品
+
+以下是 2019 年产品销售和客户反馈的数据。
+
+```{python}
+total_sales
+```
+
+```{python}
+product_feedback
+```
+
+使用 `inner` 连接合并这些数据集。
+
+两个数据集共有多少个产品?
+
+哪个产品的正面评价与销售单位的比率最高?(应该是桌面电脑)
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(total_sales, product_feedback, on='product', how='inner')
+
+# How many products are there in common between the two datasets?
+len(pd.merge(total_sales, product_feedback, on='product', how='inner'))
+
+# Which product has the highest ratio of positive reviews to units sold?
+pd.merge(total_sales, product_feedback, on='product', how='inner').assign(
+    ratio=lambda x: x['n_positive_reviews'] / x['total_units_sold']
+).sort_values("ratio", ascending=False).head(1)
+```
+
+:::
+
+## `outer` 连接
+
+`outer` 连接的特点是它保留 *所有* 记录,无论两个数据框之间是否存在匹配。在最终的数据集中存在缺失信息的地方,单元格会被设置为 `NaN`,就像我们在 `left` 和 `right` 连接中看到的那样。让我们看一下 `people` 和 `test_info_xavier` 数据集来说明这一点。
+
+这里是我们的数据集的提醒:
+
+```{python}
+people
+test_info_xavier
+```
+
+现在让我们执行 `outer` 连接:
+
+```{python}
+pd.merge(people, test_info_xavier, on='name', how='outer')
+```
+
+正如我们所见,所有行都被保留,因此信息没有丢失!下图说明了这个过程:
+
+![Outer Join](images/full_join.gif)
+
+正如我们上面所看到的,原始两个数据框的所有数据都保留了,任何缺失的信息都被设置为 `NaN`。
+
+::: {.callout-tip title="练习"}
+    
+## 练习题:连接销售数据
+
+以下数据框包含来自不同年份的全球销售和全球客户投诉数据。
+
+```{python}
+sales
+```
+
+```{python}
+customer_complaints
+```
+
+使用适当的连接类型连接上述表格,以保留两个数据集的所有信息。
+
+```{python}
+# | echo: false
+# | eval: false
+# Solution
+pd.merge(sales, customer_complaints, on='year', how='outer')
+```
+
+:::
+
+## 总结!
+
+做得好,您现在了解了连接的基础知识!下图中的维恩图对不同的连接类型及其保留的信息进行了有用的总结。保存这张图片以供将来参考可能会很有帮助!
+
+![Join Types](images/venn_cropped-01.jpg)
