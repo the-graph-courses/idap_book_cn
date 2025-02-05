@@ -1,8 +1,8 @@
 ---
-title: "Installing and Using VS Code"
+title: "安装和使用 VS Code"
 ---
 
-## Introduction
+## 介绍
 
 在本课中,我们将探索 Visual Studio Code(VS Code),一款功能强大且多用途的编辑器,用于编写、运行和调试 Python 代码。由于其丰富的功能集和广泛的扩展库,VS Code 被广泛使用,使编码更加高效和愉快。
 

@@ -1,4 +1,3 @@
-```markdown
 ---
 title: 'pandas 中的变量转换'
 ---
@@ -272,4 +271,3 @@ subset['unemp_20'] = subset['unemp_20'].round(0)
 - 基于条件创建布尔变量。
 
 祝贺您完成本课!
-```

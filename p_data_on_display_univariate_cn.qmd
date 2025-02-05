@@ -1,6 +1,5 @@
-```markdown
 ---
-title: 'Univariate Graphs with Plotly Express'
+title: '使用 Plotly Express 的单变量图表'
 ---
 
 ## 简介
@@ -340,4 +339,3 @@ fig.update_layout(showlegend=False)
 在本课中,您学习了如何使用 Plotly Express 创建单变量图表。您现在应该对创建条形图、饼图和直方图有信心。您还应该对自定义图表的外观感到舒适。
 
 下节课见。
-```

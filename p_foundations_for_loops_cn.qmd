@@ -1,5 +1,5 @@
 ---
-title: 'Intro to Loops in Python'
+title: 'Python中的循环简介'
 ---
 
 ```{python}

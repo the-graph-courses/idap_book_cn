@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>p_foundations_google_colab_cn – Introduction to Data Science with Python</title>
+<title>2&nbsp; Google Colab 入门指南 – 用 Python 介绍数据科学</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html">Foundations</a></li><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">p_foundations_google_colab_cn.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html">基础知识</a></li><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Google Colab 入门指南</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Introduction to Data Science with Python</a> 
+      <a href="./">用 Python 介绍数据科学</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -120,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Foundations</span></a>
+ <span class="menu-text">基础知识</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -129,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_foundations_google_colab_cn.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">p_foundations_google_colab_cn.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Google Colab 入门指南</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_foundations_coding_basics_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><code>markdown&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-next"} [&lt;span class='chapter-number'&gt;1&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;介绍&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-prev"} [&lt;span class='chapter-number'&gt;1&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;介绍&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/index.html&lt;span-class='chapter-number'&gt;1&lt;/span&gt;--&lt;span-class='chapter-title'&gt;介绍&lt;/span&gt;"} [Foundations]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:quarto-sidebar-section-1"} [&lt;span class='chapter-number'&gt;2&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;p_foundations_google_colab_cn.html&lt;/span&gt;]{.hidden .quarto-markdown-envelope-contents render-id="quarto-int-sidebar:/p_foundations_google_colab_cn.html&lt;span-class='chapter-number'&gt;2&lt;/span&gt;--&lt;span-class='chapter-title'&gt;p_foundations_google_colab_cn.html&lt;/span&gt;"} [&lt;span class='chapter-number'&gt;3&lt;/span&gt;&nbsp; &lt;span class='chapter-title'&gt;</code>markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">编程基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -153,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_foundations_for_loops_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Intro to Loops in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Python中的循环简介</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Visualization</span></a>
+ <span class="menu-text">数据可视化</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -182,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_data_on_display_univariate_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">使用 Plotly Express 的单变量图表</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -196,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Tools for Local Python</span></a>
+ <span class="menu-text">本地 Python 工具</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -211,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_tools_using_vscode_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Installing and Using VS Code</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">安装和使用 VS Code</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -223,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_tools_quarto_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">使用 Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Manipulation</span></a>
+ <span class="menu-text">数据操作</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -252,7 +286,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_untangled_transform_variables_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">pandas 中的变量转换</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -296,7 +330,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Using LLMs in Python</span></a>
+ <span class="menu-text">使用 Python 中的 LLM</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -315,15 +349,167 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#学习目标" id="toc-学习目标" class="nav-link active" data-scroll-target="#学习目标"><span class="header-section-number">2.1</span> 学习目标</a></li>
+  <li><a href="#简介" id="toc-简介" class="nav-link" data-scroll-target="#简介"><span class="header-section-number">2.2</span> 简介</a></li>
+  <li><a href="#colab-入门" id="toc-colab-入门" class="nav-link" data-scroll-target="#colab-入门"><span class="header-section-number">2.3</span> Colab 入门</a></li>
+  <li><a href="#创建和管理笔记本" id="toc-创建和管理笔记本" class="nav-link" data-scroll-target="#创建和管理笔记本"><span class="header-section-number">2.4</span> 创建和管理笔记本</a></li>
+  <li><a href="#使用代码单元格" id="toc-使用代码单元格" class="nav-link" data-scroll-target="#使用代码单元格"><span class="header-section-number">2.5</span> 使用代码单元格</a></li>
+  <li><a href="#文本单元格" id="toc-文本单元格" class="nav-link" data-scroll-target="#文本单元格"><span class="header-section-number">2.6</span> 文本单元格</a></li>
+  <li><a href="#数据处理示例" id="toc-数据处理示例" class="nav-link" data-scroll-target="#数据处理示例"><span class="header-section-number">2.7</span> 数据处理示例</a></li>
+  <li><a href="#练习题导入数据" id="toc-练习题导入数据" class="nav-link" data-scroll-target="#练习题导入数据"><span class="header-section-number">2.8</span> 练习题：导入数据</a></li>
+  <li><a href="#从-drive-获取数据" id="toc-从-drive-获取数据" class="nav-link" data-scroll-target="#从-drive-获取数据"><span class="header-section-number">2.9</span> 从 Drive 获取数据</a></li>
+  <li><a href="#练习题导入数据-1" id="toc-练习题导入数据-1" class="nav-link" data-scroll-target="#练习题导入数据-1"><span class="header-section-number">2.10</span> 练习题：导入数据</a></li>
+  <li><a href="#笔记本保存在哪里" id="toc-笔记本保存在哪里" class="nav-link" data-scroll-target="#笔记本保存在哪里"><span class="header-section-number">2.11</span> 笔记本保存在哪里？</a></li>
+  <li><a href="#分享和协作" id="toc-分享和协作" class="nav-link" data-scroll-target="#分享和协作"><span class="header-section-number">2.12</span> 分享和协作</a></li>
+  <li><a href="#结论" id="toc-结论" class="nav-link" data-scroll-target="#结论"><span class="header-section-number">2.13</span> 结论</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_google_colab_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html">基础知识</a></li><li class="breadcrumb-item"><a href="./p_foundations_google_colab_cn.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Google Colab 入门指南</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Google Colab 入门指南</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/fp-2xtbFRYo?si=JO_AMNhh_XOJaFsP" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="学习目标" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="学习目标"><span class="header-section-number">2.1</span> 学习目标</h2>
+<ul>
+<li>了解 Google Colab 是什么以及它在数据科学和人工智能方面的优势</li>
+<li>学习如何访问和导航 Google Colab</li>
+<li>在 Google Colab 中创建和管理笔记本</li>
+<li>在 Colab 单元格中运行 Python 代码</li>
+<li>使用文本单元格进行解释和格式化</li>
+<li>导入和使用预装的数据分析库</li>
+<li>导入和使用数据进行分析</li>
+<li>分享 Colab 笔记本</li>
+</ul>
+</section>
+<section id="简介" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="简介"><span class="header-section-number">2.2</span> 简介</h2>
+<p>Google Collaboratory（简称 Colab）是一个免费的在线平台，允许您在浏览器中使用 Python 或 R 代码。对于 Python 入门来说，这是一个很好的方式，因为您不需要在计算机上安装任何东西。</p>
+<p>如果运行重负载工作，会有一些限制。可能会出现超时。但对于初学数据分析的人来说，它是完美且免费的。</p>
+<p>请注意，本文档是视频的摘要，而不是替代品。您应该观看视频以获得更完整的体验。</p>
+</section>
+<section id="colab-入门" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="colab-入门"><span class="header-section-number">2.3</span> Colab 入门</h2>
+<ul>
+<li>在您喜欢的搜索引擎中搜索”Google Colab”</li>
+<li>通常第一个结果就是正确的。目前是 colab.research.google.com，但未来可能会改变</li>
+<li>使用您的 Google 账户登录（如果没有，请创建一个 Gmail 账户）</li>
+</ul>
+</section>
+<section id="创建和管理笔记本" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="创建和管理笔记本"><span class="header-section-number">2.4</span> 创建和管理笔记本</h2>
+<ul>
+<li>笔记本是在 Colab 中组织工作的主要方式，包含代码单元格和文本单元格</li>
+<li>创建新笔记本：文件 &gt; 新建笔记本</li>
+<li>重命名笔记本以便于组织</li>
+</ul>
+</section>
+<section id="使用代码单元格" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="使用代码单元格"><span class="header-section-number">2.5</span> 使用代码单元格</h2>
+<ul>
+<li>左上角应该有一个按钮，允许您添加代码或文本单元格</li>
+<li>代码单元格是编写和执行 Python 代码的地方</li>
+<li>在单元格中输入 <code>1 + 1</code> 然后运行</li>
+<li>通过点击播放按钮或使用键盘快捷键运行单元格：
+<ul>
+<li>Mac 上使用 <code>Command + Enter</code> 或 Windows 上使用 <code>Ctrl + Enter</code>：运行当前单元格</li>
+<li><code>Shift + Enter</code>：运行当前单元格并在下方创建新单元格</li>
+</ul></li>
+<li>尝试熟悉键盘快捷键</li>
+<li>第一次运行代码单元格可能需要一段时间，因为需要初始化 Python 引擎</li>
+<li>运行单元格时，最终输出显示在单元格下方</li>
+<li>要查看多个输出，请使用 <code>print()</code> 显式打印。例如：</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="文本单元格" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="文本单元格"><span class="header-section-number">2.6</span> 文本单元格</h2>
+<ul>
+<li>使用文本单元格进行解释和标题</li>
+<li>文本单元格上方的工具栏允许您格式化文本，但要注意生成的 markdown</li>
+</ul>
+</section>
+<section id="数据处理示例" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="数据处理示例"><span class="header-section-number">2.7</span> 数据处理示例</h2>
+<ul>
+<li>点击文件选项卡查看”sample_data”文件夹</li>
+<li>导入加利福尼亚房屋测试数据集：</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>housing_data <span class="op">=</span> pandas.read_csv(<span class="st">"/content/sample_data/california_housing_test.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>housing_data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>在单元格中输入 <code>housing_data</code> 并运行以查看数据集</li>
+</ul>
+</section>
+<section id="练习题导入数据" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="练习题导入数据"><span class="header-section-number">2.8</span> 练习题：导入数据</h2>
+<ul>
+<li>导入”california_housing_train”数据集</li>
+<li>使用 <code>describe()</code> 函数获取数据集摘要</li>
+</ul>
+</section>
+<section id="从-drive-获取数据" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="从-drive-获取数据"><span class="header-section-number">2.9</span> 从 Drive 获取数据</h2>
+<ul>
+<li>在文件选项卡中，点击按钮挂载您的驱动器</li>
+<li>创建文件夹并从计算机上传 CSV 文件到该文件夹</li>
+<li>我们可以像之前一样使用 pandas 导入数据</li>
+</ul>
+</section>
+<section id="练习题导入数据-1" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="练习题导入数据-1"><span class="header-section-number">2.10</span> 练习题：导入数据</h2>
+<ul>
+<li>导入您上传到驱动器的 CSV 文件</li>
+<li>使用 <code>describe()</code> 函数获取数据集摘要</li>
+</ul>
+</section>
+<section id="笔记本保存在哪里" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="笔记本保存在哪里"><span class="header-section-number">2.11</span> 笔记本保存在哪里？</h2>
+<ul>
+<li>所有工作自动保存到您的 Google Drive</li>
+<li>在 drive.google.com 的”Colab Notebooks”文件夹中访问您的笔记本</li>
+</ul>
+</section>
+<section id="分享和协作" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="分享和协作"><span class="header-section-number">2.12</span> 分享和协作</h2>
+<ul>
+<li>通过链接分享笔记本，给予查看者或编辑者访问权限</li>
+<li>之后可以从 Google Drive 访问笔记本</li>
+<li>以各种格式下载笔记本（ipynb, py）</li>
+</ul>
+</section>
+<section id="结论" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="结论"><span class="header-section-number">2.13</span> 结论</h2>
+<p>Google Colab 为数据科学和人工智能项目提供了一个强大、易用的平台。它预配置的环境和便捷的分享功能使其成为开始数据分析的绝佳方式。</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -753,8 +939,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./p_foundations_coding_basics_cn.html" class="pagination-link" aria-label="```markdown">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">```markdown</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p_foundations_coding_basics_cn.html" class="pagination-link" aria-label="编程基础">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">编程基础</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -766,7 +952,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_google_colab_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_foundations_google_colab_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

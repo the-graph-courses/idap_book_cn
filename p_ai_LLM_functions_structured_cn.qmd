@@ -1,5 +1,5 @@
 ---
-title: "Using LLMs in Python – Working with Structured Outputs"
+title: "在 Python 中使用 LLM - 处理结构化输出"
 ---
 
 在本教程中,我们将深入探讨如何使用 Pydantic 模型处理 OpenAI 的大语言模型(LLMs)的结构化输出。我们将学习如何定义预期的响应格式,将 LLM 的输出解析为结构化数据,并将其整合到我们的数据处理工作流程中。

@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 book:
-  title: "Introduction to Data Science with Python"
-  subtitle: "With Real-World Examples from Research, Business and Industry"
+  title: "用 Python 介绍数据科学"
+  subtitle: "从研究、商业和行业中的真实示例"
   author: "The GRAPH Courses"
   cover-image: cover.jpg
   favicon: logo.png
@@ -19,7 +19,7 @@ book:
 
     
     ## Use the below for HTML render. (Parts don't seem to work in HTML render)
-    - part: "Foundations"
+    - part: "基础知识"
       chapters:
         - p_foundations_google_colab_cn.qmd
         - p_foundations_coding_basics_cn.qmd
@@ -27,18 +27,18 @@ book:
         - p_foundations_data_structures_cn.qmd
         - p_foundations_for_loops_cn.qmd
         - p_foundations_writing_functions_cn.qmd
-    - part: "Data Visualization"
+    - part: "数据可视化"
       chapters:
         - p_data_on_display_data_viz_types_cn.qmd
         - p_data_on_display_univariate_cn.qmd
         - p_data_on_display_multivariate_cn.qmd
-    - part: "Tools for Local Python"
+    - part: "本地 Python 工具"
       chapters:
         - p_tools_installing_python_cn.qmd
         - p_tools_using_vscode_cn.qmd
         - p_tools_venv_cn.qmd
         - p_tools_quarto_cn.qmd
-    - part: "Data Manipulation"
+    - part: "数据操作"
       chapters:
         - p_untangled_subset_columns_cn.qmd
         - p_untangled_query_rows_cn.qmd
@@ -49,7 +49,7 @@ book:
         - p_untangled_joining_1_cn.qmd
         - p_untangled_joining_2_cn.qmd
         - p_untangled_pivoting_cn.qmd
-    - part: "Using LLMs in Python"
+    - part: "使用 Python 中的 LLM"
       chapters:
         - p_ai_LLM_functions_cn.qmd
 
