@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>19&nbsp; 数据分组和汇总 – Introduction to Data Science with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./p_untangled_other_grouped_operations_cn.html" rel="next">
+<link href="./p_untangled_conditional_transforms_cn.html" rel="prev">
+<link href="./logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_untangled_subset_columns_cn.html">Data Manipulation</a></li><li class="breadcrumb-item"><a href="./p_untangled_groupby_agg_cn.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science with Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">介绍</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_google_colab_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">p_foundations_google_colab_cn.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_coding_basics_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_functions_methods_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Python中的函数、方法和库</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_data_structures_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python中的数据结构</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_for_loops_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Intro to Loops in Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_writing_functions_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数与条件语句入门</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_data_viz_types_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">数据可视化类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_univariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_multivariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">使用 Plotly Express 的双变量和多变量图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Tools for Local Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_installing_python_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">安装 Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_using_vscode_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Installing and Using VS Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_venv_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">文件夹和虚拟环境</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_quarto_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Manipulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_subset_columns_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">选择列子集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_query_rows_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">查询行</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_transform_variables_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_conditional_transforms_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">变量的条件性转换</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_groupby_agg_cn.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_other_grouped_operations_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Pandas中其他分组操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_1_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">数据集连接介绍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_2_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">连接 2:一对多、多键连接与键不匹配</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_pivoting_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">使用 melt() 和 pivot() 重新塑造数据</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Using LLMs in Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_ai_LLM_functions_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#介绍" id="toc-介绍" class="nav-link active" data-scroll-target="#介绍"><span class="header-section-number">19.1</span> 介绍</a></li>
+  <li><a href="#学习目标" id="toc-学习目标" class="nav-link" data-scroll-target="#学习目标"><span class="header-section-number">19.2</span> 学习目标</a></li>
+  <li><a href="#库" id="toc-库" class="nav-link" data-scroll-target="#库"><span class="header-section-number">19.3</span> 库</a></li>
+  <li><a href="#雅温得-covid-19-数据集" id="toc-雅温得-covid-19-数据集" class="nav-link" data-scroll-target="#雅温得-covid-19-数据集"><span class="header-section-number">19.4</span> 雅温得 COVID-19 数据集</a></li>
+  <li><a href="#介绍-pandas.dataframe.agg" id="toc-介绍-pandas.dataframe.agg" class="nav-link" data-scroll-target="#介绍-pandas.dataframe.agg"><span class="header-section-number">19.5</span> 介绍 <code>pandas.DataFrame.agg()</code></a></li>
+  <li><a href="#使用-pandas.dataframe.groupby-进行分组汇总" id="toc-使用-pandas.dataframe.groupby-进行分组汇总" class="nav-link" data-scroll-target="#使用-pandas.dataframe.groupby-进行分组汇总"><span class="header-section-number">19.7</span> 使用 <code>pandas.DataFrame.groupby()</code> 进行分组汇总</a></li>
+  <li><a href="#按多个变量分组嵌套分组" id="toc-按多个变量分组嵌套分组" class="nav-link" data-scroll-target="#按多个变量分组嵌套分组"><span class="header-section-number">19.9</span> 按多个变量分组(嵌套分组)</a></li>
+  <li><a href="#agg-中的-nan-值" id="toc-agg-中的-nan-值" class="nav-link" data-scroll-target="#agg-中的-nan-值"><span class="header-section-number">19.11</span> <code>agg()</code> 中的 NaN 值</a></li>
+  <li><a href="#使用-lambda-函数进行自定义汇总统计" id="toc-使用-lambda-函数进行自定义汇总统计" class="nav-link" data-scroll-target="#使用-lambda-函数进行自定义汇总统计"><span class="header-section-number">19.13</span> 使用 lambda 函数进行自定义汇总统计</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">19.15</span> 总结</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_untangled_groupby_agg_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_untangled_subset_columns_cn.html">Data Manipulation</a></li><li class="breadcrumb-item"><a href="./p_untangled_groupby_agg_cn.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="介绍" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="介绍"><span class="header-section-number">19.1</span> 介绍</h2>
+<p>在本课程中,我们将探讨两个强大的 pandas 方法:<code>agg()</code> 和 <code>groupby()</code>。这些工具将使您能够轻松提取汇总统计信息并对分组数据执行操作。</p>
+<p>汇总统计量是描述一系列值(通常是数据集中的一列)的单个值(如平均值或中位数)。</p>
+<p>让我们看看如何使用它们!</p>
+</section>
+<section id="学习目标" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="学习目标"><span class="header-section-number">19.2</span> 学习目标</h2>
+<ol type="1">
+<li><p>您可以使用 <code>pandas.DataFrame.agg()</code> 从数据集中提取汇总统计信息。</p></li>
+<li><p>您可以使用 <code>pandas.DataFrame.groupby()</code> 按一个或多个变量对数据进行分组,然后对其执行操作。</p></li>
+<li><p>您可以将自定义函数传递给 <code>agg()</code> 以计算汇总统计信息。</p></li>
+</ol>
+<hr>
+</section>
+<section id="库" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="库"><span class="header-section-number">19.3</span> 库</h2>
+<p>运行以下代码导入必要的库:</p>
+<div id="4c2a11bb" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="雅温得-covid-19-数据集" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="雅温得-covid-19-数据集"><span class="header-section-number">19.4</span> 雅温得 COVID-19 数据集</h2>
+<p>在本课程中,我们将再次使用喀麦隆雅温得进行的 COVID-19 血清调查数据的一个子集。</p>
+<p>您可以从此链接下载数据集:<a href="https://raw.githubusercontent.com/the-graph-courses/idap_book/main/data/yaounde_mini.zip">yaounde_mini.csv</a></p>
+<div id="04ec7c97" class="cell" data-message="false" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>yao <span class="op">=</span> pd.read_csv(<span class="st">"data/yaounde_mini.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>yao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">age_category_3</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">weight_kg</th>
+<th data-quarto-table-cell-role="th">height_cm</th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">is_smoker</th>
+<th data-quarto-table-cell-role="th">is_pregnant</th>
+<th data-quarto-table-cell-role="th">occupation</th>
+<th data-quarto-table-cell-role="th">treatment_combinations</th>
+<th data-quarto-table-cell-role="th">symptoms</th>
+<th data-quarto-table-cell-role="th">n_days_miss_work</th>
+<th data-quarto-table-cell-role="th">n_bedridden_days</th>
+<th data-quarto-table-cell-role="th">highest_education</th>
+<th data-quarto-table-cell-role="th">igg_result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>45</td>
+<td>Adult</td>
+<td>Female</td>
+<td>95</td>
+<td>169</td>
+<td>Briqueterie</td>
+<td>Non-smoker</td>
+<td>No</td>
+<td>Informal worker</td>
+<td>Paracetamol</td>
+<td>Muscle pain</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>Secondary</td>
+<td>Negative</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>55</td>
+<td>Adult</td>
+<td>Male</td>
+<td>96</td>
+<td>185</td>
+<td>Briqueterie</td>
+<td>Ex-smoker</td>
+<td>NaN</td>
+<td>Salaried worker</td>
+<td>NaN</td>
+<td>No symptoms</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>University</td>
+<td>Positive</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>23</td>
+<td>Adult</td>
+<td>Male</td>
+<td>74</td>
+<td>180</td>
+<td>Briqueterie</td>
+<td>Smoker</td>
+<td>NaN</td>
+<td>Student</td>
+<td>NaN</td>
+<td>No symptoms</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>University</td>
+<td>Negative</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">968</td>
+<td>35</td>
+<td>Adult</td>
+<td>Male</td>
+<td>77</td>
+<td>168</td>
+<td>Tsinga Oliga</td>
+<td>Smoker</td>
+<td>NaN</td>
+<td>Informal worker</td>
+<td>Paracetamol</td>
+<td>Headache</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>University</td>
+<td>Positive</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">969</td>
+<td>31</td>
+<td>Adult</td>
+<td>Female</td>
+<td>66</td>
+<td>169</td>
+<td>Tsinga Oliga</td>
+<td>Non-smoker</td>
+<td>No</td>
+<td>Unemployed</td>
+<td>NaN</td>
+<td>No symptoms</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Secondary</td>
+<td>Negative</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">970</td>
+<td>17</td>
+<td>Child</td>
+<td>Female</td>
+<td>67</td>
+<td>162</td>
+<td>Tsinga Oliga</td>
+<td>Non-smoker</td>
+<td>No response</td>
+<td>Unemployed</td>
+<td>NaN</td>
+<td>No symptoms</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Secondary</td>
+<td>Negative</td>
+</tr>
+</tbody>
+</table>
+
+<p>971 rows × 15 columns</p>
+</div>
+</div>
+</div>
+<p>您可以在这里了解更多关于该数据集的信息:https://www.nature.com/articles/s41467-021-25946-0</p>
+</section>
+<section id="介绍-pandas.dataframe.agg" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="介绍-pandas.dataframe.agg"><span class="header-section-number">19.5</span> 介绍 <code>pandas.DataFrame.agg()</code></h2>
+<p>首先,让我们考虑如何在不使用 <code>agg()</code> 的情况下获取简单的汇总统计信息,然后我们将考虑为什么您<em>应该</em>实际使用 <code>agg()</code>。</p>
+<p>假设有人要求您找出 <code>yao</code> 数据框中受访者的平均年龄。您可以通过调用 <code>yao</code> 数据框的 <code>age</code> 列上的 <code>mean()</code> 方法来实现:</p>
+<div id="9422de14" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>yao[[<span class="st">"age"</span>]].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>age    29.017508
+dtype: float64</code></pre>
+</div>
+</div>
+<p>现在,让我们看看如何使用 <code>agg()</code> 来做到这一点。</p>
+<div id="8e9673a9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>yao.agg(mean_age<span class="op">=</span>(<span class="st">'age'</span>, <span class="st">'mean'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">mean_age</td>
+<td>29.017508</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>这种语法的结构是:</p>
+<div id="fbfaac36" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dataframe.agg(summary_name<span class="op">=</span>(<span class="st">"COLUMN_TO_SUMMARIZE"</span>, <span class="st">"SUMMARY_FUNCTION"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这一部分 <code>("COLUMN_TO_SUMMARIZE", "SUMMARY_FUNCTION")</code> 被称为<em>元组</em>。元组的第一个元素是要汇总的列的名称,第二个元素是要应用于该列的汇总函数。</p>
+<p>语法更为复杂,但正如您稍后将看到的,它更加强大,因为它允许您计算多个汇总统计信息,并按组计算统计数据。</p>
+<hr>
+<p>让我们看看如何在单个 <code>agg()</code> 语句中计算多个汇总统计信息。如果您想要年龄的平均值和中位数,您可以运行:</p>
+<div id="187ea06f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yao.agg(mean_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"mean"</span>), median_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"median"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">mean_age</td>
+<td>29.017508</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">median_age</td>
+<td>26.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>很好,现在试试下面的练习题。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题平均值和中位数体重" class="level2 callout-body-container callout-body" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="练习题平均值和中位数体重"><span class="header-section-number">19.6</span> 练习题:平均值和中位数体重</h2>
+<p>使用 <code>agg()</code> 和相关的汇总函数,从 <code>yao</code> 数据框的 <code>weight_kg</code> 变量中获取受访者体重的平均值和中位数。</p>
+<div id="efe3f79d" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="使用-pandas.dataframe.groupby-进行分组汇总" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="使用-pandas.dataframe.groupby-进行分组汇总"><span class="header-section-number">19.7</span> 使用 <code>pandas.DataFrame.groupby()</code> 进行分组汇总</h2>
+<p>现在让我们看看如何使用 <code>groupby()</code> 来获得分组汇总,这是使用 <code>agg()</code> 的主要原因。</p>
+<p>顾名思义,<code>pandas.DataFrame.groupby()</code> 让您可以按变量中的值对数据框进行分组(例如,按性别分组为男性和女性)。然后,您可以执行按这些组拆分的操作。</p>
+<p>让我们尝试按性别对 <code>yao</code> 数据框进行分组,并观察效果:</p>
+<div id="95c27458" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>yao.groupby(<span class="st">"sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x1050cffb0&gt;</code></pre>
+</div>
+</div>
+<p>嗯。显然没有发生任何事情。我们只是得到了一个 <code>GroupBy</code> 对象。</p>
+<p>但是,当我们将 <code>groupby()</code> 与前一节中使用的 <code>agg()</code> 调用链式连接时,看看会发生什么:</p>
+<div id="75f282c6" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>yao.groupby(<span class="st">"sex"</span>).agg(mean_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"mean"</span>), median_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"median"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_age</th>
+<th data-quarto-table-cell-role="th">median_age</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Female</td>
+<td>29.495446</td>
+<td>26.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Male</td>
+<td>28.395735</td>
+<td>25.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>现在我们为每个组获得了不同的统计数据!女性受访者的平均年龄约为 29.5 岁,而男性受访者的平均年龄约为 28.4 岁。</p>
+<p>如前所述,这种分组汇总是 <code>agg()</code> 函数如此有用的主要原因。</p>
+<p>您可能注意到有两行标题。这是因为输出具有层次索引(在 pandas 中称为 MultiIndex)。虽然在某些情况下这可能有用,但它通常会使进一步的数据操作更加困难。我们可以使用 <code>reset_index()</code> 方法重置索引,将组标签转换回常规列。</p>
+<div id="5d9ab82f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>yao.groupby(<span class="st">"sex"</span>).agg(mean_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"mean"</span>), median_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"median"</span>)).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">mean_age</th>
+<th data-quarto-table-cell-role="th">median_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Female</td>
+<td>29.495446</td>
+<td>26.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Male</td>
+<td>28.395735</td>
+<td>25.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>您可能会注意到代码行变得相当长。我们可以将每个新的方法调用移到新的一行以提高代码的可读性,但需要将整个链包裹在括号中。</p>
+<div id="d704e62a" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"sex"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    .agg(mean_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"mean"</span>), median_age<span class="op">=</span>(<span class="st">"age"</span>, <span class="st">"median"</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">mean_age</th>
+<th data-quarto-table-cell-role="th">median_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Female</td>
+<td>29.495446</td>
+<td>26.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Male</td>
+<td>28.395735</td>
+<td>25.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<hr>
+<p>让我们看一个例子。</p>
+<p>假设您被要求获取不同社区中个体的最大和最小体重,并呈现每个社区中的个体数量。我们可以编写:</p>
+<div id="6a768824" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"neighborhood"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        max_weight<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"max"</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        min_weight<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"min"</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        count<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"size"</span>),  <span class="co"># the size function counts rows per group</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">max_weight</th>
+<th data-quarto-table-cell-role="th">min_weight</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Briqueterie</td>
+<td>128</td>
+<td>20</td>
+<td>106</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Carriere</td>
+<td>129</td>
+<td>14</td>
+<td>236</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Cité Verte</td>
+<td>118</td>
+<td>16</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Nkomkana</td>
+<td>161</td>
+<td>15</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Tsinga</td>
+<td>105</td>
+<td>15</td>
+<td>81</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Tsinga Oliga</td>
+<td>100</td>
+<td>17</td>
+<td>67</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题按性别分组的最小和最大身高" class="level2 callout-body-container callout-body" data-number="19.8">
+<h2 data-number="19.8" class="anchored" data-anchor-id="练习题按性别分组的最小和最大身高"><span class="header-section-number">19.8</span> 练习题:按性别分组的最小和最大身高</h2>
+<p>使用 <code>groupby()</code>、<code>agg()</code> 和相关的汇总函数,从 <code>yao</code> 数据框中获取每个性别的最小和最大身高,以及每个性别组中的个体数量。</p>
+<p>您的输出应为如下所示的 DataFrame:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>sex</th>
+<th>min_height_cm</th>
+<th>max_height_cm</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Female</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Male</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="c26abeae" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="按多个变量分组嵌套分组" class="level2" data-number="19.9">
+<h2 data-number="19.9" class="anchored" data-anchor-id="按多个变量分组嵌套分组"><span class="header-section-number">19.9</span> 按多个变量分组(嵌套分组)</h2>
+<p>可以按多个变量对数据框进行分组。这有时称为“嵌套”分组。</p>
+<p>假设您想知道每个社区中男性和女性的平均年龄,您可以在 <code>groupby()</code> 语句中同时放入 <code>sex</code> 和 <code>neighborhood</code>:</p>
+<div id="cff22f5c" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    yao</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">'sex'</span>, <span class="st">'neighborhood'</span>])</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    .agg(mean_age<span class="op">=</span>(<span class="st">'age'</span>, <span class="st">'mean'</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">mean_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Female</td>
+<td>Briqueterie</td>
+<td>31.622951</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Female</td>
+<td>Carriere</td>
+<td>28.164286</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Female</td>
+<td>Cité Verte</td>
+<td>31.750000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Male</td>
+<td>Nkomkana</td>
+<td>29.812500</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Male</td>
+<td>Tsinga</td>
+<td>28.820513</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17</td>
+<td>Male</td>
+<td>Tsinga Oliga</td>
+<td>24.297297</td>
+</tr>
+</tbody>
+</table>
+
+<p>18 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>从这个输出数据框您可以看出,例如,来自 Briqueterie 的女性的平均年龄为 31.6 岁。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题按年龄和性别组的最小和最大身高" class="level2 callout-body-container callout-body" data-number="19.10">
+<h2 data-number="19.10" class="anchored" data-anchor-id="练习题按年龄和性别组的最小和最大身高"><span class="header-section-number">19.10</span> 练习题:按年龄和性别组的最小和最大身高</h2>
+<p>使用 <code>groupby()</code>、<code>agg()</code> 以及 <code>min()</code> 和 <code>max()</code>,获取 <code>yao</code> 数据框中每个年龄-性别组的最小和最大身高。需要的变量是 <code>age_category_3</code> 和 <code>sex</code>。</p>
+<p>您的输出应为如下所示的 DataFrame:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>age_category_3</th>
+<th>sex</th>
+<th>min_height</th>
+<th>max_height</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adult</td>
+<td>Female</td>
+<td>78</td>
+<td>185</td>
+</tr>
+<tr class="even">
+<td>Adult</td>
+<td>Male</td>
+<td>147</td>
+<td>196</td>
+</tr>
+<tr class="odd">
+<td>Child</td>
+<td>Female</td>
+<td>54</td>
+<td>183</td>
+</tr>
+<tr class="even">
+<td>Child</td>
+<td>Male</td>
+<td>96</td>
+<td>190</td>
+</tr>
+<tr class="odd">
+<td>Senior</td>
+<td>Female</td>
+<td>143</td>
+<td>174</td>
+</tr>
+<tr class="even">
+<td>Senior</td>
+<td>Male</td>
+<td>160</td>
+<td>195</td>
+</tr>
+</tbody>
+</table>
+<div id="c7a83495" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="agg-中的-nan-值" class="level2" data-number="19.11">
+<h2 data-number="19.11" class="anchored" data-anchor-id="agg-中的-nan-值"><span class="header-section-number">19.11</span> <code>agg()</code> 中的 NaN 值</h2>
+<p>在使用 <code>agg()</code> 计算分组汇总统计信息时,请注意您关注的组是否包含 NaN 值。</p>
+<p>例如,要按吸烟状态获取平均体重,我们可以编写:</p>
+<div id="7a3799b3" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"is_smoker"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_mean<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"mean"</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">is_smoker</th>
+<th data-quarto-table-cell-role="th">weight_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Ex-smoker</td>
+<td>76.366197</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Non-smoker</td>
+<td>63.033760</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Smoker</td>
+<td>72.410256</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>但这实际上会将一些具有 NaN 吸烟状态的行从汇总表中排除。</p>
+<p>我们可以通过在 <code>groupby()</code> 函数中设置 <code>dropna=False</code> 来将这些个体包含在汇总表中。</p>
+<div id="6b70468c" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"is_smoker"</span>, dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_mean<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"mean"</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">is_smoker</th>
+<th data-quarto-table-cell-role="th">weight_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Ex-smoker</td>
+<td>76.366197</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Non-smoker</td>
+<td>63.033760</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Smoker</td>
+<td>72.410256</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>NaN</td>
+<td>73.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>此外,记住您可以使用 <code>size()</code> 函数查看每个吸烟状态组中有多少个体。这通常在您的汇总表中包含此信息很有用,这样您就知道每个汇总统计背后有多少个体。</p>
+<div id="2eace0c3" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"is_smoker"</span>, dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_mean<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"mean"</span>), </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         count<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="st">"size"</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">is_smoker</th>
+<th data-quarto-table-cell-role="th">weight_mean</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Ex-smoker</td>
+<td>76.366197</td>
+<td>71</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Non-smoker</td>
+<td>63.033760</td>
+<td>859</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Smoker</td>
+<td>72.410256</td>
+<td>39</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>NaN</td>
+<td>73.000000</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题按怀孕状态的平均体重" class="level2 callout-body-container callout-body" data-number="19.12">
+<h2 data-number="19.12" class="anchored" data-anchor-id="练习题按怀孕状态的平均体重"><span class="header-section-number">19.12</span> 练习题:按怀孕状态的平均体重</h2>
+<p>使用 <code>groupby()</code>、<code>agg()</code> 和 <code>mean()</code> 函数,从 <code>yao</code> 数据框中按怀孕状态获取平均体重(公斤)。在汇总表中包含怀孕状态为 NaN 的个体。</p>
+<p>输出的数据框应类似于:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>is_pregnant</th>
+<th>weight_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>No response</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Yes</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>NaN</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="6212635b" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="使用-lambda-函数进行自定义汇总统计" class="level2" data-number="19.13">
+<h2 data-number="19.13" class="anchored" data-anchor-id="使用-lambda-函数进行自定义汇总统计"><span class="header-section-number">19.13</span> 使用 lambda 函数进行自定义汇总统计</h2>
+<p>在深入研究自定义汇总统计之前,让我们简要介绍一下 lambda 函数。Python 中的 lambda 函数是使用 <code>lambda</code> 关键字定义的小型匿名函数。</p>
+<p>例如,考虑一个计算列表的范围(最大值与最小值之差)的函数。您可以使用常规函数如下定义:</p>
+<div id="469682e0" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> range_func(x):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(x) <span class="op">-</span> <span class="bu">min</span>(x)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(range_func([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))  <span class="co"># Output: 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>或者,您可以使用 lambda 函数实现相同的结果:</p>
+<div id="ac64c35f" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>range_func <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">max</span>(x) <span class="op">-</span> <span class="bu">min</span>(x)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(range_func([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))  <span class="co"># Output: 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>现在,让我们看看如何使用 lambda 函数在数据分析中应用自定义汇总统计。</p>
+<p>例如,假设我们想计算每个社区中体重的范围。我们可以使用 <code>range_func</code> 函数来实现:</p>
+<div id="5b58ac1a" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"neighborhood"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_range<span class="op">=</span>(<span class="st">"weight_kg"</span>, range_func))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">weight_range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Briqueterie</td>
+<td>108</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Carriere</td>
+<td>115</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Cité Verte</td>
+<td>102</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Nkomkana</td>
+<td>146</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Tsinga</td>
+<td>90</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Tsinga Oliga</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<p>注意我们没有将 <code>range_func</code> 放在引号中。只有内置函数才会被放在引号中。</p>
+<p>现在,我们可以在 <code>agg()</code> 调用中直接使用 lambda 函数,而不调用 <code>range_func</code>:</p>
+<div id="b69d58da" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"neighborhood"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_range<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="kw">lambda</span> x: <span class="bu">max</span>(x) <span class="op">-</span> <span class="bu">min</span>(x)))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">weight_range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Briqueterie</td>
+<td>108</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Carriere</td>
+<td>115</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Cité Verte</td>
+<td>102</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Nkomkana</td>
+<td>146</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Tsinga</td>
+<td>90</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Tsinga Oliga</td>
+<td>83</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<p>请注意,我们仍然向 <code>agg()</code> 函数提供了一个元组,<code>('weight_kg', lambda x: max(x) - min(x))</code>,但元组的第二个元素是一个 lambda 函数。</p>
+<p>这个 lambda 函数作用于元组中提供的列 <code>weight_kg</code>。</p>
+<p>再看一个例子:计算每个社区内体重的变异系数(CV)。CV 是标准差除以均值,是分布相对可变性的无单位度量。</p>
+<div id="b34bc21b" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    yao.groupby(<span class="st">"neighborhood"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    .agg(weight_cv<span class="op">=</span>(<span class="st">"weight_kg"</span>, <span class="kw">lambda</span> x: (np.std(x) <span class="op">/</span> np.mean(x)) <span class="op">*</span> <span class="dv">100</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">neighborhood</th>
+<th data-quarto-table-cell-role="th">weight_cv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Briqueterie</td>
+<td>33.531748</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Carriere</td>
+<td>32.027533</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Cité Verte</td>
+<td>33.255829</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Nkomkana</td>
+<td>33.187496</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Tsinga</td>
+<td>33.937145</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Tsinga Oliga</td>
+<td>35.894453</td>
+</tr>
+</tbody>
+</table>
+
+<p>9 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题按社区年龄的四分位距" class="level2 callout-body-container callout-body" data-number="19.14">
+<h2 data-number="19.14" class="anchored" data-anchor-id="练习题按社区年龄的四分位距"><span class="header-section-number">19.14</span> 练习题:按社区年龄的四分位距</h2>
+<p>找出每个社区的年龄变量的四分位距(IQR)。IQR 是第 75 和第 25 百分位数之间的差。您的 lambda 如下所示:<code>lambda x: x.quantile(0.75) - x.quantile(0.25)</code></p>
+<div id="817681f5" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="总结" class="level2" data-number="19.15">
+<h2 data-number="19.15" class="anchored" data-anchor-id="总结"><span class="header-section-number">19.15</span> 总结</h2>
+<p>在本课程中,您学会了如何使用 <code>agg()</code> 快速获取数据的汇总统计信息,使用 <code>groupby()</code> 对数据进行分组,并将 <code>groupby()</code> 与 <code>agg()</code> 结合使用以实现强大的数据汇总。</p>
+<p>这些技能对于探索性数据分析和为展示或绘图准备数据至关重要。<code>groupby()</code> 和 <code>agg()</code> 结合使用是 pandas 中最常见和最有用的数据操作技术之一。</p>
+<p>在接下来的课程中,我们将探讨将 <code>groupby()</code> 与其他 pandas 方法结合使用的方法。</p>
+<p>下次见!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./p_untangled_conditional_transforms_cn.html" class="pagination-link" aria-label="变量的条件性转换">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">变量的条件性转换</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./p_untangled_other_grouped_operations_cn.html" class="pagination-link" aria-label="Pandas中其他分组操作">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Pandas中其他分组操作</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Book created by <a href="https://thegraphcourses.org/">The GRAPH Courses</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_untangled_groupby_agg_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

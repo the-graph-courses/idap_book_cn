@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; ```qmd – Introduction to Data Science with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./p_untangled_subset_columns_cn.html" rel="next">
+<link href="./p_tools_venv_cn.html" rel="prev">
+<link href="./logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.35.2.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script>
+
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_tools_installing_python_cn.html">Tools for Local Python</a></li><li class="breadcrumb-item"><a href="./p_tools_quarto_cn.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science with Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">介绍</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_google_colab_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">p_foundations_google_colab_cn.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_coding_basics_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_functions_methods_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Python中的函数、方法和库</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_data_structures_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python中的数据结构</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_for_loops_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Intro to Loops in Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_writing_functions_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数与条件语句入门</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_data_viz_types_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">数据可视化类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_univariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_multivariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">使用 Plotly Express 的双变量和多变量图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Tools for Local Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_installing_python_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">安装 Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_using_vscode_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Installing and Using VS Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_venv_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">文件夹和虚拟环境</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_quarto_cn.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Manipulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_subset_columns_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">选择列子集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_query_rows_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">查询行</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_transform_variables_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_conditional_transforms_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">变量的条件性转换</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_groupby_agg_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_other_grouped_operations_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Pandas中其他分组操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_1_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">数据集连接介绍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_2_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">连接 2:一对多、多键连接与键不匹配</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_pivoting_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">使用 melt() 和 pivot() 重新塑造数据</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Using LLMs in Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_ai_LLM_functions_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#介绍" id="toc-介绍" class="nav-link active" data-scroll-target="#介绍"><span class="header-section-number">14.1</span> 介绍</a></li>
+  <li><a href="#学习目标" id="toc-学习目标" class="nav-link" data-scroll-target="#学习目标"><span class="header-section-number">14.2</span> 学习目标</a></li>
+  <li><a href="#安装-quarto" id="toc-安装-quarto" class="nav-link" data-scroll-target="#安装-quarto"><span class="header-section-number">14.3</span> 安装 Quarto</a></li>
+  <li><a href="#项目设置" id="toc-项目设置" class="nav-link" data-scroll-target="#项目设置"><span class="header-section-number">14.4</span> 项目设置</a></li>
+  <li><a href="#创建新文档" id="toc-创建新文档" class="nav-link" data-scroll-target="#创建新文档"><span class="header-section-number">14.5</span> 创建新文档</a></li>
+  <li><a href="#添加代码块" id="toc-添加代码块" class="nav-link" data-scroll-target="#添加代码块"><span class="header-section-number">14.6</span> 添加代码块</a></li>
+  <li><a href="#quarto-文档头部-yaml" id="toc-quarto-文档头部-yaml" class="nav-link" data-scroll-target="#quarto-文档头部-yaml"><span class="header-section-number">14.7</span> Quarto 文档头部 (YAML)</a></li>
+  <li><a href="#输出格式" id="toc-输出格式" class="nav-link" data-scroll-target="#输出格式"><span class="header-section-number">14.8</span> 输出格式</a></li>
+  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown"><span class="header-section-number">14.9</span> Markdown</a></li>
+  <li><a href="#代码块选项" id="toc-代码块选项" class="nav-link" data-scroll-target="#代码块选项"><span class="header-section-number">14.10</span> 代码块选项</a>
+  <ul class="collapse">
+  <li><a href="#全局选项" id="toc-全局选项" class="nav-link" data-scroll-target="#全局选项"><span class="header-section-number">14.10.1</span> 全局选项</a></li>
+  </ul></li>
+  <li><a href="#显示表格" id="toc-显示表格" class="nav-link" data-scroll-target="#显示表格"><span class="header-section-number">14.11</span> 显示表格</a></li>
+  <li><a href="#显示图表" id="toc-显示图表" class="nav-link" data-scroll-target="#显示图表"><span class="header-section-number">14.12</span> 显示图表</a></li>
+  <li><a href="#结束语" id="toc-结束语" class="nav-link" data-scroll-target="#结束语"><span class="header-section-number">14.13</span> 结束语</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_tools_quarto_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_tools_installing_python_cn.html">Tools for Local Python</a></li><li class="breadcrumb-item"><a href="./p_tools_quarto_cn.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>title: “使用 Quarto” format: html —</p>
+<section id="介绍" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="介绍"><span class="header-section-number">14.1</span> 介绍</h2>
+<p>作为数据分析师,你角色的重要部分是通过报告将结果传达给他人。<strong>Quarto</strong> 是生成此类报告最强大、最灵活的工具之一。它使你能够通过结合格式化文本和代码生成的结果来生成动态文档。使用 Quarto,你可以创建各种格式的文档,如 HTML、PDF、Word、PowerPoint 幻灯片、网页仪表板等。</p>
+<p>我们在 GRAPH 课程中的大部分文档实际上都是用 Quarto 编写的!</p>
+<p>在本课中,我们将介绍这个强大工具的基础知识。</p>
+</section>
+<section id="学习目标" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="学习目标"><span class="header-section-number">14.2</span> 学习目标</h2>
+<p>完成本课后,你应该能:</p>
+<ul>
+<li>创建并渲染包含 Python 代码和叙述文本的 Quarto 文档。</li>
+<li>以多种格式输出文档,包括 HTML、PDF、Word 等。</li>
+<li>理解基本的 Markdown 语法。</li>
+<li>使用代码块选项来控制代码执行和输出显示。</li>
+<li>使用 Python 包在 Quarto 文档中显示表格和图形。</li>
+</ul>
+</section>
+<section id="安装-quarto" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="安装-quarto"><span class="header-section-number">14.3</span> 安装 Quarto</h2>
+<p>要开始使用,首先需要安装 Quarto。</p>
+<p>在你喜欢的搜索引擎中搜索“quarto download”。按照结果进入“Quarto.org”网站,然后按照你的操作系统的说明进行操作。(我们不在这里提供直接链接,因为确切链接可能会随着时间变化。)</p>
+<p>安装后,可以通过在命令行或终端中运行以下命令来检查是否已安装:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>现在 Quarto 已安装,使用它来安装 <code>tinytex</code> 包,我们需要该包来编译我们的 PDF:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> install tinytex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>要在 VSCode 中使用 Quarto 的所有功能,我们需要安装 <strong>Quarto</strong> 扩展和 <strong>Jupyter</strong> 扩展。你可以在 VSCode 的扩展标签中安装这些扩展。确保安装这些扩展的官方版本。Quarto 由 Quarto 发布,Jupyter 由微软发布。</p>
+<p>这需要安装很多扩展,但不要担心——你只需在电脑上完成这些步骤一次。</p>
+</section>
+<section id="项目设置" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="项目设置"><span class="header-section-number">14.4</span> 项目设置</h2>
+<p>首先,在 VSCode 中打开你的 <code>graph_courses_python</code> 项目。</p>
+<p>如果你没有观看前一个解释项目设置的视频,请现在观看。在那个视频中,我们解释了如何创建项目文件夹、创建虚拟环境、选择解释器,并安装 <code>jupyter</code>、<code>ipykernel</code>、<code>kaleido</code>、<code>itables</code>、<code>plotly</code> 和 <code>pandas</code> 包。</p>
+</section>
+<section id="创建新文档" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="创建新文档"><span class="header-section-number">14.5</span> 创建新文档</h2>
+<p>Quarto 文档是一个简单的文本文件,扩展名为 <code>.qmd</code>。</p>
+<p>要创建一个新的 Quarto 文档,创建一个新文件并将其保存为 <code>.qmd</code> 扩展名,例如 <code>first_quarto_doc.qmd</code>。</p>
+<p>在你的文档中添加以下文本的两个部分:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 第一节</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>你好</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># 第二节</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>世界</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="添加代码块" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="添加代码块"><span class="header-section-number">14.6</span> 添加代码块</h2>
+<p>你可以使用以下语法及快捷键 <code>Cmd + Shift + I</code>(Mac 上)或 <code>Ctrl + Shift + I</code>(Windows 上)向文档中添加代码块。或者,可以点击屏幕右上方的“…”按钮。</p>
+<p>让我们创建一个将两个数字相加并显示结果的代码块:</p>
+<div id="78fb8722" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>4</code></pre>
+</div>
+</div>
+<p>你应该在工具栏中看到一个“运行单元格”按钮。点击它来运行代码块。</p>
+<p>如果你尚未在当前环境中安装 <code>ipykernel</code> 包,VSCode 可能会提示你安装。去安装它。</p>
+<p>现在练习在文档末尾添加另一个将 3 乘以 3 的代码块。</p>
+<p>添加这些后,你应该也会看到“运行下一个单元”和“运行上方”按钮出现。</p>
+<p>还有两个你应该熟悉的快捷键:</p>
+<ul>
+<li><code>Cmd + Enter</code>(Mac)或 <code>Ctrl + Enter</code>(Windows/Linux)运行代码块。</li>
+<li><code>Option + Enter</code>(Mac)或 <code>Alt + Enter</code>(Windows/Linux)运行当前行或选中的代码部分。</li>
+</ul>
+<p>要测试这些快捷键,在一个代码块中添加多行代码,然后练习使用第一个快捷键运行整个块,用第二个快捷键逐行运行。</p>
+<p>如你所见,我们可以将 Quarto 用作类似于 Jupyter notebook 或 Google Colab 的交互式文档。但真正使它出色的是其输出多种格式的能力。</p>
+<p>课程后面,我们将看到如何使用此功能。</p>
+</section>
+<section id="quarto-文档头部-yaml" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="quarto-文档头部-yaml"><span class="header-section-number">14.7</span> Quarto 文档头部 (YAML)</h2>
+<p>在文档顶部,我们添加一个 YAML 部分。这是我们可以指定文档详情的地方,例如标题、作者和格式。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"我的第一个 Quarto 文档"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"你的名字"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>现在,我们将只使用 <code>html</code> 格式。</p>
+<p>要渲染文档,点击屏幕右上方的“Render”按钮。</p>
+<p>(要正确渲染,你需要安装 <code>jupyter</code> 包。如果你尚未设置虚拟环境,请观看我们关于设置虚拟环境的视频,并了解如何安装包。)</p>
+<p>你应该会在 VSCode 中看到一个新标签页,显示已经渲染的文档。</p>
+<p>如果你转到资源管理器,你应该会看到一个名为 <code>first_quarto_doc.html</code> 的新文件。</p>
+<p>所以现在我们拥有了 Quarto 文档的主要元素:</p>
+<ul>
+<li>YAML 头部</li>
+<li>部分标题</li>
+<li>文本</li>
+<li>代码块</li>
+<li>这些代码块的输出</li>
+</ul>
+<p>这些元素共同使 Quarto 成为报告的一个非常强大的工具。</p>
+<p>你还可以使用额外的选项来自定义输出格式。例如,要将资源直接嵌入到 HTML 文件中,可以修改 YAML 头部中的 <code>format</code> 部分:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="输出格式" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="输出格式"><span class="header-section-number">14.8</span> 输出格式</h2>
+<p>如我们之前讨论的,Quarto 的一个强大功能是它能够输出多种格式。</p>
+<p>你可以在 YAML 头部中更改 <code>format</code> 值来尝试其他格式。</p>
+<p>尝试以下格式:</p>
+<ul>
+<li><code>html</code>:将文档渲染为 HTML 网页。</li>
+<li><code>pdf</code>:将文档渲染为 PDF。你需要在电脑上安装 LaTeX(或 tinytex)才能使用此格式。</li>
+<li><code>docx</code>:将文档渲染为 Microsoft Word 文档。</li>
+<li><code>pptx</code>:将文档渲染为 PowerPoint 演示文稿。</li>
+<li><code>revealjs</code>:将文档渲染为 HTML 幻灯片。</li>
+<li><code>dashboard</code>:将文档渲染为交互式仪表板。</li>
+</ul>
+<p>请注意,由于不同的操作系统或软件版本,这些格式中的一些可能无法在你的电脑上正常工作。</p>
+</section>
+<section id="markdown" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="markdown"><span class="header-section-number">14.9</span> Markdown</h2>
+<p>Quarto 文档中的文本使用 Markdown 编写。</p>
+<p><strong>Markdown</strong> 是一组用于为纯文本添加格式的简单约定。例如,要将文本设置为斜体,可以将其用星号包裹 <code>*text here*</code>,要开始一个新标题,可以使用井号 <code>#</code>。我们将在下面详细学习这些内容。</p>
+<p>你可以通过在一行开始添加一个或多个 <code>#</code> 来定义不同级别的标题:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 一级标题</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 二级标题</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">### 三级标题</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>文档主体由遵循 Markdown 语法的文本组成。Markdown 文件是包含轻量级标记的文本文件,帮助设置标题级别或格式化文本。例如,以下文本:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>This is text with *italics* and **bold**.</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>You can define bulleted lists:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First element</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Second element</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>将生成以下格式化的文本:</p>
+<blockquote class="blockquote">
+<p>这是带有<em>斜体</em>和<strong>粗体</strong>的文本。</p>
+<p>你可以定义无序列表:</p>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+</ul>
+</blockquote>
+<p>注意,你需要在列表前后留空行,并将列表项保持在单独的行上。否则,它们会挤在一起,而不是形成列表。</p>
+<p>我们看到,放在星号之间的词语会变为斜体,而以破折号开头的行会转换为项目符号列表。</p>
+<p>Markdown 语法还允许其他格式化,例如插入链接或图片。例如,以下代码:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">示例链接</span><span class="co">](https://example.com)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>… 将生成以下链接:</p>
+<blockquote class="blockquote">
+<p><a href="https://example.com">示例链接</a></p>
+</blockquote>
+<p>我们还可以嵌入图片。在你的文档中,你可以输入:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="al">![替代文本](images/picture_name.jpg)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>将“替代文本”替换为图片的描述(也可以为空),将“images”替换为项目中的图片文件夹名称,将“picture_name.jpg”替换为你想要使用的图片名称。或者,在某些编辑器中,你可以将图片拖放到文档中。</p>
+</section>
+<section id="代码块选项" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="代码块选项"><span class="header-section-number">14.10</span> 代码块选项</h2>
+<p>可以为每个代码块传递选项以修改其行为。</p>
+<p>例如,一个代码块如下所示:</p>
+<div id="57e698dd" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+</div>
+<p>但你可以添加选项来控制代码块的执行和显示:</p>
+<div id="11120e3a" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+</div>
+<p>在此示例中,<code>echo: false</code> 选项告诉 Quarto 不在渲染的文档中显示代码,仅显示输出。</p>
+<section id="全局选项" class="level3" data-number="14.10.1">
+<h3 data-number="14.10.1" class="anchored" data-anchor-id="全局选项"><span class="header-section-number">14.10.1</span> 全局选项</h3>
+<p>你可能希望全局应用选项到文档中的所有代码块。你可以在 YAML 头部的 <code>execute</code> 键下设置默认的代码执行选项。</p>
+<p>例如:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Quarto 文档"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">echo</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>这将为所有代码块设置 <code>echo: false</code>。</p>
+</section>
+</section>
+<section id="显示表格" class="level2" data-number="14.11">
+<h2 data-number="14.11" class="anchored" data-anchor-id="显示表格"><span class="header-section-number">14.11</span> 显示表格</h2>
+<p>默认情况下,pandas DataFrame 在 Quarto 中显示整洁。然而,对于交互式表格,我们可以使用 <code>itables</code> 包。</p>
+<p>确保你已安装 <code>itables</code> 包。如果没有,可以使用以下命令安装:</p>
+<div id="98b73efe" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install itables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>然后,你可以运行类似以下的代码:</p>
+<div id="ee67e27e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itables <span class="im">import</span> show</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> px.data.tips()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>show(tips)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table id="itables_62185966_0b16_4322_80d7_7addd04fad2f" class="display nowrap" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<thead>
+    <tr style="text-align: right;">
+      
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead><tbody><tr>
+<td style="vertical-align:middle; text-align:left">
+<div style="float:left; margin-right: 10px;">
+<a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
+    <g style="fill:#d9d7fc">
+        <path d="M100,400H500V357H100Z"></path>
+        <path d="M100,300H400V257H100Z"></path>
+        <path d="M0,200H400V157H0Z"></path>
+        <path d="M100,100H500V57H100Z"></path>
+        <path d="M100,350H500V307H100Z"></path>
+        <path d="M100,250H400V207H100Z"></path>
+        <path d="M0,150H400V107H0Z"></path>
+        <path d="M100,50H500V7H100Z"></path>
+    </g>
+    <g style="fill:#1a1366;stroke:#1a1366;">
+   <rect x="100" y="7" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="5s" repeatcount="indefinite"></animate>
+      <animate attributename="x" values="100;100;500" dur="5s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="0" y="107" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="3.5s" repeatcount="indefinite"></animate>
+    <animate attributename="x" values="0;0;400" dur="3.5s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="100" y="207" width="300" height="43">
+    <animate attributename="width" values="0;300;0" dur="3s" repeatcount="indefinite"></animate>
+    <animate attributename="x" values="100;100;400" dur="3s" repeatcount="indefinite"></animate>
+  </rect>
+        <rect x="100" y="307" width="400" height="43">
+    <animate attributename="width" values="0;400;0" dur="4s" repeatcount="indefinite"></animate>
+      <animate attributename="x" values="100;100;500" dur="4s" repeatcount="indefinite"></animate>
+  </rect>
+        <g style="fill:transparent;stroke-width:8; stroke-linejoin:round" rx="5">
+            <g transform="translate(45 50) rotate(-45)">
+                <circle r="33" cx="0" cy="0"></circle>
+                <rect x="-8" y="32" width="16" height="30"></rect>
+            </g>
+
+            <g transform="translate(450 152)">
+                <polyline points="-15,-20 -35,-20 -35,40 25,40 25,20"></polyline>
+                <rect x="-15" y="-40" width="60" height="60"></rect>
+            </g>
+
+            <g transform="translate(50 352)">
+                <polygon points="-35,-5 0,-40 35,-5"></polygon>
+                <polygon points="-35,10 0,45 35,10"></polygon>
+            </g>
+
+            <g transform="translate(75 250)">
+                <polyline points="-30,30 -60,0 -30,-30"></polyline>
+                <polyline points="0,30 -30,0 0,-30"></polyline>
+            </g>
+
+            <g transform="translate(425 250) rotate(180)">
+                <polyline points="-30,30 -60,0 -30,-30"></polyline>
+                <polyline points="0,30 -30,0 0,-30"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
+</a>
+</div>
+<div>
+Loading ITables v2.2.2 from the internet...
+(need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</div></td>
+
+</tr></tbody>
+
+</table>
+<link href="https://www.unpkg.com/dt_for_itables@2.0.13/dt_bundle.css" rel="stylesheet">
+<script type="module">
+    import {DataTable, jQuery as $} from 'https://www.unpkg.com/dt_for_itables@2.0.13/dt_bundle.js';
+
+    document.querySelectorAll("#itables_62185966_0b16_4322_80d7_7addd04fad2f:not(.dataTable)").forEach(table => {
+        if (!(table instanceof HTMLTableElement))
+            return;
+
+        // Define the table data
+        const data = [[16.99, 1.01, "Female", "No", "Sun", "Dinner", 2], [10.34, 1.66, "Male", "No", "Sun", "Dinner", 3], [21.01, 3.5, "Male", "No", "Sun", "Dinner", 3], [23.68, 3.31, "Male", "No", "Sun", "Dinner", 2], [24.59, 3.61, "Female", "No", "Sun", "Dinner", 4], [25.29, 4.71, "Male", "No", "Sun", "Dinner", 4], [8.77, 2.0, "Male", "No", "Sun", "Dinner", 2], [26.88, 3.12, "Male", "No", "Sun", "Dinner", 4], [15.04, 1.96, "Male", "No", "Sun", "Dinner", 2], [14.78, 3.23, "Male", "No", "Sun", "Dinner", 2], [10.27, 1.71, "Male", "No", "Sun", "Dinner", 2], [35.26, 5.0, "Female", "No", "Sun", "Dinner", 4], [15.42, 1.57, "Male", "No", "Sun", "Dinner", 2], [18.43, 3.0, "Male", "No", "Sun", "Dinner", 4], [14.83, 3.02, "Female", "No", "Sun", "Dinner", 2], [21.58, 3.92, "Male", "No", "Sun", "Dinner", 2], [10.33, 1.67, "Female", "No", "Sun", "Dinner", 3], [16.29, 3.71, "Male", "No", "Sun", "Dinner", 3], [16.97, 3.5, "Female", "No", "Sun", "Dinner", 3], [20.65, 3.35, "Male", "No", "Sat", "Dinner", 3], [17.92, 4.08, "Male", "No", "Sat", "Dinner", 2], [20.29, 2.75, "Female", "No", "Sat", "Dinner", 2], [15.77, 2.23, "Female", "No", "Sat", "Dinner", 2], [39.42, 7.58, "Male", "No", "Sat", "Dinner", 4], [19.82, 3.18, "Male", "No", "Sat", "Dinner", 2], [17.81, 2.34, "Male", "No", "Sat", "Dinner", 4], [13.37, 2.0, "Male", "No", "Sat", "Dinner", 2], [12.69, 2.0, "Male", "No", "Sat", "Dinner", 2], [21.7, 4.3, "Male", "No", "Sat", "Dinner", 2], [19.65, 3.0, "Female", "No", "Sat", "Dinner", 2], [9.55, 1.45, "Male", "No", "Sat", "Dinner", 2], [18.35, 2.5, "Male", "No", "Sat", "Dinner", 4], [15.06, 3.0, "Female", "No", "Sat", "Dinner", 2], [20.69, 2.45, "Female", "No", "Sat", "Dinner", 4], [17.78, 3.27, "Male", "No", "Sat", "Dinner", 2], [24.06, 3.6, "Male", "No", "Sat", "Dinner", 3], [16.31, 2.0, "Male", "No", "Sat", "Dinner", 3], [16.93, 3.07, "Female", "No", "Sat", "Dinner", 3], [18.69, 2.31, "Male", "No", "Sat", "Dinner", 3], [31.27, 5.0, "Male", "No", "Sat", "Dinner", 3], [16.04, 2.24, "Male", "No", "Sat", "Dinner", 3], [17.46, 2.54, "Male", "No", "Sun", "Dinner", 2], [13.94, 3.06, "Male", "No", "Sun", "Dinner", 2], [9.68, 1.32, "Male", "No", "Sun", "Dinner", 2], [30.4, 5.6, "Male", "No", "Sun", "Dinner", 4], [18.29, 3.0, "Male", "No", "Sun", "Dinner", 2], [22.23, 5.0, "Male", "No", "Sun", "Dinner", 2], [32.4, 6.0, "Male", "No", "Sun", "Dinner", 4], [28.55, 2.05, "Male", "No", "Sun", "Dinner", 3], [18.04, 3.0, "Male", "No", "Sun", "Dinner", 2], [12.54, 2.5, "Male", "No", "Sun", "Dinner", 2], [10.29, 2.6, "Female", "No", "Sun", "Dinner", 2], [34.81, 5.2, "Female", "No", "Sun", "Dinner", 4], [9.94, 1.56, "Male", "No", "Sun", "Dinner", 2], [25.56, 4.34, "Male", "No", "Sun", "Dinner", 4], [19.49, 3.51, "Male", "No", "Sun", "Dinner", 2], [38.01, 3.0, "Male", "Yes", "Sat", "Dinner", 4], [26.41, 1.5, "Female", "No", "Sat", "Dinner", 2], [11.24, 1.76, "Male", "Yes", "Sat", "Dinner", 2], [48.27, 6.73, "Male", "No", "Sat", "Dinner", 4], [20.29, 3.21, "Male", "Yes", "Sat", "Dinner", 2], [13.81, 2.0, "Male", "Yes", "Sat", "Dinner", 2], [11.02, 1.98, "Male", "Yes", "Sat", "Dinner", 2], [18.29, 3.76, "Male", "Yes", "Sat", "Dinner", 4], [17.59, 2.64, "Male", "No", "Sat", "Dinner", 3], [20.08, 3.15, "Male", "No", "Sat", "Dinner", 3], [16.45, 2.47, "Female", "No", "Sat", "Dinner", 2], [3.07, 1.0, "Female", "Yes", "Sat", "Dinner", 1], [20.23, 2.01, "Male", "No", "Sat", "Dinner", 2], [15.01, 2.09, "Male", "Yes", "Sat", "Dinner", 2], [12.02, 1.97, "Male", "No", "Sat", "Dinner", 2], [17.07, 3.0, "Female", "No", "Sat", "Dinner", 3], [26.86, 3.14, "Female", "Yes", "Sat", "Dinner", 2], [25.28, 5.0, "Female", "Yes", "Sat", "Dinner", 2], [14.73, 2.2, "Female", "No", "Sat", "Dinner", 2], [10.51, 1.25, "Male", "No", "Sat", "Dinner", 2], [17.92, 3.08, "Male", "Yes", "Sat", "Dinner", 2], [27.2, 4.0, "Male", "No", "Thur", "Lunch", 4], [22.76, 3.0, "Male", "No", "Thur", "Lunch", 2], [17.29, 2.71, "Male", "No", "Thur", "Lunch", 2], [19.44, 3.0, "Male", "Yes", "Thur", "Lunch", 2], [16.66, 3.4, "Male", "No", "Thur", "Lunch", 2], [10.07, 1.83, "Female", "No", "Thur", "Lunch", 1], [32.68, 5.0, "Male", "Yes", "Thur", "Lunch", 2], [15.98, 2.03, "Male", "No", "Thur", "Lunch", 2], [34.83, 5.17, "Female", "No", "Thur", "Lunch", 4], [13.03, 2.0, "Male", "No", "Thur", "Lunch", 2], [18.28, 4.0, "Male", "No", "Thur", "Lunch", 2], [24.71, 5.85, "Male", "No", "Thur", "Lunch", 2], [21.16, 3.0, "Male", "No", "Thur", "Lunch", 2], [28.97, 3.0, "Male", "Yes", "Fri", "Dinner", 2], [22.49, 3.5, "Male", "No", "Fri", "Dinner", 2], [5.75, 1.0, "Female", "Yes", "Fri", "Dinner", 2], [16.32, 4.3, "Female", "Yes", "Fri", "Dinner", 2], [22.75, 3.25, "Female", "No", "Fri", "Dinner", 2], [40.17, 4.73, "Male", "Yes", "Fri", "Dinner", 4], [27.28, 4.0, "Male", "Yes", "Fri", "Dinner", 2], [12.03, 1.5, "Male", "Yes", "Fri", "Dinner", 2], [21.01, 3.0, "Male", "Yes", "Fri", "Dinner", 2], [12.46, 1.5, "Male", "No", "Fri", "Dinner", 2], [11.35, 2.5, "Female", "Yes", "Fri", "Dinner", 2], [15.38, 3.0, "Female", "Yes", "Fri", "Dinner", 2], [44.3, 2.5, "Female", "Yes", "Sat", "Dinner", 3], [22.42, 3.48, "Female", "Yes", "Sat", "Dinner", 2], [20.92, 4.08, "Female", "No", "Sat", "Dinner", 2], [15.36, 1.64, "Male", "Yes", "Sat", "Dinner", 2], [20.49, 4.06, "Male", "Yes", "Sat", "Dinner", 2], [25.21, 4.29, "Male", "Yes", "Sat", "Dinner", 2], [18.24, 3.76, "Male", "No", "Sat", "Dinner", 2], [14.31, 4.0, "Female", "Yes", "Sat", "Dinner", 2], [14.0, 3.0, "Male", "No", "Sat", "Dinner", 2], [7.25, 1.0, "Female", "No", "Sat", "Dinner", 1], [38.07, 4.0, "Male", "No", "Sun", "Dinner", 3], [23.95, 2.55, "Male", "No", "Sun", "Dinner", 2], [25.71, 4.0, "Female", "No", "Sun", "Dinner", 3], [17.31, 3.5, "Female", "No", "Sun", "Dinner", 2], [29.93, 5.07, "Male", "No", "Sun", "Dinner", 4], [10.65, 1.5, "Female", "No", "Thur", "Lunch", 2], [12.43, 1.8, "Female", "No", "Thur", "Lunch", 2], [24.08, 2.92, "Female", "No", "Thur", "Lunch", 4], [11.69, 2.31, "Male", "No", "Thur", "Lunch", 2], [13.42, 1.68, "Female", "No", "Thur", "Lunch", 2], [14.26, 2.5, "Male", "No", "Thur", "Lunch", 2], [15.95, 2.0, "Male", "No", "Thur", "Lunch", 2], [12.48, 2.52, "Female", "No", "Thur", "Lunch", 2], [29.8, 4.2, "Female", "No", "Thur", "Lunch", 6], [8.52, 1.48, "Male", "No", "Thur", "Lunch", 2], [14.52, 2.0, "Female", "No", "Thur", "Lunch", 2], [11.38, 2.0, "Female", "No", "Thur", "Lunch", 2], [22.82, 2.18, "Male", "No", "Thur", "Lunch", 3], [19.08, 1.5, "Male", "No", "Thur", "Lunch", 2], [20.27, 2.83, "Female", "No", "Thur", "Lunch", 2], [11.17, 1.5, "Female", "No", "Thur", "Lunch", 2], [12.26, 2.0, "Female", "No", "Thur", "Lunch", 2], [18.26, 3.25, "Female", "No", "Thur", "Lunch", 2], [8.51, 1.25, "Female", "No", "Thur", "Lunch", 2], [10.33, 2.0, "Female", "No", "Thur", "Lunch", 2], [14.15, 2.0, "Female", "No", "Thur", "Lunch", 2], [16.0, 2.0, "Male", "Yes", "Thur", "Lunch", 2], [13.16, 2.75, "Female", "No", "Thur", "Lunch", 2], [17.47, 3.5, "Female", "No", "Thur", "Lunch", 2], [34.3, 6.7, "Male", "No", "Thur", "Lunch", 6], [41.19, 5.0, "Male", "No", "Thur", "Lunch", 5], [27.05, 5.0, "Female", "No", "Thur", "Lunch", 6], [16.43, 2.3, "Female", "No", "Thur", "Lunch", 2], [8.35, 1.5, "Female", "No", "Thur", "Lunch", 2], [18.64, 1.36, "Female", "No", "Thur", "Lunch", 3], [11.87, 1.63, "Female", "No", "Thur", "Lunch", 2], [9.78, 1.73, "Male", "No", "Thur", "Lunch", 2], [7.51, 2.0, "Male", "No", "Thur", "Lunch", 2], [14.07, 2.5, "Male", "No", "Sun", "Dinner", 2], [13.13, 2.0, "Male", "No", "Sun", "Dinner", 2], [17.26, 2.74, "Male", "No", "Sun", "Dinner", 3], [24.55, 2.0, "Male", "No", "Sun", "Dinner", 4], [19.77, 2.0, "Male", "No", "Sun", "Dinner", 4], [29.85, 5.14, "Female", "No", "Sun", "Dinner", 5], [48.17, 5.0, "Male", "No", "Sun", "Dinner", 6], [25.0, 3.75, "Female", "No", "Sun", "Dinner", 4], [13.39, 2.61, "Female", "No", "Sun", "Dinner", 2], [16.49, 2.0, "Male", "No", "Sun", "Dinner", 4], [21.5, 3.5, "Male", "No", "Sun", "Dinner", 4], [12.66, 2.5, "Male", "No", "Sun", "Dinner", 2], [16.21, 2.0, "Female", "No", "Sun", "Dinner", 3], [13.81, 2.0, "Male", "No", "Sun", "Dinner", 2], [17.51, 3.0, "Female", "Yes", "Sun", "Dinner", 2], [24.52, 3.48, "Male", "No", "Sun", "Dinner", 3], [20.76, 2.24, "Male", "No", "Sun", "Dinner", 2], [31.71, 4.5, "Male", "No", "Sun", "Dinner", 4], [10.59, 1.61, "Female", "Yes", "Sat", "Dinner", 2], [10.63, 2.0, "Female", "Yes", "Sat", "Dinner", 2], [50.81, 10.0, "Male", "Yes", "Sat", "Dinner", 3], [15.81, 3.16, "Male", "Yes", "Sat", "Dinner", 2], [7.25, 5.15, "Male", "Yes", "Sun", "Dinner", 2], [31.85, 3.18, "Male", "Yes", "Sun", "Dinner", 2], [16.82, 4.0, "Male", "Yes", "Sun", "Dinner", 2], [32.9, 3.11, "Male", "Yes", "Sun", "Dinner", 2], [17.89, 2.0, "Male", "Yes", "Sun", "Dinner", 2], [14.48, 2.0, "Male", "Yes", "Sun", "Dinner", 2], [9.6, 4.0, "Female", "Yes", "Sun", "Dinner", 2], [34.63, 3.55, "Male", "Yes", "Sun", "Dinner", 2], [34.65, 3.68, "Male", "Yes", "Sun", "Dinner", 4], [23.33, 5.65, "Male", "Yes", "Sun", "Dinner", 2], [45.35, 3.5, "Male", "Yes", "Sun", "Dinner", 3], [23.17, 6.5, "Male", "Yes", "Sun", "Dinner", 4], [40.55, 3.0, "Male", "Yes", "Sun", "Dinner", 2], [20.69, 5.0, "Male", "No", "Sun", "Dinner", 5], [20.9, 3.5, "Female", "Yes", "Sun", "Dinner", 3], [30.46, 2.0, "Male", "Yes", "Sun", "Dinner", 5], [18.15, 3.5, "Female", "Yes", "Sun", "Dinner", 3], [23.1, 4.0, "Male", "Yes", "Sun", "Dinner", 3], [15.69, 1.5, "Male", "Yes", "Sun", "Dinner", 2], [19.81, 4.19, "Female", "Yes", "Thur", "Lunch", 2], [28.44, 2.56, "Male", "Yes", "Thur", "Lunch", 2], [15.48, 2.02, "Male", "Yes", "Thur", "Lunch", 2], [16.58, 4.0, "Male", "Yes", "Thur", "Lunch", 2], [7.56, 1.44, "Male", "No", "Thur", "Lunch", 2], [10.34, 2.0, "Male", "Yes", "Thur", "Lunch", 2], [43.11, 5.0, "Female", "Yes", "Thur", "Lunch", 4], [13.0, 2.0, "Female", "Yes", "Thur", "Lunch", 2], [13.51, 2.0, "Male", "Yes", "Thur", "Lunch", 2], [18.71, 4.0, "Male", "Yes", "Thur", "Lunch", 3], [12.74, 2.01, "Female", "Yes", "Thur", "Lunch", 2], [13.0, 2.0, "Female", "Yes", "Thur", "Lunch", 2], [16.4, 2.5, "Female", "Yes", "Thur", "Lunch", 2], [20.53, 4.0, "Male", "Yes", "Thur", "Lunch", 4], [16.47, 3.23, "Female", "Yes", "Thur", "Lunch", 3], [26.59, 3.41, "Male", "Yes", "Sat", "Dinner", 3], [38.73, 3.0, "Male", "Yes", "Sat", "Dinner", 4], [24.27, 2.03, "Male", "Yes", "Sat", "Dinner", 2], [12.76, 2.23, "Female", "Yes", "Sat", "Dinner", 2], [30.06, 2.0, "Male", "Yes", "Sat", "Dinner", 3], [25.89, 5.16, "Male", "Yes", "Sat", "Dinner", 4], [48.33, 9.0, "Male", "No", "Sat", "Dinner", 4], [13.27, 2.5, "Female", "Yes", "Sat", "Dinner", 2], [28.17, 6.5, "Female", "Yes", "Sat", "Dinner", 3], [12.9, 1.1, "Female", "Yes", "Sat", "Dinner", 2], [28.15, 3.0, "Male", "Yes", "Sat", "Dinner", 5], [11.59, 1.5, "Male", "Yes", "Sat", "Dinner", 2], [7.74, 1.44, "Male", "Yes", "Sat", "Dinner", 2], [30.14, 3.09, "Female", "Yes", "Sat", "Dinner", 4], [12.16, 2.2, "Male", "Yes", "Fri", "Lunch", 2], [13.42, 3.48, "Female", "Yes", "Fri", "Lunch", 2], [8.58, 1.92, "Male", "Yes", "Fri", "Lunch", 1], [15.98, 3.0, "Female", "No", "Fri", "Lunch", 3], [13.42, 1.58, "Male", "Yes", "Fri", "Lunch", 2], [16.27, 2.5, "Female", "Yes", "Fri", "Lunch", 2], [10.09, 2.0, "Female", "Yes", "Fri", "Lunch", 2], [20.45, 3.0, "Male", "No", "Sat", "Dinner", 4], [13.28, 2.72, "Male", "No", "Sat", "Dinner", 2], [22.12, 2.88, "Female", "Yes", "Sat", "Dinner", 2], [24.01, 2.0, "Male", "Yes", "Sat", "Dinner", 4], [15.69, 3.0, "Male", "Yes", "Sat", "Dinner", 3], [11.61, 3.39, "Male", "No", "Sat", "Dinner", 2], [10.77, 1.47, "Male", "No", "Sat", "Dinner", 2], [15.53, 3.0, "Male", "Yes", "Sat", "Dinner", 2], [10.07, 1.25, "Male", "No", "Sat", "Dinner", 2], [12.6, 1.0, "Male", "Yes", "Sat", "Dinner", 2], [32.83, 1.17, "Male", "Yes", "Sat", "Dinner", 2], [35.83, 4.67, "Female", "No", "Sat", "Dinner", 3], [29.03, 5.92, "Male", "No", "Sat", "Dinner", 3], [27.18, 2.0, "Female", "Yes", "Sat", "Dinner", 2], [22.67, 2.0, "Male", "Yes", "Sat", "Dinner", 2], [17.82, 1.75, "Male", "No", "Sat", "Dinner", 2], [18.78, 3.0, "Female", "No", "Thur", "Dinner", 2]];
+
+        // Define the dt_args
+        let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "order": [], "warn_on_selected_rows_not_rendered": true};
+        dt_args["data"] = data;
+
+        
+        new DataTable(table, dt_args);
+    });
+</script>
+</div>
+</div>
+<p>请注意,交互式表格仅在 HTML 格式中有效。我们将在后面查看其他格式的表格。</p>
+</section>
+<section id="显示图表" class="level2" data-number="14.12">
+<h2 data-number="14.12" class="anchored" data-anchor-id="显示图表"><span class="header-section-number">14.12</span> 显示图表</h2>
+<p>对于交互式图表,<code>plotly</code> 包非常有用。</p>
+<div id="32d13bec" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> px.data.tips()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tips_sex <span class="op">=</span> px.violin(tips, x<span class="op">=</span><span class="st">"day"</span>, y<span class="op">=</span><span class="st">"total_bill"</span>, color<span class="op">=</span><span class="st">"sex"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>tips_sex.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>                            <div id="dbac9a56-f833-484c-9724-46f027c62e35" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("dbac9a56-f833-484c-9724-46f027c62e35")) {                    Plotly.newPlot(                        "dbac9a56-f833-484c-9724-46f027c62e35",                        [{"alignmentgroup":"True","box":{"visible":false},"hovertemplate":"sex=Female\u003cbr\u003eday=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Female","marker":{"color":"#636efa"},"name":"Female","offsetgroup":"Female","orientation":"v","scalegroup":"True","showlegend":true,"x":["Sun","Sun","Sun","Sun","Sun","Sun","Sat","Sat","Sat","Sat","Sat","Sat","Sun","Sun","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Thur","Thur","Fri","Fri","Fri","Fri","Fri","Sat","Sat","Sat","Sat","Sat","Sun","Sun","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Sun","Sun","Sun","Sun","Sun","Sat","Sat","Sun","Sun","Sun","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Sat","Sat","Sat","Sat","Sat","Fri","Fri","Fri","Fri","Sat","Sat","Sat","Thur"],"x0":" ","xaxis":"x","y":[16.99,24.59,35.26,14.83,10.33,16.97,20.29,15.77,19.65,15.06,20.69,16.93,10.29,34.81,26.41,16.45,3.07,17.07,26.86,25.28,14.73,10.07,34.83,5.75,16.32,22.75,11.35,15.38,44.3,22.42,20.92,14.31,7.25,25.71,17.31,10.65,12.43,24.08,13.42,12.48,29.8,14.52,11.38,20.27,11.17,12.26,18.26,8.51,10.33,14.15,13.16,17.47,27.05,16.43,8.35,18.64,11.87,29.85,25.0,13.39,16.21,17.51,10.59,10.63,9.6,20.9,18.15,19.81,43.11,13.0,12.74,13.0,16.4,16.47,12.76,13.27,28.17,12.9,30.14,13.42,15.98,16.27,10.09,22.12,35.83,27.18,18.78],"y0":" ","yaxis":"y","type":"violin"},{"alignmentgroup":"True","box":{"visible":false},"hovertemplate":"sex=Male\u003cbr\u003eday=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Male","marker":{"color":"#EF553B"},"name":"Male","offsetgroup":"Male","orientation":"v","scalegroup":"True","showlegend":true,"x":["Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Fri","Fri","Fri","Fri","Fri","Fri","Fri","Sat","Sat","Sat","Sat","Sat","Sun","Sun","Sun","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sat","Sat","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Sun","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Thur","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Fri","Fri","Fri","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat","Sat"],"x0":" ","xaxis":"x","y":[10.34,21.01,23.68,25.29,8.77,26.88,15.04,14.78,10.27,15.42,18.43,21.58,16.29,20.65,17.92,39.42,19.82,17.81,13.37,12.69,21.7,9.55,18.35,17.78,24.06,16.31,18.69,31.27,16.04,17.46,13.94,9.68,30.4,18.29,22.23,32.4,28.55,18.04,12.54,9.94,25.56,19.49,38.01,11.24,48.27,20.29,13.81,11.02,18.29,17.59,20.08,20.23,15.01,12.02,10.51,17.92,27.2,22.76,17.29,19.44,16.66,32.68,15.98,13.03,18.28,24.71,21.16,28.97,22.49,40.17,27.28,12.03,21.01,12.46,15.36,20.49,25.21,18.24,14.0,38.07,23.95,29.93,11.69,14.26,15.95,8.52,22.82,19.08,16.0,34.3,41.19,9.78,7.51,14.07,13.13,17.26,24.55,19.77,48.17,16.49,21.5,12.66,13.81,24.52,20.76,31.71,50.81,15.81,7.25,31.85,16.82,32.9,17.89,14.48,34.63,34.65,23.33,45.35,23.17,40.55,20.69,30.46,23.1,15.69,28.44,15.48,16.58,7.56,10.34,13.51,18.71,20.53,26.59,38.73,24.27,30.06,25.89,48.33,28.15,11.59,7.74,12.16,8.58,13.42,20.45,13.28,24.01,15.69,11.61,10.77,15.53,10.07,12.6,32.83,29.03,22.67,17.82],"y0":" ","yaxis":"y","type":"violin"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"day"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"total_bill"}},"legend":{"title":{"text":"sex"},"tracegroupgap":0},"violinmode":"group"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('dbac9a56-f833-484c-9724-46f027c62e35');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+<p>这将在 HTML 输出中显示一个交互式的 Plotly 图表。</p>
+<p>对于静态输出,如 PDF 和 Word 文档,我们需要将图表保存为图像文件,然后将其包含在文档中。</p>
+<p>首先,将图表保存为图像:</p>
+<div id="556b8a88" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tips_sex.write_image(<span class="st">"tips_sex_plot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>此命令将在与你的文档相同的文件夹中创建一个静态图像文件。然后,我们可以将其包含在文档中,如下所示:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="al">![按日和性别划分的总账单小提琴图](tips_sex_plot.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>这将在输出中显示图片。</p>
+<hr>
+</section>
+<section id="结束语" class="level2" data-number="14.13">
+<h2 data-number="14.13" class="anchored" data-anchor-id="结束语"><span class="header-section-number">14.13</span> 结束语</h2>
+<p>在本课中,我们学习了如何创建和渲染 Quarto 文档,添加格式,以及包含代码块。我们还学习了如何使用代码块选项来控制文档的行为。我们尝试了不同的输出格式以及如何自定义文档的显示。</p>
+<p>通过这些工具,你可以创建动态和交互式的报告,能够以各种格式轻松分享。Quarto 的灵活性和与 Python 的集成使其成为数据分析师和研究人员的优秀选择。 ```</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./p_tools_venv_cn.html" class="pagination-link" aria-label="文件夹和虚拟环境">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">文件夹和虚拟环境</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./p_untangled_subset_columns_cn.html" class="pagination-link" aria-label="选择列子集">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">选择列子集</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Book created by <a href="https://thegraphcourses.org/">The GRAPH Courses</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_tools_quarto_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

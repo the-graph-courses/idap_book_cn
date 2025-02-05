@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>24&nbsp; 在 Python 中使用 LLM 进行文本生成 – Introduction to Data Science with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./p_untangled_pivoting_cn.html" rel="prev">
+<link href="./logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_ai_LLM_functions_cn.html">Using LLMs in Python</a></li><li class="breadcrumb-item"><a href="./p_ai_LLM_functions_cn.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science with Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/the-graph-courses/idap_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">介绍</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_google_colab_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">p_foundations_google_colab_cn.html</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_coding_basics_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_functions_methods_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Python中的函数、方法和库</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_data_structures_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python中的数据结构</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_for_loops_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Intro to Loops in Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_foundations_writing_functions_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数与条件语句入门</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_data_viz_types_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">数据可视化类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_univariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_data_on_display_multivariate_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">使用 Plotly Express 的双变量和多变量图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Tools for Local Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_installing_python_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">安装 Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_using_vscode_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Installing and Using VS Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_venv_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">文件夹和虚拟环境</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_tools_quarto_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">```qmd</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Manipulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_subset_columns_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">选择列子集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_query_rows_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">查询行</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_transform_variables_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">```markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_conditional_transforms_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">变量的条件性转换</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_groupby_agg_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">数据分组和汇总</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_other_grouped_operations_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Pandas中其他分组操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_1_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">数据集连接介绍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_joining_2_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">连接 2:一对多、多键连接与键不匹配</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_untangled_pivoting_cn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">使用 melt() 和 pivot() 重新塑造数据</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Using LLMs in Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p_ai_LLM_functions_cn.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#简介" id="toc-简介" class="nav-link active" data-scroll-target="#简介"><span class="header-section-number">24.1</span> 简介</a></li>
+  <li><a href="#学习目标" id="toc-学习目标" class="nav-link" data-scroll-target="#学习目标"><span class="header-section-number">24.2</span> 学习目标</a></li>
+  <li><a href="#设置-openai-客户端" id="toc-设置-openai-客户端" class="nav-link" data-scroll-target="#设置-openai-客户端"><span class="header-section-number">24.3</span> 设置 OpenAI 客户端</a></li>
+  <li><a href="#进行-api-调用" id="toc-进行-api-调用" class="nav-link" data-scroll-target="#进行-api-调用"><span class="header-section-number">24.4</span> 进行 API 调用</a></li>
+  <li><a href="#定义辅助函数" id="toc-定义辅助函数" class="nav-link" data-scroll-target="#定义辅助函数"><span class="header-section-number">24.5</span> 定义辅助函数</a></li>
+  <li><a href="#固定问题" id="toc-固定问题" class="nav-link" data-scroll-target="#固定问题"><span class="header-section-number">24.6</span> 固定问题</a></li>
+  <li><a href="#可变作为提示输入" id="toc-可变作为提示输入" class="nav-link" data-scroll-target="#可变作为提示输入"><span class="header-section-number">24.8</span> 可变作为提示输入</a></li>
+  <li><a href="#自动摘要电影数据集" id="toc-自动摘要电影数据集" class="nav-link" data-scroll-target="#自动摘要电影数据集"><span class="header-section-number">24.10</span> 自动摘要:电影数据集</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">24.12</span> 总结</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./p_ai_LLM_functions_cn.html">Using LLMs in Python</a></li><li class="breadcrumb-item"><a href="./p_ai_LLM_functions_cn.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">在 Python 中使用 LLM 进行文本生成</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="简介" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="简介"><span class="header-section-number">24.1</span> 简介</h2>
+<p>在本教程中,我们将探讨如何利用大型语言模型(LLMs)使用 OpenAI 的 API 生成文本。我们将使用 <code>gpt-4o-mini</code> 模型来生成对固定和可变提示的响应,使用辅助函数和向量化优化我们的代码,并使用 pandas DataFrame 处理数据。</p>
+</section>
+<section id="学习目标" class="level2" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="学习目标"><span class="header-section-number">24.2</span> 学习目标</h2>
+<ul>
+<li>设置 OpenAI 客户端</li>
+<li>定义和使用简单函数生成文本</li>
+<li>使用向量化将函数应用于 DataFrame</li>
+</ul>
+</section>
+<section id="设置-openai-客户端" class="level2" data-number="24.3">
+<h2 data-number="24.3" class="anchored" data-anchor-id="设置-openai-客户端"><span class="header-section-number">24.3</span> 设置 OpenAI 客户端</h2>
+<p>首先,我们需要使用您的 API 密钥设置 OpenAI 客户端。在这里,我们将密钥存储在名为 <code>local_settings.py</code> 的文件中,然后将其导入到我们的脚本中。</p>
+<div id="d640c8e1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> local_settings <span class="im">import</span> OPENAI_KEY</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置 OpenAI API 密钥</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用您的 API 密钥初始化 OpenAI 客户端</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> OpenAI(api_key<span class="op">=</span>OPENAI_KEY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>或者,您可以在设置 <code>api_key</code> 时直接传递您的 API 密钥,但请注意不要在代码中泄露,尤其是如果您计划共享或发布代码时。</p>
+</section>
+<section id="进行-api-调用" class="level2" data-number="24.4">
+<h2 data-number="24.4" class="anchored" data-anchor-id="进行-api-调用"><span class="header-section-number">24.4</span> 进行 API 调用</h2>
+<p>让我们进行一次 API 调用,使用 <code>gpt-4o-mini</code> 模型生成对提示的响应。</p>
+<div id="82eca7b7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-4o-mini"</span>, messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is the most tourist-friendly city in France?"</span>}]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>While several cities in France are popular among tourists, Paris often stands out as the most tourist-friendly city. It offers a wealth of attractions, including iconic landmarks like the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral. The city's extensive public transportation system makes it easy for visitors to navigate, and there are countless dining, shopping, and entertainment options. Additionally, many people in the hospitality industry speak English, which can enhance the experience for non-French speaking tourists.
+
+Other cities in France, such as Nice, Lyon, and Marseille, also have their unique charm and tourist-friendly amenities, but Paris remains the primary destination for international visitors.</code></pre>
+</div>
+</div>
+</section>
+<section id="定义辅助函数" class="level2" data-number="24.5">
+<h2 data-number="24.5" class="anchored" data-anchor-id="定义辅助函数"><span class="header-section-number">24.5</span> 定义辅助函数</h2>
+<p>为了简化我们的代码并避免重复,我们将定义一个用于进行 API 调用的辅助函数。API 调用包含大量样板代码,因此将此逻辑封装在函数中可以使我们的代码更简洁、更易维护。</p>
+<p>如果您忘记如何构建 API 调用,请参考 <a href="https://platform.openai.com/docs/api-reference/introduction">OpenAI API 文档</a> 或在线搜索“OpenAI Python API example”。</p>
+<p>以下是我们如何定义 <code>llm_chat</code> 函数:</p>
+<div id="3bbaeb74" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> llm_chat(message):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gpt-4o-mini"</span>, messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: message}]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response.choices[<span class="dv">0</span>].message.content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>此函数接受一个 <code>message</code> 作为输入,发送给 LLM,并返回生成的响应。 <code>model</code> 参数指定要使用的模型 —— 在此情况下为 <code>gpt-4o-mini</code>。我们使用此模型是因为它在质量、速度和成本之间具有良好的平衡。如果您需要更高性能的模型,可以使用 <code>gpt-4o</code>,但请注意不要超过您的 API 配额。</p>
+</section>
+<section id="固定问题" class="level2" data-number="24.6">
+<h2 data-number="24.6" class="anchored" data-anchor-id="固定问题"><span class="header-section-number">24.6</span> 固定问题</h2>
+<p>让我们首先向 <code>gpt-4o-mini</code> 模型发送一个固定问题并获取响应。</p>
+<div id="2380b3c9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 示例用法</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> llm_chat(<span class="st">"What is the most tourist-friendly city in France?"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>While several cities in France are popular with tourists, **Paris** often stands out as the most tourist-friendly city. It offers a wealth of attractions, including iconic landmarks like the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral. The city's extensive public transportation system, including the Metro, makes it easy for visitors to navigate. Additionally, Paris boasts a wide range of accommodations, dining options, and cultural experiences catering to diverse preferences.
+
+Other cities, such as Nice, Lyon, and Bordeaux, are also tourist-friendly and offer their unique charm and attractions, but Paris remains the most visited and recognized city in France.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题获取巴西最适合旅游的城市" class="level2 callout-body-container callout-body" data-number="24.7">
+<h2 data-number="24.7" class="anchored" data-anchor-id="练习题获取巴西最适合旅游的城市"><span class="header-section-number">24.7</span> 练习题:获取巴西最适合旅游的城市</h2>
+<p>使用 <code>llm_chat</code> 函数询问模型巴西最适合旅游的城市。将响应存储在名为 <code>rec_brazil</code> 的变量中。打印响应。</p>
+<div id="31705732" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="可变作为提示输入" class="level2" data-number="24.8">
+<h2 data-number="24.8" class="anchored" data-anchor-id="可变作为提示输入"><span class="header-section-number">24.8</span> 可变作为提示输入</h2>
+<p>通常,您会希望基于不同的输入生成响应。让我们创建一个函数,该函数接受一个国家作为输入,并询问模型该国最适合旅游的城市。</p>
+<div id="80203e6b" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> city_rec(country):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"What is the most tourist-friendly city in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">?"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> llm_chat(prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>现在,您可以通过调用 <code>city_rec("Country Name")</code> 来获取不同国家的推荐:</p>
+<div id="cbd59320" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>city_rec(<span class="st">"Nigeria"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>"Lagos is often considered the most tourist-friendly city in Nigeria. As the country's largest city and a major cultural and economic hub, Lagos offers a vibrant mix of attractions, including beautiful beaches, bustling markets, and a rich nightlife. Key tourist sites include the Lekki Conservation Centre, Nike Art Gallery, and the National Museum. Additionally, Lagos has a variety of accommodations, restaurants, and activities that cater to different preferences and budgets.\n\nOther cities in Nigeria, such as Abuja (the capital city), Calabar (known for its festivals and cultural heritage), and Port Harcourt (with its riverine attractions), also have their own unique appeal for tourists, but Lagos remains the most prominent and accessible for visitors seeking a diverse urban experience."</code></pre>
+</div>
+</div>
+<p>然而,如果我们尝试将此函数直接用于国家列表或 DataFrame 列,它不会逐个处理每个国家。而是会尝试将列表连接成一个字符串,这不是我们想要的行为。</p>
+<div id="160be470" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 错误用法</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>country_df <span class="op">=</span> pd.DataFrame({<span class="st">"country"</span>: [<span class="st">"Nigeria"</span>, <span class="st">"Chile"</span>, <span class="st">"France"</span>, <span class="st">"Canada"</span>]})</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> city_rec(country_df[<span class="st">"country"</span>])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Among the countries you've listed, the most tourist-friendly city is often considered to be in **France**, specifically **Paris**. Paris is renowned for its rich history, cultural landmarks (such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral), and a wide array of amenities for tourists, including public transport, accommodations, and entertainment options. 
+
+While cities in Nigeria, Chile, and Canada have their unique attractions and offerings, Paris consistently ranks as a top destination for tourists globally.</code></pre>
+</div>
+</div>
+<p>要逐个处理每个国家,我们可以使用 NumPy 的 <code>vectorize</code> 函数。此函数将 <code>city_rec</code> 转换为可以接受数组(如列表或 NumPy 数组)并按元素应用函数的形式。</p>
+<div id="1c705bf5" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 向量化函数</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>city_rec_vec <span class="op">=</span> np.vectorize(city_rec)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 将函数应用于每个国家</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>country_df[<span class="st">"city_rec"</span>] <span class="op">=</span> city_rec_vec(country_df[<span class="st">"country"</span>])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>country_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">city_rec</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Nigeria</td>
+<td>Lagos is often considered the most tourist-fri...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Chile</td>
+<td>Santiago is often considered the most tourist-...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>France</td>
+<td>Paris is often regarded as the most tourist-fr...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Canada</td>
+<td>While "most tourist-friendly" can be subjectiv...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>此代码将输出一个包含新列 <code>city_rec</code> 的 DataFrame,其中包含每个国家对应的城市推荐。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题获取当地菜肴" class="level2 callout-body-container callout-body" data-number="24.9">
+<h2 data-number="24.9" class="anchored" data-anchor-id="练习题获取当地菜肴"><span class="header-section-number">24.9</span> 练习题:获取当地菜肴</h2>
+<p>创建一个名为 <code>get_local_dishes</code> 的函数,该函数接受一个国家名称作为输入,并返回该国一些最著名的当地菜肴。然后,将此函数向量化并应用于 <code>country_df</code> DataFrame,为每个国家添加一个包含当地菜肴推荐的列。</p>
+<div id="577486c8" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="自动摘要电影数据集" class="level2" data-number="24.10">
+<h2 data-number="24.10" class="anchored" data-anchor-id="自动摘要电影数据集"><span class="header-section-number">24.10</span> 自动摘要:电影数据集</h2>
+<p>在此示例中,我们将使用来自 <code>vega_datasets</code> 的电影数据集为每部电影生成自动摘要。我们将每部电影的数据转换为字典,并将其作为输入提供给 LLM 生成一段关于其表现的摘要。</p>
+<p>首先,让我们加载电影数据集并预览前几行:</p>
+<div id="8d9c2311" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vega_datasets <span class="im">as</span> vd</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载电影数据集</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> vd.data.movies().head()  <span class="co"># 仅使用前 5 行以节省 API 积分</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>movies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Title</th>
+<th data-quarto-table-cell-role="th">US_Gross</th>
+<th data-quarto-table-cell-role="th">Worldwide_Gross</th>
+<th data-quarto-table-cell-role="th">US_DVD_Sales</th>
+<th data-quarto-table-cell-role="th">Production_Budget</th>
+<th data-quarto-table-cell-role="th">Release_Date</th>
+<th data-quarto-table-cell-role="th">MPAA_Rating</th>
+<th data-quarto-table-cell-role="th">Running_Time_min</th>
+<th data-quarto-table-cell-role="th">Distributor</th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">Major_Genre</th>
+<th data-quarto-table-cell-role="th">Creative_Type</th>
+<th data-quarto-table-cell-role="th">Director</th>
+<th data-quarto-table-cell-role="th">Rotten_Tomatoes_Rating</th>
+<th data-quarto-table-cell-role="th">IMDB_Rating</th>
+<th data-quarto-table-cell-role="th">IMDB_Votes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>The Land Girls</td>
+<td>146083.0</td>
+<td>146083.0</td>
+<td>NaN</td>
+<td>8000000.0</td>
+<td>Jun 12 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Gramercy</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.1</td>
+<td>1071.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>First Love, Last Rites</td>
+<td>10876.0</td>
+<td>10876.0</td>
+<td>NaN</td>
+<td>300000.0</td>
+<td>Aug 07 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Strand</td>
+<td>None</td>
+<td>Drama</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.9</td>
+<td>207.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>I Married a Strange Person</td>
+<td>203134.0</td>
+<td>203134.0</td>
+<td>NaN</td>
+<td>250000.0</td>
+<td>Aug 28 1998</td>
+<td>None</td>
+<td>NaN</td>
+<td>Lionsgate</td>
+<td>None</td>
+<td>Comedy</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.8</td>
+<td>865.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Let's Talk About Sex</td>
+<td>373615.0</td>
+<td>373615.0</td>
+<td>NaN</td>
+<td>300000.0</td>
+<td>Sep 11 1998</td>
+<td>None</td>
+<td>NaN</td>
+<td>Fine Line</td>
+<td>None</td>
+<td>Comedy</td>
+<td>None</td>
+<td>None</td>
+<td>13.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Slam</td>
+<td>1009819.0</td>
+<td>1087521.0</td>
+<td>NaN</td>
+<td>1000000.0</td>
+<td>Oct 09 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Trimark</td>
+<td>Original Screenplay</td>
+<td>Drama</td>
+<td>Contemporary Fiction</td>
+<td>None</td>
+<td>62.0</td>
+<td>3.4</td>
+<td>165.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>接下来,我们将 DataFrame 的每一行转换为字典。这将有助于将数据传递给 LLM。</p>
+<div id="4d84ea1a" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将每部电影的数据转换为字典</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>movies.to_dict(orient<span class="op">=</span><span class="st">"records"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>[{'Title': 'The Land Girls',
+  'US_Gross': 146083.0,
+  'Worldwide_Gross': 146083.0,
+  'US_DVD_Sales': nan,
+  'Production_Budget': 8000000.0,
+  'Release_Date': 'Jun 12 1998',
+  'MPAA_Rating': 'R',
+  'Running_Time_min': nan,
+  'Distributor': 'Gramercy',
+  'Source': None,
+  'Major_Genre': None,
+  'Creative_Type': None,
+  'Director': None,
+  'Rotten_Tomatoes_Rating': nan,
+  'IMDB_Rating': 6.1,
+  'IMDB_Votes': 1071.0},
+ {'Title': 'First Love, Last Rites',
+  'US_Gross': 10876.0,
+  'Worldwide_Gross': 10876.0,
+  'US_DVD_Sales': nan,
+  'Production_Budget': 300000.0,
+  'Release_Date': 'Aug 07 1998',
+  'MPAA_Rating': 'R',
+  'Running_Time_min': nan,
+  'Distributor': 'Strand',
+  'Source': None,
+  'Major_Genre': 'Drama',
+  'Creative_Type': None,
+  'Director': None,
+  'Rotten_Tomatoes_Rating': nan,
+  'IMDB_Rating': 6.9,
+  'IMDB_Votes': 207.0},
+ {'Title': 'I Married a Strange Person',
+  'US_Gross': 203134.0,
+  'Worldwide_Gross': 203134.0,
+  'US_DVD_Sales': nan,
+  'Production_Budget': 250000.0,
+  'Release_Date': 'Aug 28 1998',
+  'MPAA_Rating': None,
+  'Running_Time_min': nan,
+  'Distributor': 'Lionsgate',
+  'Source': None,
+  'Major_Genre': 'Comedy',
+  'Creative_Type': None,
+  'Director': None,
+  'Rotten_Tomatoes_Rating': nan,
+  'IMDB_Rating': 6.8,
+  'IMDB_Votes': 865.0},
+ {'Title': "Let's Talk About Sex",
+  'US_Gross': 373615.0,
+  'Worldwide_Gross': 373615.0,
+  'US_DVD_Sales': nan,
+  'Production_Budget': 300000.0,
+  'Release_Date': 'Sep 11 1998',
+  'MPAA_Rating': None,
+  'Running_Time_min': nan,
+  'Distributor': 'Fine Line',
+  'Source': None,
+  'Major_Genre': 'Comedy',
+  'Creative_Type': None,
+  'Director': None,
+  'Rotten_Tomatoes_Rating': 13.0,
+  'IMDB_Rating': nan,
+  'IMDB_Votes': nan},
+ {'Title': 'Slam',
+  'US_Gross': 1009819.0,
+  'Worldwide_Gross': 1087521.0,
+  'US_DVD_Sales': nan,
+  'Production_Budget': 1000000.0,
+  'Release_Date': 'Oct 09 1998',
+  'MPAA_Rating': 'R',
+  'Running_Time_min': nan,
+  'Distributor': 'Trimark',
+  'Source': 'Original Screenplay',
+  'Major_Genre': 'Drama',
+  'Creative_Type': 'Contemporary Fiction',
+  'Director': None,
+  'Rotten_Tomatoes_Rating': 62.0,
+  'IMDB_Rating': 3.4,
+  'IMDB_Votes': 165.0}]</code></pre>
+</div>
+</div>
+<p>让我们将此新列存储在 DataFrame 中:</p>
+<div id="4f8ad9c2" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>movies[<span class="st">"full_dict"</span>] <span class="op">=</span> movies.to_dict(orient<span class="op">=</span><span class="st">"records"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>movies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Title</th>
+<th data-quarto-table-cell-role="th">US_Gross</th>
+<th data-quarto-table-cell-role="th">Worldwide_Gross</th>
+<th data-quarto-table-cell-role="th">US_DVD_Sales</th>
+<th data-quarto-table-cell-role="th">Production_Budget</th>
+<th data-quarto-table-cell-role="th">Release_Date</th>
+<th data-quarto-table-cell-role="th">MPAA_Rating</th>
+<th data-quarto-table-cell-role="th">Running_Time_min</th>
+<th data-quarto-table-cell-role="th">Distributor</th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">Major_Genre</th>
+<th data-quarto-table-cell-role="th">Creative_Type</th>
+<th data-quarto-table-cell-role="th">Director</th>
+<th data-quarto-table-cell-role="th">Rotten_Tomatoes_Rating</th>
+<th data-quarto-table-cell-role="th">IMDB_Rating</th>
+<th data-quarto-table-cell-role="th">IMDB_Votes</th>
+<th data-quarto-table-cell-role="th">full_dict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>The Land Girls</td>
+<td>146083.0</td>
+<td>146083.0</td>
+<td>NaN</td>
+<td>8000000.0</td>
+<td>Jun 12 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Gramercy</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.1</td>
+<td>1071.0</td>
+<td>{'Title': 'The Land Girls', 'US_Gross': 146083...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>First Love, Last Rites</td>
+<td>10876.0</td>
+<td>10876.0</td>
+<td>NaN</td>
+<td>300000.0</td>
+<td>Aug 07 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Strand</td>
+<td>None</td>
+<td>Drama</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.9</td>
+<td>207.0</td>
+<td>{'Title': 'First Love, Last Rites', 'US_Gross'...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>I Married a Strange Person</td>
+<td>203134.0</td>
+<td>203134.0</td>
+<td>NaN</td>
+<td>250000.0</td>
+<td>Aug 28 1998</td>
+<td>None</td>
+<td>NaN</td>
+<td>Lionsgate</td>
+<td>None</td>
+<td>Comedy</td>
+<td>None</td>
+<td>None</td>
+<td>NaN</td>
+<td>6.8</td>
+<td>865.0</td>
+<td>{'Title': 'I Married a Strange Person', 'US_Gr...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Let's Talk About Sex</td>
+<td>373615.0</td>
+<td>373615.0</td>
+<td>NaN</td>
+<td>300000.0</td>
+<td>Sep 11 1998</td>
+<td>None</td>
+<td>NaN</td>
+<td>Fine Line</td>
+<td>None</td>
+<td>Comedy</td>
+<td>None</td>
+<td>None</td>
+<td>13.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>{'Title': 'Let's Talk About Sex', 'US_Gross': ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Slam</td>
+<td>1009819.0</td>
+<td>1087521.0</td>
+<td>NaN</td>
+<td>1000000.0</td>
+<td>Oct 09 1998</td>
+<td>R</td>
+<td>NaN</td>
+<td>Trimark</td>
+<td>Original Screenplay</td>
+<td>Drama</td>
+<td>Contemporary Fiction</td>
+<td>None</td>
+<td>62.0</td>
+<td>3.4</td>
+<td>165.0</td>
+<td>{'Title': 'Slam', 'US_Gross': 1009819.0, 'Worl...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>现在,让我们定义一个 <code>movie_performance</code> 函数,该函数接受电影的数据字典,构建提示,并调用 <code>llm_chat</code> 函数以获取摘要:</p>
+<div id="403e8a5f" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> movie_performance(movie_data):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> <span class="ss">f"Considering the following data on this movie </span><span class="sc">{</span>movie_data<span class="sc">}</span><span class="ss">, provide a one-paragraph summary of its performance for my report."</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> llm_chat(prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>我们将向量化此函数,以便可以将其应用于整个 <code>full_dict</code> 列:</p>
+<div id="50122894" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 向量化函数以应用于 DataFrame</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>movie_performance_vec <span class="op">=</span> np.vectorize(movie_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>让我们使用一个示例测试我们的函数:</p>
+<div id="343ec87a" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 示例用法</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>movie_performance(<span class="st">"Name: Kene's Movie, Sales: 100,000 USD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>"Kene's Movie has demonstrated strong commercial performance with total sales reaching $100,000 USD. This figure indicates a positive reception and suggests that the film has successfully engaged its target audience, contributing to its financial success. The strong sales figures may reflect effective marketing strategies, favorable reviews, or a compelling storyline that resonated well with viewers. Overall, Kene's Movie appears to be a noteworthy entry in its genre, highlighting its potential for continued success in subsequent markets or platforms."</code></pre>
+</div>
+</div>
+<p>最后,我们将应用向量化函数为每部电影生成摘要:</p>
+<div id="9ecbdaa9" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为每部电影生成摘要</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>movies[<span class="st">"llm_summary"</span>] <span class="op">=</span> movie_performance_vec(movies[<span class="st">"full_dict"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>您现在可以将生成的摘要与 DataFrame 一起保存到 CSV 文件:</p>
+<div id="a3ba7e07" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 将结果保存到 CSV 文件</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>movies.to_csv(<span class="st">"movies_output.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这种方法允许您基于每部电影的完整数据生成详细摘要,这对于自动报告和数据分析非常有用。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+练习
+</div>
+</div>
+<section id="练习题天气摘要" class="level2 callout-body-container callout-body" data-number="24.11">
+<h2 data-number="24.11" class="anchored" data-anchor-id="练习题天气摘要"><span class="header-section-number">24.11</span> 练习题:天气摘要</h2>
+<p>使用来自 <code>vega_datasets</code> 的 <code>seattle_weather</code> 数据集的前 5 行,创建一个函数,该函数接受某一天的所有天气列,并生成该天天气状况的摘要。该函数应使用 LLM 根据提供的数据生成一段用于报告的一段摘要。将摘要存储在名为 <code>weather_summary</code> 的列中。</p>
+<div id="a5b2efd7" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> vd.data.seattle_weather().head()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">precipitation</th>
+<th data-quarto-table-cell-role="th">temp_max</th>
+<th data-quarto-table-cell-role="th">temp_min</th>
+<th data-quarto-table-cell-role="th">wind</th>
+<th data-quarto-table-cell-role="th">weather</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2012-01-01</td>
+<td>0.0</td>
+<td>12.8</td>
+<td>5.0</td>
+<td>4.7</td>
+<td>drizzle</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2012-01-02</td>
+<td>10.9</td>
+<td>10.6</td>
+<td>2.8</td>
+<td>4.5</td>
+<td>rain</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2012-01-03</td>
+<td>0.8</td>
+<td>11.7</td>
+<td>7.2</td>
+<td>2.3</td>
+<td>rain</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2012-01-04</td>
+<td>20.3</td>
+<td>12.2</td>
+<td>5.6</td>
+<td>4.7</td>
+<td>rain</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2012-01-05</td>
+<td>1.3</td>
+<td>8.9</td>
+<td>2.8</td>
+<td>6.1</td>
+<td>rain</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="51772209" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 您的代码</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="总结" class="level2" data-number="24.12">
+<h2 data-number="24.12" class="anchored" data-anchor-id="总结"><span class="header-section-number">24.12</span> 总结</h2>
+<p>在本教程中,我们学习了在 Python 中使用 OpenAI 的 LLM 进行文本生成的基础知识,创建了辅助函数,并通过向量化将这些函数应用于数据集。</p>
+<p>在下一课中,我们将探讨结构化输出,允许我们指定从 LLM 获得响应的格式。我们将使用这一点从非结构化文本中提取结构化数据,这在数据分析中是常见任务。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./p_untangled_pivoting_cn.html" class="pagination-link" aria-label="使用 melt() 和 pivot() 重新塑造数据">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">使用 melt() 和 pivot() 重新塑造数据</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Book created by <a href="https://thegraphcourses.org/">The GRAPH Courses</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/the-graph-courses/idap_book/edit/main/p_ai_LLM_functions_cn.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/the-graph-courses/idap_book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
