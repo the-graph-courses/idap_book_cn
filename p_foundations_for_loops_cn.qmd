@@ -26,7 +26,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 - 在循环中使用 f-字符串格式化输出
 - 应用循环生成多个数据可视化图表
 
-## 包
+## 库
 
 在本课程中,我们将使用以下 Python 库:
 
