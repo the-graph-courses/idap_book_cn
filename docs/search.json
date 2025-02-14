@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "介绍",
     "section": "",
-    "text": "0.1 介绍\n《用 Python 介绍数据科学》课程草稿书\n这本书是由 The GRAPH Courses 提供的一门为期 3 个月的在线课程的课程笔记汇编。要访问课程视频、练习文件和在线测验，请访问我们的网站 thegraphcourses.org。\nThe GRAPH Courses 是 Global Research and Analyses for Public Health (GRAPH) Network 的一个项目，该网络是一个非营利组织，致力于通过经济实惠的现场训练营和免费的自学课程让编程和数据技能变得触手可及。",
+    "text": "0.1 介绍\n《 Python 与数据科学》课程介绍\n这本书是由 The GRAPH Courses 提供的一门为期 3 个月的在线课程的课程笔记汇编。要访问课程视频、练习文件和在线测验，请访问我们的网站 thegraphcourses.org。\nGRAPH 课程是全球公共卫生研究与分析（Global Research and Analyses for Public Health，GRAPH）网络 的一个项目，该网络是一个非营利组织，致力于通过经济实惠的现场训练营和免费的自学课程，让编程和数据技能变得更加简单便捷。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>介绍</span>"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#贡献者",
     "title": "介绍",
     "section": "0.2 贡献者",
-    "text": "0.2 贡献者\n我们非常感谢以下多年来为这些资料开发做出贡献的各位：\nAmanda McKinley, Andree Valle Campos, Aziza Merzouki, Benedict Nguimbis, Bennour Hsin, Camille Beatrice Valera, Daniel Camara, Eduardo Araujo, Elton Mukonda, Guy Wafeu, Imad El Badisy, Imane Bensouda Korachi, Joy Vaz, Kene David Nwosu, Lameck Agasa, Laure Nguemo, Laure Vancauwenberghe, Matteo Franza, Michal Shrestha, Olivia Keiser, Sabina Rodriguez Velasquez, Sara Botero Mesa.",
+    "text": "0.2 贡献者\n我们非常感谢以下多年来为这些资料开发做出贡献的各位：\nAmanda McKinley, Andree Valle Campos, Aziza Merzouki, Benedict Nguimbis, Bennour Hsin, Camille Beatrice Valera, Daniel Camara, Eduardo Araujo, Elton Mukonda, Guy Wafeu, Imad El Badisy, Imane Bensouda Korachi, Joy Vaz, Kene David Nwosu, Lameck Agasa, Laure Nguemo, Laure Vancauwenberghe, Matteo Franza, Michal Shrestha, Olivia Keiser, Sabina Rodriguez Velasquez, Sara Botero Mesa，Li LUO, Ping LEI",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>介绍</span>"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#合作伙伴与资助方",
     "title": "介绍",
     "section": "0.3 合作伙伴与资助方",
-    "text": "0.3 合作伙伴与资助方\n\n日内瓦大学\n牛津大学\n世界卫生组织\n全球基金\nErnst Goehner 基金会",
+    "text": "0.3 合作伙伴与资助方\n\n日内瓦大学\n牛津大学\n复旦大学\n世界卫生组织\n全球基金\nErnst Goehner 基金会",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>介绍</span>"
     ]
@@ -55,7 +55,7 @@
     "href": "p_foundations_google_colab_cn.html#学习目标",
     "title": "2  Google Colab 入门指南",
     "section": "",
-    "text": "了解 Google Colab 是什么以及它在数据科学和人工智能方面的优势\n学习如何访问和导航 Google Colab\n在 Google Colab 中创建和管理笔记本\n在 Colab 单元格中运行 Python 代码\n使用文本单元格进行解释和格式化\n导入和使用预装的数据分析库\n导入和使用数据进行分析\n分享 Colab 笔记本",
+    "text": "了解什么是Google Colab 以及它在数据科学和人工智能方面的优势\n学习如何访问和使用 Google Colab\n在 Google Colab 中创建和管理笔记本\n在 Colab 单元格中运行 Python 代码\n使用文本单元格进行解释和格式化\n导入和使用系统自带的数据分析库\n导入和使用外部数据进行分析\n分享 Colab 笔记本",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Google Colab 入门指南</span>"
@@ -66,7 +66,7 @@
     "href": "p_foundations_google_colab_cn.html#简介",
     "title": "2  Google Colab 入门指南",
     "section": "2.2 简介",
-    "text": "2.2 简介\nGoogle Collaboratory（简称 Colab）是一个免费的在线平台，允许您在浏览器中使用 Python 或 R 代码。对于 Python 入门来说，这是一个很好的方式，因为您不需要在计算机上安装任何东西。\n如果运行重负载工作，会有一些限制。可能会出现超时。但对于初学数据分析的人来说，它是完美且免费的。\n请注意，本文档是视频的摘要，而不是替代品。您应该观看视频以获得更完整的体验。",
+    "text": "2.2 简介\nGoogle Collaboratory（简称 Colab）是一个免费的在线平台，允许您在浏览器中使用 Python 或 R 代码。对于 Python 入门来说，这是一个很好的方式，因为您不需要在计算机上安装任何系统。\n如果运行重负载工作，系统会有一些限制，可能会出现超时的情况。但对于初学数据分析的人来说，Google Colab确实是一个完美的选择。\n请注意，本文档是视频的摘要，不能完全替代视频。您需要观看视频以获得更完整的体验。",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Google Colab 入门指南</span>"
@@ -196,298 +196,298 @@
   {
     "objectID": "p_foundations_coding_basics_cn.html",
     "href": "p_foundations_coding_basics_cn.html",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "",
     "text": "3.1 学习目标",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#学习目标",
     "href": "p_foundations_coding_basics_cn.html#学习目标",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "",
-    "text": "你可以在 Python 中编写和使用注释(单行和多行)。\n你知道如何将 Python 用作基本算术运算的计算器,并理解运算顺序。\n你可以使用数学库进行更复杂的数学运算。\n你理解如何在 Python 代码中使用适当的间距以提高可读性。\n你可以创建、操作和重新赋值不同类型的变量(字符串、整数、浮点数)。\n你可以获取用户输入并进行计算。\n你理解在 Python 中命名变量的基本规则和最佳实践。\n你可以识别并修复与变量使用和命名相关的常见错误。",
+    "text": "掌握如何在 Python 中编写和使用注释(单行和多行)。\n了解如何将 Python 用作基本算术运算的计算器,并理解运算顺序。\n在Python中使用数学库进行更复杂的数学运算。\n理解如何在 Python 代码中使用适当的间距以提高可读性。\n使用Python中创建、操作和重新赋值不同类型的变量(字符串、整数、浮点数)。\n如何在Python中获取用户输入并进行计算。\n理解在 Python 中命名变量的基本规则和最佳实践。\n识别并修复与变量使用和命名相关的常见错误。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#介绍",
     "href": "p_foundations_coding_basics_cn.html#介绍",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.2 介绍",
     "text": "3.2 介绍\n在本课程中,你将学习使用 Python 的基础知识。\n要开始,请打开你喜欢的 Python 环境(例如 Jupyter Notebook、VS Code 或 PyCharm),并创建一个新的 Python 文件或笔记本。\n接下来,根据你的环境,保存文件,文件名如“coding_basics.py”或“coding_basics.ipynb”。\n你现在应该将本课程中的所有代码输入到该文件中。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#注释",
     "href": "p_foundations_coding_basics_cn.html#注释",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.3 注释",
-    "text": "3.3 注释\n注释是 Python 忽略的文本。它们用于解释代码在做什么。\n你使用符号 #,读作“井号”或“pound”,来开始注释。同一行中 # 之后的任何内容都会被忽略。例如:\n\n# 加法\n2 + 2\n\n4\n\n\n如果我们只是尝试在代码上方写 Addition,会导致错误:\n\nAddition\n2 + 2\n\nNameError: name 'Addition' is not defined\n我们可以将注释放在代码的同一行,但它需要放在代码之后。\n\n2 + 2  # 加法\n\n4\n\n\n要编写多行注释,你可以添加更多的 # 符号:\n\n# 加法\n# 添加两个数字\n2 + 2\n\n4\n\n\n或者你可以使用三引号 ''' 或 \"\"\":\n\n'''\n加法:\n下面我们添加两个数字\n'''\n2 + 2\n\n4\n\n\n或者:\n\n\"\"\"\n加法:\n下面我们添加两个数字\n\"\"\"\n2 + 2\n\n4\n\n\n\n\n\n\n\n\n词汇\n\n\n\n注释:代码中被 Python 忽略的一段文本。注释用于解释代码在做什么,旨在供人类阅读。\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.4 练习题:Python 中的注释\n以下哪些代码块是有效的 Python 注释方式?\n# 添加两个数字\n2 + 2\n2 + 2 # 添加两个数字\n''' 添加两个数字\n2 + 2\n# 添加两个数字 2 + 2\n通过尝试运行每个代码块来检查你的答案。",
+    "text": "3.3 注释\n注释是 Python 不会进行运行的文本。它们用于解释代码在做什么。\n使用符号 #,读作“井号”或“pound”,来开始注释。同一行中 # 之后的任何内容都会被忽略。例如:\n\n# 加法\n2 + 2\n\n4\n\n\n如果我们只是尝试在代码上方写 Addition,会导致错误:\n\nAddition\n2 + 2\n\nNameError: name 'Addition' is not defined\n我们可以将注释放在代码的同一行,但它需要放在代码之后。\n\n2 + 2  # 加法\n\n4\n\n\n要编写多行注释,你可以添加更多的 # 符号:\n\n# 加法\n# 添加两个数字\n2 + 2\n\n4\n\n\n或者你可以使用三引号 ''' 或 \"\"\":\n\n'''\n加法:\n下面我们添加两个数字\n'''\n2 + 2\n\n4\n\n\n或者:\n\n\"\"\"\n加法:\n下面我们添加两个数字\n\"\"\"\n2 + 2\n\n4\n\n\n\n\n\n\n\n\n词汇\n\n\n\n注释:代码中被 Python 忽略的一段文本。注释用于解释代码在做什么,旨在供人类阅读。\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.4 练习题:Python 中的注释\n以下哪些代码块是有效的 Python 注释方式?\n# 添加两个数字\n2 + 2\n2 + 2 # 添加两个数字\n''' 添加两个数字\n2 + 2\n# 添加两个数字 2 + 2\n通过尝试运行每个代码块来检查你的答案。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题python-中的注释",
     "href": "p_foundations_coding_basics_cn.html#练习题python-中的注释",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.4 练习题:Python 中的注释",
     "text": "3.4 练习题:Python 中的注释\n以下哪些代码块是有效的 Python 注释方式?\n# 添加两个数字\n2 + 2\n2 + 2 # 添加两个数字\n''' 添加两个数字\n2 + 2\n# 添加两个数字 2 + 2\n通过尝试运行每个代码块来检查你的答案。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#python-作为计算器",
     "href": "p_foundations_coding_basics_cn.html#python-作为计算器",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.5 Python 作为计算器",
-    "text": "3.5 Python 作为计算器\n如你所见,Python 可以按照标准方式作为计算器使用。\n以下是一些其他基本算术运算的例子:\n\n2 - 2 # 二减二\n\n0\n\n\n\n2 * 2  # 二乘二 \n\n4\n\n\n\n2 / 2  # 二除以二\n\n1.0\n\n\n\n2 ** 2  # 二的二次方\n\n4\n\n\n还有一些你可能会遇到的其他运算符。例如,% 是取模运算符,它返回除法的余数。\n\n10 % 3  # 十模三\n\n1\n\n\n// 是地板除运算符,它先除法然后向下取整到最接近的整数。\n\n10 // 3  # 十地板除三\n\n3\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.6 练习题:取模与地板除\n猜测以下代码块的结果,然后运行它们以检查你的答案:\n\n5 % 4\n\n\n5 // 4",
+    "text": "3.5 Python 作为计算器\n如你所见,Python 可以按照标准方式作为计算器使用。\n以下是一些其他基本算术运算的例子:\n\n2 - 2 # 二减二\n\n0\n\n\n\n2 * 2  # 二乘二 \n\n4\n\n\n\n2 / 2  # 二除以二\n\n1.0\n\n\n\n2 ** 2  # 二的二次方\n\n4\n\n\n还有一些你可能会遇到的其他运算符。例如,在Python中，使用% 符号表示模数运算,它返回除法的余数。\n\n10 % 3  # 十模三\n\n1\n\n\n// 是地板除运算符,它先除法然后向下取整到最接近的整数。\n\n10 // 3  # 十地板除三\n\n3\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.6 练习题:取模与地板除\n猜测以下代码块的结果,然后运行它们以检查你的答案:\n\n5 % 4\n\n\n5 // 4",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题取模与地板除",
     "href": "p_foundations_coding_basics_cn.html#练习题取模与地板除",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.6 练习题:取模与地板除",
     "text": "3.6 练习题:取模与地板除\n猜测以下代码块的结果,然后运行它们以检查你的答案:\n\n5 % 4\n\n\n5 // 4",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#运算顺序",
     "href": "p_foundations_coding_basics_cn.html#运算顺序",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.7 运算顺序",
     "text": "3.7 运算顺序\nPython 遵循标准的 PEMDAS 运算顺序(括号、指数、乘法、除法、加法、减法)。\n例如,乘法在加法之前计算,所以下面的结果是 6。\n\n2 + 2 * 2   \n\n6\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.8 练习题:评估算术表达式\n以下哪些代码块将计算为 10?\n\n2 + 2 * 4\n\n\n6 + 2 ** 2",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题评估算术表达式",
     "href": "p_foundations_coding_basics_cn.html#练习题评估算术表达式",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.8 练习题:评估算术表达式",
     "text": "3.8 练习题:评估算术表达式\n以下哪些代码块将计算为 10?\n\n2 + 2 * 4\n\n\n6 + 2 ** 2",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#使用数学库",
     "href": "p_foundations_coding_basics_cn.html#使用数学库",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.9 使用数学库",
-    "text": "3.9 使用数学库\n我们还可以使用 math 库来进行更复杂的数学运算。例如,我们可以使用 math.sqrt 函数计算一个数的平方根。\n\nimport math\nmath.sqrt(100)  # 平方根\n\n10.0\n\n\n或者我们可以使用 math.log 函数计算一个数的自然对数。\n\nimport math\nmath.log(100)  # 对数\n\n4.605170185988092\n\n\nmath.sqrt 和 math.log 是 Python 函数 的例子,其中一个 参数(例如 100)被传递给函数以进行计算。\n我们将在后面学习更多关于函数的内容。\n\n\n\n\n\n\n词汇\n\n\n\n函数:执行特定任务的可重用代码块。函数通常接受输入(称为参数)并返回输出。\n\n\n\n\n\n\n\n\n练习\n\n\n\n\n3.10 练习题:使用数学库\n使用 math 库,计算 81 的平方根。\n在下方编写你的代码并运行以检查你的答案:\n\n# 你的代码在这里\n\n\n\n3.11 练习题:描述 Random 库的使用\n考虑以下代码,它生成一个 1 到 10 之间的随机数:\n\nimport random\nrandom.randint(1, 10)\n\n1\n\n\n在这段代码中,确定库、函数和函数的参数。",
+    "text": "3.9 使用数学库\n我们还可以使用 math 库来进行更复杂的数学运算。例如,我们可以使用 math.sqrt 函数计算一个数的平方根。\n\nimport math\nmath.sqrt(100)  # 平方根\n\n10.0\n\n\n或者我们可以使用 math.log 函数计算一个数的自然对数。\n\nimport math\nmath.log(100)  # 对数\n\n4.605170185988092\n\n\nmath.sqrt 和 math.log 是 Python 函数 的例子,其中一个 参数(例如 100)被传递给函数以进行计算。\n我们将在后面学习更多关于函数的内容。\n\n\n\n\n\n\n词汇\n\n\n\n函数:执行特定任务的可重用代码块。函数通常接受输入(称为参数)并返回输出。\n\n\n\n\n\n\n\n\n练习\n\n\n\n\n3.10 练习题:使用数学库\n使用 math 库,计算 81 的平方根。\n在下方编写你的代码并运行以检查你的答案:\n\n# 你的代码在这里\n\n\n\n3.11 练习题:描述 Random 库的使用\n考虑以下代码,它生成一个 1 到 10 之间的随机数:\n\nimport random\nrandom.randint(1, 10)\n\n10\n\n\n在这段代码中,确定库、函数和函数的参数。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题使用数学库",
     "href": "p_foundations_coding_basics_cn.html#练习题使用数学库",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.10 练习题:使用数学库",
     "text": "3.10 练习题:使用数学库\n使用 math 库,计算 81 的平方根。\n在下方编写你的代码并运行以检查你的答案:\n\n# 你的代码在这里",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题描述-random-库的使用",
     "href": "p_foundations_coding_basics_cn.html#练习题描述-random-库的使用",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.11 练习题:描述 Random 库的使用",
-    "text": "3.11 练习题:描述 Random 库的使用\n考虑以下代码,它生成一个 1 到 10 之间的随机数:\n\nimport random\nrandom.randint(1, 10)\n\n1\n\n\n在这段代码中,确定库、函数和函数的参数。",
+    "text": "3.11 练习题:描述 Random 库的使用\n考虑以下代码,它生成一个 1 到 10 之间的随机数:\n\nimport random\nrandom.randint(1, 10)\n\n10\n\n\n在这段代码中,确定库、函数和函数的参数。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#代码中的间距",
     "href": "p_foundations_coding_basics_cn.html#代码中的间距",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.12 代码中的间距",
     "text": "3.12 代码中的间距\n良好的间距使你的代码更易读。在 Python 中,两个简单的间距实践可以大大提高代码的可读性:使用空行和在运算符周围添加空格。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#缩进",
     "href": "p_foundations_coding_basics_cn.html#缩进",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.13 缩进",
     "text": "3.13 缩进\nPython 使用缩进来表示循环、函数和其他代码块的开始和结束。我们将在后面的课程中详细介绍这一点。\n目前,需要注意的一件事是避免在代码前意外加入空格。\n例如,考虑以下代码块:\n\nimport math\n# 获取 100 的平方根\n math.sqrt(100)\n\n尝试运行这段代码会导致错误:\nIndentationError: unexpected indent\n这是由于 math.sqrt 函数前的空格。我们可以通过删除空格来修复它。\n\nimport math\n# 获取 100 的平方根\nmath.sqrt(100)",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#空行",
     "href": "p_foundations_coding_basics_cn.html#空行",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.14 空行",
     "text": "3.14 空行\n使用空行来分隔代码的不同部分。\n例如,考虑以下代码块:\n\n# 设置数字\nx = 5\ny = 10\n# 执行计算\nresult = x + y\n# 显示结果\nprint(result)\n\n15\n\n\n我们可以添加空行来分隔代码的不同部分:\n\n# 设置数字\nx = 5\ny = 10\n\n# 执行计算\nresult = x + y\n\n# 显示结果\nprint(result)\n\n15\n\n\n空行有助于将代码组织成逻辑部分,类似于书写中的段落。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#运算符周围的空格",
     "href": "p_foundations_coding_basics_cn.html#运算符周围的空格",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.15 运算符周围的空格",
     "text": "3.15 运算符周围的空格\n在数学运算符周围添加空格可以提高可读性:\n\n# 难以阅读\nx=5+3*2\n\n# 容易阅读\nx = 5 + 3 * 2\n\n在列举项目时,在每个逗号后添加一个空格:\n\n# 难以阅读\nprint(1,2,3)\n\n# 容易阅读\nprint(1, 2, 3)\n\n这一做法遵循书面英语的惯例,我们在逗号后加一个空格。它使代码中的项目列表更易读。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#python-中的变量",
     "href": "p_foundations_coding_basics_cn.html#python-中的变量",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.16 Python 中的变量",
     "text": "3.16 Python 中的变量\n如你所见,为了在 Python 中存储一个值以供将来使用,我们使用 赋值运算符 = 将其赋值给一个 变量。\n\nmy_var = 2 + 2  # 将 `2 + 2` 的结果赋值给名为 `my_var` 的变量\nprint(my_var)  # 打印 my_var\n\n4\n\n\n现在你已经创建了变量 my_var,Python 知道它并将在这个 Python 会话中跟踪它。\n你可以打开你的环境查看你创建了哪些变量。这取决于你的 IDE 而有所不同。\n那么,变量到底是什么?可以将其视为一个命名的容器,可以保存一个值。当你运行以下代码:\n\nmy_var = 20\n\n你是在告诉 Python,“将数字 20 存储在名为 ‘my_var’ 的变量中”。\n一旦代码运行,我们可以用 Python 术语说,“变量 my_var 的值是 20”。\n尝试为以下代码块编写类似的句子:\n\nfirst_name = \"Joanna\"\n\n运行这段代码后,我们可以用 Python 术语说,“变量 first_name 的值是 Joanna”。\n\n\n\n\n\n\n词汇\n\n\n\n像 “Joanna” 这样的文本值称为 字符串,而像 20 这样的数字称为 整数。如果数字有小数点,则称为 浮点数,是“浮点数”(floating-point number)的简称。\n以下是这三种变量类型的示例:\n\n# 字符串变量\nfirst_name = \"Joanna\"\n\n# 整数变量\nage = 5\n\n# 浮点数变量\nheight = 1.4\n\n你可以使用 type() 函数检查变量的类型。\n\nprint(type(first_name))\nprint(type(age))\nprint(type(height))\n\n&lt;class 'str'&gt;\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n\n\n\n\n\n\n\n\n\n\n词汇\n\n\n\n变量:一个可以保存值的命名容器。在 Python 中,变量可以存储不同类型的数据,包括数字、字符串和更复杂的对象。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#重新赋值变量",
     "href": "p_foundations_coding_basics_cn.html#重新赋值变量",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.17 重新赋值变量",
     "text": "3.17 重新赋值变量\n重新赋值变量就像是更改容器的内容。\n例如,之前我们运行了这段代码,将值 “Joanna” 存储在 first_name 变量中:\n\nfirst_name = \"Joanna\"\n\n要将其更改为不同的值,只需运行一个新的赋值语句并使用新值:\n\nfirst_name = \"Luigi\"\n\n你可以打印变量以观察变化:\n\nfirst_name\n\n'Luigi'",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#操作变量",
     "href": "p_foundations_coding_basics_cn.html#操作变量",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.18 操作变量",
     "text": "3.18 操作变量\n大部分时间你将在 Python 中操作变量。让我们看一些快速的例子。\n你可以对变量运行简单的命令。例如,下面我们将值 100 存储在变量中,然后对变量取平方根:\n\nimport math\n\nmy_number = 100\nmath.sqrt(my_number)\n\n10.0\n\n\nPython 将 my_number 视为数字 100,因此能够计算其平方根。\n\n你还可以将现有变量组合起来创建新变量。例如,输入以下代码,将 my_number 加到自身,并将结果存储在名为 my_sum 的新变量中:\n\nmy_sum = my_number + my_number\nmy_sum\n\n200\n\n\nmy_sum 的值应该是多少?先猜测,然后通过打印来检查。\n\nPython 还允许我们使用 + 运算符连接字符串。例如,我们可以连接 first_name 和 last_name 变量来创建一个名为 full_name 的新变量:\n\nfirst_name = \"Joanna\"\nlast_name = \"Luigi\"\nfull_name = first_name + \" \" + last_name\nfull_name\n\n'Joanna Luigi'\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.19 练习题:变量赋值与操作\n考虑以下代码。变量 answer 的值是多少?想一想,然后运行代码检查你的答案。\n\neight = 9\nanswer = eight - 8\nanswer",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题变量赋值与操作",
     "href": "p_foundations_coding_basics_cn.html#练习题变量赋值与操作",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.19 练习题:变量赋值与操作",
     "text": "3.19 练习题:变量赋值与操作\n考虑以下代码。变量 answer 的值是多少?想一想,然后运行代码检查你的答案。\n\neight = 9\nanswer = eight - 8\nanswer",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#获取用户输入",
     "href": "p_foundations_coding_basics_cn.html#获取用户输入",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.20 获取用户输入",
     "text": "3.20 获取用户输入\n尽管在数据分析中不常用,但 Python 的 input() 函数是一个很酷的 Python 功能,你应该了解。它允许你获取用户输入。\n这是一个简单的例子。我们可以请求用户输入并将其存储在名为 name 的变量中。\n\nname = input()\n\n然后我们可以向用户打印一个问候语。\n\nprint(\"Hello,\", name)\n\n我们还可以在输入提示中包含一个问题:\n\nname = input('What is your name? ')\nprint(\"Hello,\", name)\n\n让我们看另一个例子。我们将告诉用户他们名字中有多少个字母。\n\nname = input('What is your name? ')\nprint(\"There are\", len(name), \"letters in your name\")\n\n例如,如果你运行这段代码并输入 “Kene”,你可能会看到:\nWhat is your name? Kene\nThere are 4 letters in your name\n\n\n\n\n\n\n练习\n\n\n\n3.21 练习题:使用 Input()\n编写一个简短的程序,询问用户他们最喜欢的颜色,然后打印一条消息,说“xx 颜色也是我最喜欢的颜色!”,其中 xx 是他们输入的颜色。通过运行程序并输入一个颜色来测试你的程序。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题使用-input",
     "href": "p_foundations_coding_basics_cn.html#练习题使用-input",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.21 练习题:使用 Input()",
     "text": "3.21 练习题:使用 Input()\n编写一个简短的程序,询问用户他们最喜欢的颜色,然后打印一条消息,说“xx 颜色也是我最喜欢的颜色!”,其中 xx 是他们输入的颜色。通过运行程序并输入一个颜色来测试你的程序。",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#与变量相关的常见错误",
     "href": "p_foundations_coding_basics_cn.html#与变量相关的常见错误",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.22 与变量相关的常见错误",
     "text": "3.22 与变量相关的常见错误\n在 Python 中使用变量时,你会遇到的最常见错误之一是 NameError。当你尝试使用一个尚未定义的变量时,就会发生这种错误。例如:\n\nmy_number = 48  # 定义 `my_number`\nMy_number + 2  # 尝试将 2 加到 `my_number`\n\n如果你运行这段代码,会得到如下错误信息:\nNameError: name 'My_number' is not defined\n在这里,Python 返回错误信息,因为我们尚未创建(或 定义)变量 My_number。记住,Python 是区分大小写的;我们定义了 my_number,但尝试使用 My_number。\n要修复此问题,确保你使用的是正确的变量名:\n\nmy_number = 48\nmy_number + 2  # 这将工作并返回 50\n\n50\n\n\n始终仔细检查你的变量名以避免此错误。记住,在 Python 中,my_number、My_number 和 MY_NUMBER 都是不同的变量。\n\n当你开始学习 Python 时,处理错误可能会令人沮丧。它们通常很难理解。\n但习惯读取和理解错误很重要,因为你在编码职业生涯中会经常遇到错误。\n稍后,我们将向你展示如何使用像 ChatGPT 这样的语言模型(LLMs)来调试错误。\n但在此之前,最好尝试自己发现和修复错误。\n\n\n\n\n\n\n练习\n\n\n\n3.23 练习题:调试变量错误\n下面的代码返回一个错误。为什么?(仔细看看)\n\nmy_1st_name = \"Kene\"\nmy_last_name = \"Nwosu\"\n\nprint(my_Ist_name, my_last_name)\n\n提示:看看变量名。它们是否一致?",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题调试变量错误",
     "href": "p_foundations_coding_basics_cn.html#练习题调试变量错误",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.23 练习题:调试变量错误",
     "text": "3.23 练习题:调试变量错误\n下面的代码返回一个错误。为什么?(仔细看看)\n\nmy_1st_name = \"Kene\"\nmy_last_name = \"Nwosu\"\n\nprint(my_Ist_name, my_last_name)\n\n提示:看看变量名。它们是否一致?",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#命名变量",
     "href": "p_foundations_coding_basics_cn.html#命名变量",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.24 命名变量",
     "text": "3.24 命名变量\n\n计算机科学中只有 两件难事:缓存失效和 命名事物。\n— Phil Karlton.\n\n因为你在 Python 中的很多工作涉及与你创建的变量互动,给这些变量选择智能的名字很重要。\n命名变量很难,因为名字应该既 简短(这样你可以快速键入它们)又 信息丰富(这样你可以轻松记住变量包含的内容),而这两个目标往往相冲突。\n因此,像下面这样太长的名字是不好的,因为它们需要很长时间来输入。\n\nsample_of_the_ebola_outbreak_dataset_from_sierra_leone_in_2014\n\n而像 data 这样的名字也是不好的,因为它不具有信息性;名字没有很好地说明变量包含什么。\n随着你编写更多的 Python 代码,你将学会如何编写简短且信息丰富的名字。\n\n对于由多个单词组成的名字,有几种约定用于分隔单词:\n\nsnake_case = \"蛇形命名使用下划线\"\ncamelCase = \"骆驼命名法将新单词首字母大写(但不包括第一个单词)\"\nPascalCase = \"帕斯卡命名法将所有单词包括第一个单词都首字母大写\"\n\n我们推荐 snake_case,它使用全小写单词,并用 _ 分隔单词。\n\n还要注意,变量名有一些限制:\n\n名称必须以字母或下划线开头。因此 2014_data 不是一个有效的名字(因为它以数字开头)。尝试运行下面的代码块看看会得到什么错误。\n\n\n2014_data = \"This is not a valid name\"\n\n\n名称只能包含字母、数字和下划线 (_)。因此 ebola-data 或 ebola~data 或带空格的 ebola data 都不是有效的名字。\n\n\nebola-data = \"This is not a valid name\"\n\n\nebola~data = \"This is not a valid name\"\n\n\n\n\n\n\n\n附注\n\n\n\n虽然我们在 Python 中推荐使用 snake_case 作为变量名,但你可能会看到其他约定,如 camelCase 或 PascalCase,特别是在使用其他语言的代码或某些 Python 库时。在你自己的代码中要保持一致,并遵循你所工作的任何项目或团队的惯例。\n\n\n\n\n\n\n\n\n练习\n\n\n\n3.25 练习题:有效的变量命名约定\n以下哪些变量名在 Python 中是有效的?尝试在不运行代码的情况下确定,然后通过尝试运行每行代码来检查你的答案。\n然后修复无效的变量名。\n\n1st_name = \"John\"\nlast_name = \"Doe\"\nfull-name = \"John Doe\"\nage_in_years = 30\ncurrent@job = \"Developer\"\nPhoneNumber = \"555-1234\"\n_secret_code = 42",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#练习题有效的变量命名约定",
     "href": "p_foundations_coding_basics_cn.html#练习题有效的变量命名约定",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.25 练习题:有效的变量命名约定",
     "text": "3.25 练习题:有效的变量命名约定\n以下哪些变量名在 Python 中是有效的?尝试在不运行代码的情况下确定,然后通过尝试运行每行代码来检查你的答案。\n然后修复无效的变量名。\n\n1st_name = \"John\"\nlast_name = \"Doe\"\nfull-name = \"John Doe\"\nage_in_years = 30\ncurrent@job = \"Developer\"\nPhoneNumber = \"555-1234\"\n_secret_code = 42",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
     "objectID": "p_foundations_coding_basics_cn.html#总结",
     "href": "p_foundations_coding_basics_cn.html#总结",
-    "title": "3  编程基础",
+    "title": "3  Python 编程基础",
     "section": "3.26 总结",
     "text": "3.26 总结\n在本课程中,我们涵盖了 Python 编程的基本构建块:\n\n注释:使用 # 进行单行注释和三引号进行多行注释。\n基本算术:将 Python 用作计算器,并理解运算顺序。\n数学库:执行复杂的数学运算。\n代码间距:通过适当的间距提高可读性。\n变量:创建、操作和重新赋值不同类型的变量。\n获取用户输入:使用 input() 函数获取用户输入。\n变量命名:遵循命名变量的规则和最佳实践。\n常见错误:识别并修复与变量相关的错误。\n\n这些概念构成了 Python 编程的基础。随着你继续学习,你将以这些基础为基础,创建更复杂和强大的程序。记住,实践是掌握这些概念的关键!",
     "crumbs": [
       "基础知识",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>编程基础</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Python 编程基础</span>"
     ]
   },
   {
@@ -506,7 +506,7 @@
     "href": "p_foundations_functions_methods_cn.html#学习目标",
     "title": "4  Python中的函数、方法和库",
     "section": "",
-    "text": "你理解Python中的函数和方法是什么。\n你能识别和使用函数和方法中的参数。\n你知道如何在对象上调用内置函数和方法。\n你理解Python中的库及其导入方式。\n你知道如何安装一个简单的外部库并在代码中使用它。",
+    "text": "理解Python中的函数和方法。\n识别和使用函数和方法中的参数。\n掌握如何在对象上调用内置函数和方法。\n理解Python中的库及其导入方式。\n了解如何安装一个简单的外部库并在代码中使用它。",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Python中的函数、方法和库</span>"
@@ -594,7 +594,7 @@
     "href": "p_foundations_data_structures_cn.html",
     "title": "5  Python中的数据结构",
     "section": "",
-    "text": "5.1 介绍\n到目前为止,在我们的Python探索中,我们一直在处理简单的、单一的值,如数字和字符串。但是,正如你所知,数据通常以更大的结构形式出现。你最熟悉的结构是带有行和列的表格。\n在本课程中,我们将探索在Python中组织数据的构建块,从列表、字典、Series,最后到表格,或者更正式地说,是数据框(DataFrames)。\n让我们开始吧!",
+    "text": "5.1 介绍\n到目前为止,在我们的Python探索中,我们一直在处理简单的、单一的值,如数字和字符串。但是,正如你所知,数据通常以更大的结构形式出现。我们最熟悉的结构是带有行和列的表格。\n在本课程中,我们将探索在Python中组织数据的构建块,从列表、字典、Series,最后到表格,或者更正式地说,是数据框(DataFrames)。\n让我们开始吧!",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Python中的数据结构</span>"
@@ -700,11 +700,11 @@
     ]
   },
   {
-    "objectID": "p_foundations_for_loops_cn.html#包",
-    "href": "p_foundations_for_loops_cn.html#包",
+    "objectID": "p_foundations_for_loops_cn.html#库",
+    "href": "p_foundations_for_loops_cn.html#库",
     "title": "6  Python中的循环简介",
-    "section": "6.3 包",
-    "text": "6.3 包\n在本课程中,我们将使用以下 Python 库:\n\nimport pandas as pd\nimport plotly.express as px\nfrom vega_datasets import data",
+    "section": "6.3 库",
+    "text": "6.3 库\n在本课程中,我们将使用以下 Python 库:\n\nimport pandas as pd\nimport plotly.express as px\nfrom vega_datasets import data",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Python中的循环简介</span>"
@@ -759,7 +759,7 @@
     "href": "p_foundations_writing_functions_cn.html",
     "title": "7  函数与条件语句入门",
     "section": "",
-    "text": "7.1 简介\n到目前为止,在本课程中你主要使用了别人编写的函数。在本课中,你将学习如何在 Python 中编写自己的函数。",
+    "text": "7.1 简介\n到目前为止,在本课程中我们主要使用了别人编写的函数。在本课中,我们将学习如何在 Python 中编写自己的函数。",
     "crumbs": [
       "基础知识",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>函数与条件语句入门</span>"
@@ -1342,7 +1342,7 @@
     "href": "p_tools_venv_cn.html#演示环境隔离",
     "title": "13  文件夹和虚拟环境",
     "section": "13.7 演示环境隔离",
-    "text": "13.7 演示环境隔离\n让我们演示虚拟环境是如何隔离的。\n\n使用文件 &gt; 打开文件夹菜单选项打开您之前的工作区 my_first_workspace。\n创建一个 Python 文件并尝试使用 cowsay 包:\n::: {#41ccc204 .cell execution_count=2} {.python .cell-code}  import cowsay :::\n\n这可能无法正常工作,因为该环境中未安装 cowsay。如果它确实工作,这意味着您已在全局范围内安装了 cowsay,这也是可以的。\n现在,让我们返回到我们的主文件夹/工作区。这是您将在本课程中进行大部分分析的地方。",
+    "text": "13.7 演示环境隔离\n让我们演示虚拟环境是如何隔离的。\n\n使用文件 &gt; 打开文件夹菜单选项打开您之前的工作区 my_first_workspace。\n创建一个 Python 文件并尝试使用 cowsay 包:\n::: {#45de7e94 .cell execution_count=2} {.python .cell-code}  import cowsay :::\n\n这可能无法正常工作,因为该环境中未安装 cowsay。如果它确实工作,这意味着您已在全局范围内安装了 cowsay,这也是可以的。\n现在,让我们返回到我们的主文件夹/工作区。这是您将在本课程中进行大部分分析的地方。",
     "crumbs": [
       "本地 Python 工具",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>文件夹和虚拟环境</span>"
@@ -1848,7 +1848,7 @@
     "href": "p_untangled_transform_variables_cn.html#写时复制警告",
     "title": "17  pandas 中的变量转换",
     "section": "17.9 写时复制警告",
-    "text": "17.9 写时复制警告\n在本课的前面部分,我们启用了“写时复制”模式。让我们看看当此功能被禁用时会发生什么。\n\npd.set_option(\"mode.copy_on_write\", False)\n\n# Create a small subset of our data\nsubset = counties.query(\"state == 'AL'\")\n\nsubset\n\n\n\n\n\n\n\n\nstate\ncounty\npop_20\narea_sq_miles\nhh_inc_21\necon_type\nunemp_20\nforeign_born_num\npop_change_2010_2020\npct_emp_change_2010_2021\n\n\n\n\n0\nAL\nAutauga, AL\n58877.0\n594.456107\n66444.0\nNonspecialized\n5.4\n1241.0\n7.758700\n9.0\n\n\n1\nAL\nBaldwin, AL\n233140.0\n1589.836014\n65658.0\nRecreation\n6.2\n7938.0\n27.159356\n28.2\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n65\nAL\nWilcox, AL\n10518.0\n887.857611\n30071.0\nManufacturing\n16.2\n36.0\n-9.168809\n3.8\n\n\n66\nAL\nWinston, AL\n23491.0\n612.998002\n47176.0\nManufacturing\n5.2\n408.0\n-3.855579\n18.1\n\n\n\n\n67 rows × 10 columns\n\n\n\n当我们尝试修改子集时,会收到一个警告:\n\n# Modify the subset\nsubset['unemp_20'] = subset['unemp_20'].round(0)\n\n/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_61682/317403666.py:2: SettingWithCopyWarning:\n\n\nA value is trying to be set on a copy of a slice from a DataFrame.\nTry using .loc[row_indexer,col_indexer] = value instead\n\nSee the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy\n\n\n\n虽然我们不会深入探讨此警告的技术细节(因为它涉及复杂的 pandas 内部机制),但值得注意的是,该警告包含一个指向 pandas 文档的链接。该文档包含了我们在课程开始时使用的设置。\n如果您需要再次参考此设置,您只需点击警告消息中的链接即可访问文档。文档页面还提供了有关此特定问题的更详细信息。\n另请注意,从 Pandas 3.0(可能在 2025 年发布)开始,将移除此警告,因为默认行为将改为写时复制。",
+    "text": "17.9 写时复制警告\n在本课的前面部分,我们启用了“写时复制”模式。让我们看看当此功能被禁用时会发生什么。\n\npd.set_option(\"mode.copy_on_write\", False)\n\n# Create a small subset of our data\nsubset = counties.query(\"state == 'AL'\")\n\nsubset\n\n\n\n\n\n\n\n\nstate\ncounty\npop_20\narea_sq_miles\nhh_inc_21\necon_type\nunemp_20\nforeign_born_num\npop_change_2010_2020\npct_emp_change_2010_2021\n\n\n\n\n0\nAL\nAutauga, AL\n58877.0\n594.456107\n66444.0\nNonspecialized\n5.4\n1241.0\n7.758700\n9.0\n\n\n1\nAL\nBaldwin, AL\n233140.0\n1589.836014\n65658.0\nRecreation\n6.2\n7938.0\n27.159356\n28.2\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n65\nAL\nWilcox, AL\n10518.0\n887.857611\n30071.0\nManufacturing\n16.2\n36.0\n-9.168809\n3.8\n\n\n66\nAL\nWinston, AL\n23491.0\n612.998002\n47176.0\nManufacturing\n5.2\n408.0\n-3.855579\n18.1\n\n\n\n\n67 rows × 10 columns\n\n\n\n当我们尝试修改子集时,会收到一个警告:\n\n# Modify the subset\nsubset['unemp_20'] = subset['unemp_20'].round(0)\n\n/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_11078/317403666.py:2: SettingWithCopyWarning:\n\n\nA value is trying to be set on a copy of a slice from a DataFrame.\nTry using .loc[row_indexer,col_indexer] = value instead\n\nSee the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy\n\n\n\n虽然我们不会深入探讨此警告的技术细节(因为它涉及复杂的 pandas 内部机制),但值得注意的是,该警告包含一个指向 pandas 文档的链接。该文档包含了我们在课程开始时使用的设置。\n如果您需要再次参考此设置,您只需点击警告消息中的链接即可访问文档。文档页面还提供了有关此特定问题的更详细信息。\n另请注意,从 Pandas 3.0(可能在 2025 年发布)开始,将移除此警告,因为默认行为将改为写时复制。",
     "crumbs": [
       "数据操作",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>pandas 中的变量转换</span>"
@@ -2046,7 +2046,7 @@
     "href": "p_untangled_groupby_agg_cn.html#使用-pandas.dataframe.groupby-进行分组汇总",
     "title": "19  数据分组和汇总",
     "section": "19.7 使用 pandas.DataFrame.groupby() 进行分组汇总",
-    "text": "19.7 使用 pandas.DataFrame.groupby() 进行分组汇总\n现在让我们看看如何使用 groupby() 来获得分组汇总,这是使用 agg() 的主要原因。\n顾名思义,pandas.DataFrame.groupby() 让您可以按变量中的值对数据框进行分组(例如,按性别分组为男性和女性)。然后,您可以执行按这些组拆分的操作。\n让我们尝试按性别对 yao 数据框进行分组,并观察效果:\n\nyao.groupby(\"sex\")\n\n&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x12594e2d0&gt;\n\n\n嗯。显然没有发生任何事情。我们只是得到了一个 GroupBy 对象。\n但是,当我们将 groupby() 与前一节中使用的 agg() 调用链式连接时,看看会发生什么:\n\nyao.groupby(\"sex\").agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\"))\n\n\n\n\n\n\n\n\nmean_age\nmedian_age\n\n\nsex\n\n\n\n\n\n\nFemale\n29.495446\n26.0\n\n\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n现在我们为每个组获得了不同的统计数据!女性受访者的平均年龄约为 29.5 岁,而男性受访者的平均年龄约为 28.4 岁。\n如前所述,这种分组汇总是 agg() 函数如此有用的主要原因。\n您可能注意到有两行标题。这是因为输出具有层次索引(在 pandas 中称为 MultiIndex)。虽然在某些情况下这可能有用,但它通常会使进一步的数据操作更加困难。我们可以使用 reset_index() 方法重置索引,将组标签转换回常规列。\n\nyao.groupby(\"sex\").agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\")).reset_index()\n\n\n\n\n\n\n\n\nsex\nmean_age\nmedian_age\n\n\n\n\n0\nFemale\n29.495446\n26.0\n\n\n1\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n您可能会注意到代码行变得相当长。我们可以将每个新的方法调用移到新的一行以提高代码的可读性,但需要将整个链包裹在括号中。\n\n(\n    yao.groupby(\"sex\")\n    .agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\"))\n    .reset_index()\n)\n\n\n\n\n\n\n\n\nsex\nmean_age\nmedian_age\n\n\n\n\n0\nFemale\n29.495446\n26.0\n\n\n1\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n\n让我们看一个例子。\n假设您被要求获取不同社区中个体的最大和最小体重,并呈现每个社区中的个体数量。我们可以编写:\n\n(\n    yao.groupby(\"neighborhood\")\n    .agg(\n        max_weight=(\"weight_kg\", \"max\"),\n        min_weight=(\"weight_kg\", \"min\"),\n        count=(\"weight_kg\", \"size\"),  # the size function counts rows per group\n    )\n    .reset_index()\n) \n\n\n\n\n\n\n\n\nneighborhood\nmax_weight\nmin_weight\ncount\n\n\n\n\n0\nBriqueterie\n128\n20\n106\n\n\n1\nCarriere\n129\n14\n236\n\n\n2\nCité Verte\n118\n16\n72\n\n\n...\n...\n...\n...\n...\n\n\n6\nNkomkana\n161\n15\n75\n\n\n7\nTsinga\n105\n15\n81\n\n\n8\nTsinga Oliga\n100\n17\n67\n\n\n\n\n9 rows × 4 columns\n\n\n\n\n\n\n\n\n\n练习\n\n\n\n19.8 练习题:按性别分组的最小和最大身高\n使用 groupby()、agg() 和相关的汇总函数,从 yao 数据框中获取每个性别的最小和最大身高,以及每个性别组中的个体数量。\n您的输出应为如下所示的 DataFrame:\n\n\n\nsex\nmin_height_cm\nmax_height_cm\ncount\n\n\n\n\nFemale\n\n\n\n\n\nMale\n\n\n\n\n\n\n\n# Your code here",
+    "text": "19.7 使用 pandas.DataFrame.groupby() 进行分组汇总\n现在让我们看看如何使用 groupby() 来获得分组汇总,这是使用 agg() 的主要原因。\n顾名思义,pandas.DataFrame.groupby() 让您可以按变量中的值对数据框进行分组(例如,按性别分组为男性和女性)。然后,您可以执行按这些组拆分的操作。\n让我们尝试按性别对 yao 数据框进行分组,并观察效果:\n\nyao.groupby(\"sex\")\n\n&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x10882c110&gt;\n\n\n嗯。显然没有发生任何事情。我们只是得到了一个 GroupBy 对象。\n但是,当我们将 groupby() 与前一节中使用的 agg() 调用链式连接时,看看会发生什么:\n\nyao.groupby(\"sex\").agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\"))\n\n\n\n\n\n\n\n\nmean_age\nmedian_age\n\n\nsex\n\n\n\n\n\n\nFemale\n29.495446\n26.0\n\n\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n现在我们为每个组获得了不同的统计数据!女性受访者的平均年龄约为 29.5 岁,而男性受访者的平均年龄约为 28.4 岁。\n如前所述,这种分组汇总是 agg() 函数如此有用的主要原因。\n您可能注意到有两行标题。这是因为输出具有层次索引(在 pandas 中称为 MultiIndex)。虽然在某些情况下这可能有用,但它通常会使进一步的数据操作更加困难。我们可以使用 reset_index() 方法重置索引,将组标签转换回常规列。\n\nyao.groupby(\"sex\").agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\")).reset_index()\n\n\n\n\n\n\n\n\nsex\nmean_age\nmedian_age\n\n\n\n\n0\nFemale\n29.495446\n26.0\n\n\n1\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n您可能会注意到代码行变得相当长。我们可以将每个新的方法调用移到新的一行以提高代码的可读性,但需要将整个链包裹在括号中。\n\n(\n    yao.groupby(\"sex\")\n    .agg(mean_age=(\"age\", \"mean\"), median_age=(\"age\", \"median\"))\n    .reset_index()\n)\n\n\n\n\n\n\n\n\nsex\nmean_age\nmedian_age\n\n\n\n\n0\nFemale\n29.495446\n26.0\n\n\n1\nMale\n28.395735\n25.0\n\n\n\n\n\n\n\n\n让我们看一个例子。\n假设您被要求获取不同社区中个体的最大和最小体重,并呈现每个社区中的个体数量。我们可以编写:\n\n(\n    yao.groupby(\"neighborhood\")\n    .agg(\n        max_weight=(\"weight_kg\", \"max\"),\n        min_weight=(\"weight_kg\", \"min\"),\n        count=(\"weight_kg\", \"size\"),  # the size function counts rows per group\n    )\n    .reset_index()\n) \n\n\n\n\n\n\n\n\nneighborhood\nmax_weight\nmin_weight\ncount\n\n\n\n\n0\nBriqueterie\n128\n20\n106\n\n\n1\nCarriere\n129\n14\n236\n\n\n2\nCité Verte\n118\n16\n72\n\n\n...\n...\n...\n...\n...\n\n\n6\nNkomkana\n161\n15\n75\n\n\n7\nTsinga\n105\n15\n81\n\n\n8\nTsinga Oliga\n100\n17\n67\n\n\n\n\n9 rows × 4 columns\n\n\n\n\n\n\n\n\n\n练习\n\n\n\n19.8 练习题:按性别分组的最小和最大身高\n使用 groupby()、agg() 和相关的汇总函数,从 yao 数据框中获取每个性别的最小和最大身高,以及每个性别组中的个体数量。\n您的输出应为如下所示的 DataFrame:\n\n\n\nsex\nmin_height_cm\nmax_height_cm\ncount\n\n\n\n\nFemale\n\n\n\n\n\nMale\n\n\n\n\n\n\n\n# Your code here",
     "crumbs": [
       "数据操作",
       "<span class='chapter-number'>19</span>  <span class='chapter-title'>数据分组和汇总</span>"
@@ -2178,7 +2178,7 @@
     "href": "p_untangled_other_grouped_operations_cn.html#数据",
     "title": "20  Pandas中其他分组操作",
     "section": "20.4 数据",
-    "text": "20.4 数据\n我们将使用 weather 数据集作为例子。\n\nweather_raw = vd.data.seattle_weather()\n\n# 使用 query 选择2012年的数据,并添加一个月份列\nweather = weather_raw.query(\"date.dt.year == 2012\")\nweather[\"month\"] = pd.Categorical(\n    weather[\"date\"].dt.strftime(\"%B\"),\n    categories=list(calendar.month_name[1:]),\n    ordered=True,\n)\nweather\n\n/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_61702/375086048.py:5: SettingWithCopyWarning:\n\n\nA value is trying to be set on a copy of a slice from a DataFrame.\nTry using .loc[row_indexer,col_indexer] = value instead\n\nSee the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy\n\n\n\n\n\n\n\n\n\n\ndate\nprecipitation\ntemp_max\ntemp_min\nwind\nweather\nmonth\n\n\n\n\n0\n2012-01-01\n0.0\n12.8\n5.0\n4.7\ndrizzle\nJanuary\n\n\n1\n2012-01-02\n10.9\n10.6\n2.8\n4.5\nrain\nJanuary\n\n\n2\n2012-01-03\n0.8\n11.7\n7.2\n2.3\nrain\nJanuary\n\n\n3\n2012-01-04\n20.3\n12.2\n5.6\n4.7\nrain\nJanuary\n\n\n4\n2012-01-05\n1.3\n8.9\n2.8\n6.1\nrain\nJanuary\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n361\n2012-12-27\n4.1\n7.8\n3.3\n3.2\nrain\nDecember\n\n\n362\n2012-12-28\n0.0\n8.3\n3.9\n1.7\nrain\nDecember\n\n\n363\n2012-12-29\n1.5\n5.0\n3.3\n1.7\nrain\nDecember\n\n\n364\n2012-12-30\n0.0\n4.4\n0.0\n1.8\ndrizzle\nDecember\n\n\n365\n2012-12-31\n0.0\n3.3\n-1.1\n2.0\ndrizzle\nDecember\n\n\n\n\n366 rows × 7 columns\n\n\n\n现在让我们设置本课程其余部分的显示选项:\n\npd.options.display.max_rows = 20\n\n并且让我们忽略在使用当前版本的 pandas 处理分类数据时出现的警告:\n\nwarnings.filterwarnings(\n    \"ignore\"\n)  ## 有一类关于使用当前版本 pandas 处理分类数据时出现的警告,我们可以忽略",
+    "text": "20.4 数据\n我们将使用 weather 数据集作为例子。\n\nweather_raw = vd.data.seattle_weather()\n\n# 使用 query 选择2012年的数据,并添加一个月份列\nweather = weather_raw.query(\"date.dt.year == 2012\")\nweather[\"month\"] = pd.Categorical(\n    weather[\"date\"].dt.strftime(\"%B\"),\n    categories=list(calendar.month_name[1:]),\n    ordered=True,\n)\nweather\n\n/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_11107/375086048.py:5: SettingWithCopyWarning:\n\n\nA value is trying to be set on a copy of a slice from a DataFrame.\nTry using .loc[row_indexer,col_indexer] = value instead\n\nSee the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy\n\n\n\n\n\n\n\n\n\n\ndate\nprecipitation\ntemp_max\ntemp_min\nwind\nweather\nmonth\n\n\n\n\n0\n2012-01-01\n0.0\n12.8\n5.0\n4.7\ndrizzle\nJanuary\n\n\n1\n2012-01-02\n10.9\n10.6\n2.8\n4.5\nrain\nJanuary\n\n\n2\n2012-01-03\n0.8\n11.7\n7.2\n2.3\nrain\nJanuary\n\n\n3\n2012-01-04\n20.3\n12.2\n5.6\n4.7\nrain\nJanuary\n\n\n4\n2012-01-05\n1.3\n8.9\n2.8\n6.1\nrain\nJanuary\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n361\n2012-12-27\n4.1\n7.8\n3.3\n3.2\nrain\nDecember\n\n\n362\n2012-12-28\n0.0\n8.3\n3.9\n1.7\nrain\nDecember\n\n\n363\n2012-12-29\n1.5\n5.0\n3.3\n1.7\nrain\nDecember\n\n\n364\n2012-12-30\n0.0\n4.4\n0.0\n1.8\ndrizzle\nDecember\n\n\n365\n2012-12-31\n0.0\n3.3\n-1.1\n2.0\ndrizzle\nDecember\n\n\n\n\n366 rows × 7 columns\n\n\n\n现在让我们设置本课程其余部分的显示选项:\n\npd.options.display.max_rows = 20\n\n并且让我们忽略在使用当前版本的 pandas 处理分类数据时出现的警告:\n\nwarnings.filterwarnings(\n    \"ignore\"\n)  ## 有一类关于使用当前版本 pandas 处理分类数据时出现的警告,我们可以忽略",
     "crumbs": [
       "数据操作",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>Pandas中其他分组操作</span>"
@@ -2871,7 +2871,7 @@
     "href": "p_ai_LLM_functions_cn.html#进行-api-调用",
     "title": "24  在 Python 中使用 LLM 进行文本生成",
     "section": "24.4 进行 API 调用",
-    "text": "24.4 进行 API 调用\n让我们进行一次 API 调用,使用 gpt-4o-mini 模型生成对提示的响应。\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4o-mini\", messages=[{\"role\": \"user\", \"content\": \"What is the most tourist-friendly city in France?\"}]\n)\nprint(response.choices[0].message.content)\n\nParis is often considered the most tourist-friendly city in France. Renowned for its iconic landmarks such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral, Paris offers a wealth of activities, cultural experiences, and culinary delights. The city is well-equipped for tourists, with extensive public transportation, abundant information centers, and a wide variety of accommodations and dining options. Additionally, Paris hosts numerous events and festivals that cater to visitors, making it a top destination for travelers from around the world.",
+    "text": "24.4 进行 API 调用\n让我们进行一次 API 调用,使用 gpt-4o-mini 模型生成对提示的响应。\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4o-mini\", messages=[{\"role\": \"user\", \"content\": \"What is the most tourist-friendly city in France?\"}]\n)\nprint(response.choices[0].message.content)\n\nParis is often considered the most tourist-friendly city in France. It is renowned for its iconic landmarks such as the Eiffel Tower, Louvre Museum, Notre-Dame Cathedral, and Montmartre. The city's extensive public transportation system, including buses and the Metro, makes it easy for tourists to navigate. Additionally, Paris offers a wide range of accommodations, dining options, and cultural experiences catering to visitors. Many tourist information centers are also available to help travelers with any inquiries or guidance they may need. Other cities like Nice, Lyon, and Marseille are also popular with tourists but may not offer the same level of convenience and appeal as Paris.",
     "crumbs": [
       "使用 Python 中的 LLM",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>在 Python 中使用 LLM 进行文本生成</span>"
@@ -2893,7 +2893,7 @@
     "href": "p_ai_LLM_functions_cn.html#固定问题",
     "title": "24  在 Python 中使用 LLM 进行文本生成",
     "section": "24.6 固定问题",
-    "text": "24.6 固定问题\n让我们首先向 gpt-4o-mini 模型发送一个固定问题并获取响应。\n\n# 示例用法\nresponse = llm_chat(\"What is the most tourist-friendly city in France?\")\nprint(response)\n\nThe most tourist-friendly city in France is often considered to be Paris. Known as the \"City of Light,\" Paris offers a wealth of attractions, including iconic landmarks like the Eiffel Tower, the Louvre Museum, Notre-Dame Cathedral, and Montmartre. The city's extensive public transportation system makes it easy for visitors to navigate, and it is known for its vibrant culture, dining options, and shopping experiences.\n\nMoreover, Paris is well-equipped for tourists, with a wide range of accommodations, guided tours, and information centers. The city's rich history, beautiful architecture, and numerous parks and gardens also enhance its appeal to visitors from around the world.\n\nHowever, other cities in France, such as Nice, Lyon, and Marseille, also offer unique experiences and are considered friendly to tourists, each with their own charm and attractions.\n\n\n\n\n\n\n\n\n练习\n\n\n\n24.7 练习题:获取巴西最适合旅游的城市\n使用 llm_chat 函数询问模型巴西最适合旅游的城市。将响应存储在名为 rec_brazil 的变量中。打印响应。\n\n# 您的代码",
+    "text": "24.6 固定问题\n让我们首先向 gpt-4o-mini 模型发送一个固定问题并获取响应。\n\n# 示例用法\nresponse = llm_chat(\"What is the most tourist-friendly city in France?\")\nprint(response)\n\nParis is often considered the most tourist-friendly city in France. It is a major global city known for its iconic landmarks, such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral. The city is well-equipped to accommodate tourists, with a wide range of hotels, restaurants, and attractions. Additionally, Paris has extensive public transportation options, including buses and the metro, making it easy for visitors to navigate.\n\nOther cities in France that are also quite tourist-friendly include Nice, Lyon, and Marseille, each offering unique attractions and experiences. However, Paris remains the most popular destination for international tourists.\n\n\n\n\n\n\n\n\n练习\n\n\n\n24.7 练习题:获取巴西最适合旅游的城市\n使用 llm_chat 函数询问模型巴西最适合旅游的城市。将响应存储在名为 rec_brazil 的变量中。打印响应。\n\n# 您的代码",
     "crumbs": [
       "使用 Python 中的 LLM",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>在 Python 中使用 LLM 进行文本生成</span>"
@@ -2915,7 +2915,7 @@
     "href": "p_ai_LLM_functions_cn.html#可变作为提示输入",
     "title": "24  在 Python 中使用 LLM 进行文本生成",
     "section": "24.8 可变作为提示输入",
-    "text": "24.8 可变作为提示输入\n通常,您会希望基于不同的输入生成响应。让我们创建一个函数,该函数接受一个国家作为输入,并询问模型该国最适合旅游的城市。\n\ndef city_rec(country):\n    prompt = f\"What is the most tourist-friendly city in {country}?\"\n    return llm_chat(prompt)\n\n现在,您可以通过调用 city_rec(\"Country Name\") 来获取不同国家的推荐:\n\ncity_rec(\"Nigeria\")\n\n'One of the most tourist-friendly cities in Nigeria is Lagos. As the largest city in the country, Lagos offers a vibrant mix of culture, history, and modern attractions. Key points that make Lagos appealing to tourists include:\\n\\n1. **Cultural Diversity**: Lagos is a melting pot of cultures, showcasing a rich array of traditions, festivals, and cuisines.\\n\\n2. **Beaches**: The city boasts several beautiful beaches, such as Lekki and Tarkwa Bay, where visitors can relax and enjoy water activities.\\n\\n3. **Entertainment and Nightlife**: Lagos is known for its lively nightlife, with numerous clubs, restaurants, and entertainment options.\\n\\n4. **Museums and Art Galleries**: Visitors can explore places like the Nike Art Gallery and the National Museum, which provide insights into Nigerian art and history.\\n\\n5. **Local Markets**: Markets like Balogun and Lekki Market offer a unique shopping experience with local crafts, fabrics, and souvenirs.\\n\\n6. **Accessibility**: Lagos has an international airport (Murtala Muhammed International Airport) that connects it to major cities around the world, making it relatively easy for tourists to visit.\\n\\nWhile Lagos is a primary destination, other cities like Abuja (the capital), Calabar, and Port Harcourt also offer unique attractions and experiences for tourists.'\n\n\n然而,如果我们尝试将此函数直接用于国家列表或 DataFrame 列,它不会逐个处理每个国家。而是会尝试将列表连接成一个字符串,这不是我们想要的行为。\n\n# 错误用法\ncountry_df = pd.DataFrame({\"country\": [\"Nigeria\", \"Chile\", \"France\", \"Canada\"]})\n\nresponse = city_rec(country_df[\"country\"])\n\nprint(response)\n\nDetermining the \"most tourist-friendly\" city can vary based on personal experiences, business metrics, and travel reviews. However, generally speaking:\n\n1. **Nigeria**: Lagos is a major city that attracts tourists but may not be seen as the most tourist-friendly due to safety concerns and infrastructure challenges.\n   \n2. **Chile**: Santiago is the capital and offers a mix of cultural and modern attractions, making it relatively tourist-friendly, with good public transportation and hospitality.\n\n3. **France**: Paris is one of the most visited cities in the world, known for its iconic landmarks, rich history, and diverse gastronomy, making it highly tourist-friendly.\n\n4. **Canada**: Cities like Toronto and Vancouver are often considered very tourist-friendly, with a welcoming atmosphere, a range of attractions, and good public services.\n\nBased on global perception and tourist feedback, **Paris, France**, is often regarded as the most tourist-friendly city among the options provided.\n\n\n要逐个处理每个国家,我们可以使用 NumPy 的 vectorize 函数。此函数将 city_rec 转换为可以接受数组(如列表或 NumPy 数组)并按元素应用函数的形式。\n\n# 向量化函数\ncity_rec_vec = np.vectorize(city_rec)\n\n# 将函数应用于每个国家\ncountry_df[\"city_rec\"] = city_rec_vec(country_df[\"country\"])\ncountry_df\n\n\n\n\n\n\n\n\ncountry\ncity_rec\n\n\n\n\n0\nNigeria\nLagos is often considered the most tourist-fri...\n\n\n1\nChile\nSantiago is often considered the most tourist-...\n\n\n2\nFrance\nParis is often regarded as the most tourist-fr...\n\n\n3\nCanada\nDetermining the \"most tourist-friendly\" city i...\n\n\n\n\n\n\n\n此代码将输出一个包含新列 city_rec 的 DataFrame,其中包含每个国家对应的城市推荐。\n\n\n\n\n\n\n练习\n\n\n\n24.9 练习题:获取当地菜肴\n创建一个名为 get_local_dishes 的函数,该函数接受一个国家名称作为输入,并返回该国一些最著名的当地菜肴。然后,将此函数向量化并应用于 country_df DataFrame,为每个国家添加一个包含当地菜肴推荐的列。\n\n# 您的代码",
+    "text": "24.8 可变作为提示输入\n通常,您会希望基于不同的输入生成响应。让我们创建一个函数,该函数接受一个国家作为输入,并询问模型该国最适合旅游的城市。\n\ndef city_rec(country):\n    prompt = f\"What is the most tourist-friendly city in {country}?\"\n    return llm_chat(prompt)\n\n现在,您可以通过调用 city_rec(\"Country Name\") 来获取不同国家的推荐:\n\ncity_rec(\"Nigeria\")\n\n'Lagos is often considered the most tourist-friendly city in Nigeria. As the largest city in the country and one of the fastest-growing cities in the world, Lagos offers a vibrant blend of culture, nightlife, beaches, and historical sites. Tourists can explore attractions like Lekki Conservation Centre, Tarkwa Bay Beach, the Nike Art Gallery, and the National Museum Lagos. The city also has a diverse culinary scene and a range of accommodations, making it accessible for both international and domestic travelers.\\n\\nOther cities like Abuja, the capital, and tourist destinations like Calabar, known for its festivals, and Port Harcourt, with its scenic beauty, also attract visitors, but Lagos remains the primary hub for tourists due to its numerous amenities and activities.'\n\n\n然而,如果我们尝试将此函数直接用于国家列表或 DataFrame 列,它不会逐个处理每个国家。而是会尝试将列表连接成一个字符串,这不是我们想要的行为。\n\n# 错误用法\ncountry_df = pd.DataFrame({\"country\": [\"Nigeria\", \"Chile\", \"France\", \"Canada\"]})\n\nresponse = city_rec(country_df[\"country\"])\n\nprint(response)\n\nDetermining the \"most tourist-friendly\" city can be subjective and depends on various factors such as infrastructure, hospitality, safety, attractions, and overall visitor experience. However, I can provide a general idea based on popular perceptions:\n\n1. **Nigeria**: Cities like Lagos and Abuja offer a vibrant culture and various attractions but may face challenges related to safety and infrastructure.\n   \n2. **Chile**: Santiago, the capital, is known for its friendly locals, accessibility, and numerous attractions, making it quite tourist-friendly.\n\n3. **France**: Paris is one of the most famous tourist destinations in the world, known for its rich history, culture, and hospitality, making it very tourist-friendly.\n\n4. **Canada**: Cities like Toronto and Vancouver are well-regarded for their friendliness, safety, and the quality of services offered to tourists.\n\nBased on these considerations, **Paris, France** would likely be considered the most tourist-friendly city among the options given, primarily due to its extensive tourist infrastructure, world-renowned attractions, and overall visitor experience.\n\n\n要逐个处理每个国家,我们可以使用 NumPy 的 vectorize 函数。此函数将 city_rec 转换为可以接受数组(如列表或 NumPy 数组)并按元素应用函数的形式。\n\n# 向量化函数\ncity_rec_vec = np.vectorize(city_rec)\n\n# 将函数应用于每个国家\ncountry_df[\"city_rec\"] = city_rec_vec(country_df[\"country\"])\ncountry_df\n\n\n\n\n\n\n\n\ncountry\ncity_rec\n\n\n\n\n0\nNigeria\nLagos is often considered the most tourist-fri...\n\n\n1\nChile\nThe most tourist-friendly city in Chile is oft...\n\n\n2\nFrance\nParis is widely regarded as the most tourist-f...\n\n\n3\nCanada\nWhile several Canadian cities are known for be...\n\n\n\n\n\n\n\n此代码将输出一个包含新列 city_rec 的 DataFrame,其中包含每个国家对应的城市推荐。\n\n\n\n\n\n\n练习\n\n\n\n24.9 练习题:获取当地菜肴\n创建一个名为 get_local_dishes 的函数,该函数接受一个国家名称作为输入,并返回该国一些最著名的当地菜肴。然后,将此函数向量化并应用于 country_df DataFrame,为每个国家添加一个包含当地菜肴推荐的列。\n\n# 您的代码",
     "crumbs": [
       "使用 Python 中的 LLM",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>在 Python 中使用 LLM 进行文本生成</span>"
@@ -2937,7 +2937,7 @@
     "href": "p_ai_LLM_functions_cn.html#自动摘要电影数据集",
     "title": "24  在 Python 中使用 LLM 进行文本生成",
     "section": "24.10 自动摘要:电影数据集",
-    "text": "24.10 自动摘要:电影数据集\n在此示例中,我们将使用来自 vega_datasets 的电影数据集为每部电影生成自动摘要。我们将每部电影的数据转换为字典,并将其作为输入提供给 LLM 生成一段关于其表现的摘要。\n首先,让我们加载电影数据集并预览前几行:\n\nimport pandas as pd\nimport vega_datasets as vd\n\n# 加载电影数据集\nmovies = vd.data.movies().head()  # 仅使用前 5 行以节省 API 积分\nmovies\n\n\n\n\n\n\n\n\nTitle\nUS_Gross\nWorldwide_Gross\nUS_DVD_Sales\nProduction_Budget\nRelease_Date\nMPAA_Rating\nRunning_Time_min\nDistributor\nSource\nMajor_Genre\nCreative_Type\nDirector\nRotten_Tomatoes_Rating\nIMDB_Rating\nIMDB_Votes\n\n\n\n\n0\nThe Land Girls\n146083.0\n146083.0\nNaN\n8000000.0\nJun 12 1998\nR\nNaN\nGramercy\nNone\nNone\nNone\nNone\nNaN\n6.1\n1071.0\n\n\n1\nFirst Love, Last Rites\n10876.0\n10876.0\nNaN\n300000.0\nAug 07 1998\nR\nNaN\nStrand\nNone\nDrama\nNone\nNone\nNaN\n6.9\n207.0\n\n\n2\nI Married a Strange Person\n203134.0\n203134.0\nNaN\n250000.0\nAug 28 1998\nNone\nNaN\nLionsgate\nNone\nComedy\nNone\nNone\nNaN\n6.8\n865.0\n\n\n3\nLet's Talk About Sex\n373615.0\n373615.0\nNaN\n300000.0\nSep 11 1998\nNone\nNaN\nFine Line\nNone\nComedy\nNone\nNone\n13.0\nNaN\nNaN\n\n\n4\nSlam\n1009819.0\n1087521.0\nNaN\n1000000.0\nOct 09 1998\nR\nNaN\nTrimark\nOriginal Screenplay\nDrama\nContemporary Fiction\nNone\n62.0\n3.4\n165.0\n\n\n\n\n\n\n\n接下来,我们将 DataFrame 的每一行转换为字典。这将有助于将数据传递给 LLM。\n\n# 将每部电影的数据转换为字典\nmovies.to_dict(orient=\"records\")\n\n[{'Title': 'The Land Girls',\n  'US_Gross': 146083.0,\n  'Worldwide_Gross': 146083.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 8000000.0,\n  'Release_Date': 'Jun 12 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Gramercy',\n  'Source': None,\n  'Major_Genre': None,\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.1,\n  'IMDB_Votes': 1071.0},\n {'Title': 'First Love, Last Rites',\n  'US_Gross': 10876.0,\n  'Worldwide_Gross': 10876.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 300000.0,\n  'Release_Date': 'Aug 07 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Strand',\n  'Source': None,\n  'Major_Genre': 'Drama',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.9,\n  'IMDB_Votes': 207.0},\n {'Title': 'I Married a Strange Person',\n  'US_Gross': 203134.0,\n  'Worldwide_Gross': 203134.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 250000.0,\n  'Release_Date': 'Aug 28 1998',\n  'MPAA_Rating': None,\n  'Running_Time_min': nan,\n  'Distributor': 'Lionsgate',\n  'Source': None,\n  'Major_Genre': 'Comedy',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.8,\n  'IMDB_Votes': 865.0},\n {'Title': \"Let's Talk About Sex\",\n  'US_Gross': 373615.0,\n  'Worldwide_Gross': 373615.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 300000.0,\n  'Release_Date': 'Sep 11 1998',\n  'MPAA_Rating': None,\n  'Running_Time_min': nan,\n  'Distributor': 'Fine Line',\n  'Source': None,\n  'Major_Genre': 'Comedy',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': 13.0,\n  'IMDB_Rating': nan,\n  'IMDB_Votes': nan},\n {'Title': 'Slam',\n  'US_Gross': 1009819.0,\n  'Worldwide_Gross': 1087521.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 1000000.0,\n  'Release_Date': 'Oct 09 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Trimark',\n  'Source': 'Original Screenplay',\n  'Major_Genre': 'Drama',\n  'Creative_Type': 'Contemporary Fiction',\n  'Director': None,\n  'Rotten_Tomatoes_Rating': 62.0,\n  'IMDB_Rating': 3.4,\n  'IMDB_Votes': 165.0}]\n\n\n让我们将此新列存储在 DataFrame 中:\n\nmovies[\"full_dict\"] = movies.to_dict(orient=\"records\")\nmovies\n\n\n\n\n\n\n\n\nTitle\nUS_Gross\nWorldwide_Gross\nUS_DVD_Sales\nProduction_Budget\nRelease_Date\nMPAA_Rating\nRunning_Time_min\nDistributor\nSource\nMajor_Genre\nCreative_Type\nDirector\nRotten_Tomatoes_Rating\nIMDB_Rating\nIMDB_Votes\nfull_dict\n\n\n\n\n0\nThe Land Girls\n146083.0\n146083.0\nNaN\n8000000.0\nJun 12 1998\nR\nNaN\nGramercy\nNone\nNone\nNone\nNone\nNaN\n6.1\n1071.0\n{'Title': 'The Land Girls', 'US_Gross': 146083...\n\n\n1\nFirst Love, Last Rites\n10876.0\n10876.0\nNaN\n300000.0\nAug 07 1998\nR\nNaN\nStrand\nNone\nDrama\nNone\nNone\nNaN\n6.9\n207.0\n{'Title': 'First Love, Last Rites', 'US_Gross'...\n\n\n2\nI Married a Strange Person\n203134.0\n203134.0\nNaN\n250000.0\nAug 28 1998\nNone\nNaN\nLionsgate\nNone\nComedy\nNone\nNone\nNaN\n6.8\n865.0\n{'Title': 'I Married a Strange Person', 'US_Gr...\n\n\n3\nLet's Talk About Sex\n373615.0\n373615.0\nNaN\n300000.0\nSep 11 1998\nNone\nNaN\nFine Line\nNone\nComedy\nNone\nNone\n13.0\nNaN\nNaN\n{'Title': 'Let's Talk About Sex', 'US_Gross': ...\n\n\n4\nSlam\n1009819.0\n1087521.0\nNaN\n1000000.0\nOct 09 1998\nR\nNaN\nTrimark\nOriginal Screenplay\nDrama\nContemporary Fiction\nNone\n62.0\n3.4\n165.0\n{'Title': 'Slam', 'US_Gross': 1009819.0, 'Worl...\n\n\n\n\n\n\n\n现在,让我们定义一个 movie_performance 函数,该函数接受电影的数据字典,构建提示,并调用 llm_chat 函数以获取摘要:\n\ndef movie_performance(movie_data):\n    prompt = f\"Considering the following data on this movie {movie_data}, provide a one-paragraph summary of its performance for my report.\"\n    return llm_chat(prompt)\n\n我们将向量化此函数,以便可以将其应用于整个 full_dict 列:\n\nimport numpy as np\n\n# 向量化函数以应用于 DataFrame\nmovie_performance_vec = np.vectorize(movie_performance)\n\n让我们使用一个示例测试我们的函数:\n\n# 示例用法\nmovie_performance(\"Name: Kene's Movie, Sales: 100,000 USD\")\n\n\"Kene's Movie has demonstrated a commendable performance in the market, generating sales of 100,000 USD. This figure not only reflects the film's popularity but also indicates a strong reception from audiences. Such sales figures suggest successful marketing strategies and a solid viewer interest, positioning Kene's Movie as a significant contender within its genre. Overall, the movie's financial success highlights its appeal and potential for continued engagement in both current and future viewing platforms.\"\n\n\n最后,我们将应用向量化函数为每部电影生成摘要:\n\n# 为每部电影生成摘要\nmovies[\"llm_summary\"] = movie_performance_vec(movies[\"full_dict\"])\n\n您现在可以将生成的摘要与 DataFrame 一起保存到 CSV 文件:\n\n# 将结果保存到 CSV 文件\nmovies.to_csv(\"movies_output.csv\", index=False)\n\n这种方法允许您基于每部电影的完整数据生成详细摘要,这对于自动报告和数据分析非常有用。\n\n\n\n\n\n\n练习\n\n\n\n24.11 练习题:天气摘要\n使用来自 vega_datasets 的 seattle_weather 数据集的前 5 行,创建一个函数,该函数接受某一天的所有天气列,并生成该天天气状况的摘要。该函数应使用 LLM 根据提供的数据生成一段用于报告的一段摘要。将摘要存储在名为 weather_summary 的列中。\n\nweather = vd.data.seattle_weather().head()\nweather\n\n\n\n\n\n\n\n\ndate\nprecipitation\ntemp_max\ntemp_min\nwind\nweather\n\n\n\n\n0\n2012-01-01\n0.0\n12.8\n5.0\n4.7\ndrizzle\n\n\n1\n2012-01-02\n10.9\n10.6\n2.8\n4.5\nrain\n\n\n2\n2012-01-03\n0.8\n11.7\n7.2\n2.3\nrain\n\n\n3\n2012-01-04\n20.3\n12.2\n5.6\n4.7\nrain\n\n\n4\n2012-01-05\n1.3\n8.9\n2.8\n6.1\nrain\n\n\n\n\n\n\n\n\n# 您的代码",
+    "text": "24.10 自动摘要:电影数据集\n在此示例中,我们将使用来自 vega_datasets 的电影数据集为每部电影生成自动摘要。我们将每部电影的数据转换为字典,并将其作为输入提供给 LLM 生成一段关于其表现的摘要。\n首先,让我们加载电影数据集并预览前几行:\n\nimport pandas as pd\nimport vega_datasets as vd\n\n# 加载电影数据集\nmovies = vd.data.movies().head()  # 仅使用前 5 行以节省 API 积分\nmovies\n\n\n\n\n\n\n\n\nTitle\nUS_Gross\nWorldwide_Gross\nUS_DVD_Sales\nProduction_Budget\nRelease_Date\nMPAA_Rating\nRunning_Time_min\nDistributor\nSource\nMajor_Genre\nCreative_Type\nDirector\nRotten_Tomatoes_Rating\nIMDB_Rating\nIMDB_Votes\n\n\n\n\n0\nThe Land Girls\n146083.0\n146083.0\nNaN\n8000000.0\nJun 12 1998\nR\nNaN\nGramercy\nNone\nNone\nNone\nNone\nNaN\n6.1\n1071.0\n\n\n1\nFirst Love, Last Rites\n10876.0\n10876.0\nNaN\n300000.0\nAug 07 1998\nR\nNaN\nStrand\nNone\nDrama\nNone\nNone\nNaN\n6.9\n207.0\n\n\n2\nI Married a Strange Person\n203134.0\n203134.0\nNaN\n250000.0\nAug 28 1998\nNone\nNaN\nLionsgate\nNone\nComedy\nNone\nNone\nNaN\n6.8\n865.0\n\n\n3\nLet's Talk About Sex\n373615.0\n373615.0\nNaN\n300000.0\nSep 11 1998\nNone\nNaN\nFine Line\nNone\nComedy\nNone\nNone\n13.0\nNaN\nNaN\n\n\n4\nSlam\n1009819.0\n1087521.0\nNaN\n1000000.0\nOct 09 1998\nR\nNaN\nTrimark\nOriginal Screenplay\nDrama\nContemporary Fiction\nNone\n62.0\n3.4\n165.0\n\n\n\n\n\n\n\n接下来,我们将 DataFrame 的每一行转换为字典。这将有助于将数据传递给 LLM。\n\n# 将每部电影的数据转换为字典\nmovies.to_dict(orient=\"records\")\n\n[{'Title': 'The Land Girls',\n  'US_Gross': 146083.0,\n  'Worldwide_Gross': 146083.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 8000000.0,\n  'Release_Date': 'Jun 12 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Gramercy',\n  'Source': None,\n  'Major_Genre': None,\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.1,\n  'IMDB_Votes': 1071.0},\n {'Title': 'First Love, Last Rites',\n  'US_Gross': 10876.0,\n  'Worldwide_Gross': 10876.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 300000.0,\n  'Release_Date': 'Aug 07 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Strand',\n  'Source': None,\n  'Major_Genre': 'Drama',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.9,\n  'IMDB_Votes': 207.0},\n {'Title': 'I Married a Strange Person',\n  'US_Gross': 203134.0,\n  'Worldwide_Gross': 203134.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 250000.0,\n  'Release_Date': 'Aug 28 1998',\n  'MPAA_Rating': None,\n  'Running_Time_min': nan,\n  'Distributor': 'Lionsgate',\n  'Source': None,\n  'Major_Genre': 'Comedy',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': nan,\n  'IMDB_Rating': 6.8,\n  'IMDB_Votes': 865.0},\n {'Title': \"Let's Talk About Sex\",\n  'US_Gross': 373615.0,\n  'Worldwide_Gross': 373615.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 300000.0,\n  'Release_Date': 'Sep 11 1998',\n  'MPAA_Rating': None,\n  'Running_Time_min': nan,\n  'Distributor': 'Fine Line',\n  'Source': None,\n  'Major_Genre': 'Comedy',\n  'Creative_Type': None,\n  'Director': None,\n  'Rotten_Tomatoes_Rating': 13.0,\n  'IMDB_Rating': nan,\n  'IMDB_Votes': nan},\n {'Title': 'Slam',\n  'US_Gross': 1009819.0,\n  'Worldwide_Gross': 1087521.0,\n  'US_DVD_Sales': nan,\n  'Production_Budget': 1000000.0,\n  'Release_Date': 'Oct 09 1998',\n  'MPAA_Rating': 'R',\n  'Running_Time_min': nan,\n  'Distributor': 'Trimark',\n  'Source': 'Original Screenplay',\n  'Major_Genre': 'Drama',\n  'Creative_Type': 'Contemporary Fiction',\n  'Director': None,\n  'Rotten_Tomatoes_Rating': 62.0,\n  'IMDB_Rating': 3.4,\n  'IMDB_Votes': 165.0}]\n\n\n让我们将此新列存储在 DataFrame 中:\n\nmovies[\"full_dict\"] = movies.to_dict(orient=\"records\")\nmovies\n\n\n\n\n\n\n\n\nTitle\nUS_Gross\nWorldwide_Gross\nUS_DVD_Sales\nProduction_Budget\nRelease_Date\nMPAA_Rating\nRunning_Time_min\nDistributor\nSource\nMajor_Genre\nCreative_Type\nDirector\nRotten_Tomatoes_Rating\nIMDB_Rating\nIMDB_Votes\nfull_dict\n\n\n\n\n0\nThe Land Girls\n146083.0\n146083.0\nNaN\n8000000.0\nJun 12 1998\nR\nNaN\nGramercy\nNone\nNone\nNone\nNone\nNaN\n6.1\n1071.0\n{'Title': 'The Land Girls', 'US_Gross': 146083...\n\n\n1\nFirst Love, Last Rites\n10876.0\n10876.0\nNaN\n300000.0\nAug 07 1998\nR\nNaN\nStrand\nNone\nDrama\nNone\nNone\nNaN\n6.9\n207.0\n{'Title': 'First Love, Last Rites', 'US_Gross'...\n\n\n2\nI Married a Strange Person\n203134.0\n203134.0\nNaN\n250000.0\nAug 28 1998\nNone\nNaN\nLionsgate\nNone\nComedy\nNone\nNone\nNaN\n6.8\n865.0\n{'Title': 'I Married a Strange Person', 'US_Gr...\n\n\n3\nLet's Talk About Sex\n373615.0\n373615.0\nNaN\n300000.0\nSep 11 1998\nNone\nNaN\nFine Line\nNone\nComedy\nNone\nNone\n13.0\nNaN\nNaN\n{'Title': 'Let's Talk About Sex', 'US_Gross': ...\n\n\n4\nSlam\n1009819.0\n1087521.0\nNaN\n1000000.0\nOct 09 1998\nR\nNaN\nTrimark\nOriginal Screenplay\nDrama\nContemporary Fiction\nNone\n62.0\n3.4\n165.0\n{'Title': 'Slam', 'US_Gross': 1009819.0, 'Worl...\n\n\n\n\n\n\n\n现在,让我们定义一个 movie_performance 函数,该函数接受电影的数据字典,构建提示,并调用 llm_chat 函数以获取摘要:\n\ndef movie_performance(movie_data):\n    prompt = f\"Considering the following data on this movie {movie_data}, provide a one-paragraph summary of its performance for my report.\"\n    return llm_chat(prompt)\n\n我们将向量化此函数,以便可以将其应用于整个 full_dict 列:\n\nimport numpy as np\n\n# 向量化函数以应用于 DataFrame\nmovie_performance_vec = np.vectorize(movie_performance)\n\n让我们使用一个示例测试我们的函数:\n\n# 示例用法\nmovie_performance(\"Name: Kene's Movie, Sales: 100,000 USD\")\n\n\"Kene's Movie has demonstrated a strong performance in the market, achieving sales of 100,000 USD. This figure indicates a solid reception among audiences, reflecting effective marketing strategies and a compelling storyline that resonated with viewers. The sales performance not only highlights the film's commercial viability but also suggests potential for future success, whether through additional revenue streams such as merchandise, streaming rights, or international distribution. Overall, Kene's Movie can be considered a success within its category, contributing positively to its production team's portfolio.\"\n\n\n最后,我们将应用向量化函数为每部电影生成摘要:\n\n# 为每部电影生成摘要\nmovies[\"llm_summary\"] = movie_performance_vec(movies[\"full_dict\"])\n\n您现在可以将生成的摘要与 DataFrame 一起保存到 CSV 文件:\n\n# 将结果保存到 CSV 文件\nmovies.to_csv(\"movies_output.csv\", index=False)\n\n这种方法允许您基于每部电影的完整数据生成详细摘要,这对于自动报告和数据分析非常有用。\n\n\n\n\n\n\n练习\n\n\n\n24.11 练习题:天气摘要\n使用来自 vega_datasets 的 seattle_weather 数据集的前 5 行,创建一个函数,该函数接受某一天的所有天气列,并生成该天天气状况的摘要。该函数应使用 LLM 根据提供的数据生成一段用于报告的一段摘要。将摘要存储在名为 weather_summary 的列中。\n\nweather = vd.data.seattle_weather().head()\nweather\n\n\n\n\n\n\n\n\ndate\nprecipitation\ntemp_max\ntemp_min\nwind\nweather\n\n\n\n\n0\n2012-01-01\n0.0\n12.8\n5.0\n4.7\ndrizzle\n\n\n1\n2012-01-02\n10.9\n10.6\n2.8\n4.5\nrain\n\n\n2\n2012-01-03\n0.8\n11.7\n7.2\n2.3\nrain\n\n\n3\n2012-01-04\n20.3\n12.2\n5.6\n4.7\nrain\n\n\n4\n2012-01-05\n1.3\n8.9\n2.8\n6.1\nrain\n\n\n\n\n\n\n\n\n# 您的代码",
     "crumbs": [
       "使用 Python 中的 LLM",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>在 Python 中使用 LLM 进行文本生成</span>"

@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./p_foundations_coding_basics_cn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">编程基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Python 编程基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="导入" class="level2" data-number="20.3">
 <h2 data-number="20.3" class="anchored" data-anchor-id="导入"><span class="header-section-number">20.3</span> 导入</h2>
 <p>运行以下单元以导入必要的库:</p>
-<div id="9cb0fa43" class="cell" data-execution_count="2">
+<div id="7e3638c4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vega_datasets <span class="im">as</span> vd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="数据" class="level2" data-number="20.4">
 <h2 data-number="20.4" class="anchored" data-anchor-id="数据"><span class="header-section-number">20.4</span> 数据</h2>
 <p>我们将使用 <code>weather</code> 数据集作为例子。</p>
-<div id="72ffa837" class="cell" data-execution_count="3">
+<div id="2fe5bdce" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather_raw <span class="op">=</span> vd.data.seattle_weather()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 query 选择2012年的数据,并添加一个月份列</span></span>
@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_61702/375086048.py:5: SettingWithCopyWarning:
+<pre><code>/var/folders/vr/shb6ffvj2rl61kh7qqczhrgh0000gp/T/ipykernel_11107/375086048.py:5: SettingWithCopyWarning:
 
 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -575,11 +575,11 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>现在让我们设置本课程其余部分的显示选项:</p>
-<div id="c0c7d4b4" class="cell" data-execution_count="4">
+<div id="5c557bf2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.options.display.max_rows <span class="op">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>并且让我们忽略在使用当前版本的 pandas 处理分类数据时出现的警告:</p>
-<div id="63611b32" class="cell" data-execution_count="5">
+<div id="3d86dfa9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ignore"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)  <span class="co">## 有一类关于使用当前版本 pandas 处理分类数据时出现的警告,我们可以忽略</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -589,7 +589,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <h2 data-number="20.5" class="anchored" data-anchor-id="使用-transform-添加汇总统计"><span class="header-section-number">20.5</span> 使用 <code>transform()</code> 添加汇总统计</h2>
 <p>在上一课中,您学习了如何使用 <code>agg()</code> 计算平均值、中位数或标准差等汇总统计。</p>
 <p>例如,要计算每个月的平均降水量(雨+雪),您可以使用:</p>
-<div id="972ded84" class="cell" data-execution_count="6">
+<div id="0d3fbc1a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather.groupby(<span class="st">'month'</span>).agg(mean_precip <span class="op">=</span> (<span class="st">'precipitation'</span>, <span class="st">'mean'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -659,7 +659,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>有时,我们希望将这些组级别的统计添加为原始 DataFrame 的新列。我们无法直接使用 <code>agg()</code> 的输出来实现:</p>
-<div id="c177b690" class="cell" data-execution_count="7">
+<div id="9e39d625" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 无法工作</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'mean_precip'</span>] <span class="op">=</span> weather.groupby(<span class="st">'month'</span>).agg(mean_precip <span class="op">=</span> (<span class="st">'precipitation'</span>, <span class="st">'mean'</span>))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -811,7 +811,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>但我们可以使用 <code>transform()</code> 来实现。<code>transform()</code> 将输出重新整形以匹配原始 DataFrame 的形状,允许我们将组级别的统计添加为新列。</p>
-<div id="3940df18" class="cell" data-execution_count="8">
+<div id="f472f84d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'mean_precip_month'</span>] <span class="op">=</span> weather.groupby(<span class="st">'month'</span>)[<span class="st">'precipitation'</span>].transform(<span class="st">'mean'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -974,7 +974,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>您可以以类似方式计算其他统计。例如,要计算每个月的降水中位数,您可以使用:</p>
-<div id="fa29cb7b" class="cell" data-execution_count="9">
+<div id="148540c6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'prep_median_month'</span>] <span class="op">=</span> weather.groupby(<span class="st">'month'</span>)[<span class="st">'precipitation'</span>].transform(<span class="st">'median'</span>)    </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -1149,7 +1149,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>或者计算每个月的降水总和:</p>
-<div id="ef144971" class="cell" data-execution_count="10">
+<div id="5b1c3484" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'precip_sum_month'</span>] <span class="op">=</span> weather.groupby(<span class="st">'month'</span>)[<span class="st">'precipitation'</span>].transform(<span class="st">'sum'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -1336,7 +1336,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>有了总和,我们可以轻松计算该月降水量在每天中所占的比例:</p>
-<div id="269998a5" class="cell" data-execution_count="11">
+<div id="0c101be8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"precip_month_prop"</span>] <span class="op">=</span> weather[<span class="st">"precipitation"</span>] <span class="op">/</span> weather[<span class="st">"precip_sum_month"</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -1546,7 +1546,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="练习题每日小费比例" class="level2 callout-body-container callout-body" data-number="20.6">
 <h2 data-number="20.6" class="anchored" data-anchor-id="练习题每日小费比例"><span class="header-section-number">20.6</span> 练习题:每日小费比例</h2>
 <p>使用 <code>tips</code> 数据集,计算: 1. 一个包含每天总小费的新列 <code>daily_total_tips</code> 2. 一个显示每位顾客该日总小费的比例的新列 <code>tip_proportion</code></p>
-<div id="018008b1" class="cell" data-execution_count="12">
+<div id="7332fc47" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here:</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> px.data.tips()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tips</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1694,7 +1694,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 </div>
 <p>让我们重新初始化 <code>weather</code> DataFrame 为一个较小的列集合,用于本课程的其余部分:</p>
-<div id="0c0d78c4" class="cell" data-execution_count="14">
+<div id="a3d2a82d" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> weather[[<span class="st">'date'</span>, <span class="st">'month'</span>, <span class="st">'precipitation'</span>, <span class="st">'wind'</span>, <span class="st">'weather'</span>]]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -1813,7 +1813,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <h2 data-number="20.7" class="anchored" data-anchor-id="使用-value_counts-统计组内的值"><span class="header-section-number">20.7</span> 使用 <code>value_counts()</code> 统计组内的值</h2>
 <p>统计分类变量在组内的出现次数可以揭示有趣的模式,通常需要在使用 <code>groupby()</code> 后进行。</p>
 <p>首先,让我们回顾一下 <code>value_counts()</code> 在整个 DataFrame 上的工作方式。</p>
-<div id="7a2f1908" class="cell" data-execution_count="15">
+<div id="ddf30081" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 天气类型的计数</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"weather"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -1827,7 +1827,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>我们可以添加 <code>normalize=True</code> 来获得比例:</p>
-<div id="010fbfa8" class="cell" data-execution_count="16">
+<div id="df3393e4" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'weather'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>weather
@@ -1840,7 +1840,7 @@ Name: proportion, dtype: float64</code></pre>
 </div>
 </div>
 <p>现在,要统计每个月的天气类型,我们首先按 <code>month</code> 分组,然后选择 <code>weather</code> 列并应用 <code>value_counts()</code>。</p>
-<div id="c8c0e07c" class="cell" data-execution_count="17">
+<div id="dcd4aa8c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 每个月天气类型的计数</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>weather.groupby(<span class="st">'month'</span>)[<span class="st">'weather'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -1860,7 +1860,7 @@ Name: count, Length: 60, dtype: int64</code></pre>
 </div>
 </div>
 <p>这将返回一个具有多重索引的 Series,可以使用 <code>reset_index()</code> 转换为常规的 DataFrame:</p>
-<div id="426d907c" class="cell" data-execution_count="18">
+<div id="481e90bc" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>weather.groupby(<span class="st">'month'</span>)[<span class="st">'weather'</span>].value_counts().reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
@@ -1961,7 +1961,7 @@ Name: count, Length: 60, dtype: int64</code></pre>
 <section id="练习题按日统计吸烟者和非吸烟者人数" class="level2 callout-body-container callout-body" data-number="20.8">
 <h2 data-number="20.8" class="anchored" data-anchor-id="练习题按日统计吸烟者和非吸烟者人数"><span class="header-section-number">20.8</span> 练习题:按日统计吸烟者和非吸烟者人数</h2>
 <p>使用 <code>tips</code> 数据集,统计每一天吸烟者和非吸烟者的数量。</p>
-<div id="544dc905" class="cell" data-execution_count="19">
+<div id="487ed41c" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> px.data.tips()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tips</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2113,7 +2113,7 @@ Sat No  45</code></pre>
 <h2 data-number="20.9" class="anchored" data-anchor-id="在组内计算累积和"><span class="header-section-number">20.9</span> 在组内计算累积和</h2>
 <p>累积和有助于跟踪组内的运行总计。这是一种常用的操作。让我们看看如何对分组数据执行此操作。</p>
 <p>回顾一下,以下是如何计算整个 DataFrame 的降水累积和:</p>
-<div id="9baa8297" class="cell" data-execution_count="21">
+<div id="e5f8293e" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 降水的累积和</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"precip_cumul"</span>] <span class="op">=</span> weather[<span class="st">"precipitation"</span>].cumsum()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2241,7 +2241,7 @@ Sat No  45</code></pre>
 </div>
 </div>
 <p>要计算每个月的降水累积和,我们可以使用 <code>groupby()</code> 和 <code>cumsum()</code>:</p>
-<div id="ae530202" class="cell" data-execution_count="22">
+<div id="e4e0e60e" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 每个月的降水累积和</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"precip_cumul"</span>] <span class="op">=</span> weather.groupby(<span class="st">"month"</span>)[<span class="st">"precipitation"</span>].cumsum()</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2372,7 +2372,7 @@ Sat No  45</code></pre>
 <section id="练习题按日累积小费金额" class="level2 callout-practice" title="练习题1:按日累积小费金额" data-number="20.10">
 <h2 data-number="20.10" class="anchored" data-anchor-id="练习题按日累积小费金额"><span class="header-section-number">20.10</span> 练习题:按日累积小费金额</h2>
 <p>使用 <code>tips</code> 数据集,计算每个 <code>day</code> 的 <code>total_bill</code> 累积和,添加一个新列 <code>cumul_total_bill_day</code>。然后添加另一列 <code>cumul_tip_day</code>,包含每个 <code>day</code> 的 <code>tip</code> 累积和。</p>
-<div id="f3c726da" class="cell" data-execution_count="23">
+<div id="93d9a188" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> px.data.tips()</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>tips <span class="op">=</span> tips.sort_values(<span class="st">'day'</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>tips</span>
